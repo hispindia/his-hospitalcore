@@ -27,6 +27,7 @@ public class PatientDashboardConstants {
 	public static final String CONCEPT_CLASS_NAME_SYMPTOM = "Symptom";
 	public static final String CONCEPT_CLASS_NAME_DIAGNOSIS = "Diagnosis";
 	public static final String CONCEPT_CLASS_NAME_PROCEDURE = "Procedure";
+	public static final String CONCEPT_CLASS_NAME_EXAMINATION = "EXAMINATION";
 	//ghanshyam 1-june-2013 New Requirement #1633 User must be able to send investigation orders from dashboard to billing
 	public static final String CONCEPT_CLASS_NAME_INVESTIGATION = "Test";
 	//ghanshyam 12-june-2013 New Requirement #1635 User should be able to send pharmacy orders to issue drugs to a patient from dashboard
@@ -36,6 +37,7 @@ public class PatientDashboardConstants {
 	public static String PROPERTY_IPDWARD = MODULE_ID + ".IPDRootConcept";
 	public static String PROPERTY_HOSPITAL = MODULE_ID + ".externalHospitalConcept";
 	public static String PROPERTY_SYMPTOM = MODULE_ID + ".symptomConcept";
+	public static String PROPERTY_EXAMINATION = MODULE_ID + ".examinationConcept";
 	public static String PROPERTY_PROVISIONAL_DIAGNOSIS = MODULE_ID + ".provisionalDiagnosisConcept";
 	public static String PROPERTY_POST_FOR_PROCEDURE = MODULE_ID + ".postForProcedureConcept";
 	//ghanshyam 1-june-2013 New Requirement #1633 User must be able to send investigation orders from dashboard to billing

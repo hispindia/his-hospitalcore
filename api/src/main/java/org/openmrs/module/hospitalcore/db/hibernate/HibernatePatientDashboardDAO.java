@@ -52,6 +52,7 @@ import org.openmrs.module.hospitalcore.db.PatientDashboardDAO;
 import org.openmrs.module.hospitalcore.model.Answer;
 import org.openmrs.module.hospitalcore.model.Department;
 import org.openmrs.module.hospitalcore.model.DepartmentConcept;
+import org.openmrs.module.hospitalcore.model.Examination;
 import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
@@ -422,6 +423,31 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 				TriagePatientData.class);
 			criteria.add(Restrictions.like("encounterOpd",encounterOpd));
 		return (TriagePatientData) criteria.uniqueResult();
+	}
+
+	public Examination saveExamination(Examination examination)
+			throws DAOException {
+		// TODO Auto-generated method stub
+		return (Examination) sessionFactory.getCurrentSession().merge(
+				examination);
+	}
+
+	public List<Examination> getExamination(Encounter encounters)
+			throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Examination.class);
+			criteria.add(Restrictions.like("encounters",encounters));
+			return criteria.list();
+	}
+
+	public List<Question> getQuestion(Examination examination)
+			throws DAOException {
+		// TODO Auto-generated method stub
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Question.class);
+			criteria.add(Restrictions.like("examination",examination));
+
+		return criteria.list();
 	}
 
 }

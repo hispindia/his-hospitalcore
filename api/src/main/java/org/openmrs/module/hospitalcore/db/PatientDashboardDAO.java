@@ -35,6 +35,7 @@ import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.model.Answer;
 import org.openmrs.module.hospitalcore.model.Department;
 import org.openmrs.module.hospitalcore.model.DepartmentConcept;
+import org.openmrs.module.hospitalcore.model.Examination;
 import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
@@ -79,4 +80,7 @@ public interface PatientDashboardDAO {
 	public TriagePatientData getTriagePatientData(Integer triageDataId) throws DAOException;
 	
 	public TriagePatientData getTriagePatientDataFromEncounter(Integer encounterOpd) throws DAOException;
+	public Examination saveExamination(Examination examination)throws DAOException;
+	public List<Examination> getExamination(Encounter encounters)throws DAOException;
+	public List<Question> getQuestion(Examination examination)throws DAOException;
 }

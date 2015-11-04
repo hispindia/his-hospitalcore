@@ -294,4 +294,9 @@ public class PatientQueueServiceImpl  extends BaseOpenmrsService implements Pati
 	       // TODO Auto-generated method stub
 	       return dao.updateTriagePatientData(triagePatientData);
 	    }
+
+	public List<Obs> getAllExamination(Integer personId) throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getAllExamination(personId);
+	}
 }

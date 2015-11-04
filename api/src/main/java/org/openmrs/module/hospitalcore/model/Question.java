@@ -9,7 +9,10 @@ import org.openmrs.Concept;
 public class Question implements Serializable{
 private Integer questionId;
 private Symptom symptom;
+private Examination examination;
 private Concept questionConcept;
+
+
 public Integer getQuestionId() {
 	return questionId;
 }
@@ -27,6 +30,12 @@ public Concept getQuestionConcept() {
 }
 public void setQuestionConcept(Concept questionConcept) {
 	this.questionConcept = questionConcept;
+}
+public Examination getExamination() {
+	return examination;
+}
+public void setExamination(Examination examination) {
+	this.examination = examination;
 }
 
 }

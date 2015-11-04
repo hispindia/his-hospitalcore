@@ -466,6 +466,37 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 	public TriagePatientData updateTriagePatientData(TriagePatientData triagePatientData)  throws DAOException {
 		return (TriagePatientData)  sessionFactory.getCurrentSession().merge(triagePatientData);
 		
+	}
+
+	public List<Obs> getAllExamination(Integer personId) throws DAOException {
+		// TODO Auto-generated method stub
+		 Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Obs.class,"obs");
+		 String toDdate = formatter1.format(new Date());
+		
+		 Date date1 = new Date(); 
+		
+		 Date oldDate = new Date(date1.getTime() - TimeUnit.HOURS.toMillis(24));
+		 String fromDate = formatter1.format(oldDate);
+
+		 
+		try {
+			criteria.add(Restrictions.lt(
+					"obs.obsDatetime", formatter1.parse(toDdate)));
+			criteria.add(Restrictions.gt(
+					"obs.obsDatetime", formatter1.parse(fromDate)));
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error convert date: "+ e.toString());
+			e.printStackTrace();
+		}
+		
+		criteria.add(Restrictions.eq(
+				"obs.personId",personId));
+		criteria.add(Restrictions.eq(
+				"obs.concept",Context.getConceptService().getConcept("EXAMINATION")));
+
+		return criteria.list();
 	}	
 	
 }

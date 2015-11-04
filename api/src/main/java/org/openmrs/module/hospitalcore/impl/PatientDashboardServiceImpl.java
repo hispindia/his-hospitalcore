@@ -42,6 +42,7 @@ import org.openmrs.module.hospitalcore.db.PatientDashboardDAO;
 import org.openmrs.module.hospitalcore.model.Answer;
 import org.openmrs.module.hospitalcore.model.Department;
 import org.openmrs.module.hospitalcore.model.DepartmentConcept;
+import org.openmrs.module.hospitalcore.model.Examination;
 import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
@@ -67,7 +68,12 @@ public class PatientDashboardServiceImpl implements PatientDashboardService {
 		ConceptClass cc =  Context.getConceptService().getConceptClassByName(PatientDashboardConstants.CONCEPT_CLASS_NAME_SYMPTOM);
 		return dao.searchConceptsByNameAndClass(text, cc);
 	}
-	
+	//Examination
+	public List<Concept> searchExamination(String text) throws APIException {
+		// TODO Auto-generated method stub
+		ConceptClass cc =  Context.getConceptService().getConceptClassByName(PatientDashboardConstants.CONCEPT_CLASS_NAME_EXAMINATION);
+		return dao.searchConceptsByNameAndClass(text, cc);
+	}
 	public List<Concept> searchDiagnosis(String text) throws APIException {
 		ConceptClass cc =  Context.getConceptService().getConceptClassByName(PatientDashboardConstants.CONCEPT_CLASS_NAME_DIAGNOSIS);
 		return dao.searchConceptsByNameAndClass(text, cc);
@@ -230,5 +236,25 @@ public class PatientDashboardServiceImpl implements PatientDashboardService {
 	public TriagePatientData getTriagePatientDataFromEncounter(Integer encounterOpd) {
 		return dao.getTriagePatientDataFromEncounter(encounterOpd);
 	}
+
+	public Examination saveExamination(Examination examination)
+			throws APIException {
+		// TODO Auto-generated method stub
+		return dao.saveExamination(examination);
+	}
+
+	public List<Examination> getExamination(Encounter encounters)
+			throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getExamination(encounters);
+	}
+
+	public List<Question> getQuestion(Examination examination)
+			throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getQuestion(examination);
+	}
+
+	
 }
 

@@ -21,6 +21,7 @@
 
 package org.openmrs.module.hospitalcore;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,7 @@ import org.openmrs.api.APIException;
 import org.openmrs.module.hospitalcore.model.Answer;
 import org.openmrs.module.hospitalcore.model.Department;
 import org.openmrs.module.hospitalcore.model.DepartmentConcept;
+import org.openmrs.module.hospitalcore.model.Examination;
 import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
@@ -48,7 +50,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PatientDashboardService {
 	
 	public List<Concept> searchSymptom(String text) throws APIException;
-	
+	//Examination 
+	public List<Concept> searchExamination(String text) throws APIException;
 	public List<Concept> searchDiagnosis(String text) throws APIException;
 	
 	public List<Concept> searchProcedure(String text) throws APIException;
@@ -93,5 +96,11 @@ public interface PatientDashboardService {
 	public TriagePatientData getTriagePatientData(Integer triageDataId) throws APIException;
 	
 	public TriagePatientData getTriagePatientDataFromEncounter(Integer encounterOpd) throws APIException;
+
+	public Examination saveExamination(Examination examination)throws APIException;
+	public List<Examination> getExamination(Encounter encounters)throws APIException;
+	public List<Question> getQuestion(Examination examination)throws APIException;
+
+	
 	
 }

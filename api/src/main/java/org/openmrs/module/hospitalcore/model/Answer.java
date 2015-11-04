@@ -7,6 +7,13 @@ import org.openmrs.Concept;
 public class Answer implements Serializable{
 private Integer answerId;
 private Question question;
+private Question quest;
+public Question getQuest() {
+	return quest;
+}
+public void setQuest(Question quest) {
+	this.quest = quest;
+}
 private Concept answerConcept;
 private String freeText;
 public Integer getAnswerId() {

@@ -93,7 +93,7 @@ public interface PatientQueueDAO {
 	public List<Obs> getAllDiagnosis(Integer personId) throws DAOException;
 	
 	public List<Obs> getAllSymptom(Integer personId) throws DAOException;
-	
+	public List<Obs> getAllExamination(Integer personId) throws DAOException;
 	public TriagePatientData updateTriagePatientData(TriagePatientData triagePatientData) throws DAOException ;
 }
 
