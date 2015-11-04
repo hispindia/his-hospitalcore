@@ -761,4 +761,40 @@
 			ALTER TABLE indoor_patient_service_bill ADD COLUMN `selected_category` integer default 0;
 		</sql>
 	</diff>
+	<!--<diff>
+		<version>5.6</version>
+		<author>Admin</author>
+		<date>Oct 12 2015</date>
+		<description>
+			create table examination,question,answer
+		</description>
+		<sql>
+			CREATE TABLE IF NOT EXISTS examination (exam_id integer not null auto_increment, encounter integer, exam_concept integer, `created_date` datetime default null, `creator` int(11) default null,primary key (exam_id));
+			
+		</sql>
+	</diff>	-->
+	<diff>
+		<version>5.7</version>
+		<author>Admin</author>
+		<date>Oct 14 2015</date>
+		<description>
+			create table examination,question,answer
+		</description>
+		<sql>
+			CREATE TABLE IF NOT EXISTS examination (exam_id integer not null auto_increment, encounter integer, exam_concept integer, `created_date` datetime default null, `creator` int(11) default null,primary key (exam_id));
+			
+		</sql>
+	</diff>	
+	<diff>
+		<version>5.8</version>
+		<author>Admin</author>
+		<date>August 14 2014</date>
+		<description>
+			Add columns to question
+		</description>
+		<sql>
+			ALTER TABLE question ADD COLUMN `exam_id` integer;
+			
+		</sql>
+	</diff>
 </sqldiff>

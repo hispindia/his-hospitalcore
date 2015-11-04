@@ -162,6 +162,7 @@
 		PatientFamilyHistory.hbm.xml
 		PatientPersonalHistory.hbm.xml
 		Symptom.hbm.xml
+		Examination.hbm.xml
 		Question.hbm.xml
 		Answer.hbm.xml
     </mappingFiles>
