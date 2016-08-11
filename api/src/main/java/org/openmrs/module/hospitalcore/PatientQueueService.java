@@ -23,7 +23,12 @@
 package org.openmrs.module.hospitalcore;
 
 import java.util.List;
-
+//New Requirement "Editable Dashboard" //
+import org.openmrs.Concept;
+import org.openmrs.Encounter;
+import org.openmrs.Obs;
+import org.openmrs.Patient;
+import org.openmrs.Person;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
@@ -54,4 +59,10 @@ public interface PatientQueueService extends OpenmrsService {
 	public List<OpdPatientQueue> getAllPatientInQueue() throws APIException ;
 	public OpdPatientQueueLog copyTo(OpdPatientQueue opdPatientQueue)throws APIException ;
 	public OpdPatientQueue getOpdPatientQueue(String patientIdentifier,Integer opdConceptId) throws APIException;
+	//New Requirement "Editable Dashboard"//
+	public Encounter getLastOPDEncounter(Patient patient) throws APIException;
+	public OpdPatientQueueLog getOpdPatientQueueLogByEncounter(Encounter enc) throws APIException;
+	public Obs getObservationByPersonConceptAndEncounter(Person person,
+			Concept concept, Encounter enc)throws APIException;
+	public List<Obs> getAllDiagnosis(Integer personId) throws APIException;
 }

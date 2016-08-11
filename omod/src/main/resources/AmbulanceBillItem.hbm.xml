@@ -19,6 +19,8 @@
 		<property name="createdDate" column="created_date"  />
 		<property name="voided" column="voided"  />
 		<property name="voidedDate" column="voided_date"  />
+		
+		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_ambulancebillitem_voidedby"/>
 		<!-- ghanshyam 07/07/2012 New Requirement #305: Additional details in Ambulance Bill-->
 		<property name="patientName" column="patient_name"  />
 		<property name="receiptNumber" column="receipt_number"  />

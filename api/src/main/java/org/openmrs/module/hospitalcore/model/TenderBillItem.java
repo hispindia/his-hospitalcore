@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.openmrs.User;
+
 
 /**
  *
@@ -52,6 +54,8 @@ public class TenderBillItem implements Serializable{
     private Boolean voided=false;
     
     private Date voidedDate;
+    
+    private User voidedby;
     
     private Tender tender;
     
@@ -159,5 +163,14 @@ public class TenderBillItem implements Serializable{
     public void setName(String name) {
     	this.name = name;
     }
+    
+ // New Requirement add 'voided_by' column in bills 
+    public User getvoidedby() {
+		return voidedby;
+	}
+	
+	public void setvoidedby(User voidedby) {
+		this.voidedby = voidedby;
+	}
 
 }

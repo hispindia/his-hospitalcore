@@ -24,6 +24,8 @@ package org.openmrs.module.hospitalcore.db.hibernate;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+//New Requirement "Editable Dashboard" //
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -32,6 +34,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.openmrs.Concept;
+import org.openmrs.Encounter;
+import org.openmrs.Obs;
+import org.openmrs.Patient;
+import org.openmrs.Person;
+import org.openmrs.api.APIException;
+import org.openmrs.api.context.Context;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.db.PatientQueueDAO;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
@@ -40,6 +49,8 @@ import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
 public class HibernatePatientQueueDAO implements PatientQueueDAO {
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	SimpleDateFormat formatterExt = new SimpleDateFormat("dd/MM/yyyy");
+	//New Requirement "Editable Dashboard"//
+	SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	/**
 	 * Hibernate session factory
 	 */
@@ -175,7 +186,43 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 		OpdPatientQueueLog opdPatientQueueLog = (OpdPatientQueueLog) criteria.uniqueResult();
 		return opdPatientQueueLog;
 	}
-
+	//New Requirement "Editable Dashboard" //
+	public Encounter getLastOPDEncounter(Patient patient) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Encounter.class,"encounter")
+				.createAlias("encounter.encounterType", "encounterType");
+		criteria.add(Restrictions.eq("patient", patient));
+		criteria.add(Restrictions.eq("encounterType.name","OPDENCOUNTER"));
+		criteria.addOrder(Order.desc("dateCreated"));
+		criteria.setMaxResults(1);
+		return (Encounter) criteria.uniqueResult();
+	}
+	
+	public OpdPatientQueueLog getOpdPatientQueueLogByEncounter(Encounter encounter) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdPatientQueueLog.class);
+		criteria.add(Restrictions.eq("encounter", encounter));
+		return (OpdPatientQueueLog) criteria.uniqueResult();
+	}
+	
+	public Obs getObservationByPersonConceptAndEncounter(Person person,Concept concept,Encounter encounter) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Obs.class);
+		criteria.add(Restrictions.eq("person", person));
+		criteria.add(Restrictions.eq("concept", concept));
+		criteria.add(Restrictions.eq("encounter", encounter));
+		criteria.addOrder(Order.desc("dateCreated"));
+		criteria.setMaxResults(1);
+		return (Obs) criteria.uniqueResult();
+	}
+	
+	public OpdPatientQueueLog getOpdPatientQueueLog(String patientIdentifier,Integer opdConceptId) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdPatientQueueLog.class, "queue")
+				.createAlias("queue.opdConcept", "opdConcept");
+		criteria.add(Restrictions.eq("queue.patientIdentifier", patientIdentifier));
+		criteria.add(Restrictions.eq("queue.visitOutCome", "admit"));
+		criteria.addOrder(Order.desc("queue.createdOn"));
+		criteria.setMaxResults(1);
+		return (OpdPatientQueueLog) criteria.uniqueResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<OpdPatientQueue> getAllPatientInQueue() throws DAOException {
 		//for sure everything always get less than one date
@@ -192,5 +239,41 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 		}
 		return criteria.list();
 	}
+
+		// TODO Auto-generated method stub
+	
+	//New Requirement "Editable Dashboard" //
+	public List<Obs> getAllDiagnosis(Integer personId) 
+			throws DAOException {
+				 Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Obs.class,"obs");
+				 String toDdate = formatter1.format(new Date());
+				
+				 Date date1 = new Date(); 
+				
+				 Date oldDate = new Date(date1.getTime() - TimeUnit.HOURS.toMillis(24));
+				 String fromDate = formatter1.format(oldDate);
+				
+				 
+				try {
+					criteria.add(Restrictions.lt(
+							"obs.obsDatetime", formatter1.parse(toDdate)));
+					criteria.add(Restrictions.gt(
+							"obs.obsDatetime", formatter1.parse(fromDate)));
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					System.out.println("Error convert date: "+ e.toString());
+					e.printStackTrace();
+				}
+				
+				criteria.add(Restrictions.eq(
+						"obs.personId",personId));
+				criteria.add(Restrictions.eq(
+						"obs.concept", Context.getConceptService().getConcept("PROVISIONAL DIAGNOSIS")));
+
+				return criteria.list();
+			}
+
+	
 	
 }

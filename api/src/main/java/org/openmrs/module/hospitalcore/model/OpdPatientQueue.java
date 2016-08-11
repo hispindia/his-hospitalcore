@@ -48,7 +48,7 @@ public class OpdPatientQueue implements  Serializable {
 	 private String status;
 	 private User user;
 	 private Date createdOn;
-	
+	 private String visitStatus;
 	 
 	 
 	@Override
@@ -144,6 +144,12 @@ public class OpdPatientQueue implements  Serializable {
 	}
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+	public String getVisitStatus() {
+		return visitStatus;
+	}
+	public void setVisitStatus(String visitStatus) {
+		this.visitStatus = visitStatus;
 	}
 	 
 	  

@@ -23,7 +23,12 @@
 package org.openmrs.module.hospitalcore.impl;
 
 import java.util.List;
-
+//New Requirement "Editable Dashboard" //
+import org.openmrs.Concept;
+import org.openmrs.Encounter;
+import org.openmrs.Obs;
+import org.openmrs.Patient;
+import org.openmrs.Person;
 import org.openmrs.api.APIException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.hospitalcore.PatientQueueService;
@@ -122,8 +127,18 @@ public class PatientQueueServiceImpl  extends BaseOpenmrsService implements Pati
 		opdPatientQueueLog.setUser(opdPatientQueue.getUser());
 		return opdPatientQueueLog;
 	}
+	//New Requirement "Editable Dashboard" //
+	public Encounter getLastOPDEncounter(Patient patient) {
+		return dao.getLastOPDEncounter(patient);
+	}
 	
+	public OpdPatientQueueLog getOpdPatientQueueLogByEncounter(Encounter encounter) {
+		return dao.getOpdPatientQueueLogByEncounter(encounter);
+	}
 	
+	public Obs getObservationByPersonConceptAndEncounter(Person person,Concept concept,Encounter encounter) {
+		return dao.getObservationByPersonConceptAndEncounter(person,concept,encounter);
+	}
 
 	public OpdPatientQueue getOpdPatientQueue(String patientIdentifier,Integer opdConceptId)throws APIException {
 		// TODO Auto-generated method stub
@@ -131,6 +146,13 @@ public class PatientQueueServiceImpl  extends BaseOpenmrsService implements Pati
 	}
 
 	public List<OpdPatientQueue> getAllPatientInQueue() throws APIException {
+		// TODO Auto-generated method stub
 		return dao.getAllPatientInQueue();
 	}
+	//New Requirement "Editable Dashboard" ~Wasib//
+	public List<Obs> getAllDiagnosis(Integer personId)
+			throws APIException{
+				return dao.getAllDiagnosis(personId);
+			}
+
 }

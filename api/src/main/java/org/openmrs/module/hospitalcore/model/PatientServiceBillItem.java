@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.openmrs.Order;
+import org.openmrs.User;
 
 /**
  *
@@ -59,7 +60,11 @@ public class PatientServiceBillItem implements Serializable {
 	
 	private Order order ;
 	
+	private String patientCategory;
+	
 	private Date voidedDate;
+	
+	private User voidedby;
 	
 	public BillableService getService() {
 		return service;
@@ -155,5 +160,21 @@ public class PatientServiceBillItem implements Serializable {
 
 	public void setActualAmount(BigDecimal actualAmount) {
 		this.actualAmount = actualAmount;
+	}
+	// New Requirement add 'voided_by' column in bills 
+	public User getvoidedby() {
+		return voidedby;
+	}
+	
+	public void setvoidedby(User voidedby) {
+		this.voidedby = voidedby;
+	}
+	// New Requirement add 'patient_category' column in bills 
+	public String getPatientCategory() {
+		return patientCategory;
+	}
+
+	public void setPatientCategory(String patientCategory) {
+		this.patientCategory = patientCategory;
 	}
 }

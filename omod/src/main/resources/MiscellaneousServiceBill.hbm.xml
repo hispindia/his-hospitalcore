@@ -20,6 +20,7 @@
 		<property name="voided" column="voided" />
 		<property name="quantity" column="quantity" />
 		<property name="voidedDate" column="voided_date" />
+		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_miscellaneousservicebill_voidedby"/>
 		<many-to-one name="service"  column="service_id" class="org.openmrs.module.hospitalcore.model.MiscellaneousService" foreign-key="fk_miscellaneous_service_bill_miscellaneous_service_service" lazy="false"/>
 		<many-to-one name="receipt" column="receipt_id" class="org.openmrs.module.hospitalcore.model.Receipt" lazy="false" foreign-key="fk_miscellaneousservicebill_receipt"/>
 	</class>

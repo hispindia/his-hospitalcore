@@ -18,7 +18,6 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore.impl;
 
 import java.util.ArrayList;
@@ -41,28 +40,27 @@ import org.openmrs.module.hospitalcore.model.IpdPatientAdmitted;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmittedLog;
 import org.openmrs.module.hospitalcore.util.HospitalCoreConstants;
 
-public class IpdServiceImpl extends BaseOpenmrsService implements IpdService{
-	public IpdServiceImpl(){
-    }
-    
-    protected IpdDAO dao;
-	
+public class IpdServiceImpl extends BaseOpenmrsService implements IpdService {
+	public IpdServiceImpl() {
+	}
+
+	protected IpdDAO dao;
+
 	public void setDao(IpdDAO dao) {
 		this.dao = dao;
 	}
-	
+
 	public List<IpdPatientAdmission> getAllIpdPatientAdmission()
 			throws APIException {
 		return dao.getAllIpdPatientAdmission();
 	}
 
-	
-
 	public List<IpdPatientAdmissionLog> listIpdPatientAdmissionLog(
 			Integer patientId, Integer admissionWardId, String status,
 			Integer min, Integer max) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listIpdPatientAdmissionLog(patientId, admissionWardId, status, min, max);
+		return dao.listIpdPatientAdmissionLog(patientId, admissionWardId,
+				status, min, max);
 	}
 
 	public List<IpdPatientAdmitted> getAllIpdPatientAdmitted()
@@ -115,24 +113,25 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService{
 		return dao.saveIpdPatientAdmittedLog(admitted);
 	}
 
+	// New Requirement load choose ipd page
 	public List<IpdPatientAdmission> searchIpdPatientAdmission(
 			String patientSearch, ArrayList<Integer> userIds, String fromDate,
-			String toDate, ArrayList<Integer> wardIds, String status)
-			throws APIException {
-		return dao.searchIpdPatientAdmission(patientSearch, userIds, fromDate, toDate, wardIds, status);
+			String toDate, String wardId, String status) throws APIException {
+		return dao.searchIpdPatientAdmission(patientSearch, userIds, fromDate,
+				toDate, wardId, status);
 	}
 
 	public List<IpdPatientAdmitted> searchIpdPatientAdmitted(
 			String patientSearch, ArrayList<Integer> userIds, String fromDate,
-			String toDate, ArrayList<Integer> wardIds, String status)
-			throws APIException {
-		return dao.searchIpdPatientAdmitted(patientSearch, userIds, fromDate, toDate, wardIds, status);
+			String toDate, String wardId, String status) throws APIException {
+		return dao.searchIpdPatientAdmitted(patientSearch, userIds, fromDate,
+				toDate, wardId, status);
 	}
 
 	public void removeIpdPatientAdmission(IpdPatientAdmission admission)
 			throws APIException {
 		dao.removeIpdPatientAdmission(admission);
-		
+
 	}
 
 	public void removeIpdPatientAdmitted(IpdPatientAdmitted admitted)
@@ -142,20 +141,21 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService{
 
 	public IpdPatientAdmitted transfer(Integer id, Integer wardId,
 			Integer doctorId, String bed) throws APIException {
-		
-		
+
 		IpdPatientAdmitted from = getIpdPatientAdmitted(id);
-		if( from == null )
-			throw new APIException("Can not found IpdPatientAdmitted with id :"+id);
-		
+		if (from == null)
+			throw new APIException("Can not found IpdPatientAdmitted with id :"
+					+ id);
+
 		Concept ward = Context.getConceptService().getConcept(wardId);
-		if( ward == null )
-			throw new APIException("Can not find IPD Ward with id : "+wardId);
-		
+		if (ward == null)
+			throw new APIException("Can not find IPD Ward with id : " + wardId);
+
 		User user = Context.getUserService().getUser(doctorId);
-		if( user == null )
-			throw new APIException("Can not find Doctor with user id :" + doctorId);
-		
+		if (user == null)
+			throw new APIException("Can not find Doctor with user id :"
+					+ doctorId);
+
 		IpdPatientAdmittedLog log = new IpdPatientAdmittedLog();
 		log.setAdmissionDate(new Date());
 		log.setAdmittedWard(from.getAdmittedWard());
@@ -168,7 +168,8 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService{
 		log.setIpdAdmittedUser(from.getIpdAdmittedUser());
 		log.setMonthlyIncome(from.getMonthlyIncome());
 		log.setPatient(from.getPatient());
-		log.setPatientAdmittedLogTransferFrom(from.getPatientAdmittedLogTransferFrom());
+		log.setPatientAdmittedLogTransferFrom(from
+				.getPatientAdmittedLogTransferFrom());
 		log.setPatientAddress(from.getPatientAddress());
 		log.setPatientIdentifier(from.getPatientIdentifier());
 		log.setPatientAdmissionLog(from.getPatientAdmissionLog());
@@ -176,11 +177,10 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService{
 		log.setUser(Context.getAuthenticatedUser());
 		log.setStatus(IpdPatientAdmitted.STATUS_TRANSFER);
 		log = saveIpdPatientAdmittedLog(log);
-		if( log.getId() != null ){
+		if (log.getId() != null) {
 			removeIpdPatientAdmitted(from);
 		}
-		
-		
+
 		IpdPatientAdmitted to = new IpdPatientAdmitted();
 		to.setAdmissionDate(new Date());
 		to.setAdmittedWard(ward);
@@ -202,15 +202,15 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService{
 		to.setPatientAdmissionLog(log.getPatientAdmissionLog());
 		to.setPatientAdmittedLogTransferFrom(log);
 		to = saveIpdPatientAdmitted(to);
-		
+
 		return to;
 	}
 
 	public IpdPatientAdmittedLog discharge(Integer id, Integer outComeConceptId)
 			throws APIException {
-		
-		
-		Concept outComeConcept = Context.getConceptService().getConcept(outComeConceptId);
+
+		Concept outComeConcept = Context.getConceptService().getConcept(
+				outComeConceptId);
 		IpdPatientAdmitted admitted = getIpdPatientAdmitted(id);
 		IpdPatientAdmittedLog log = new IpdPatientAdmittedLog();
 		log.setAdmissionDate(new Date());
@@ -229,40 +229,43 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService{
 		log.setPatientIdentifier(admitted.getPatientIdentifier());
 		log.setPatientAdmissionLog(admitted.getPatientAdmissionLog());
 		log.setPatientName(admitted.getPatientName());
-		log.setPatientAdmittedLogTransferFrom(admitted.getPatientAdmittedLogTransferFrom());
+		log.setPatientAdmittedLogTransferFrom(admitted
+				.getPatientAdmittedLogTransferFrom());
 		log.setStatus(IpdPatientAdmitted.STATUS_DISCHARGE);
 		log.setAdmissionOutCome(outComeConcept.getName().getName());
 		log = saveIpdPatientAdmittedLog(log);
-		if( log.getId() != null ){
-			//CHUYEN set status of admissionLog = discharge
-			IpdPatientAdmissionLog admissionLog = admitted.getPatientAdmissionLog();
+		if (log.getId() != null) {
+			// CHUYEN set status of admissionLog = discharge
+			IpdPatientAdmissionLog admissionLog = admitted
+					.getPatientAdmissionLog();
 			admissionLog.setStatus(IpdPatientAdmitted.STATUS_DISCHARGE);
 			saveIpdPatientAdmissionLog(admissionLog);
 			removeIpdPatientAdmitted(admitted);
 
 			// save discharge info to encounter
-			Concept conVisitOutCome = Context.getConceptService().getConcept(HospitalCoreConstants.CONCEPT_ADMISSION_OUTCOME);
-			Location location = new Location( 1 );
-			
+			Concept conVisitOutCome = Context.getConceptService().getConcept(
+					HospitalCoreConstants.CONCEPT_ADMISSION_OUTCOME);
+			Location location = new Location(1);
+
 			Encounter ipdEncounter = admissionLog.getIpdEncounter();
-			
+
 			Obs dischargeObs = new Obs();
-			
+
 			dischargeObs.setConcept(conVisitOutCome);
 			dischargeObs.setValueCoded(outComeConcept);
-			dischargeObs.setCreator( Context.getAuthenticatedUser());
+			dischargeObs.setCreator(Context.getAuthenticatedUser());
 			dischargeObs.setObsDatetime(new Date());
 			dischargeObs.setLocation(location);
 			dischargeObs.setDateCreated(new Date());
 			dischargeObs.setPatient(ipdEncounter.getPatient());
 			dischargeObs.setEncounter(ipdEncounter);
-			dischargeObs = Context.getObsService().saveObs(dischargeObs, "update obs dischargeObs if need");
+			dischargeObs = Context.getObsService().saveObs(dischargeObs,
+					"update obs dischargeObs if need");
 			ipdEncounter.addObs(dischargeObs);
 			Context.getEncounterService().saveEncounter(ipdEncounter);
-			
+
 		}
-		
-		
+
 		return log;
 	}
 
@@ -276,7 +279,4 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService{
 		return dao.getAdmittedByPatientId(patientId);
 	}
 
-
- 
-	
 }

@@ -57,6 +57,8 @@ public class TenderBill implements Serializable {
 	
 	private User creator;
 	
+	private User voidedby;
+	
 	private Receipt receipt;
 	
 	private Set<TenderBillItem> billItems;
@@ -153,6 +155,15 @@ public class TenderBill implements Serializable {
 
 	public void setReceipt(Receipt receipt) {
 		this.receipt = receipt;
+	}
+	// New Requirement add 'voided_by' column in bills 
+	
+	public User getvoidedby() {
+		return voidedby;
+	}
+	
+	public void setvoidedby(User voidedby) {
+		this.voidedby = voidedby;
 	}
 	
 }

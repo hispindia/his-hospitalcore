@@ -23,7 +23,13 @@
 package org.openmrs.module.hospitalcore.db;
 
 import java.util.List;
-
+//New Requirement "Editable Dashboard" ~Wasib//
+import org.openmrs.Concept;
+import org.openmrs.Encounter;
+import org.openmrs.Obs;
+import org.openmrs.Patient;
+import org.openmrs.Person;
+import org.openmrs.api.APIException;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
@@ -50,4 +56,12 @@ public interface PatientQueueDAO {
 	public OpdPatientQueueLog getOpdPatientQueueLogById(Integer id) throws DAOException;
 	public List<OpdPatientQueue> getAllPatientInQueue() throws DAOException ;
 	public OpdPatientQueue getOpdPatientQueue(String patientIdentifier,Integer opdConceptId) throws DAOException;
+	
+	//New Requirement "Editable Dashboard" ~Wasib//
+	public Encounter getLastOPDEncounter(Patient patient) throws APIException;
+	public OpdPatientQueueLog getOpdPatientQueueLogByEncounter(
+			Encounter encounter) throws APIException;
+	public Obs getObservationByPersonConceptAndEncounter(Person person,
+			Concept concept, Encounter encounter) throws APIException;
+	public List<Obs> getAllDiagnosis(Integer personId) throws DAOException;
 }

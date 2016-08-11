@@ -59,6 +59,10 @@ public class PatientServiceBill implements Serializable {
 	
 	private String description;
 	
+	private User voidedby;
+	
+	private String patientCategory;
+	
 	private Receipt receipt;
 	
 	private Boolean freeBill = false;
@@ -173,5 +177,21 @@ public class PatientServiceBill implements Serializable {
 	
 	public void setActualAmount(BigDecimal actualAmount) {
 		this.actualAmount = actualAmount;
+	}
+	// New Requirement add 'voided_by' column in bills 
+	public User getvoidedby() {
+		return voidedby;
+	}
+	
+	public void setvoidedby(User voidedby) {
+		this.voidedby = voidedby;
+	}
+	// New Requirement add 'patient_category' column in bills 
+	public String getPatientCategory() {
+		return patientCategory;
+	}
+
+	public void setPatientCategory(String patientCategory) {
+		this.patientCategory = patientCategory;
 	}
 }

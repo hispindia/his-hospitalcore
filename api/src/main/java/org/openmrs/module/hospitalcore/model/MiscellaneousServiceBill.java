@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.openmrs.User;
+
 public class MiscellaneousServiceBill implements Serializable {
 
 	/**
@@ -40,6 +42,7 @@ public class MiscellaneousServiceBill implements Serializable {
 	private Integer creator;
 	private Boolean voided = false;
 	private Date voidedDate;
+	private User voidedby;
 	private Boolean printed = false;
 	private MiscellaneousService service;
 	
@@ -144,5 +147,13 @@ public class MiscellaneousServiceBill implements Serializable {
     public void setQuantity(Integer quantity) {
     	this.quantity = quantity;
     }
+	// New Requirement add 'voided_by' column in bills 
+    public User getvoidedby() {
+		return voidedby;
+	}
+	
+	public void setvoidedby(User voidedby) {
+		this.voidedby = voidedby;
+	}
 	
 }

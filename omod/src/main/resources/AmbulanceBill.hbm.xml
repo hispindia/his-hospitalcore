@@ -18,6 +18,8 @@
 		<property name="createdDate" column="created_date"  />
 		<property name="voided" column="voided"  />
 		<property name="voidedDate" column="voided_date"  />
+		
+		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_ambulancebill_voidedby"/>
 		<many-to-one name="driver" column="driver_id" class="org.openmrs.module.hospitalcore.model.Driver" foreign-key="fk_ambulancebill_driver"/>
 		<set name="billItems" table="billing_ambulance_bill_item"  where="voided=0" cascade="save-update,merge,evict" lazy="false">
 			<key column="ambulance_bill_id" />

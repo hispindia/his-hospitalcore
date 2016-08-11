@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.openmrs.User;
+
 
 /**
  *
@@ -49,6 +51,10 @@ public class AmbulanceBillItem implements Serializable{
     private BigDecimal amount;
     
     private Date createdDate;
+    
+	private User voidedby;
+	
+	
 	
 	private Boolean voided = false;
 	
@@ -197,5 +203,15 @@ public class AmbulanceBillItem implements Serializable{
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
+	// New Requirement add 'voided_by' column in bills 
+	public User getvoidedby() {
+		return voidedby;
+	}
+	
+	public void setvoidedby(User voidedby) {
+		this.voidedby = voidedby;
+	}
+	
+	
     
 }
