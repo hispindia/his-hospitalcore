@@ -805,4 +805,16 @@ public class HibernateBillingDAO implements BillingDAO {
 		return (IndoorPatientServiceBill) criteria.uniqueResult();
 	}
 	
+	//New Requirement add Paid bill & Free bill Both 
+	public PatientServiceBillItem getPatientServiceBillItem(Integer billId,
+			String name) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				PatientServiceBillItem.class);
+
+		criteria.add(Restrictions.eq("patientServiceBill.patientServiceBillId",
+				billId));
+		criteria.add(Restrictions.eq("name", name));
+		return (PatientServiceBillItem) criteria.uniqueResult();
+	}
+	
 }

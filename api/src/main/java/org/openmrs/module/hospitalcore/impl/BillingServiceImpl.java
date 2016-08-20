@@ -1214,4 +1214,8 @@ public class BillingServiceImpl extends BaseOpenmrsService implements BillingSer
 		encounter.addOrder(order);
 		return order;
 	}
+	//New Requirement add Paid bill & Free bill Both 
+	public PatientServiceBillItem getPatientServiceBillItem(Integer billId,String name) throws APIException {
+		return dao.getPatientServiceBillItem(billId,name);
+	}
 }
