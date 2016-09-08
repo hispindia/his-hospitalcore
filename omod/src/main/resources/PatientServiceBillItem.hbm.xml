@@ -22,7 +22,6 @@
 		<property name="voided" column="voided"  />
 		<property name="voidedDate" column="voided_date"  />
 		<property name="actualAmount" column="actual_amount"  />
-		<property name="patientCategory" column="patient_category" />
 		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_patientservicebillitem_voidedby"/>			
 	</class>
 </hibernate-mapping>

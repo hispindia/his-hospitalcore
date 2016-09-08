@@ -60,8 +60,6 @@ public class PatientServiceBillItem implements Serializable {
 	
 	private Order order ;
 	
-	private String patientCategory;
-	
 	private Date voidedDate;
 	
 	private User voidedby;
@@ -168,13 +166,5 @@ public class PatientServiceBillItem implements Serializable {
 	
 	public void setvoidedby(User voidedby) {
 		this.voidedby = voidedby;
-	}
-	// New Requirement add 'patient_category' column in bills 
-	public String getPatientCategory() {
-		return patientCategory;
-	}
-
-	public void setPatientCategory(String patientCategory) {
-		this.patientCategory = patientCategory;
 	}
 }

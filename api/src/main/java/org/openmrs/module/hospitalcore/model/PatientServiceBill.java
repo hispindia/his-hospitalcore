@@ -63,6 +63,8 @@ public class PatientServiceBill implements Serializable {
 	
 	private String patientCategory;
 	
+	private String comment;
+	
 	private Receipt receipt;
 	
 	private Boolean freeBill = false;
@@ -194,4 +196,13 @@ public class PatientServiceBill implements Serializable {
 	public void setPatientCategory(String patientCategory) {
 		this.patientCategory = patientCategory;
 	}
+	
+	// New Requirement add 'comment' column in bills
+		public String getComment() {
+			return comment;
+		}
+		
+		public void setComment(String comment) {
+			this.comment = comment;
+		}
 }
