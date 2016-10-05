@@ -22,7 +22,9 @@
 package org.openmrs.module.hospitalcore.db;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
@@ -121,4 +123,6 @@ public interface HospitalCoreDAO {
 	
 	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 	public PatientSearch getPatient(int patientID);
+	
+	public Set<Patient> getAllEncounterCurrentDate();
 }

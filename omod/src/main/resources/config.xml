@@ -102,7 +102,13 @@
 			Concept class id to tell a concept is for a medical examination.
 		</description>
 	</globalProperty>
-	
+	  <globalProperty>
+		<property>@MODULE_ID@.ninCode</property>
+		<defaultValue>10</defaultValue>
+		<description>
+			NIN code for hospitals
+		</description>
+	</globalProperty>
 	<!-- Internationalization -->
 	<!-- All message codes should start with @MODULE_ID@.* -->
 	<messages>

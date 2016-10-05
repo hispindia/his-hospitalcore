@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -210,4 +211,9 @@ public interface HospitalCoreService extends OpenmrsService {
 	
 	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 	public PatientSearch getPatient(int patientID);
+	
+	
+	//New requirement to download patient
+	public Set<Patient> getAllEncounterCurrentDate();
+	
 }

@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -56,6 +57,8 @@ import org.openmrs.module.hospitalcore.db.HospitalCoreDAO;
 import org.openmrs.module.hospitalcore.model.CoreForm;
 import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.hospitalcore.util.DateUtils;
+
+import java.text.ParseException;
 
 public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	
@@ -353,5 +356,29 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PatientSearch.class);
 		criteria.add(Restrictions.eq("patientId", patientID));
 		return (PatientSearch) criteria.uniqueResult();
+	}
+	
+
+	public Set<Patient> getAllEncounterCurrentDate() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Encounter.class);
+		
+		 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String datee = formatterExt.format(new Date());
+		String startFromDate = datee + " 00:00:00"; ;
+		String endFromDate = datee + " 23:59:59";
+		try { 
+			
+			criteria.add(Restrictions.and(Restrictions.ge("encounterDatetime", formatter.parse(startFromDate)),
+				    Restrictions.le("encounterDatetime", formatter.parse(endFromDate))));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<Encounter> enc=criteria.list();
+		Set<Patient> dops=new LinkedHashSet<Patient>();
+		for(Encounter encounter:enc){
+			dops.add(encounter.getPatient());	
+		}
+		return dops;
+		 
 	}
 }
