@@ -72,7 +72,7 @@ public class PatientDetailasCSVController {
 				}		   
 		        }
 			    String ninnumber = GlobalPropertyUtil.getString(
-						HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER, "");
+						HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER, null);
 				String identifier=pat.getPatientIdentifier().getIdentifier();
 				String name=pat.getGivenName() ;
 				String gender=pat.getGender();

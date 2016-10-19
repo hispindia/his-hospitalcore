@@ -38,7 +38,7 @@ public class HospitalCoreConstants {
 	public static final String PROPERTY_IPDENCOUNTER = MODULE_ID + ".ipdEncounter";
 	public static final String PROPERTY_IDENTIFIER_PREFIX = MODULE_ID + ".identifier_prefix";
 	public static final String PROPERTY_HOSPITAL_NAME = MODULE_ID + ".hospitalName";
-	public static final String PROPERTY_HOSPITAL_NIN_NUMBER = MODULE_ID + ".nincode";
+	public static final String PROPERTY_HOSPITAL_NIN_NUMBER = MODULE_ID + ".ninCode";
 	
 	
 	
