@@ -124,5 +124,5 @@ public interface HospitalCoreDAO {
 	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 	public PatientSearch getPatient(int patientID);
 	
-	public Set<Patient> getAllEncounterCurrentDate();
+	public Set<Patient> getAllEncounterCurrentDate(String date);
 }

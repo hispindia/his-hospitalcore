@@ -4,7 +4,11 @@ package org.openmrs.module.hospitalcore.web.controller.downloadasCSV;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
+
 
 
 
@@ -28,7 +32,9 @@ public class DownloadAsCSvController {
 			
 			HospitalCoreService hcs=Context.getService(HospitalCoreService.class);
 			 
-		
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			String dateStr = sdf.format(new Date());
+			model.addAttribute("currentDate", dateStr);
 			
 	    	
 	    	

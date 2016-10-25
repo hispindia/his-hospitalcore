@@ -214,6 +214,6 @@ public interface HospitalCoreService extends OpenmrsService {
 	
 	
 	//New requirement to download patient
-	public Set<Patient> getAllEncounterCurrentDate();
+	public Set<Patient> getAllEncounterCurrentDate(String date);
 	
 }

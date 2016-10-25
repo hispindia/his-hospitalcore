@@ -40,28 +40,38 @@ public class PatientDetailasCSVController {
 	                         @RequestParam(value="currentPage",required=false)  Integer currentPage,
 	                         Map<String, Object> model, HttpServletRequest request){
 		
-		
     	
 		return "/module/hospitalcore/downloadasCSV/patientDetailasCSV";
 	}
 	@RequestMapping(value = "/downloadCSV")
-	public void downloadCSV(HttpServletResponse response) throws IOException {
- 
+	public void downloadCSV(HttpServletResponse response,@RequestParam(value="date",required=false)  String date,HttpServletRequest request) throws IOException {
+		
+		String dates=date;
+		
 		response.setContentType("text/csv");
 		SimpleDateFormat formatterExt = new SimpleDateFormat("dd/MM/yyyy");
-		String reportName = "Report_On_"+formatterExt.format(new Date())+".csv";
+		String reportName = "Report_On_"+dates+".csv";
 		response.setHeader("Content-disposition", "attachment;filename="+reportName);
 		
 		ArrayList<String> rows = new ArrayList<String>();
 		rows.add("NINNumber,Identifier,Name,Gender,Age,PhoneNo,LastVisit,AdharNumber,DeparmentName,TypeOfPatient");
 		rows.add("\n");
 		HospitalCoreService hcs=Context.getService(HospitalCoreService.class);
-		 Set<Patient>enc=hcs.getAllEncounterCurrentDate();
+		 Set<Patient>enc=hcs.getAllEncounterCurrentDate(dates);
         
 			
 			for(Patient pat:enc)
-			{	
-				
+			{	String typeofpatient="";
+				List<Encounter>encounterpatient=Context.getEncounterService().getEncountersByPatient(pat);
+			     
+			     if(encounterpatient.size()==1)
+			     {
+			    	 typeofpatient="New Patient" ;
+			     }
+			     else
+			     {
+			    	 typeofpatient="Revisit" ;
+			     }
 				String phone="";
 				List<PersonAttribute> pas = hcs.getPersonAttributes(pat.getId());
 			    for (PersonAttribute pa : pas) {
@@ -74,10 +84,11 @@ public class PatientDetailasCSVController {
 			    String ninnumber = GlobalPropertyUtil.getString(
 						HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER, null);
 				String identifier=pat.getPatientIdentifier().getIdentifier();
-				String name=pat.getGivenName() ;
+				String name=pat.getGivenName().concat(" ").concat(pat.getMiddleName()).concat(" ").concat(pat.getFamilyName()) ;
+				
 				String gender=pat.getGender();
 			    String age=pat.getAge().toString();
-				String lastvisit=hcs.getLastVisitTime(pat.getId()).toString();
+				String lastvisit=formatterExt.format(hcs.getLastVisitTime(pat.getId()));
 				String adharnumber="";
 				for (PersonAttribute pa : pas) {
 					PersonAttributeType attributeType = pa.getAttributeType();
@@ -87,7 +98,7 @@ public class PatientDetailasCSVController {
 						
 					}		   
 			        }
-				String typeofpatient="";
+				
 				String departmentName="";
 				List<Obs> o=Context.getObsService().getObservationsByPersonAndConcept(pat,Context.getConceptService().getConceptByName("OPD WARD"));
 				for(Obs ob:o)

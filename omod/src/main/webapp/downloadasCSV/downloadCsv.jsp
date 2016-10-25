@@ -29,10 +29,23 @@
 <h2><spring:message code="hospitalcore.download.csv"/></h2>	
 
 <br />
+<script type="text/javascript">  jQuery(document).ready(function() {
+	jQuery('#date').datepicker({yearRange:'c-30:c+30', dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true});
+});
+function exportpatientCSV(){
+	
+	var date = jQuery("#date").val();		
+	window.location = "patientDetailasCSV.form?date=" + date;		
+	
+}
+
+
+</script>
 <c:forEach items="${errors.allErrors}" var="error">
 	<span class="error"><spring:message code="${error.defaultMessage}" text="${error.defaultMessage}"/></span><
 </c:forEach>
-<input type="button" value="<spring:message code='hospitalcore.download.buttons'/>" onclick="ACT.go('patientDetailasCSV.form');"/> 
+Date:<input id="date" name="date" value="${currentDate}" style="text-align:right;"/>
+<input type="button" value="<spring:message code='hospitalcore.download.buttons'/>" onclick="exportpatientCSV();"/> 
 <br /><br />
 
 

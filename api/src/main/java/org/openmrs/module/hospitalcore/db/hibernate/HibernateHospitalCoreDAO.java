@@ -359,13 +359,13 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	}
 	
 
-	public Set<Patient> getAllEncounterCurrentDate() {
+	public Set<Patient> getAllEncounterCurrentDate(String date) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Encounter.class);
 		
-		 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		String datee = formatterExt.format(new Date());
-		String startFromDate = datee + " 00:00:00"; ;
-		String endFromDate = datee + " 23:59:59";
+	//	 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	//	String datee = formatterExt.format(new Date());
+		String startFromDate = date + " 00:00:00"; ;
+		String endFromDate = date + " 23:59:59";
 		try { 
 			
 			criteria.add(Restrictions.and(Restrictions.ge("encounterDatetime", formatter.parse(startFromDate)),
@@ -381,4 +381,6 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		return dops;
 		 
 	}
+
+
 }
