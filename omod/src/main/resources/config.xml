@@ -167,6 +167,7 @@
         OpdDrugOrder.hbm.xml
         IndoorPatientServiceBill.hbm.xml
 		IndoorPatientServiceBillItem.hbm.xml
+		WardBedStrength.hbm.xml
     </mappingFiles>
 </module>
 

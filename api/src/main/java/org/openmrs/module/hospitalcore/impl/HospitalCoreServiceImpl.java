@@ -750,6 +750,10 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		// TODO Auto-generated method stub
 		return dao.getAllEncounterCurrentDate(date);
 	}
+	
+	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept){
+		return dao.getObsInstanceForDiagnosis(encounter,concept);
+	}
 
 
 }

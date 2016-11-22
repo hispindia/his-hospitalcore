@@ -30,6 +30,7 @@ import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmissionLog;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmitted;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmittedLog;
+import org.openmrs.module.hospitalcore.model.WardBedStrength;
 
 public interface IpdDAO {
 	
@@ -59,4 +60,8 @@ public interface IpdDAO {
 	public List<IpdPatientAdmittedLog> listAdmittedLogByPatientId(Integer patientId) throws DAOException;
 	
 	public IpdPatientAdmitted getAdmittedByPatientId(Integer patientId) throws DAOException;
+	
+	public void saveWardBedStrength(WardBedStrength wardBedStrength) throws DAOException;
+	
+	public WardBedStrength getWardBedStrengthByWardId(Integer wardId) throws DAOException;
 }

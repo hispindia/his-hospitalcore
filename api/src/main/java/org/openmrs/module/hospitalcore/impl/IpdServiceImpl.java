@@ -38,6 +38,7 @@ import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmissionLog;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmitted;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmittedLog;
+import org.openmrs.module.hospitalcore.model.WardBedStrength;
 import org.openmrs.module.hospitalcore.util.HospitalCoreConstants;
 
 public class IpdServiceImpl extends BaseOpenmrsService implements IpdService {
@@ -277,6 +278,19 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService {
 	public IpdPatientAdmitted getAdmittedByPatientId(Integer patientId)
 			throws APIException {
 		return dao.getAdmittedByPatientId(patientId);
+	}
+
+	public void saveWardBedStrength(WardBedStrength wardBedStrength)
+			throws APIException {
+
+		dao.saveWardBedStrength(wardBedStrength);
+
+	}
+
+	public WardBedStrength getWardBedStrengthByWardId(Integer wardId)
+			throws APIException {
+
+		return dao.getWardBedStrengthByWardId(wardId);
 	}
 
 }

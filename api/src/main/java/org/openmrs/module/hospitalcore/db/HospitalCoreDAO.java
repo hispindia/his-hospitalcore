@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.openmrs.Concept;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Obs;
@@ -125,4 +126,6 @@ public interface HospitalCoreDAO {
 	public PatientSearch getPatient(int patientID);
 	
 	public Set<Patient> getAllEncounterCurrentDate(String date);
+	
+	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws DAOException;
 }
