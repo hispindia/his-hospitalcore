@@ -32,6 +32,8 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.openmrs.Concept;
+import org.openmrs.ConceptClass;
 import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.db.DAOException;
@@ -40,6 +42,7 @@ import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmissionLog;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmitted;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmittedLog;
+import org.openmrs.module.hospitalcore.model.IpdPatientVitalStatistics;
 import org.openmrs.module.hospitalcore.model.WardBedStrength;
 
 public class HibernateIpdDAO implements IpdDAO {
@@ -374,5 +377,29 @@ public class HibernateIpdDAO implements IpdDAO {
 
 		return CollectionUtils.isEmpty(list) ? null : list.get(0);
 	}
-
+// vital statstics for ipd [atient
+	public IpdPatientVitalStatistics saveIpdPatientVitalStatistics(
+			IpdPatientVitalStatistics vitalStatistics) throws DAOException {
+		return (IpdPatientVitalStatistics) sessionFactory.getCurrentSession()
+				.merge(vitalStatistics);
+	}
+	
+	public List<IpdPatientVitalStatistics> getIpdPatientVitalStatistics(
+			Integer patientId, Integer patientAdmissionLogId)
+			throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				IpdPatientVitalStatistics.class);
+		criteria.add(Restrictions.eq("patient.personId", patientId));
+		criteria.add(Restrictions.eq("ipdPatientAdmissionLog.id",
+				patientAdmissionLogId));
+		return criteria.list();
+	}
+	public List<Concept> getDiet() throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Concept.class, "con");
+		ConceptClass conClass = Context.getConceptService()
+				.getConceptClassByName("Diet");
+		criteria.add(Restrictions.eq("con.conceptClass", conClass));
+		return criteria.list();
+	}
 }

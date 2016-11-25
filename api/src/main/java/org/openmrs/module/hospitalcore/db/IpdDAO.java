@@ -24,12 +24,14 @@ package org.openmrs.module.hospitalcore.db;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openmrs.Concept;
 import org.openmrs.api.APIException;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmissionLog;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmitted;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmittedLog;
+import org.openmrs.module.hospitalcore.model.IpdPatientVitalStatistics;
 import org.openmrs.module.hospitalcore.model.WardBedStrength;
 
 public interface IpdDAO {
@@ -64,4 +66,8 @@ public interface IpdDAO {
 	public void saveWardBedStrength(WardBedStrength wardBedStrength) throws DAOException;
 	
 	public WardBedStrength getWardBedStrengthByWardId(Integer wardId) throws DAOException;
+	//Vital stastics for ipd patient
+	public IpdPatientVitalStatistics saveIpdPatientVitalStatistics(IpdPatientVitalStatistics vitalStatistics) throws DAOException;
+	public List<IpdPatientVitalStatistics> getIpdPatientVitalStatistics(Integer patientId,Integer patientAdmissionLogId) throws DAOException;
+	public List<Concept> getDiet() throws DAOException;
 }

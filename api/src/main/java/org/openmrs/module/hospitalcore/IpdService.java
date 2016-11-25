@@ -24,12 +24,14 @@ package org.openmrs.module.hospitalcore;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openmrs.Concept;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmissionLog;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmitted;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmittedLog;
+import org.openmrs.module.hospitalcore.model.IpdPatientVitalStatistics;
 import org.openmrs.module.hospitalcore.model.WardBedStrength;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -93,5 +95,8 @@ public interface IpdService extends OpenmrsService{
 	public void saveWardBedStrength(WardBedStrength wardBedStrength) throws APIException;
 	
 	public WardBedStrength getWardBedStrengthByWardId(Integer wardId) throws APIException;
-
+  //Vital Stastics
+	public IpdPatientVitalStatistics saveIpdPatientVitalStatistics(IpdPatientVitalStatistics vitalStatistics) throws APIException;
+	public List<IpdPatientVitalStatistics> getIpdPatientVitalStatistics(Integer patientId,Integer patientAdmissionLogId) throws APIException;
+	public List<Concept> getDiet() throws APIException;
 }

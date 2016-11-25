@@ -168,6 +168,8 @@
         IndoorPatientServiceBill.hbm.xml
 		IndoorPatientServiceBillItem.hbm.xml
 		WardBedStrength.hbm.xml
+		<!-- Record vitals -->
+		IpdPatientVitalStatistics.hbm.xml
     </mappingFiles>
 </module>
 

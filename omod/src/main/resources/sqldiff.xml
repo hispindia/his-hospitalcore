@@ -358,4 +358,39 @@
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		</sql>
 	</diff>
+	<!-- Capture Vital statistics for admitted patient in ipd -->
+		<diff>
+		<version>2.4</version>
+		<author>Ambika</author>
+		<date>Nov 22 2016</date>
+		<description>
+			Create table ipd_vital_statistics
+		</description>
+		<sql>
+			CREATE TABLE IF NOT EXISTS `ipd_vital_statistics` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`patient_id` int(11) NOT NULL,
+                        `ipd_patientadmissionlog_id` int(11) NOT NULL,
+                        `blood_pressure` varchar(11) DEFAULT NULL,
+                        `pulse_rate` varchar(11) DEFAULT NULL,
+                        `temperature` varchar(11) DEFAULT NULL,
+                        `diet_advised` varchar(50) DEFAULT NULL,
+                        `note` varchar(200) DEFAULT NULL,
+			`created_by` int(11) NOT NULL,
+			`created_on` datetime NOT NULL,
+			PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+		</sql>
+	</diff>
+	<diff>
+		<version>2.5</version>
+		<author>Ambika</author>
+		<date>Nov 24 2016</date>
+		<description>
+			Add column order_from for 'opd_drug_order' table
+		</description>
+		<sql>
+			ALTER TABLE opd_drug_order ADD order_from smallint(1) NOT NULL DEFAULT '0';
+		</sql>
+	</diff>
 </sqldiff>
