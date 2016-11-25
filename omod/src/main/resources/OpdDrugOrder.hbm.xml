@@ -26,5 +26,7 @@
 			not-null="true" />
 	    <property name="cancelStatus" column="cancel_status" length="1"
 			not-null="true" />
+			<property name="orderFrom" column="order_from" length="1"
+			not-null="true" />
 	</class>
 </hibernate-mapping>

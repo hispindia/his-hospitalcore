@@ -43,6 +43,8 @@ public class OpdDrugOrder {
 	private Date createdOn;
 	private int orderStatus; //0=drug order from opd not yet processed,1=drug order from opd processed 
 	private int cancelStatus; //0=not yet canceled,1=canceled
+    private int orderFrom;  //drug ordered from  opd=0 , treatmentcard=1 , discharge=2
+	
 	public Integer getOpdDrugOrderId() {
 		return opdDrugOrderId;
 	}
@@ -115,5 +117,11 @@ public class OpdDrugOrder {
 	}
 	public void setCancelStatus(int cancelStatus) {
 		this.cancelStatus = cancelStatus;
+	}
+	public int getOrderFrom() {
+		return orderFrom;
+	}
+	public void setOrderFrom(int orderFrom) {
+		this.orderFrom = orderFrom;
 	}
 }
