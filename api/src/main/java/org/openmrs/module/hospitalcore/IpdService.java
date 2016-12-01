@@ -82,7 +82,7 @@ public interface IpdService extends OpenmrsService{
 	@Transactional(readOnly = true)
 	public List<IpdPatientAdmitted> searchIpdPatientAdmitted(String patientSearch, ArrayList<Integer> userIds, String fromDate, String toDate, String wardId, String status) throws APIException;
 	
-	public IpdPatientAdmitted transfer(Integer id, Integer wardId, Integer doctorId, String bed) throws APIException;
+	public IpdPatientAdmitted transfer(Integer id, Integer wardId, Integer doctorId, String bed, String comments) throws APIException;
 	
 	public IpdPatientAdmittedLog discharge(Integer id, Integer outComeConceptId) throws APIException;
 	

@@ -49,6 +49,7 @@ public class IpdPatientAdmittedLog implements Serializable{
 	private String patientName;
 	private String patientAddress;
 	private String bed;
+	private String comments;
 	private String fatherName;
 	private String patientIdentifier;
 	private Date birthDate;
@@ -196,6 +197,12 @@ public class IpdPatientAdmittedLog implements Serializable{
 	}
 	public void setAdmissionOutCome(String admissionOutCome) {
 		this.admissionOutCome = admissionOutCome;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	
 	

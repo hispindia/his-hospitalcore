@@ -393,4 +393,16 @@
 			ALTER TABLE opd_drug_order ADD order_from smallint(1) NOT NULL DEFAULT '0';
 		</sql>
 	</diff>
+	<diff>
+		<version>2.6</version>
+		<author>sagar</author>
+		<date>December 01st 2016</date>
+		<description>
+			Add column comments for ipd_patient_admitted_log table
+		</description>
+		<sql>
+			ALTER TABLE ipd_patient_admitted_log
+			ADD COLUMN `comments`  varchar(100)  default NULL;
+		</sql>
+	</diff>
 </sqldiff>

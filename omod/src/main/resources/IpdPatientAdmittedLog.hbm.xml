@@ -23,6 +23,7 @@
 		<property name="patientName" column="patient_name" />
 		<property name="birthDate" column="birth_date" />
 		<property name="gender" column="gender" />
+		<property name="comments" column="comments" />
 		<property name="monthlyIncome" column="monthly_income" />
 		<property name="patientIdentifier" column="patient_identifier" />
 		<property name="basicPay" column="basic_pay" />

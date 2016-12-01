@@ -142,7 +142,7 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService {
 	}
 
 	public IpdPatientAdmitted transfer(Integer id, Integer wardId,
-			Integer doctorId, String bed) throws APIException {
+			Integer doctorId, String bed, String comments) throws APIException {
 
 		IpdPatientAdmitted from = getIpdPatientAdmitted(id);
 		if (from == null)
@@ -163,6 +163,7 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService {
 		log.setAdmittedWard(from.getAdmittedWard());
 		log.setBasicPay(from.getBasicPay());
 		log.setBed(from.getBed());
+		log.setComments(comments);
 		log.setBirthDate(from.getBirthDate());
 		log.setCaste(from.getCaste());
 		log.setFatherName(from.getFatherName());
