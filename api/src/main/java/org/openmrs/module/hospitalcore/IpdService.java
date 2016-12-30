@@ -99,4 +99,5 @@ public interface IpdService extends OpenmrsService{
 	public IpdPatientVitalStatistics saveIpdPatientVitalStatistics(IpdPatientVitalStatistics vitalStatistics) throws APIException;
 	public List<IpdPatientVitalStatistics> getIpdPatientVitalStatistics(Integer patientId,Integer patientAdmissionLogId) throws APIException;
 	public List<Concept> getDiet() throws APIException;
+	public List<IpdPatientAdmitted> getBedAvailability(Concept wardId,String bedNo);
 }

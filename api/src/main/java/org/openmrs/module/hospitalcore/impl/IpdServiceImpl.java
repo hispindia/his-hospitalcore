@@ -309,4 +309,7 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService {
 	public List<Concept> getDiet() throws APIException {
 		return dao.getDiet();
 	}
+	public List<IpdPatientAdmitted> getBedAvailability(Concept wardId,String bedNo) throws APIException {
+		return dao.getBedAvailability(wardId,bedNo);
+	}
 }

@@ -70,4 +70,5 @@ public interface IpdDAO {
 	public IpdPatientVitalStatistics saveIpdPatientVitalStatistics(IpdPatientVitalStatistics vitalStatistics) throws DAOException;
 	public List<IpdPatientVitalStatistics> getIpdPatientVitalStatistics(Integer patientId,Integer patientAdmissionLogId) throws DAOException;
 	public List<Concept> getDiet() throws DAOException;
+	public List<IpdPatientAdmitted> getBedAvailability(Concept wardId,String bedNo);
 }
