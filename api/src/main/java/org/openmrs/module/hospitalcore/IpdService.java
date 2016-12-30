@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openmrs.Concept;
+import org.openmrs.Encounter;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
@@ -58,6 +59,12 @@ public interface IpdService extends OpenmrsService{
 	
 	@Transactional(readOnly = true)
 	public IpdPatientAdmissionLog getIpdPatientAdmissionLog(Integer id) throws APIException;
+	
+	@Transactional(readOnly = true)
+	public IpdPatientAdmissionLog getIpdPatientAdmissionLogByEncounter(Encounter en) throws APIException;
+	
+	@Transactional(readOnly = true)
+	public IpdPatientAdmittedLog getIpdPatientAdmittedLogByAdmissionLog(IpdPatientAdmissionLog ipl) throws APIException;
 	
 	@Transactional(readOnly = true)
 	public IpdPatientAdmission getIpdPatientAdmission(Integer id) throws APIException;

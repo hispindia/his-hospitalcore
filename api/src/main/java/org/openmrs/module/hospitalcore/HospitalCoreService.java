@@ -216,6 +216,8 @@ public interface HospitalCoreService extends OpenmrsService {
 	//New requirement to download patient
 	public Set<Patient> getAllEncounterCurrentDate(String date);
 	
+	public Set<Encounter> getEncountersByPatientAndDate(Patient patient, String date);
+	
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws APIException;
 	
 }

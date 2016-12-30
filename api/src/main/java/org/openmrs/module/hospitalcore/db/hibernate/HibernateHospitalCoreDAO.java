@@ -360,26 +360,50 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	
 
 	public Set<Patient> getAllEncounterCurrentDate(String date) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Encounter.class);
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Obs.class);
 		
 	//	 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	//	String datee = formatterExt.format(new Date());
 		String startFromDate = date + " 00:00:00"; ;
 		String endFromDate = date + " 23:59:59";
 		try { 
-			
-			criteria.add(Restrictions.and(Restrictions.ge("encounterDatetime", formatter.parse(startFromDate)),
-				    Restrictions.le("encounterDatetime", formatter.parse(endFromDate))));
+			criteria.add(Restrictions.and(Restrictions.ge("obsDatetime", formatter.parse(startFromDate)),
+				    Restrictions.le("obsDatetime", formatter.parse(endFromDate))));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		List<Encounter> enc=criteria.list();
+		List<Obs> enc=criteria.list();
 		Set<Patient> dops=new LinkedHashSet<Patient>();
-		for(Encounter encounter:enc){
-			dops.add(encounter.getPatient());	
+		for(Obs o:enc){
+			Patient p = Context.getPatientService().getPatient(o.getPersonId());
+			dops.add(p);	
 		}
 		return dops;
 		 
+	}
+	
+	public Set<Encounter>  getEncountersByPatientAndDate(Patient patient, String date) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Obs.class);
+		
+	//	 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	//	String datee = formatterExt.format(new Date());
+		String startFromDate = date + " 00:00:00"; ;
+		String endFromDate = date + " 23:59:59";
+		Person per = Context.getPersonService().getPerson(patient.getPatientId()); 
+		try { 
+			criteria.add(Restrictions.and(Restrictions.ge("obsDatetime", formatter.parse(startFromDate)),
+				    Restrictions.le("obsDatetime", formatter.parse(endFromDate))));
+			criteria.add(Restrictions.eq("person", per));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<Obs> enc=criteria.list();
+		Set<Encounter> dops=new LinkedHashSet<Encounter>();
+		for(Obs o:enc){
+			dops.add(o.getEncounter());	
+		}
+
+		return dops;
 	}
 	
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) {

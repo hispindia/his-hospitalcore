@@ -127,5 +127,7 @@ public interface HospitalCoreDAO {
 	
 	public Set<Patient> getAllEncounterCurrentDate(String date);
 	
+	public Set<Encounter> getEncountersByPatientAndDate(Patient patient, String date);
+	
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws DAOException;
 }

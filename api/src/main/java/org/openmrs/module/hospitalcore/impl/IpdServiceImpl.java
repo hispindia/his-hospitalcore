@@ -85,6 +85,17 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService {
 		return dao.getIpdPatientAdmissionLog(id);
 	}
 
+	public IpdPatientAdmissionLog getIpdPatientAdmissionLogByEncounter(Encounter en)
+			throws APIException {
+		return dao.getIpdPatientAdmissionLogByEncounter(en);
+	}
+	
+	public IpdPatientAdmittedLog getIpdPatientAdmittedLogByAdmissionLog(IpdPatientAdmissionLog ipl)
+			throws APIException {
+		return dao.getIpdPatientAdmittedLogByAdmissionLog(ipl);
+	}
+	
+	
 	public IpdPatientAdmitted getIpdPatientAdmitted(Integer id)
 			throws APIException {
 		return dao.getIpdPatientAdmitted(id);

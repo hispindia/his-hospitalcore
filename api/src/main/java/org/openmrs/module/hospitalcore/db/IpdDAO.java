@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openmrs.Concept;
+import org.openmrs.Encounter;
 import org.openmrs.api.APIException;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
@@ -44,9 +45,11 @@ public interface IpdDAO {
 	public IpdPatientAdmittedLog getIpdPatientAdmittedLog(Integer id) throws DAOException;
 	public IpdPatientAdmitted getIpdPatientAdmitted(Integer id) throws DAOException;
 	public IpdPatientAdmissionLog getIpdPatientAdmissionLog(Integer id) throws DAOException;
+	public IpdPatientAdmissionLog getIpdPatientAdmissionLogByEncounter(Encounter en) throws DAOException;
 	public IpdPatientAdmission getIpdPatientAdmission(Integer id) throws DAOException;
 	
 	public List<IpdPatientAdmittedLog> getAllIpdPatientAdmittedLog() throws DAOException;
+	public IpdPatientAdmittedLog getIpdPatientAdmittedLogByAdmissionLog(IpdPatientAdmissionLog ipl)  throws DAOException;
 	public List<IpdPatientAdmitted> getAllIpdPatientAdmitted() throws DAOException;
 	public List<IpdPatientAdmissionLog> listIpdPatientAdmissionLog(Integer patientId, Integer admissionWardId,String status,Integer min, Integer max)
 	throws DAOException;
