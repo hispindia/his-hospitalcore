@@ -3,6 +3,7 @@ package org.openmrs.module.hospitalcore.web.controller.downloadasCSV;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -74,6 +75,10 @@ public class PatientDetailasCSVController {
 			String hours = "";
 			String minute = "";
 			String visitTime = "";
+			String calculateAge = "";
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(pat.getBirthdate());
+			int yearNew = cal.get(Calendar.YEAR);
 			
 			Set<Encounter> encounterpatient =hcs.getEncountersByPatientAndDate(pat,dates);
 			
@@ -90,6 +95,7 @@ public class PatientDetailasCSVController {
 					flag=false;
 					visitId = e.getEncounterId().toString();
 					typeofpatient = "2";
+					
 					Set<Obs> oList = Context.getObsService().getObservations(e);
 					for (Obs o : oList) {
 						if (o.getConcept().getName().toString().equals("OPD WARD")) {
@@ -99,6 +105,14 @@ public class PatientDetailasCSVController {
 							minute = minute + o.getObsDatetime().getMinutes();
 							visitTime = hours.concat(minute);
 							departmentId = o.getValueCoded().toString();
+							
+							Calendar cal2 = Calendar.getInstance();
+							cal2.setTime(o.getObsDatetime());
+							int yearOld = cal2.get(Calendar.YEAR);
+							int yearDiff = yearOld - yearNew;
+							if(yearDiff<1) { yearDiff=1;}
+							calculateAge = yearDiff +"";
+							
 							break;
 						}
 					}
@@ -122,6 +136,13 @@ public class PatientDetailasCSVController {
 							if(ipl.getStatus().toString().equals("discharge")){
 								IpdPatientAdmittedLog ipld = inService.getIpdPatientAdmittedLogByAdmissionLog(ipl);
 								departmentId = ipld.getAdmittedWard().toString();
+								Calendar cal2 = Calendar.getInstance();
+								cal2.setTime(o.getObsDatetime());
+								int yearOld = cal2.get(Calendar.YEAR);
+								int yearDiff = yearOld - yearNew;
+								if(yearDiff<1) { yearDiff=1;}
+								calculateAge = yearDiff +"";
+
 								break;
 							}
 						}
@@ -155,7 +176,7 @@ public class PatientDetailasCSVController {
 				 gender="3";
 			}
 			
-			String age = pat.getAge().toString();
+	//		String age = pat.getAge().toString();
 
 			String adharnumber = "";
 			for (PersonAttribute pa : pas) {
@@ -176,7 +197,7 @@ public class PatientDetailasCSVController {
 					.concat(visitDate).concat(",").concat(visitTime)
 					.concat(",").concat(departmentId).concat(",")
 					.concat(typeofpatient).concat(",").concat(gender)
-					.concat(",").concat(age));
+					.concat(",").concat(calculateAge));
 
 			rows.add("\n");
 			patientCount++;
