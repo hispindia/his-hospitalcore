@@ -54,7 +54,7 @@ public class PatientDetailasCSVController {
 
 		response.setContentType("text/csv");
 		SimpleDateFormat formatterExt = new SimpleDateFormat("dd-MM-yyyy");
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 		String reportName = "Report_On_" + dates + ".csv";
 		response.setHeader("Content-disposition", "attachment;filename="
 				+ reportName);
@@ -74,6 +74,7 @@ public class PatientDetailasCSVController {
 
 			String hours = "";
 			String minute = "";
+			String seconds ="";
 			String visitTime = "";
 			String calculateAge = "";
 			Calendar cal = Calendar.getInstance();
@@ -103,7 +104,8 @@ public class PatientDetailasCSVController {
 							visitDate=formatterExt.format(o.getObsDatetime());
 							hours = hours+o.getObsDatetime().getHours();
 							minute = minute + o.getObsDatetime().getMinutes();
-							visitTime = hours.concat(minute);
+							seconds = seconds + o.getObsDatetime().getSeconds();
+							visitTime = hours.concat(":").concat(minute).concat(":").concat(seconds);
 							departmentId = o.getValueCoded().toString();
 							
 							Calendar cal2 = Calendar.getInstance();
@@ -130,7 +132,8 @@ public class PatientDetailasCSVController {
 							visitDate=formatterExt.format(o.getObsDatetime());
 							hours = hours+o.getObsDatetime().getHours();
 							minute = minute + o.getObsDatetime().getMinutes();
-							visitTime = hours.concat(minute);
+							seconds = seconds + o.getObsDatetime().getSeconds();
+							visitTime = hours.concat(":").concat(minute).concat(":").concat(seconds);
 							
 							IpdPatientAdmissionLog ipl = inService.getIpdPatientAdmissionLogByEncounter(o.getEncounter());
 							if(ipl.getStatus().toString().equals("discharge")){
