@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.openmrs.Encounter;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
@@ -53,7 +51,7 @@ public class PatientDetailasCSVController {
 		String dates = date;
 
 		response.setContentType("text/csv");
-		SimpleDateFormat formatterExt = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		String reportName = "Report_On_" + dates + ".csv";
 		response.setHeader("Content-disposition", "attachment;filename="
@@ -101,7 +99,8 @@ public class PatientDetailasCSVController {
 					for (Obs o : oList) {
 						if (o.getConcept().getName().toString().equals("OPD WARD")) {
 							
-							visitDate=formatterExt.format(o.getObsDatetime());
+							
+							visitDate=sdf.format(o.getObsDatetime());
 							hours = hours+o.getObsDatetime().getHours();
 							minute = minute + o.getObsDatetime().getMinutes();
 							seconds = seconds + o.getObsDatetime().getSeconds();
@@ -129,7 +128,7 @@ public class PatientDetailasCSVController {
 							visitId = e.getEncounterId().toString();
 							typeofpatient = "1";
 							
-							visitDate=formatterExt.format(o.getObsDatetime());
+							visitDate=sdf.format(o.getObsDatetime());
 							hours = hours+o.getObsDatetime().getHours();
 							minute = minute + o.getObsDatetime().getMinutes();
 							seconds = seconds + o.getObsDatetime().getSeconds();
