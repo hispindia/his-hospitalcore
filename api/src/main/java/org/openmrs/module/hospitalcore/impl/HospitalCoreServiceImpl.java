@@ -746,15 +746,17 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		return dao.getPatient(patientID);
 	}
 
-	public Set<Patient> getAllEncounterCurrentDate(String date) {
+	/*public List<Patient> getAllEncounterCurrentDate(String date,Set<EncounterType> encounterTypes) {
 		// TODO Auto-generated method stub
-		return dao.getAllEncounterCurrentDate(date);
-	}
+		return dao.getAllEncounterCurrentDate(date,encounterTypes);
+	}*/
 	
-	public Set<Encounter> getEncountersByPatientAndDate(Patient patient, String date){
-		return dao.getEncountersByPatientAndDate(patient,date);
+	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes){
+		return dao.getEncountersByPatientAndDate(date,encounterTypes);
 	}
-	
+	public Set<Encounter> getEncountersByPatientAndDateFromObs(String date){
+		return dao.getEncountersByPatientAndDateFromObs(date);
+	}
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept){
 		return dao.getObsInstanceForDiagnosis(encounter,concept);
 	}

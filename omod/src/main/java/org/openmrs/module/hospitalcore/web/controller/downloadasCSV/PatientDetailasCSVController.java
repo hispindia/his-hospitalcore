@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.openmrs.Encounter;
+import org.openmrs.EncounterType;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.PersonAttribute;
@@ -22,6 +24,7 @@ import org.openmrs.module.hospitalcore.HospitalCoreService;
 import org.openmrs.module.hospitalcore.IpdService;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmissionLog;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmittedLog;
+import org.openmrs.module.hospitalcore.model.PatientCSV;
 import org.openmrs.module.hospitalcore.util.GlobalPropertyUtil;
 import org.openmrs.module.hospitalcore.util.HospitalCoreConstants;
 import org.springframework.stereotype.Controller;
@@ -61,145 +64,299 @@ public class PatientDetailasCSVController {
 		rows.add("ID,ninID,patientID,visitID,patientName,mobile,landline,aadhaarNumber,visitDate,visitTime,departmentID,patientTypeID,gender,age");
 		rows.add("\n");
 		HospitalCoreService hcs = Context.getService(HospitalCoreService.class);
-		Set<Patient> enc = hcs.getAllEncounterCurrentDate(dates);
-
+		Set<EncounterType> encounterTypes = new HashSet<EncounterType>();
+		encounterTypes.add(Context.getEncounterService().getEncounterType(
+				"REGINITIAL"));
+		encounterTypes.add(Context.getEncounterService().getEncounterType(
+				"REGREVISIT"));
+		List<PatientCSV> records = new ArrayList<PatientCSV>();
 		int patientCount = 1;
-		for (Patient pat : enc) {
-			String typeofpatient = "";
-			String visitId = "";
-			String departmentId = "";
-			String visitDate = "";
 
-			String hours = "";
-			String minute = "";
-			String seconds ="";
-			String visitTime = "";
-			String calculateAge = "";
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(pat.getBirthdate());
-			int yearNew = cal.get(Calendar.YEAR);
+		String typeofpatient = "";
+		String visitId = "";
+		String departmentId = "";
+		String visitDate = "";
+
+		String hours = "";
+		String minute = "";
+		String seconds = "";
+		String visitTime = "";
+		String calculateAge = "";
+
+		IpdService inService = Context.getService(IpdService.class);
+		Set<Encounter> encounterpatient = hcs.getEncountersByPatientAndDate(
+				dates, encounterTypes);
+		Set<Encounter> encounterpatientObs = hcs
+				.getEncountersByPatientAndDateFromObs(dates);
+
+		List<Encounter> totalEnc1 = new ArrayList<Encounter>();
+		List<Encounter> totalEnc2 = new ArrayList<Encounter>();
+		totalEnc1.addAll(encounterpatient);
+		totalEnc2.addAll(encounterpatientObs);
+		totalEnc1.addAll(totalEnc2);
+
+		for (Encounter e : totalEnc1) {
+			PatientCSV record = new PatientCSV();
+			boolean flag = true;
 			
-			Set<Encounter> encounterpatient =hcs.getEncountersByPatientAndDate(pat,dates);
+			if (e.getEncounterType().getName().equals("REGINITIAL")
+					|| e.getEncounterType().getName().equals("REGREVISIT")) {
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(e.getPatient().getBirthdate());
+				int yearNew = cal.get(Calendar.YEAR);
+				flag = false;
+				List<PersonAttribute> pas = hcs.getPersonAttributes(e
+						.getPatientId());
+				String identifier = e.getPatient().getPatientIdentifier()
+						.getIdentifier();
+				String name = e.getPatient().getGivenName().concat(" ")
+						.concat(e.getPatient().getMiddleName()).concat(" ")
+						.concat(e.getPatient().getFamilyName());
+				record.setEncId(e.getEncounterId().toString());
+				record.setPatientType("2");
+				record.setPatientName(name);
+				record.setNinId(GlobalPropertyUtil.getString(
+						HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER,
+						null));
+				record.setPatientidentifier(identifier);
+				String adharnumber = "";
+				for (PersonAttribute pa : pas) {
+					PersonAttributeType attributeType = pa.getAttributeType();
+					if (attributeType.getPersonAttributeTypeId() == 20) {
+						adharnumber = pa.getValue();
+
+					}
+				}
+				if (adharnumber.equals("")) {
+					record.setAdharNumber("0");
+				} else {
+					record.setAdharNumber(adharnumber);
+				}
+				String phone = "";
+
+				for (PersonAttribute pa : pas) {
+					PersonAttributeType attributeType = pa.getAttributeType();
+					if (attributeType.getPersonAttributeTypeId() == 16) {
+						phone = pa.getValue();
+					}
+				}
+				if (phone.equals("")) {
+					record.setMobile("0");
+				} else {
+					record.setMobile(phone);
+				}
+
+				Set<Obs> oList = Context.getObsService().getObservations(e);
+				for (Obs o : oList) {
+					if (o.getConcept().getName().toString().equals("OPD WARD")) {
+						
+						visitDate = sdf.format(o.getObsDatetime());
+						Integer h = o.getObsDatetime().getHours();
+						Integer m = o.getObsDatetime().getMinutes();
+						hours = h.toString();
+						minute = m.toString();
+						seconds = seconds + o.getObsDatetime().getSeconds();
+						if (visitTime.equals("")) {
+							visitTime = hours.concat(minute);
+						}
+
+						else {
+							visitTime = h.toString().concat(m.toString());
+						}
+						departmentId = o.getValueCoded().toString();
+						record.setDept(departmentId);
+						record.setVisitDate(visitDate);
+						record.setVisitTime(visitTime);
+						Calendar cal2 = Calendar.getInstance();
+						cal2.setTime(o.getObsDatetime());
+						int yearOld = cal2.get(Calendar.YEAR);
+						int yearDiff = yearOld - yearNew;
+						if (yearDiff < 1) {
+							yearDiff = 1;
+						}
+						calculateAge = yearDiff + "";
+						record.setAge(calculateAge);
+						// break;
+					}
+
+				}
+				
+				String gender = "";
+				if (e.getPatient().getGender().equals("M")) {
+					gender = "1";
+				} else if (e.getPatient().getGender().equals("F")) {
+					gender = "2";
+				} else if (e.getPatient().getGender().equals("O")) {
+					gender = "3";
+				}
+				record.setGender(gender);
+				records.add(record);
 			
-			IpdService inService =Context.getService(IpdService.class);	
+
+			}
+			if (e.getEncounterType().getName().equals("IPDENCOUNTER") && flag) {
+				List<PersonAttribute> pas = hcs.getPersonAttributes(e
+						.getPatientId());
+				String identifier = e.getPatient().getPatientIdentifier()
+						.getIdentifier();
+				String name = e.getPatient().getGivenName().concat(" ")
+						.concat(e.getPatient().getMiddleName()).concat(" ")
+						.concat(e.getPatient().getFamilyName());
+				record.setEncId(e.getEncounterId().toString());
+				record.setPatientName(name);
+				record.setNinId(GlobalPropertyUtil.getString(
+						HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER,
+						null));
+				record.setPatientidentifier(identifier);
+				String adharnumber = "";
+				for (PersonAttribute pa : pas) {
+					PersonAttributeType attributeType = pa.getAttributeType();
+					if (attributeType.getPersonAttributeTypeId() == 20) {
+						adharnumber = pa.getValue();
+
+					}
+				}
+				if (adharnumber.equals("")) {
+					record.setAdharNumber("0");
+				} else {
+					record.setAdharNumber(adharnumber);
+				}
+				String phone = "";
+
+				for (PersonAttribute pa : pas) {
+					PersonAttributeType attributeType = pa.getAttributeType();
+					if (attributeType.getPersonAttributeTypeId() == 16) {
+						phone = pa.getValue();
+					}
+				}
+				if (phone.equals("")) {
+					record.setMobile("0");
+				} else {
+					record.setMobile(phone);
+				}
+				Set<Obs> obList = Context.getObsService().getObservations(e);
+				for (Obs ob : obList) {
+					if (ob.getConcept().getName().toString()
+							.equals("ADMISSION OUTCOME")) {
+						visitId = e.getEncounterId().toString();
+						typeofpatient = "1";
+
+						visitDate = sdf.format(ob.getObsDatetime());
+						record.setVisitDate(visitDate);
+						record.setPatientType("1");
+						Integer h = ob.getObsDatetime().getHours();
+						Integer m = ob.getObsDatetime().getMinutes();
+						hours = h.toString();
+						minute = m.toString();
+						seconds = seconds + ob.getObsDatetime().getSeconds();
+						if (visitTime.equals("")) {
+							visitTime = hours.concat(minute);
+						}
+
+						else {
+							visitTime = h.toString().concat(m.toString());
+						}
+						seconds = seconds + ob.getObsDatetime().getSeconds();
+						record.setVisitTime(visitTime);
+
+						IpdPatientAdmissionLog ipl = inService
+								.getIpdPatientAdmissionLogByEncounter(ob
+										.getEncounter());
+						if (ipl.getStatus().toString().equals("discharge")) {
+							IpdPatientAdmittedLog ipld = inService
+									.getIpdPatientAdmittedLogByAdmissionLog(ipl);
+							departmentId = ipld.getAdmittedWard().toString();
+							record.setDept(departmentId);
+							Calendar cal = Calendar.getInstance();
+							cal.setTime(e.getPatient().getBirthdate());
+							Calendar cal2 = Calendar.getInstance();
+							cal2.setTime(ob.getObsDatetime());
+							int yearNew = cal.get(Calendar.YEAR);
+							int yearOld = cal2.get(Calendar.YEAR);
+							int yearDiff = yearOld - yearNew;
+							if (yearDiff < 1) {
+								yearDiff = 1;
+							}
+							calculateAge = yearDiff + "";
+							record.setAge(calculateAge);
+
+						}
+					}
+				}
+				String gender = "";
+				if (e.getPatient().getGender().equals("M")) {
+					gender = "1";
+				} else if (e.getPatient().getGender().equals("F")) {
+					gender = "2";
+				} else if (e.getPatient().getGender().equals("O")) {
+					gender = "3";
+				}
+				record.setGender(gender);
+				records.add(record);
+
+			}
+
 			/*
 			 * Get Visit ID : Equals to encounter ID - For inpatient on
 			 * descharge ; For outpatient on registration
 			 */
-			
-			for (Encounter e : encounterpatient) {
-				boolean flag=true;
-				if (e.getEncounterType().getName().equals("REGINITIAL")
-						|| e.getEncounterType().getName().equals("REGREVISIT")) {
-					flag=false;
-					visitId = e.getEncounterId().toString();
-					typeofpatient = "2";
-					
-					Set<Obs> oList = Context.getObsService().getObservations(e);
-					for (Obs o : oList) {
-						if (o.getConcept().getName().toString().equals("OPD WARD")) {
-							
-							
-							visitDate=sdf.format(o.getObsDatetime());
-							hours = hours+o.getObsDatetime().getHours();
-							minute = minute + o.getObsDatetime().getMinutes();
-							seconds = seconds + o.getObsDatetime().getSeconds();
-							visitTime = hours.concat(":").concat(minute).concat(":").concat(seconds);
-							departmentId = o.getValueCoded().toString();
-							
-							Calendar cal2 = Calendar.getInstance();
-							cal2.setTime(o.getObsDatetime());
-							int yearOld = cal2.get(Calendar.YEAR);
-							int yearDiff = yearOld - yearNew;
-							if(yearDiff<1) { yearDiff=1;}
-							calculateAge = yearDiff +"";
-							
-							break;
-						}
-					}
-					if(visitTime!=""){
-						break;
-					}
-				}
-				if (e.getEncounterType().getName().equals("IPDENCOUNTER") && flag) {
-					Set<Obs> oList = Context.getObsService().getObservations(e);
-					for (Obs o : oList) {
-						if (o.getConcept().getName().toString().equals("ADMISSION OUTCOME")) {
-							visitId = e.getEncounterId().toString();
-							typeofpatient = "1";
-							
-							visitDate=sdf.format(o.getObsDatetime());
-							hours = hours+o.getObsDatetime().getHours();
-							minute = minute + o.getObsDatetime().getMinutes();
-							seconds = seconds + o.getObsDatetime().getSeconds();
-							visitTime = hours.concat(":").concat(minute).concat(":").concat(seconds);
-							
-							IpdPatientAdmissionLog ipl = inService.getIpdPatientAdmissionLogByEncounter(o.getEncounter());
-							if(ipl.getStatus().toString().equals("discharge")){
-								IpdPatientAdmittedLog ipld = inService.getIpdPatientAdmittedLogByAdmissionLog(ipl);
-								departmentId = ipld.getAdmittedWard().toString();
-								Calendar cal2 = Calendar.getInstance();
-								cal2.setTime(o.getObsDatetime());
-								int yearOld = cal2.get(Calendar.YEAR);
-								int yearDiff = yearOld - yearNew;
-								if(yearDiff<1) { yearDiff=1;}
-								calculateAge = yearDiff +"";
 
-								break;
-							}
-						}
-					}
-				}
-			}
-			
-			String phone = "";
-			List<PersonAttribute> pas = hcs.getPersonAttributes(pat.getId());
-			for (PersonAttribute pa : pas) {
-				PersonAttributeType attributeType = pa.getAttributeType();
-				if (attributeType.getPersonAttributeTypeId() == 16) {
-					phone = pa.getValue();
-				}
-			}
-			String ninnumber = GlobalPropertyUtil.getString(
-					HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER, null);
-			String identifier = pat.getPatientIdentifier().getIdentifier();
-			String name = pat.getGivenName().concat(" ")
-					.concat(pat.getMiddleName()).concat(" ")
-					.concat(pat.getFamilyName());
+			/*
+			 * for (Encounter e : encounterpatient) { boolean flag=true; if
+			 * (e.getEncounterType().getName().equals("REGINITIAL") ||
+			 * e.getEncounterType().getName().equals("REGREVISIT")) {
+			 * flag=false; visitId = e.getEncounterId().toString();
+			 * typeofpatient = "2";
+			 * 
+			 * Set<Obs> oList = Context.getObsService().getObservations(e); for
+			 * (Obs o : oList) { if
+			 * (o.getConcept().getName().toString().equals("OPD WARD")) {
+			 * 
+			 * 
+			 * visitDate=sdf.format(o.getObsDatetime()); hours =
+			 * hours+o.getObsDatetime().getHours(); minute = minute +
+			 * o.getObsDatetime().getMinutes(); seconds = seconds +
+			 * o.getObsDatetime().getSeconds(); visitTime =
+			 * hours.concat(minute); departmentId =
+			 * o.getValueCoded().toString();
+			 * 
+			 * Calendar cal2 = Calendar.getInstance();
+			 * cal2.setTime(o.getObsDatetime()); int yearOld =
+			 * cal2.get(Calendar.YEAR); int yearDiff = yearOld - yearNew;
+			 * if(yearDiff<1) { yearDiff=1;} calculateAge = yearDiff +"";
+			 * 
+			 * //break; } } if(visitTime!=""){ //break; } }
+			 * 
+			 * 
+			 * 
+			 * }
+			 */
 
-			String gender = "";
-			if( pat.getGender().equals("M")){
-				gender="1";
-			}
-			else if( pat.getGender().equals("F")) {
-				gender="2";
-			}
-			else if(pat.getGender().equals("O")) {
-				 gender="3";
-			}
-			
-	//		String age = pat.getAge().toString();
+			/*	
+			*/
+			// String age = pat.getAge().toString();
 
-			String adharnumber = "";
-			for (PersonAttribute pa : pas) {
-				PersonAttributeType attributeType = pa.getAttributeType();
-				if (attributeType.getPersonAttributeTypeId() == 20) {
-					adharnumber = pa.getValue();
-
-				}
-			}
-
-			String count = patientCount + "";
 			// "ID,ninID,patientID,visitID,patientName,mobile,landline,aadhaarNumber,visitDate,visitTime,departmentID,patientTypeID,gender,age"
 
-			rows.add(count.concat(",").concat(ninnumber).concat(",")
-					.concat(identifier).concat(",").concat(visitId).concat(",")
-					.concat(name).concat(",").concat(phone).concat(",")
-					.concat(phone).concat(",").concat(adharnumber).concat(",")
-					.concat(visitDate).concat(",").concat(visitTime)
-					.concat(",").concat(departmentId).concat(",")
-					.concat(typeofpatient).concat(",").concat(gender)
-					.concat(",").concat(calculateAge));
+		}
+
+		
+
+		for (PatientCSV pcsv : records) {
+			String count = patientCount + "";
+
+			rows.add(count.concat(",").concat(pcsv.getNinId()).concat(",")
+					.concat(pcsv.getPatientidentifier()).concat(",")
+					.concat(pcsv.getEncId()).concat(",")
+					.concat(pcsv.getPatientName()).concat(",")
+					.concat(pcsv.getMobile()).concat(",")
+					.concat(pcsv.getMobile()).concat(",")
+					.concat(pcsv.getAdharNumber()).concat(",")
+					.concat(pcsv.getVisitDate()).concat(",")
+					.concat(pcsv.getVisitTime()).concat(",")
+					.concat(pcsv.getDept()).concat(",")
+					.concat(pcsv.getPatientType()).concat(",")
+					.concat(pcsv.getGender()).concat(",").concat(pcsv.getAge()));
 
 			rows.add("\n");
 			patientCount++;

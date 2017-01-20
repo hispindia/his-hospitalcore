@@ -125,9 +125,9 @@ public interface HospitalCoreDAO {
 	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 	public PatientSearch getPatient(int patientID);
 	
-	public Set<Patient> getAllEncounterCurrentDate(String date);
+	//public List<Patient> getAllEncounterCurrentDate(String date,Set<EncounterType> encounterTypes);
 	
-	public Set<Encounter> getEncountersByPatientAndDate(Patient patient, String date);
-	
+	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes);
+	public Set<Encounter>getEncountersByPatientAndDateFromObs(String date);
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws DAOException;
 }
