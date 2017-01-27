@@ -98,7 +98,7 @@ public class PatientDetailasCSVController {
 		for (Encounter e : totalEnc1) {
 			PatientCSV record = new PatientCSV();
 			boolean flag = true;
-			
+
 			if (e.getEncounterType().getName().equals("REGINITIAL")
 					|| e.getEncounterType().getName().equals("REGREVISIT")) {
 				Calendar cal = Calendar.getInstance();
@@ -149,19 +149,37 @@ public class PatientDetailasCSVController {
 				Set<Obs> oList = Context.getObsService().getObservations(e);
 				for (Obs o : oList) {
 					if (o.getConcept().getName().toString().equals("OPD WARD")) {
-						
+
 						visitDate = sdf.format(o.getObsDatetime());
 						Integer h = o.getObsDatetime().getHours();
 						Integer m = o.getObsDatetime().getMinutes();
+
 						hours = h.toString();
 						minute = m.toString();
+
 						seconds = seconds + o.getObsDatetime().getSeconds();
 						if (visitTime.equals("")) {
-							visitTime = hours.concat(minute);
+							if (h < 10 || m < 10)
+
+							{
+								visitTime = '0' + hours.concat('0' + minute);
+
+							} else {
+								visitTime = hours.concat(minute);
+
+							}
 						}
 
 						else {
-							visitTime = h.toString().concat(m.toString());
+							if (h < 10 || m < 10) {
+								visitTime = ('0' + h.toString()).concat('0' + m
+										.toString());
+
+							} else {
+								visitTime = h.toString().concat(m.toString());
+
+							}
+
 						}
 						departmentId = o.getValueCoded().toString();
 						record.setDept(departmentId);
@@ -180,7 +198,7 @@ public class PatientDetailasCSVController {
 					}
 
 				}
-				
+
 				String gender = "";
 				if (e.getPatient().getGender().equals("M")) {
 					gender = "1";
@@ -191,7 +209,6 @@ public class PatientDetailasCSVController {
 				}
 				record.setGender(gender);
 				records.add(record);
-			
 
 			}
 			if (e.getEncounterType().getName().equals("IPDENCOUNTER") && flag) {
@@ -246,15 +263,33 @@ public class PatientDetailasCSVController {
 						record.setPatientType("1");
 						Integer h = ob.getObsDatetime().getHours();
 						Integer m = ob.getObsDatetime().getMinutes();
+
 						hours = h.toString();
 						minute = m.toString();
+
 						seconds = seconds + ob.getObsDatetime().getSeconds();
 						if (visitTime.equals("")) {
-							visitTime = hours.concat(minute);
+							if (h < 10 || m < 10)
+
+							{
+								visitTime = '0' + hours.concat('0' + minute);
+
+							} else {
+								visitTime = hours.concat(minute);
+
+							}
 						}
 
 						else {
-							visitTime = h.toString().concat(m.toString());
+							if (h < 10 || m < 10) {
+								visitTime = ('0'+h.toString()).concat('0' + m
+										.toString());
+
+							} else {
+								visitTime = h.toString().concat(m.toString());
+
+							}
+
 						}
 						seconds = seconds + ob.getObsDatetime().getSeconds();
 						record.setVisitTime(visitTime);
@@ -339,8 +374,6 @@ public class PatientDetailasCSVController {
 			// "ID,ninID,patientID,visitID,patientName,mobile,landline,aadhaarNumber,visitDate,visitTime,departmentID,patientTypeID,gender,age"
 
 		}
-
-		
 
 		for (PatientCSV pcsv : records) {
 			String count = patientCount + "";
