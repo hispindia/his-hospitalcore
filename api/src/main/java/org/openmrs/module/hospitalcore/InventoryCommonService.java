@@ -33,6 +33,7 @@ import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.InventoryDrugFormulation;
 import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatient;
 import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatientDetail;
+import org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -52,4 +53,6 @@ public interface InventoryCommonService extends OpenmrsService{
 	public List<Concept> getDrugFrequency() throws APIException;
 	
 	public InventoryDrugFormulation getDrugFormulationById(Integer id) throws APIException;
+	
+	public InventoryStoreDrugTransactionDetail expireInventoryStoreDrugTransactionDetail(InventoryStoreDrugTransactionDetail isdtd) throws APIException;
 }

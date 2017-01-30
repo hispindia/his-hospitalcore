@@ -40,6 +40,7 @@
 	    <set name="subDetails"  table="inventory_store_drugs_transaction_detail" cascade="save-update,merge,evict" >
 	      <key column="parent_id"/>
 	      <one-to-many class="org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail"/>
-	    </set> 
+	    </set>
+	    <property name="expireStatus" column="expire_status" />
 	</class>
 </hibernate-mapping>

@@ -35,6 +35,7 @@ import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.InventoryDrugFormulation;
 import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatient;
 import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatientDetail;
+import org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail;
 
 /**
 *
@@ -72,5 +73,9 @@ public class InventoryCommonServiceImpl extends BaseOpenmrsService implements In
 	
 	public InventoryDrugFormulation getDrugFormulationById(Integer id) throws APIException {
 		return dao.getDrugFormulationById(id);
+	}
+	
+	public InventoryStoreDrugTransactionDetail expireInventoryStoreDrugTransactionDetail(InventoryStoreDrugTransactionDetail isdtd) throws APIException {
+		return dao.expireInventoryStoreDrugTransactionDetail(isdtd);
 	}
 }

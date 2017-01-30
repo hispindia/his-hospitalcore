@@ -38,10 +38,12 @@ import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.db.InventoryCommonDAO;
+import org.openmrs.module.hospitalcore.model.CoreForm;
 import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.InventoryDrugFormulation;
 import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatient;
 import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatientDetail;
+import org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail;
 
 public class HibernateInventoryCommonDAO implements InventoryCommonDAO {
 	
@@ -134,5 +136,11 @@ public class HibernateInventoryCommonDAO implements InventoryCommonDAO {
 		        .createCriteria(InventoryDrugFormulation.class, "drugFormulation")
 		        .add(Restrictions.eq("drugFormulation.id", id));
 		return (InventoryDrugFormulation) criteria.uniqueResult();
+	}
+	
+	public InventoryStoreDrugTransactionDetail expireInventoryStoreDrugTransactionDetail(InventoryStoreDrugTransactionDetail isdtd) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession()
+		        .createCriteria(InventoryStoreDrugTransactionDetail.class, "inventoryStoreDrugTransactionDetail");
+		return (InventoryStoreDrugTransactionDetail) sessionFactory.getCurrentSession().merge(isdtd);
 	}
 }

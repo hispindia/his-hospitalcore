@@ -67,6 +67,8 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 
 	 private Date receiptDate;
 	 
+	 private Integer expireStatus;
+	 
 	 
     public InventoryStoreDrugTransactionDetail() {
 	 
@@ -211,6 +213,14 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 public int compareTo(InventoryStoreDrugTransactionDetail i) {
 	 
 	    return (this.drug).compareTo(i.drug);
+	}
+
+	public Integer getExpireStatus() {
+		return expireStatus;
+	}
+
+	public void setExpireStatus(Integer expireStatus) {
+		this.expireStatus = expireStatus;
 	}
 	 
 }
