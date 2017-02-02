@@ -266,24 +266,24 @@ public class PatientUtils {
 				age += ".5";
 			}
 			if (ageYear == 1) {
-				age += " year";
+				age += " Y";
 			} else {
-				age += " years";
+				age += " Y";
 			}
 		} else if (ageYear <= 0) {
 			if (ageMonth >= 1) {
 				if (ageMonth == 1) {
-					age += ageMonth + " month ";
+					age += ageMonth + " M ";
 				} else {
-					age += ageMonth + " months ";
+					age += ageMonth + " M ";
 				}
 			}
 			if (ageMonth <= 0) {
 				
 				if ((ageDay == 1) || (ageDay == 0)) {
-					age += ageDay + " day ";
+					age += ageDay + " D ";
 				} else {
-					age += ageDay + " days ";
+					age += ageDay + " D ";
 				}
 			}
 		}
