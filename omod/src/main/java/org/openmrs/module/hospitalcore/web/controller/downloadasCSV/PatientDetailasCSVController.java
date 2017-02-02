@@ -61,7 +61,7 @@ public class PatientDetailasCSVController {
 				+ reportName);
 
 		ArrayList<String> rows = new ArrayList<String>();
-		rows.add("ID,ninID,patientID,visitID,patientName,mobile,landline,aadhaarNumber,visitDate,visitTime,departmentID,patientTypeID,gender,age");
+		rows.add("ninID,patientID,visitID,patientName,mobile,landline,aadhaarNumber,visitDate,visitTime,departmentID,patientTypeID,gender,age");
 		rows.add("\n");
 		HospitalCoreService hcs = Context.getService(HospitalCoreService.class);
 		Set<EncounterType> encounterTypes = new HashSet<EncounterType>();
@@ -378,7 +378,7 @@ public class PatientDetailasCSVController {
 		for (PatientCSV pcsv : records) {
 			String count = patientCount + "";
 
-			rows.add(count.concat(",").concat(pcsv.getNinId()).concat(",")
+			rows.add(pcsv.getNinId().concat(",")
 					.concat(pcsv.getPatientidentifier()).concat(",")
 					.concat(pcsv.getEncId()).concat(",")
 					.concat(pcsv.getPatientName()).concat(",")
