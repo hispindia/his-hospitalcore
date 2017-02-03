@@ -154,33 +154,21 @@ public class PatientDetailasCSVController {
 						Integer h = o.getObsDatetime().getHours();
 						Integer m = o.getObsDatetime().getMinutes();
 
-						hours = h.toString();
-						minute = m.toString();
+						if (h < 10)
 
-						seconds = seconds + o.getObsDatetime().getSeconds();
-						if (visitTime.equals("")) {
-							if (h < 10 || m < 10)
+						{
+							hours = "0" + h.toString();
+						} else {
+							hours = h.toString();
+						}
+						if (m < 10) {
+							minute = "0" + m.toString();
 
-							{
-								visitTime = '0' + hours.concat('0' + minute);
-
-							} else {
-								visitTime = hours.concat(minute);
-
-							}
+						} else {
+							minute = m.toString();
 						}
 
-						else {
-							if (h < 10 || m < 10) {
-								visitTime = ('0' + h.toString()).concat('0' + m
-										.toString());
-
-							} else {
-								visitTime = h.toString().concat(m.toString());
-
-							}
-
-						}
+						visitTime = hours.concat(minute);
 						departmentId = o.getValueCoded().toString();
 						record.setDept(departmentId);
 						record.setVisitDate(visitDate);
@@ -268,29 +256,21 @@ public class PatientDetailasCSVController {
 						minute = m.toString();
 
 						seconds = seconds + ob.getObsDatetime().getSeconds();
-						if (visitTime.equals("")) {
-							if (h < 10 || m < 10)
+						if (h < 10)
 
-							{
-								visitTime = '0' + hours.concat('0' + minute);
+						{
+							hours = "0" + h.toString();
+						} else {
+							hours = h.toString();
+						}
+						if (m < 10) {
+							minute = "0" + m.toString();
 
-							} else {
-								visitTime = hours.concat(minute);
-
-							}
+						} else {
+							minute = m.toString();
 						}
 
-						else {
-							if (h < 10 || m < 10) {
-								visitTime = ('0'+h.toString()).concat('0' + m
-										.toString());
-
-							} else {
-								visitTime = h.toString().concat(m.toString());
-
-							}
-
-						}
+						visitTime = hours.concat(minute);
 						seconds = seconds + ob.getObsDatetime().getSeconds();
 						record.setVisitTime(visitTime);
 
@@ -377,22 +357,24 @@ public class PatientDetailasCSVController {
 
 		for (PatientCSV pcsv : records) {
 			String count = patientCount + "";
+			if (pcsv.getVisitDate() != null) {
+				rows.add(pcsv.getNinId().concat(",")
+						.concat(pcsv.getPatientidentifier()).concat(",")
+						.concat(pcsv.getEncId()).concat(",")
+						.concat(pcsv.getPatientName()).concat(",")
+						.concat(pcsv.getMobile()).concat(",")
+						.concat(pcsv.getMobile()).concat(",")
+						.concat(pcsv.getAdharNumber()).concat(",")
+						.concat(pcsv.getVisitDate()).concat(",")
+						.concat(pcsv.getVisitTime()).concat(",")
+						.concat(pcsv.getDept()).concat(",")
+						.concat(pcsv.getPatientType()).concat(",")
+						.concat(pcsv.getGender()).concat(",")
+						.concat(pcsv.getAge()));
 
-			rows.add(pcsv.getNinId().concat(",")
-					.concat(pcsv.getPatientidentifier()).concat(",")
-					.concat(pcsv.getEncId()).concat(",")
-					.concat(pcsv.getPatientName()).concat(",")
-					.concat(pcsv.getMobile()).concat(",")
-					.concat(pcsv.getMobile()).concat(",")
-					.concat(pcsv.getAdharNumber()).concat(",")
-					.concat(pcsv.getVisitDate()).concat(",")
-					.concat(pcsv.getVisitTime()).concat(",")
-					.concat(pcsv.getDept()).concat(",")
-					.concat(pcsv.getPatientType()).concat(",")
-					.concat(pcsv.getGender()).concat(",").concat(pcsv.getAge()));
-
-			rows.add("\n");
-			patientCount++;
+				rows.add("\n");
+				patientCount++;
+			}
 		}
 		Iterator<String> iter = rows.iterator();
 		while (iter.hasNext()) {
