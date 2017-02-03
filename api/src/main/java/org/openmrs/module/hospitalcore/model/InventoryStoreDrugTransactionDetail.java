@@ -67,7 +67,7 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 
 	 private Date receiptDate;
 	 
-	 private Integer expireStatus;
+	 private Integer expireStatus=0;
 	 
 	 
     public InventoryStoreDrugTransactionDetail() {
