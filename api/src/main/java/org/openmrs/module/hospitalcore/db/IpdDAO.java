@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
+import org.openmrs.Patient;
 import org.openmrs.api.APIException;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
@@ -74,4 +75,5 @@ public interface IpdDAO {
 	public List<IpdPatientVitalStatistics> getIpdPatientVitalStatistics(Integer patientId,Integer patientAdmissionLogId) throws DAOException;
 	public List<Concept> getDiet() throws DAOException;
 	public List<IpdPatientAdmitted> getBedAvailability(Concept wardId,String bedNo);
+	public IpdPatientAdmission getIpdPatientAdmissionByPatient(Patient patient);
 }

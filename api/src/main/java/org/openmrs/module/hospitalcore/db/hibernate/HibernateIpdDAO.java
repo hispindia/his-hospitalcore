@@ -35,6 +35,7 @@ import org.hibernate.criterion.Restrictions;
 import org.openmrs.Concept;
 import org.openmrs.ConceptClass;
 import org.openmrs.Encounter;
+import org.openmrs.Patient;
 import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.db.DAOException;
@@ -427,4 +428,12 @@ public class HibernateIpdDAO implements IpdDAO {
 		criteria.add(Restrictions.eq("bed", bedNo));
 		return criteria.list();
 	}
+	
+	public IpdPatientAdmission getIpdPatientAdmissionByPatient(Patient patient)
+	throws DAOException {
+       Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+		IpdPatientAdmission.class);
+       criteria.add(Restrictions.eq("patient", patient));
+       return (IpdPatientAdmission) criteria.uniqueResult();
+     }
 }

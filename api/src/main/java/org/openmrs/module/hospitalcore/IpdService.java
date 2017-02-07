@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
+import org.openmrs.Patient;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmission;
@@ -107,4 +108,5 @@ public interface IpdService extends OpenmrsService{
 	public List<IpdPatientVitalStatistics> getIpdPatientVitalStatistics(Integer patientId,Integer patientAdmissionLogId) throws APIException;
 	public List<Concept> getDiet() throws APIException;
 	public List<IpdPatientAdmitted> getBedAvailability(Concept wardId,String bedNo);
+	public IpdPatientAdmission getIpdPatientAdmissionByPatient(Patient patient) throws APIException;
 }

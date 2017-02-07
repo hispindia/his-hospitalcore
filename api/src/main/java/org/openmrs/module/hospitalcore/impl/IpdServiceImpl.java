@@ -28,6 +28,7 @@ import org.openmrs.Concept;
 import org.openmrs.Encounter;
 import org.openmrs.Location;
 import org.openmrs.Obs;
+import org.openmrs.Patient;
 import org.openmrs.User;
 import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
@@ -322,5 +323,8 @@ public class IpdServiceImpl extends BaseOpenmrsService implements IpdService {
 	}
 	public List<IpdPatientAdmitted> getBedAvailability(Concept wardId,String bedNo) throws APIException {
 		return dao.getBedAvailability(wardId,bedNo);
+	}
+	public IpdPatientAdmission getIpdPatientAdmissionByPatient(Patient patient) throws APIException {
+		return dao.getIpdPatientAdmissionByPatient(patient);
 	}
 }
