@@ -18,8 +18,9 @@
 		<property name="gender" column="gender" />
 		<property name="birthdate" column="birthdate" />
 		<property name="age" column="age" />
+		<property name="personNameId" column="person_name_id" />
 		<!-- ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient -->
 		<property name="dead" column="dead" />
-		<property name="personNameId" column="person_name_id" />
+		<property name="admitted" column="admitted" />
 	</class>
 </hibernate-mapping>

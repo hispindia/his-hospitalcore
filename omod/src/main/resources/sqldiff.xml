@@ -405,4 +405,15 @@
 			ADD COLUMN `comments`  varchar(100)  default NULL;
 		</sql>
 	</diff>
+	<diff>
+		<version>2.7</version>
+		<author>ghanshyam</author>
+		<date>09 Feb 2017</date>
+		<description>
+			Add column admitted for 'patient_search' table
+		</description>
+		<sql>
+			ALTER TABLE patient_search ADD admitted smallint(6) DEFAULT 0;
+		</sql>
+	</diff>
 </sqldiff>

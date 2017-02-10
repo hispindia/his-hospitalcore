@@ -256,12 +256,23 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 					patient.setBirthdate((Date) obss[6]);
 					// ghanshyam,22-oct-2013,New Requirement #2940 Dealing with
 					// dead patient
+					if(obss.length > 9){
 					if (obss[9] != null) {
 						if (obss[9].toString().equals("1")) {
 							patient.setDead(true);
 						} else if (obss[9].toString().equals("0")) {
 							patient.setDead(false);
 						}
+					}
+					}
+					if(obss.length > 10){
+					if (obss[10] != null) {
+						if (obss[10].toString().equals("1")) {
+							patient.setVoided(true);
+						} else if (obss[10].toString().equals("0")) {
+							patient.setVoided(false);
+						}
+					}
 					}
 					patients.add(patient);
 				}

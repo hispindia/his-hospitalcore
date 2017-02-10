@@ -64,11 +64,23 @@ public class PatientSearchController {
 		Map<Integer, Map<Integer, String>> attributeMap = buildAttributeMap(patients);
 		Map<Integer, java.util.Date> lastVisitTime = getLastVisitTime(patients);
 		
+		patientAdmittedDetails(patients);
+		
 		model.addAttribute("lastVisitTime", lastVisitTime);
 		model.addAttribute("patients", patients);
 		model.addAttribute("attributeMap", attributeMap);
 		return view;
 	}
+	
+	//patient admission deatils
+	private void patientAdmittedDetails(List<Patient> patients) {
+		for (Patient patient : patients) {
+			if(patient.getVoided().equals(true)){
+			
+			}
+		}
+		
+   }
 	
 	private Map<Integer, Map<Integer, String>> buildAttributeMap(List<Patient> patients) {
 		HospitalCoreService hcs = Context.getService(HospitalCoreService.class);
