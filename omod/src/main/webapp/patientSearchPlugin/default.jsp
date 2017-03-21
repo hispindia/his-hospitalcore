@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
 			jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", this.form).keyup(function(event){				
 				if(event.keyCode == 13){	
 					nameInCapital = StringUtils.capitalize(jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", PATIENTSEARCH.form).val());
-					jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", PATIENTSEARCH.form).val(nameInCapital);
+					jQuery("#nameOrgivennameOrmiddleNameOrfamilyNameOrIdentifier", PATIENTSEARCH.form).val(nameInCapital);
 					PATIENTSEARCH.search(true);
 				}
 			});
@@ -104,7 +104,6 @@ jQuery(document).ready(function() {
 			jQuery("#relativeName", this.form).blur(function(){
 				PATIENTSEARCH.search(true);
 			});
-			
 			jQuery("#age", this.form).blur(function(){
 				PATIENTSEARCH.search(true);
 			});
@@ -297,8 +296,9 @@ jQuery(document).ready(function() {
 			this.fromClause   = " FROM patient_search ps";
 			this.fromClause  += " INNER JOIN person pe ON pe.person_id = ps.patient_id";
 			this.whereClause  = " WHERE";
-			this.whereClause +=  " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%' OR ps.given_name LIKE '" + nameOrIdentifier + "%'OR ps.middle_name LIKE '" + nameOrIdentifier + "%'OR ps.family_name LIKE '" + nameOrIdentifier + "%')";				
-			this.whereClause += " AND pe.dead=0";
+			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%' OR ps.given_name LIKE '" + nameOrIdentifier + "%'OR ps.middle_name LIKE '" + nameOrIdentifier + "%'OR ps.family_name LIKE '" + nameOrIdentifier + "%')";				
+			 //ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
+			//this.whereClause += " AND pe.dead=0";
 			this.groupClause = " GROUP BY ps.patient_id";
 			this.orderClause = " ORDER BY ps.patient_id ASC";
 			this.limitClause = " LIMIT " + this.currentRow + ", " + this.rowPerPage;					
@@ -306,7 +306,6 @@ jQuery(document).ready(function() {
 			//	Build extended queries
 			if(this.advanceSearch){
 				this.buildGenderQuery();
-				this.buildMiddleNameQuery();
 				this.buildAgeQuery();
 				this.buildRelativeNameQuery();
 				this.buildLastDayOfVisitQuery();
@@ -387,13 +386,13 @@ jQuery(document).ready(function() {
 			this.fromClause   = " FROM patient_search ps";
 			this.fromClause  += " INNER JOIN person pe ON pe.person_id = ps.patient_id";
 			this.whereClause  = " WHERE";
-			this.whereClause +=  " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%' OR ps.given_name LIKE '" + nameOrIdentifier + "%'OR ps.middle_name LIKE '" + nameOrIdentifier + "%'OR ps.family_name LIKE '" + nameOrIdentifier + "%')";	
-			this.whereClause += " AND pe.dead=0";
+			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%' OR ps.given_name LIKE '" + nameOrIdentifier + "%'OR ps.middle_name LIKE '" + nameOrIdentifier + "%'OR ps.family_name LIKE '" + nameOrIdentifier + "%')";	
+			//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
+			//this.whereClause += " AND pe.dead=0";
 			
 			//	Build extended queries
 			if(this.advanceSearch){
 				this.buildGenderQuery();
-				
 				this.buildAgeQuery();
 				this.buildRelativeNameQuery();
 				this.buildLastDayOfVisitQuery();
