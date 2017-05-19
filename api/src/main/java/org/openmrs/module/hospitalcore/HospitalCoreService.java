@@ -36,6 +36,8 @@ import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
+import org.openmrs.Person;
+import org.openmrs.PersonAddress;
 import org.openmrs.PersonAttribute;
 import org.openmrs.User;
 import org.openmrs.api.APIException;
@@ -219,5 +221,6 @@ public interface HospitalCoreService extends OpenmrsService {
 	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes);
 	public Set<Encounter>getEncountersByPatientAndDateFromObs(String date);
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws APIException;
+	public PersonAddress getPersonAddress(Person person);
 	
 }

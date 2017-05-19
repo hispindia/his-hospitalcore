@@ -57,6 +57,8 @@ import org.openmrs.GlobalProperty;
 import org.openmrs.Location;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
+import org.openmrs.Person;
+import org.openmrs.PersonAddress;
 import org.openmrs.PersonAttribute;
 import org.openmrs.User;
 import org.openmrs.api.APIException;
@@ -759,6 +761,10 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	}
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept){
 		return dao.getObsInstanceForDiagnosis(encounter,concept);
+	}
+	
+	public PersonAddress getPersonAddress(Person person){
+		return dao.getPersonAddress(person);
 	}
 
 
