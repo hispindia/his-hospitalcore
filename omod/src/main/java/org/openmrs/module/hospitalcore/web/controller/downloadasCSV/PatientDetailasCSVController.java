@@ -61,7 +61,7 @@ public class PatientDetailasCSVController {
 				+ reportName);
 
 		ArrayList<String> rows = new ArrayList<String>();
-		rows.add("ninID,patientID,visitID,patientName,mobile,landline,aadhaarNumber,visitDate,visitTime,departmentID,patientTypeID,gender,age");
+		rows.add("ninID,patientID,visitID,patientName,mobile,landline,visitDate,visitTime,departmentID,patientTypeID,gender,age");
 		rows.add("\n");
 		HospitalCoreService hcs = Context.getService(HospitalCoreService.class);
 		Set<EncounterType> encounterTypes = new HashSet<EncounterType>();
@@ -127,11 +127,11 @@ public class PatientDetailasCSVController {
 
 					}
 				}
-				if (adharnumber.equals("")) {
+				/*if (adharnumber.equals("")) {
 					record.setAdharNumber("0");
 				} else {
 					record.setAdharNumber(adharnumber);
-				}
+				}*/
 				String phone = "";
 
 				for (PersonAttribute pa : pas) {
@@ -221,11 +221,11 @@ public class PatientDetailasCSVController {
 
 					}
 				}
-				if (adharnumber.equals("")) {
+				/*if (adharnumber.equals("")) {
 					record.setAdharNumber("0");
 				} else {
 					record.setAdharNumber(adharnumber);
-				}
+				}*/
 				String phone = "";
 
 				for (PersonAttribute pa : pas) {
@@ -364,7 +364,6 @@ public class PatientDetailasCSVController {
 						.concat(pcsv.getPatientName()).concat(",")
 						.concat(pcsv.getMobile()).concat(",")
 						.concat(pcsv.getMobile()).concat(",")
-						.concat(pcsv.getAdharNumber()).concat(",")
 						.concat(pcsv.getVisitDate()).concat(",")
 						.concat(pcsv.getVisitTime()).concat(",")
 						.concat(pcsv.getDept()).concat(",")

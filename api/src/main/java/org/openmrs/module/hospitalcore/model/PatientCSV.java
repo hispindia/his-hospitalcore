@@ -9,7 +9,7 @@ public class PatientCSV {
 	private String patientidentifier;
 	private String patientName;
 	private String Mobile;
-	private String adharNumber;
+	//private String adharNumber;
 	private Boolean retired = false;
 	private String dept;
 	private String patientType;
@@ -44,14 +44,14 @@ public class PatientCSV {
 		Mobile = mobile;
 	}
 
-	public String getAdharNumber() {
+/*	public String getAdharNumber() {
 		return adharNumber;
 	}
 
 	public void setAdharNumber(String adharNumber) {
 		this.adharNumber = adharNumber;
 	}
-
+*/
 	public Boolean getRetired() {
 		return retired;
 	}
