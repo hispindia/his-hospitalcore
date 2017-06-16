@@ -454,27 +454,29 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 
 	public Set<Encounter> getEncountersByPatientAndDateFromObs(String date) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				Obs.class);
+				Encounter.class);
 
 		String startFromDate = date + " 00:00:00";
-		;
+		
 		String endFromDate = date + " 23:59:59";
 
 		try {
-			criteria.add(Restrictions.and(Restrictions.ge("obsDatetime",
-					formatter.parse(startFromDate)), Restrictions.le(
-					"obsDatetime", formatter.parse(endFromDate))));
+			criteria.add(Restrictions.and(
+					Restrictions.ge("encounterDatetime",
+							formatter.parse(startFromDate)),
+					Restrictions.le("encounterDatetime",
+							formatter.parse(endFromDate))));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		List<Obs> enc = criteria.list();
+		List<Encounter> enc = criteria.list();
 		Set<Encounter> dops = new LinkedHashSet<Encounter>();
-		for (Obs o : enc) {
-
-			if (o.getEncounter() != null
-					&& o.getEncounter().getEncounterType().getName()
+		for (Encounter o : enc) {
+		
+			if (o.getEncounterType().getName()
 							.equals("IPDENCOUNTER")) {
-				dops.add(o.getEncounter());
+				dops.add(o); 
+				
 			}
 
 		}

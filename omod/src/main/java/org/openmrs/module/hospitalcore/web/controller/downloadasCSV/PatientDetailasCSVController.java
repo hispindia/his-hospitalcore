@@ -94,11 +94,11 @@ public class PatientDetailasCSVController {
 		totalEnc1.addAll(encounterpatient);
 		totalEnc2.addAll(encounterpatientObs);
 		totalEnc1.addAll(totalEnc2);
-
+        
 		for (Encounter e : totalEnc1) {
 			PatientCSV record = new PatientCSV();
 			boolean flag = true;
-
+			
 			if (e.getEncounterType().getName().equals("REGINITIAL")
 					|| e.getEncounterType().getName().equals("REGREVISIT")) {
 				Calendar cal = Calendar.getInstance();
@@ -119,14 +119,14 @@ public class PatientDetailasCSVController {
 						HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER,
 						null));
 				record.setPatientidentifier(identifier);
-				String adharnumber = "";
+				/*String adharnumber = "";
 				for (PersonAttribute pa : pas) {
 					PersonAttributeType attributeType = pa.getAttributeType();
 					if (attributeType.getPersonAttributeTypeId() == 20) {
 						adharnumber = pa.getValue();
 
 					}
-				}
+				}*/
 				/*if (adharnumber.equals("")) {
 					record.setAdharNumber("0");
 				} else {
@@ -149,7 +149,8 @@ public class PatientDetailasCSVController {
 				Set<Obs> oList = Context.getObsService().getObservations(e);
 				for (Obs o : oList) {
 					if (o.getConcept().getName().toString().equals("OPD WARD")) {
-
+						
+						
 						visitDate = sdf.format(o.getObsDatetime());
 						Integer h = o.getObsDatetime().getHours();
 						Integer m = o.getObsDatetime().getMinutes();
@@ -200,6 +201,7 @@ public class PatientDetailasCSVController {
 
 			}
 			if (e.getEncounterType().getName().equals("IPDENCOUNTER") && flag) {
+				
 				List<PersonAttribute> pas = hcs.getPersonAttributes(e
 						.getPatientId());
 				String identifier = e.getPatient().getPatientIdentifier()
@@ -213,7 +215,7 @@ public class PatientDetailasCSVController {
 						HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER,
 						null));
 				record.setPatientidentifier(identifier);
-				String adharnumber = "";
+			/*	String adharnumber = "";
 				for (PersonAttribute pa : pas) {
 					PersonAttributeType attributeType = pa.getAttributeType();
 					if (attributeType.getPersonAttributeTypeId() == 20) {
@@ -240,22 +242,25 @@ public class PatientDetailasCSVController {
 					record.setMobile(phone);
 				}
 				Set<Obs> obList = Context.getObsService().getObservations(e);
-				for (Obs ob : obList) {
-					if (ob.getConcept().getName().toString()
-							.equals("ADMISSION OUTCOME")) {
+		
+				IpdPatientAdmissionLog ipl = inService
+						.getIpdPatientAdmissionLogByEncounter(e);
+				if (ipl.getStatus().toString().equals("admitted")) {
 						visitId = e.getEncounterId().toString();
 						typeofpatient = "1";
-
-						visitDate = sdf.format(ob.getObsDatetime());
+                          
+						visitDate = sdf.format(ipl.getIpdEncounter().getEncounterDatetime());
 						record.setVisitDate(visitDate);
 						record.setPatientType("1");
-						Integer h = ob.getObsDatetime().getHours();
-						Integer m = ob.getObsDatetime().getMinutes();
-
+						departmentId = ipl.getAdmissionWard().toString();
+						record.setDept(departmentId);
+						Integer h = ipl.getIpdEncounter().getEncounterDatetime().getHours();
+						Integer m = ipl.getIpdEncounter().getEncounterDatetime().getMinutes();
+					
 						hours = h.toString();
 						minute = m.toString();
 
-						seconds = seconds + ob.getObsDatetime().getSeconds();
+						seconds = seconds +ipl.getIpdEncounter().getEncounterDatetime().getSeconds();
 						if (h < 10)
 
 						{
@@ -271,21 +276,31 @@ public class PatientDetailasCSVController {
 						}
 
 						visitTime = hours.concat(minute);
-						seconds = seconds + ob.getObsDatetime().getSeconds();
+						seconds = seconds + ipl.getIpdEncounter().getEncounterDatetime().getSeconds();
 						record.setVisitTime(visitTime);
-
-						IpdPatientAdmissionLog ipl = inService
-								.getIpdPatientAdmissionLogByEncounter(ob
-										.getEncounter());
+					
+						Calendar calci = Calendar.getInstance();
+						calci.setTime(e.getPatient().getBirthdate());
+						Calendar calci2 = Calendar.getInstance();
+						calci2.setTime(ipl.getIpdEncounter().getEncounterDatetime());
+						int yearNew1 = calci.get(Calendar.YEAR);
+						int yearOld1 = calci2.get(Calendar.YEAR);
+						int yearDiff1 = yearOld1 - yearNew1;
+						if (yearDiff1 < 1) {
+							yearDiff1 = 1;
+						}
+						calculateAge = yearDiff1 + "";
+						record.setAge(calculateAge);
 						if (ipl.getStatus().toString().equals("discharge")) {
 							IpdPatientAdmittedLog ipld = inService
 									.getIpdPatientAdmittedLogByAdmissionLog(ipl);
+							
 							departmentId = ipld.getAdmittedWard().toString();
 							record.setDept(departmentId);
 							Calendar cal = Calendar.getInstance();
 							cal.setTime(e.getPatient().getBirthdate());
 							Calendar cal2 = Calendar.getInstance();
-							cal2.setTime(ob.getObsDatetime());
+							cal2.setTime(ipl.getIpdEncounter().getEncounterDatetime());
 							int yearNew = cal.get(Calendar.YEAR);
 							int yearOld = cal2.get(Calendar.YEAR);
 							int yearDiff = yearOld - yearNew;
@@ -296,8 +311,10 @@ public class PatientDetailasCSVController {
 							record.setAge(calculateAge);
 
 						}
+						
 					}
-				}
+					
+					
 				String gender = "";
 				if (e.getPatient().getGender().equals("M")) {
 					gender = "1";
@@ -308,7 +325,7 @@ public class PatientDetailasCSVController {
 				}
 				record.setGender(gender);
 				records.add(record);
-
+               
 			}
 
 			/*
@@ -352,7 +369,7 @@ public class PatientDetailasCSVController {
 			// String age = pat.getAge().toString();
 
 			// "ID,ninID,patientID,visitID,patientName,mobile,landline,aadhaarNumber,visitDate,visitTime,departmentID,patientTypeID,gender,age"
-
+			 
 		}
 
 		for (PatientCSV pcsv : records) {
@@ -368,8 +385,9 @@ public class PatientDetailasCSVController {
 						.concat(pcsv.getVisitTime()).concat(",")
 						.concat(pcsv.getDept()).concat(",")
 						.concat(pcsv.getPatientType()).concat(",")
-						.concat(pcsv.getGender()).concat(",")
-						.concat(pcsv.getAge()));
+						.concat(pcsv.getGender().concat(",")
+						.concat(pcsv.getAge()))
+						);
 
 				rows.add("\n");
 				patientCount++;
