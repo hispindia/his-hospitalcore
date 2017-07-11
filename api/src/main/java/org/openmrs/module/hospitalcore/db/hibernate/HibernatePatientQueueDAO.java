@@ -45,6 +45,9 @@ import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.db.PatientQueueDAO;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.PatientDrugHistory;
+import org.openmrs.module.hospitalcore.model.PatientFamilyHistory;
+import org.openmrs.module.hospitalcore.model.PatientPersonalHistory;
 
 public class HibernatePatientQueueDAO implements PatientQueueDAO {
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -217,7 +220,6 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdPatientQueueLog.class, "queue")
 				.createAlias("queue.opdConcept", "opdConcept");
 		criteria.add(Restrictions.eq("queue.patientIdentifier", patientIdentifier));
-		criteria.add(Restrictions.eq("queue.visitOutCome", "admit"));
 		criteria.addOrder(Order.desc("queue.createdOn"));
 		criteria.setMaxResults(1);
 		return (OpdPatientQueueLog) criteria.uniqueResult();
@@ -274,6 +276,87 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 				return criteria.list();
 			}
 
+	//Symptom
 	
+	public List<Obs> getAllSymptom(Integer personId) 
+	throws DAOException {
+
+		 Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Obs.class,"obs");
+		 String toDdate = formatter1.format(new Date());
+		
+		 Date date1 = new Date(); 
+		
+		 Date oldDate = new Date(date1.getTime() - TimeUnit.HOURS.toMillis(24));
+		 String fromDate = formatter1.format(oldDate);
+
+		 
+		try {
+			criteria.add(Restrictions.lt(
+					"obs.obsDatetime", formatter1.parse(toDdate)));
+			criteria.add(Restrictions.gt(
+					"obs.obsDatetime", formatter1.parse(fromDate)));
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error convert date: "+ e.toString());
+			e.printStackTrace();
+		}
+		
+		criteria.add(Restrictions.eq(
+				"obs.personId",personId));
+		criteria.add(Restrictions.eq(
+				"obs.concept",Context.getConceptService().getConcept("SYMPTOM")));
+
+		return criteria.list();
+	}
+	//Patient History
+	public PatientDrugHistory getPatientDrugHistoryByPatientId(Integer id) throws DAOException {
+		
+		
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PatientDrugHistory.class);
+		criteria.add(Restrictions.eq("patientId", id));
+		return (PatientDrugHistory) criteria.uniqueResult();
+	}
+
+	public PatientFamilyHistory getPatientFamilyHistoryByPatientId(Integer id) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PatientFamilyHistory.class);
+		criteria.add(Restrictions.eq("patientId", id));
+		PatientFamilyHistory patientFamilyHistory = (PatientFamilyHistory) criteria.uniqueResult();
+		return patientFamilyHistory;
+	}
+
+	public PatientPersonalHistory getPatientPersonalHistoryByPatientId(Integer id) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PatientPersonalHistory.class);
+		criteria.add(Restrictions.eq("patientId", id));
+		PatientPersonalHistory patientPersonalHistory = (PatientPersonalHistory) criteria.uniqueResult();
+		return patientPersonalHistory;
+	}
+	
+	public PatientDrugHistory savePatientDrugHistory(PatientDrugHistory patientDrugHistory) throws DAOException {
+		
+		return (PatientDrugHistory) sessionFactory.getCurrentSession().merge(patientDrugHistory);
+	}
+	
+	public PatientFamilyHistory savePatientFamilyHistory(PatientFamilyHistory patientFamilyHistory) throws DAOException {
+		
+		return (PatientFamilyHistory) sessionFactory.getCurrentSession().merge(patientFamilyHistory);
+	}
+	
+	public PatientPersonalHistory savePatientPersonalHistory(PatientPersonalHistory patientPersonalHistory) throws DAOException {
+		return (PatientPersonalHistory) sessionFactory.getCurrentSession().merge(patientPersonalHistory);
+	}
+	
+	public void updatePatientDrugHistoryByPatientId(PatientDrugHistory patientDrugHistory) throws DAOException {
+		
+		 sessionFactory.getCurrentSession().merge(patientDrugHistory);
+	}
+
+	public void updatePatientFamilyHistoryByPatientId (PatientFamilyHistory patientFamilyHistory)  throws DAOException {
+		 sessionFactory.getCurrentSession().merge(patientFamilyHistory);
+	}
+	
+	public void updatePatientPersonalHistoryByPatientId (PatientPersonalHistory patientPersonalHistory) throws DAOException {
+		 sessionFactory.getCurrentSession().merge(patientPersonalHistory);
+	}
 	
 }

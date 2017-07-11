@@ -37,7 +37,7 @@ import org.openmrs.Concept;
  * <p> Update date: Apr 13, 2011 12:51:19 PM </p>
  **/
 public class DepartmentConcept implements Serializable {
-	public static final int[] TYPES = {1,2,3}; // 1= Diagnosis, 2=Procedure, 3=Investigation
+	public static final int[] TYPES = {1,2,3,4}; // 1= Diagnosis, 2=Procedure, 3=Investigation,4=Symptom
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer typeConcept;

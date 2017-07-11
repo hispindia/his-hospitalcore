@@ -49,12 +49,15 @@ import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.db.PatientDashboardDAO;
+import org.openmrs.module.hospitalcore.model.Answer;
 import org.openmrs.module.hospitalcore.model.Department;
 import org.openmrs.module.hospitalcore.model.DepartmentConcept;
 import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
 import org.openmrs.module.hospitalcore.model.OpdTestOrder;
+import org.openmrs.module.hospitalcore.model.Question;
+import org.openmrs.module.hospitalcore.model.Symptom;
 
 public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -369,6 +372,41 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 			criteria.add(Restrictions.like("encounter",encounter));
 
 		return criteria.list();
+	}
+	
+	//Symptom
+	public Symptom saveSymptom(Symptom symptom)throws DAOException {
+		return (Symptom) sessionFactory.getCurrentSession().merge(
+				symptom);
+	}
+	public Question saveQuestion(Question question)throws DAOException {
+		return (Question) sessionFactory.getCurrentSession().merge(
+				question);
+	}
+	public Answer saveAnswer(Answer answer)throws DAOException {
+		return (Answer) sessionFactory.getCurrentSession().merge(
+				answer);
+	}
+	public List<Symptom> getSymptom(Encounter encounter) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Symptom.class);
+			criteria.add(Restrictions.like("encounter",encounter));
+
+		return criteria.list();
+	}
+	public List<Question> getQuestion(Symptom symptom) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Question.class);
+			criteria.add(Restrictions.like("symptom",symptom));
+
+		return criteria.list();
+	}
+	public Answer getAnswer(Question question) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Answer.class);
+			criteria.add(Restrictions.like("question",question));
+
+		return (Answer) criteria.uniqueResult();
 	}
 
 }

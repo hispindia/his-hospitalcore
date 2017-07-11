@@ -23,6 +23,9 @@
 package org.openmrs.module.hospitalcore.impl;
 
 import java.util.List;
+
+
+
 //New Requirement "Editable Dashboard" //
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
@@ -35,6 +38,9 @@ import org.openmrs.module.hospitalcore.PatientQueueService;
 import org.openmrs.module.hospitalcore.db.PatientQueueDAO;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.PatientDrugHistory;
+import org.openmrs.module.hospitalcore.model.PatientFamilyHistory;
+import org.openmrs.module.hospitalcore.model.PatientPersonalHistory;
 
 /**
  * <p> Class: PatientQueueServiceImpl </p>
@@ -154,5 +160,67 @@ public class PatientQueueServiceImpl  extends BaseOpenmrsService implements Pati
 			throws APIException{
 				return dao.getAllDiagnosis(personId);
 			}
+ //Symptom
+	public List<Obs> getAllSymptom(Integer personId)
+	throws APIException{
+		return dao.getAllSymptom(personId);
+	}
+	
+	//Patient history
+	
+	public PatientDrugHistory getPatientDrugHistoryByPatientId (Integer id)
+			throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getPatientDrugHistoryByPatientId(id);
+	}
 
+	public PatientFamilyHistory getPatientFamilyHistoryByPatientId (Integer id)
+			throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getPatientFamilyHistoryByPatientId(id);
+	}
+	
+	public PatientPersonalHistory getPatientPersonalHistoryByPatientId (Integer id)
+			throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getPatientPersonalHistoryByPatientId(id);
+	}
+	
+	public PatientDrugHistory savePatientDrugHistory(
+			PatientDrugHistory patientDrugHistory) throws APIException {
+		// TODO Auto-generated method stub
+		return dao.savePatientDrugHistory(patientDrugHistory);
+	}	
+
+	public PatientPersonalHistory savePatientPersonalHistory(
+			PatientPersonalHistory patientPersonalHistory) throws APIException {
+		// TODO Auto-generated method stub
+		return dao.savePatientPersonalHistory(patientPersonalHistory);
+	}	
+
+	public PatientFamilyHistory savePatientFamilyHistory(PatientFamilyHistory patientFamilyHistory) throws APIException {
+		// TODO Auto-generated method stub
+		return dao.savePatientFamilyHistory(patientFamilyHistory);
+	}	
+	public void updatePatientDrugHistoryByPatientId (PatientDrugHistory patientDrugHistory)
+	throws APIException {
+	// TODO Auto-generated method stub
+	dao.updatePatientDrugHistoryByPatientId(patientDrugHistory);
+	}
+	
+	public void updatePatientFamilyHistoryByPatientId (PatientFamilyHistory patientFamilyHistory)
+	throws APIException {
+	// TODO Auto-generated method stub
+	dao.updatePatientFamilyHistoryByPatientId(patientFamilyHistory);
+	}
+
+	public void updatePatientPersonalHistoryByPatientId (PatientPersonalHistory patientPersonalHistory)
+	throws APIException {
+	// TODO Auto-generated method stub
+	dao.updatePatientPersonalHistoryByPatientId(patientPersonalHistory);
+	}
+	public OpdPatientQueueLog getOpdPatientQueueLog(String patientIdentifier,Integer opdConceptId)throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getOpdPatientQueueLog(patientIdentifier,opdConceptId);
+	}
 }

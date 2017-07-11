@@ -27,6 +27,8 @@ public class PatientDashboardConstants {
 	public static final String CONCEPT_CLASS_NAME_DIAGNOSIS = "Diagnosis";
 	public static final String CONCEPT_CLASS_NAME_PROCEDURE = "Procedure";
 	public static String PROPERTY_OPDWARD = MODULE_ID + ".OPDRootConcept";
+	//Symptom
+	public static final String CONCEPT_CLASS_NAME_SYMPTOM = "Symptom";
 	
 	public static String PROPERTY_IPDWARD = MODULE_ID + ".IPDRootConcept";
 	public static String PROPERTY_HOSPITAL = MODULE_ID + ".externalHospitalConcept";
@@ -40,5 +42,7 @@ public class PatientDashboardConstants {
 	public static String PROPERTY_OPD_ENCOUTNER_TYPE = MODULE_ID + ".opdEncounterType";
 	public static String PROPERTY_LAB_ENCOUTNER_TYPE = MODULE_ID + ".labEncounterType";
 	public static String PROPERTY_INIT_CONCEPT = MODULE_ID + ".initNeededConcept";
+	//Symptom
+	public static String PROPERTY_SYMPTOM = MODULE_ID + ".symptomConcept";
 	
 }

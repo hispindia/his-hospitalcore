@@ -23,6 +23,9 @@
 package org.openmrs.module.hospitalcore;
 
 import java.util.List;
+
+
+
 //New Requirement "Editable Dashboard" //
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
@@ -33,6 +36,9 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.PatientDrugHistory;
+import org.openmrs.module.hospitalcore.model.PatientFamilyHistory;
+import org.openmrs.module.hospitalcore.model.PatientPersonalHistory;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -64,5 +70,18 @@ public interface PatientQueueService extends OpenmrsService {
 	public OpdPatientQueueLog getOpdPatientQueueLogByEncounter(Encounter enc) throws APIException;
 	public Obs getObservationByPersonConceptAndEncounter(Person person,
 			Concept concept, Encounter enc)throws APIException;
+	//Symptom
+	public List<Obs> getAllSymptom(Integer personId) throws APIException;
 	public List<Obs> getAllDiagnosis(Integer personId) throws APIException;
+    //patient history
+	public PatientDrugHistory getPatientDrugHistoryByPatientId (Integer id) throws APIException;
+	public PatientFamilyHistory getPatientFamilyHistoryByPatientId (Integer id) throws APIException;
+	public PatientPersonalHistory getPatientPersonalHistoryByPatientId (Integer id) throws APIException;
+	public PatientDrugHistory savePatientDrugHistory(PatientDrugHistory patientDrugHistory) throws APIException ;
+	public PatientPersonalHistory savePatientPersonalHistory(PatientPersonalHistory patientPersonalHistory) throws APIException ;
+	public PatientFamilyHistory savePatientFamilyHistory(PatientFamilyHistory patientFamilyHistory) throws APIException ;
+	public void updatePatientDrugHistoryByPatientId (PatientDrugHistory patientDrugHistory) throws APIException;
+	public void updatePatientFamilyHistoryByPatientId (PatientFamilyHistory patientFamilyHistory) throws APIException;
+	public void updatePatientPersonalHistoryByPatientId (PatientPersonalHistory patientPersonalHistory) throws APIException;
+	public OpdPatientQueueLog getOpdPatientQueueLog(String patientIdentifier,Integer opdConceptId) throws APIException;
 }

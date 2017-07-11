@@ -170,6 +170,13 @@
 		WardBedStrength.hbm.xml
 		<!-- Record vitals -->
 		IpdPatientVitalStatistics.hbm.xml
+		Symptom.hbm.xml
+		Question.hbm.xml
+		Answer.hbm.xml
+		<!-- Patient History -->
+		PatientDrugHistory.hbm.xml
+		PatientFamilyHistory.hbm.xml
+		PatientPersonalHistory.hbm.xml
     </mappingFiles>
 </module>
 

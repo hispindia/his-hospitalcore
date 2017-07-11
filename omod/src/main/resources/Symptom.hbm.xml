@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="Symptom" table="symptom"
+		batch-size="500">
+
+		<id name="symptomId" type="int" column="symptom_id"
+			unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<many-to-one name="encounter" column="encounter" class="org.openmrs.Encounter"
+			foreign-key="fk_symptom_encounter" />
+		<many-to-one name="symptomConcept" column="symptom_concept" class="org.openmrs.Concept"
+			lazy="false" foreign-key="fk_syptom_concept" />
+		<property name="createdDate" column="created_date"  />
+		<many-to-one name="creator" column="creator" class="org.openmrs.User"  foreign-key="fk_symptom_user"/>
+	</class>
+</hibernate-mapping>

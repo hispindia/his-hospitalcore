@@ -23,6 +23,9 @@
 package org.openmrs.module.hospitalcore.db;
 
 import java.util.List;
+
+
+
 //New Requirement "Editable Dashboard" ~Wasib//
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
@@ -33,6 +36,9 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.PatientDrugHistory;
+import org.openmrs.module.hospitalcore.model.PatientFamilyHistory;
+import org.openmrs.module.hospitalcore.model.PatientPersonalHistory;
 
 /**
  * <p> Class: PatientQueueDAO </p>
@@ -64,4 +70,17 @@ public interface PatientQueueDAO {
 	public Obs getObservationByPersonConceptAndEncounter(Person person,
 			Concept concept, Encounter encounter) throws APIException;
 	public List<Obs> getAllDiagnosis(Integer personId) throws DAOException;
+	//Symptom
+	public List<Obs> getAllSymptom(Integer personId) throws DAOException;
+	//Patient History
+	public PatientDrugHistory getPatientDrugHistoryByPatientId(Integer id) throws DAOException;
+	public PatientFamilyHistory getPatientFamilyHistoryByPatientId(Integer id) throws DAOException;
+	public PatientPersonalHistory getPatientPersonalHistoryByPatientId(Integer id) throws DAOException;
+	public PatientDrugHistory savePatientDrugHistory(PatientDrugHistory patientDrugHistory) throws APIException ;
+	public PatientPersonalHistory savePatientPersonalHistory(PatientPersonalHistory patientPersonalHistory) throws APIException ;
+	public PatientFamilyHistory savePatientFamilyHistory(PatientFamilyHistory patientFamilyHistory) throws APIException ;
+	public void updatePatientDrugHistoryByPatientId(PatientDrugHistory patientDrugHistory) throws DAOException;
+	public void updatePatientFamilyHistoryByPatientId (PatientFamilyHistory patientFamilyHistory) throws DAOException;
+	public void updatePatientPersonalHistoryByPatientId (PatientPersonalHistory patientPersonalHistory) throws DAOException;
+	public OpdPatientQueueLog getOpdPatientQueueLog(String patientIdentifier,Integer opdConceptId) throws DAOException;
 }

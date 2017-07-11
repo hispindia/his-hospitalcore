@@ -32,12 +32,15 @@ import org.openmrs.Location;
 import org.openmrs.Order;
 import org.openmrs.Patient;
 import org.openmrs.api.db.DAOException;
+import org.openmrs.module.hospitalcore.model.Answer;
 import org.openmrs.module.hospitalcore.model.Department;
 import org.openmrs.module.hospitalcore.model.DepartmentConcept;
 import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
 import org.openmrs.module.hospitalcore.model.OpdTestOrder;
+import org.openmrs.module.hospitalcore.model.Question;
+import org.openmrs.module.hospitalcore.model.Symptom;
 
 public interface PatientDashboardDAO {
 	public List<Order> getOrders(List<Concept> concepts, Patient patient, Location location, Date orderStartDate) throws DAOException;
@@ -64,4 +67,11 @@ public interface PatientDashboardDAO {
 	public OpdTestOrder saveOrUpdateOpdOrder(OpdTestOrder opdTestOrder) throws DAOException;
 	public OpdPatientQueueLog getOpdPatientQueueLog(Encounter encounter) throws DAOException;
 	public List<OpdDrugOrder> getOpdDrugOrder(Encounter encounter) throws DAOException;
+	//Symptom
+	public Symptom saveSymptom(Symptom symptom) throws DAOException;
+	public Question saveQuestion(Question question) throws DAOException;
+	public Answer saveAnswer(Answer answer) throws DAOException;
+	public List<Symptom> getSymptom(Encounter encounter) throws DAOException;
+	public List<Question> getQuestion(Symptom symptom) throws DAOException;
+	public Answer getAnswer(Question question) throws DAOException;
 }
