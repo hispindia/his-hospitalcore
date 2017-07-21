@@ -24,27 +24,7 @@
 	 * UC-7- Advance search of patient
 	 * Supported issue #256
 	 */
-	jQuery(document).ready(function() {
-	
-		/* Format for Date picker plugin*/
-		jQuery('#advanceSearchCalendar').datepicker({
-			yearRange : 'c-100:c+100',
-			dateFormat : 'dd/mm/yy',
-			changeMonth : true,
-			changeYear : true
-		});
-	
-		/* When click advanceSearchCalendarButton*/
-		jQuery("#advanceSearchCalendarButton").click(function() {
-			jQuery("#advanceSearchCalendar").datepicker("show");
-		});
-	
-		/* display the change of advanceSearchCalendar (hidden input) to lastDayOfVisit (visible input)*/
-		jQuery("#advanceSearchCalendar").change(function() {
-			jQuery("#lastDayOfVisit").val(jQuery(this).val());
-		});
-	
-	});	
+
 	/** 
 	 ** SEARCH FUNCTION
 	 **/
@@ -84,7 +64,6 @@
 			// Display form
 			this.form = jQuery("#patientSearchForm");
 			jQuery("#advanceSearch", this.form).hide();	
-			jQuery("#ageRange", this.form).val(5);
 			jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", this.form).keyup(function(event){				
 				if(event.keyCode == 13){	
 					nameInCapital = StringUtils.capitalize(jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", PATIENTSEARCH.form).val());
@@ -96,37 +75,11 @@
 				PATIENTSEARCH.validateNameOrIdentifierWithSpecialChar();
 				}
 			});
-			jQuery("#advanceSearchCalendar", this.form).change(function() {
-				PATIENTSEARCH.search(true);
-			});
-			jQuery("#lastDayOfVisit", this.form).change(function() {
-				PATIENTSEARCH.search(true);
-			});
-			jQuery("#lastVisit", this.form).change(function(){
-				PATIENTSEARCH.search(true);
-			});
-			// Kesavulu 2012-12-28 #570 added keyup functionality for Advance search
-			jQuery("#relativeName", this.form).keyup(function(event) {
-				if (event.keyCode == 13) {
-					PATIENTSEARCH.search(true);
-					}
-			});
-			jQuery("#age", this.form).keyup(function(event) {
-				if (event.keyCode == 13) {
-					PATIENTSEARCH.search(true);
-					}
-			});
+
 			jQuery("#gender", this.form).change(function(){
 				PATIENTSEARCH.search(true);
-			});
-			jQuery("#ageRange", this.form).change(function() {
-				PATIENTSEARCH.search(true);
-			});						
-			jQuery("#phoneNumber", this.form).keyup(function(event) {
-				if (event.keyCode == 13) {
-					PATIENTSEARCH.search(true);
-					}
-			});	
+			});				
+			
 			//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 			jQuery("#acNo", this.form).keyup(function(event) {
 				if (event.keyCode == 13) {
@@ -267,12 +220,6 @@
 			//	Build extended queries
 			if(this.advanceSearch){
 				this.buildGenderQuery();
-				this.buildAgeQuery();
-				this.buildRelativeNameQuery();
-				this.buildLastDayOfVisitQuery();
-				this.buildLastVisitQuery();
-				this.buildPhoneNumberQuery();
-				//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 				this.buildAadharCardNumberQuery();
 			}
 			
@@ -314,12 +261,6 @@
 			//	Build extended queries
 			if(this.advanceSearch){
 				this.buildGenderQuery();
-				this.buildAgeQuery();
-				this.buildRelativeNameQuery();
-				this.buildLastDayOfVisitQuery();
-				this.buildLastVisitQuery();
-				this.buildPhoneNumberQuery();
-				//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 				this.buildAadharCardNumberQuery();
 			}
 			
@@ -363,93 +304,7 @@
 			this.whereClause += " AND 1 ";
 			}
 		},
-		
-		/** BUILD QUERY FOR AGE */
-		buildAgeQuery: function(){
-			value =jQuery.trim(jQuery("#age", this.form).val());
-			
-			
-			if(value!=undefined && value.length>0){
-				if(StringUtils.isDigit(StringUtils.right(value, 1))){
-					value += "y";					
-				}
-				type = StringUtils.right(value, 1);
-				value = parseInt(value.substring(0, value.length-1));
-				range = parseInt(jQuery.trim(jQuery("#ageRange", this.form).val()));
-				
-				if(type=="y"){									
-					
-					jQuery("#rangeUnit").html("Year(s)");
-					this.whereClause += "AND (EXTRACT(YEAR FROM (FROM_DAYS(DATEDIFF(NOW(),ps.birthdate)))) >=" + (value - range) + " AND EXTRACT(YEAR FROM (FROM_DAYS(DATEDIFF(NOW(),ps.birthdate)))) <= " + (value + range) + ") ";
-				} else {
-					
-					days = value + range;
-					if(type=="m"){
-						days = days * 30;
-						jQuery("#rangeUnit").html("Month(s)");
-					} else if(type=="w") {
-						jQuery("#rangeUnit").html("Week(s)");
-						days = days * 7;
-					} else {
-						jQuery("#rangeUnit").html("Day(s)");
-					}
-					this.whereClause += "AND (DATEDIFF(NOW(),ps.birthdate) <= " + (days) + ") ";
-				}
-			}
-		},
-		
-		/** BUILD QUERY FOR RELATIVE NAME */
-		buildRelativeNameQuery: function(){
-			value = jQuery.trim(jQuery("#relativeName", this.form).val());
-			personAttributeTypeName = "Father/Husband Name";
-			if(value!=undefined && value.length>0){
-			    //ghanshyam 16-march-2013 Support #1110[Registration]ddu server slow
-			    this.fromClause += " INNER JOIN person_attribute paRelativeName ON ps.patient_id= paRelativeName.person_id";
-				//this.fromClause += " INNER JOIN person_attribute paRelativeName ON ps.person_id= paRelativeName.person_id";
-				this.fromClause += " INNER JOIN person_attribute_type patRelativeName ON paRelativeName.person_attribute_type_id = patRelativeName.person_attribute_type_id ";
-				this.whereClause += " AND (patRelativeName.name LIKE '%" + personAttributeTypeName + "%' AND paRelativeName.value LIKE '%" + value + "%')";
-			}
-		},
-		
-		/** BUILD QUERY FOR PHONE NUMBER */
-		buildPhoneNumberQuery: function(){
-			value = jQuery.trim(jQuery("#phoneNumber", this.form).val());
-			phoneNumberAttributeTypeName = "Phone Number";
-			if(value!=undefined && value.length>0){
-			     //ghanshyam 16-march-2013 Support #1110[Registration]ddu server slow
-			    this.fromClause += " INNER JOIN person_attribute paPhoneNumber ON ps.patient_id= paPhoneNumber.person_id";
-				//this.fromClause += " INNER JOIN person_attribute paPhoneNumber ON ps.person_id= paPhoneNumber.person_id";
-				this.fromClause += " INNER JOIN person_attribute_type patPhoneNumber ON paPhoneNumber.person_attribute_type_id = patPhoneNumber.person_attribute_type_id ";
-				this.whereClause += " AND (patPhoneNumber.name LIKE '%" + phoneNumberAttributeTypeName + "%' AND paPhoneNumber.value LIKE '%" + value + "%')";
-			}
-		},
-		
-		/** June 8th 2012: Thai Chuong added for lastDayOfVisit
-			Supported issue #256*/
-		/** BUILD QUERY FOR LAST DAY OF VISIT */
-		buildLastDayOfVisitQuery : function() {
-			value = jQuery.trim(jQuery("#lastDayOfVisit", this.form).val());
-			if (value != undefined && value.length > 0) {
-			    //ghanshyam 16-march-2013 Support #1110[Registration]ddu server slow
-			    this.fromClause += " INNER JOIN encounter en ON ps.patient_id = en.patient_id";
-				//this.fromClause += " INNER JOIN encounter en ON pt.patient_id = en.patient_id";
-				this.whereClause += " AND (DATE_FORMAT(DATE(en.encounter_datetime),'%d/%m/%Y') = '"
-						+ value + "')";
-			}
-		},
-		
-		/** BUILD QUERY FOR LAST VISIT */
-		buildLastVisitQuery: function(){
-			value = jQuery.trim(jQuery("#lastVisit", this.form).val());
-			if(value!='Any'){
-			    //ghanshyam 16-march-2013 Support #1110[Registration]ddu server slow
-			    this.fromClause += " INNER JOIN encounter e ON e.patient_id = ps.patient_id";
-				//this.fromClause += " INNER JOIN encounter e ON e.patient_id = pt.patient_id";
-				this.whereClause += " AND (DATEDIFF(NOW(), e.date_created) <= " + value + ")";
-			}
-		},
-		
-		//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
+	
 		buildAadharCardNumberQuery: function(){
 		    value = jQuery.trim(jQuery("#acNo", this.form).val());
 			aadharCardNumberAttributeTypeName = "Aadhar Card Number";
@@ -482,8 +337,6 @@
 			jQuery("#errorSection", this.form).html("<ul id='errorList' class='error'></ul>");
 			result = true;
 			result = result && this.validateNameOrIdentifier();
-			result = result && this.validateAge();
-			result = result && this.validatePhoneNumber();
 			return result;
 		},
 		
@@ -505,40 +358,6 @@
 				jQuery("#errorList", this.form).append("<li>Please enter at least 3 letters of patient name/identifier</li>");
 				return false;
 			}			
-		},
-		
-		/** VALIDATE AGE */
-		validateAge: function(){
-			if(this.advanceSearch){				
-				value = jQuery("#age", this.form).val();
-				pattern = "0123456789ymwd";
-				for(i=0; i<value.length; i++){
-					if(pattern.indexOf(value[i])<0){	
-						jQuery("#errorList", this.form).append("<li>Please enter patient age in digits!</li>");
-						return false;							
-					}
-				}	
-				return true;
-			} else {
-				return true;
-			}
-		},
-		
-		/** VALIDATE PHONE NUMBER */
-		validatePhoneNumber: function(){
-			if(this.advanceSearch){				
-				value = jQuery("#phoneNumber", this.form).val();
-				pattern = "0123456789+ ";
-				for(i=0; i<value.length; i++){
-					if(pattern.indexOf(value[i])<0){	
-						jQuery("#errorList", this.form).append("<li>Please enter phone number in digits!</li>");
-						return false;							
-					}
-				}	
-				return true;
-			} else {
-				return true;
-			}
 		}
 	}
 </script>
@@ -548,7 +367,7 @@
 	</div>
 	<table>
 		<tr>			
-			<td><input id="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" style='width: 152px;'/></td>
+			<td><input id="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" name="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" style='width: 152px;'/></td>
 			<td><input type="button" value="Advance search"
 			onclick="PATIENTSEARCH.toggleAdvanceSearch();" />
 		</tr>	
@@ -564,24 +383,6 @@
 						<option value="F">Female</option>
 						<option value="O">Others</option>
 					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Age</td>
-				<td>
-					<input id="age" style="width: 100px"/>
-				</td>				
-				<td>Range &plusmn;</td>
-				<td>
-					<select id="ageRange" style="width: 100px">
-						<option value="0">Exact</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-					<span id="rangeUnit"></span>
 				</td>
 			</tr>
 			<tr>

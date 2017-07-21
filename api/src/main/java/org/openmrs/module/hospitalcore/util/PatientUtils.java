@@ -94,10 +94,6 @@ public class PatientUtils {
 			fullName += patient.getGivenName() + " ";
 		}
 		
-		if (!StringUtils.isBlank(patient.getMiddleName())) {
-			fullName += patient.getMiddleName() + " ";
-		}
-		
 		if (!StringUtils.isBlank(patient.getFamilyName())) {
 			fullName += patient.getFamilyName();
 		}

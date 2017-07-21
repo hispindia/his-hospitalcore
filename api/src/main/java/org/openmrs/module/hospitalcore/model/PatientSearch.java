@@ -23,6 +23,8 @@ package org.openmrs.module.hospitalcore.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.openmrs.Patient;
+
 public class PatientSearch implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,9 +39,10 @@ public class PatientSearch implements Serializable {
 	private Date birthdate;
 	private Integer age;
 	private Integer personNameId;
-	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 	private Boolean dead = false;
 	private Boolean admitted = false;
+	private String relativeName;
+	private Patient relativeId;
 
 	public Integer getPatientId() {
 		return patientId;
@@ -135,6 +138,22 @@ public class PatientSearch implements Serializable {
 
 	public void setAdmitted(Boolean admitted) {
 		this.admitted = admitted;
+	}
+
+	public String getRelativeName() {
+		return relativeName;
+	}
+
+	public void setRelativeName(String relativeName) {
+		this.relativeName = relativeName;
+	}
+
+	public Patient getRelativeId() {
+		return relativeId;
+	}
+
+	public void setRelativeId(Patient relativeId) {
+		this.relativeId = relativeId;
 	}
 	
 }

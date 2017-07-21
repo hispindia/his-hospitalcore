@@ -19,8 +19,9 @@
 		<property name="birthdate" column="birthdate" />
 		<property name="age" column="age" />
 		<property name="personNameId" column="person_name_id" />
-		<!-- ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient -->
 		<property name="dead" column="dead" />
 		<property name="admitted" column="admitted" />
+		<property name="relativeName" column="relative_name" />
+		<many-to-one name="relativeId" column="relative_id" class="org.openmrs.Patient" />
 	</class>
 </hibernate-mapping>
