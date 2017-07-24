@@ -42,5 +42,6 @@
 	      <one-to-many class="org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail"/>
 	    </set>
 	    <property name="expireStatus" column="expire_status" />
+	    <property name="costToPatient" column="cost_to_patient" />
 	</class>
 </hibernate-mapping>

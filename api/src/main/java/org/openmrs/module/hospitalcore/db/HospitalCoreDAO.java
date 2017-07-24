@@ -130,4 +130,6 @@ public interface HospitalCoreDAO {
 	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes);
 	public Set<Encounter>getEncountersByPatientAndDateFromObs(String date);
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws DAOException;
+	public PatientSearch getPatientByPatientId(int patientId);
+	public String getPatientType(Patient patientId) throws DAOException;
 }

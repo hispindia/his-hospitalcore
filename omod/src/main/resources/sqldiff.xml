@@ -470,4 +470,26 @@
 			ALTER TABLE patient_search ADD COLUMN(relative_name VARCHAR(51),relative_id INTEGER);
 		</sql>
 	</diff>
+	<diff>
+		<version>3.2</version>
+		<author>Ambika</author>
+		<date>July 24 2017</date>
+		<description>
+			Alter opd_drug_order for order from opd to inventory
+		</description>
+		<sql>
+		ALTER TABLE opd_drug_order ADD COLUMN referral_opd_name VARCHAR(100) default NULL;
+		</sql>
+	</diff>
+		<diff>
+		<version>3.3</version>
+		<author>Ambika</author>
+		<date>July 24 2017</date>
+		<description>
+			Alter inventory_store_drug_transaction_detail and add cost to patient
+		</description>
+		<sql>
+	ALTER TABLE inventory_store_drug_transaction_detail  ADD COLUMN  `cost_to_patient` decimal(19,2);
+	</sql>
+	</diff>
 </sqldiff>

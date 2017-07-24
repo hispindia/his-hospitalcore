@@ -219,5 +219,8 @@ public interface HospitalCoreService extends OpenmrsService {
 	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes);
 	public Set<Encounter>getEncountersByPatientAndDateFromObs(String date);
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws APIException;
-	
+
+	//order from opd
+	public PatientSearch getPatientByPatientId(int patientId);
+	public String getPatientType(Patient patientId) throws APIException;
 }

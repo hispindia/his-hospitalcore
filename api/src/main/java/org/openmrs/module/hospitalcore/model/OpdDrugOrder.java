@@ -44,7 +44,7 @@ public class OpdDrugOrder {
 	private int orderStatus; //0=drug order from opd not yet processed,1=drug order from opd processed 
 	private int cancelStatus; //0=not yet canceled,1=canceled
     private int orderFrom;  //drug ordered from  opd=0 , treatmentcard=1 , discharge=2
-	
+    private String referralWardName;
 	public Integer getOpdDrugOrderId() {
 		return opdDrugOrderId;
 	}
@@ -123,5 +123,11 @@ public class OpdDrugOrder {
 	}
 	public void setOrderFrom(int orderFrom) {
 		this.orderFrom = orderFrom;
+	}
+	public String getReferralWardName() {
+		return referralWardName;
+	}
+	public void setReferralWardName(String referralWardName) {
+		this.referralWardName = referralWardName;
 	}
 }

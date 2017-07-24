@@ -48,6 +48,7 @@ public class InventoryStoreDrugTransaction implements  Serializable {
 	 private Set<InventoryStoreDrugIndent> indents;
 	 private Date createdOn;
 	 private String createdBy;
+	 private String paymentCategory;
 	public Integer getId() {
 		return id;
 	}
@@ -100,4 +101,12 @@ public class InventoryStoreDrugTransaction implements  Serializable {
 		this.indents = indents;
 	}
 	 
+	public String getPaymentCategory()
+	{
+		return paymentCategory;
+	}
+	public void setPaymentCategory(String paymentCategory)
+	{
+		 this.paymentCategory=paymentCategory;
+	}
 }

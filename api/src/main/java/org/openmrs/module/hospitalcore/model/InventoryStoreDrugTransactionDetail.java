@@ -18,7 +18,6 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore.model;
 
 import java.io.Serializable;
@@ -29,6 +28,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.openmrs.Concept;
+import org.openmrs.Encounter;
 
 /**
  * <p> Class: InventoryStoreDrugTransaction </p>
@@ -52,22 +53,49 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private BigDecimal unitPrice;
 	 private BigDecimal totalPrice;
 	 private BigDecimal VAT;
+	 private BigDecimal costToPatient;
 	 
 	 private String batchNo;
 	 private String companyName ;
 	 private Date dateManufacture;
 	 private Date dateExpiry;
 	 private Date createdOn;
-	 
+	 private String receiptFrom;	 
 	 private long openingBalance;
 	 private long closingBalance;
+	 private String attribute;
+	 private Integer reorderPoint;
+	 private String patientType;
+	 private Encounter encounter;
+	 private Integer expireStatus=0;
+	 private Concept frequency;
+	 private Integer noOfDays;
+	 private String comments;
+		
+	 public String getAttribute() {
+		return attribute;
+	}
+
+	public void setAttribute(String attribute) {
+		this.attribute = attribute;
+	}
+
+
 	 
-	 private InventoryStoreDrugTransactionDetail parent;
+	 public Integer getReorderPoint() {
+		return reorderPoint;
+	}
+
+	public void setReorderPoint(Integer reorderPoint) {
+		this.reorderPoint = reorderPoint;
+	}
+
+
+
+	private InventoryStoreDrugTransactionDetail parent;
 	 private Set<InventoryStoreDrugTransactionDetail> subDetails;
 	 
 	 private Date receiptDate;
-	 
-	 private Integer expireStatus=0;
 	 
 	 
     public InventoryStoreDrugTransactionDetail() {
@@ -101,6 +129,14 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	}
 	
 	
+	public BigDecimal getCostToPatient() {
+		return costToPatient;
+	}
+
+	public void setCostToPatient(BigDecimal costToPatient) {
+		this.costToPatient = costToPatient;
+	}
+
 	public BigDecimal getVAT() {
 		return VAT;
 	}
@@ -122,6 +158,15 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+	
+
+	public String getReceiptFrom() {
+		return receiptFrom;
+	}
+	public void setReceiptFrom(String receiptFrom) {
+		this.receiptFrom = receiptFrom;
+	}
+
 	public Date getDateManufacture() {
 		return dateManufacture;
 	}
@@ -215,6 +260,46 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	    return (this.drug).compareTo(i.drug);
 	}
 
+	public String getPatientType() {
+		return patientType;
+	}
+
+	public void setPatientType(String patientType) {
+		this.patientType = patientType;
+	}
+
+	public Encounter getEncounter() {
+		return encounter;
+	}
+
+	public void setEncounter(Encounter encounter) {
+		this.encounter = encounter;
+	}
+
+	public Concept getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(Concept frequency) {
+		this.frequency = frequency;
+	}
+
+	public Integer getNoOfDays() {
+		return noOfDays;
+	}
+
+	public void setNoOfDays(Integer noOfDays) {
+		this.noOfDays = noOfDays;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
 	public Integer getExpireStatus() {
 		return expireStatus;
 	}
@@ -222,5 +307,8 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	public void setExpireStatus(Integer expireStatus) {
 		this.expireStatus = expireStatus;
 	}
+
+	 
+	
 	 
 }
