@@ -61,6 +61,8 @@ import org.openmrs.module.hospitalcore.model.IndoorPatientServiceBillItem;
 import org.openmrs.module.hospitalcore.model.Lab;
 import org.openmrs.module.hospitalcore.model.MiscellaneousService;
 import org.openmrs.module.hospitalcore.model.MiscellaneousServiceBill;
+import org.openmrs.module.hospitalcore.model.OpdTestOrder;
+import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.hospitalcore.model.PatientServiceBill;
 import org.openmrs.module.hospitalcore.model.PatientServiceBillItem;
 import org.openmrs.module.hospitalcore.model.RadiologyDepartment;
@@ -1218,4 +1220,20 @@ public class BillingServiceImpl extends BaseOpenmrsService implements BillingSer
 	public PatientServiceBillItem getPatientServiceBillItem(Integer billId,String name) throws APIException {
 		return dao.getPatientServiceBillItem(billId,name);
 	}
+	
+	 public List<PatientSearch> searchListOfPatient(Date date, String searchKey,int page, int pgSize) throws APIException {
+			return dao.searchListOfPatient(date,searchKey,page,pgSize);
+		}
+	 
+	 public int countSearchListOfPatient(Date date, String searchKey,int page) throws APIException {
+			return dao.countSearchListOfPatient(date,searchKey,page);
+		}
+	 
+	 public List<OpdTestOrder> listOfOrder(Integer patientId,Date date) throws APIException {
+			return dao.listOfOrder(patientId,date);
+		}
+	 
+	 public List<BillableService> listOfServiceOrder(Integer patientId, Integer encounterId) throws APIException {
+			return dao.listOfServiceOrder(patientId,encounterId);
+		}
 }

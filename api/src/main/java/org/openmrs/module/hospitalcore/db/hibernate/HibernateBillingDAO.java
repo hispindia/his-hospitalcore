@@ -21,12 +21,14 @@
 package org.openmrs.module.hospitalcore.db.hibernate;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
@@ -47,6 +49,8 @@ import org.openmrs.module.hospitalcore.model.Driver;
 import org.openmrs.module.hospitalcore.model.IndoorPatientServiceBill;
 import org.openmrs.module.hospitalcore.model.MiscellaneousService;
 import org.openmrs.module.hospitalcore.model.MiscellaneousServiceBill;
+import org.openmrs.module.hospitalcore.model.OpdTestOrder;
+import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.hospitalcore.model.PatientServiceBill;
 import org.openmrs.module.hospitalcore.model.PatientServiceBillItem;
 import org.openmrs.module.hospitalcore.model.Receipt;
@@ -816,5 +820,84 @@ public class HibernateBillingDAO implements BillingDAO {
 		criteria.add(Restrictions.eq("name", name));
 		return (PatientServiceBillItem) criteria.uniqueResult();
 	}
+	
+	public List<PatientSearch> searchListOfPatient(Date date, String searchKey,
+			int page,int pgSize) throws DAOException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String startDate = sdf.format(date) + " 00:00:00";
+		String endDate = sdf.format(date) + " 23:59:59";
+		String hql = "SELECT DISTINCT ps from PatientSearch ps,OpdTestOrder o INNER JOIN o.patient p where p.patientId=ps.patientId AND o.scheduleDate BETWEEN '"
+				+ startDate
+				+ "' AND '"
+				+ endDate
+				//+ "' AND o.billingStatus=0 AND o.cancelStatus=0 AND o.billableService is NOT NULL GROUP BY o.patient) AND (ps.identifier LIKE '%"
+				+ "' AND o.billingStatus=0 AND o.cancelStatus=0 AND o.billableService is NOT NULL AND o.valueCoded NOT IN (SELECT c.answerConcept FROM ConceptAnswer c,ConceptName cn WHERE cn.name='MAJOR OPERATION' AND c.concept=cn.concept) AND (ps.identifier LIKE '%"
+				+ searchKey + "%' OR ps.fullname LIKE '%" + searchKey + "%')";
+		int firstResult = (page - 1) *pgSize;
+		Session session = sessionFactory.getCurrentSession();
+		Query q = session.createQuery(hql).setFirstResult(firstResult).setMaxResults(pgSize);
+		List<PatientSearch> list = q.list();
+		return list;
+	}
+        
+        public int countSearchListOfPatient(Date date, String searchKey,
+			int page) throws DAOException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String startDate = sdf.format(date) + " 00:00:00";
+		String endDate = sdf.format(date) + " 23:59:59";
+		String hql = "SELECT DISTINCT ps from PatientSearch ps,OpdTestOrder o INNER JOIN o.patient p where p.patientId=ps.patientId AND o.scheduleDate BETWEEN '"
+				+ startDate
+				+ "' AND '"
+				+ endDate
+				//+ "' AND o.billingStatus=0 AND o.cancelStatus=0 AND o.billableService is NOT NULL GROUP BY o.patient) AND (ps.identifier LIKE '%"
+				+ "' AND o.billingStatus=0 AND o.cancelStatus=0 AND o.billableService is NOT NULL AND o.valueCoded NOT IN (SELECT c.answerConcept FROM ConceptAnswer c,ConceptName cn WHERE cn.name='MAJOR OPERATION' AND c.concept=cn.concept) AND (ps.identifier LIKE '%"
+				+ searchKey + "%' OR ps.fullname LIKE '" + searchKey + "%')";
+
+		Session session = sessionFactory.getCurrentSession();
+                Query q = session.createQuery(hql);
+		List<PatientSearch> list = q.list();
+		return list.size();
+	}
+        
+        public List<OpdTestOrder> listOfOrder(Integer patientId, Date date)
+		throws DAOException {
+	/*
+	 * Criteria criteria =
+	 * sessionFactory.getCurrentSession().createCriteria(
+	 * OpdTestOrder.class); criteria.add(Restrictions.eq("patient",
+	 * patient)); criteria.add(Restrictions.eq("billingStatus", 0));
+	 * criteria.add(Restrictions.eq("cancelStatus", 0)); return
+	 * criteria.list();
+	 */
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String startDate = sdf.format(date) + " 00:00:00";
+	String endDate = sdf.format(date) + " 23:59:59";
+	String hql = "from OpdTestOrder o where o.patient='"
+			+ patientId
+			+ "' AND o.scheduleDate BETWEEN '"
+			+ startDate
+			+ "' AND '"
+			+ endDate
+			+ "' AND o.billingStatus=0 AND o.cancelStatus=0 AND o.billableService is NOT NULL AND o.valueCoded NOT IN (SELECT c.answerConcept FROM ConceptAnswer c,ConceptName cn WHERE cn.name='MAJOR OPERATION' AND c.concept=cn.concept) GROUP BY encounter";
+	Session session = sessionFactory.getCurrentSession();
+	Query q = session.createQuery(hql);
+	List<OpdTestOrder> list = q.list();
+	return list;
+    }
+        
+        public List<BillableService> listOfServiceOrder(Integer patientId,
+    			Integer encounterId) throws DAOException {
+    		String hql = "from BillableService b where b.conceptId IN (SELECT o.valueCoded FROM OpdTestOrder o where o.patient='"
+    				+ patientId
+    				+ "' AND o.encounter='"
+    				+ encounterId
+    				//+ "' AND o.billingStatus=0 AND o.cancelStatus=0 AND o.billableService is NOT NULL)";
+    				+ "' AND o.billingStatus=0 AND o.cancelStatus=0 AND o.billableService is NOT NULL AND o.valueCoded NOT IN (SELECT c.answerConcept FROM ConceptAnswer c,ConceptName cn WHERE cn.name='MAJOR OPERATION' AND c.concept=cn.concept))";
+    		Session session = sessionFactory.getCurrentSession();
+    		Query q = session.createQuery(hql);
+    		List<BillableService> list = q.list();
+    		return list;
+    	}
+
 	
 }

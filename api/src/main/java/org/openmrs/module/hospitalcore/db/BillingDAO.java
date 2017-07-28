@@ -20,6 +20,7 @@
 
 package org.openmrs.module.hospitalcore.db;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -33,6 +34,8 @@ import org.openmrs.module.hospitalcore.model.Driver;
 import org.openmrs.module.hospitalcore.model.IndoorPatientServiceBill;
 import org.openmrs.module.hospitalcore.model.MiscellaneousService;
 import org.openmrs.module.hospitalcore.model.MiscellaneousServiceBill;
+import org.openmrs.module.hospitalcore.model.OpdTestOrder;
+import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.hospitalcore.model.PatientServiceBill;
 import org.openmrs.module.hospitalcore.model.PatientServiceBillItem;
 import org.openmrs.module.hospitalcore.model.Receipt;
@@ -232,4 +235,12 @@ public interface BillingDAO {
 	
 	//New Requirement add Paid bill & Free bill Both 
 	public PatientServiceBillItem getPatientServiceBillItem(Integer billId,String name) throws DAOException;
+	
+	 public List<PatientSearch> searchListOfPatient(Date date, String searchKey,int page,int pgSize) throws DAOException;
+     
+     public int countSearchListOfPatient(Date date, String searchKey,int page) throws DAOException;
+     
+     public List<OpdTestOrder> listOfOrder(Integer patientId,Date date) throws DAOException;
+     
+     public List<BillableService> listOfServiceOrder(Integer patientId, Integer encounterId) throws DAOException;
 }

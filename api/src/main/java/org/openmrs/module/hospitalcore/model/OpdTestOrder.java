@@ -44,6 +44,7 @@ public class OpdTestOrder {
 	private BillableService billableService;
 	private Date scheduleDate;
 	private int indoorStatus;
+	private String fromDept;
 
 	public Integer getOpdOrderId() {
 		return opdOrderId;
@@ -147,6 +148,14 @@ public class OpdTestOrder {
 
 	public void setIndoorStatus(int indoorStatus) {
 		this.indoorStatus = indoorStatus;
+	}
+
+	public String getFromDept() {
+		return fromDept;
+	}
+
+	public void setFromDept(String fromDept) {
+		this.fromDept = fromDept;
 	}
 
 }

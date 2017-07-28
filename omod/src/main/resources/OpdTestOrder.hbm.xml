@@ -29,5 +29,6 @@
 			class="org.openmrs.module.hospitalcore.model.BillableService" />
 		<property name="scheduleDate" type="java.util.Date" column="schedule_date" length="19" />
 		<property name="indoorStatus" column="indoor_status" length="1" />
+		<property name="fromDept" column="referral_ward_name" length="100" />
 	</class>
 </hibernate-mapping>

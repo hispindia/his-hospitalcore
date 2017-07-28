@@ -481,4 +481,15 @@
 		ALTER TABLE opd_drug_order ADD COLUMN referral_opd_name VARCHAR(100) default NULL;
 		</sql>
 	</diff>
+	<diff>
+		<version>3.6</version>
+		<author>Ghanshyam</author>
+		<date>July 28 2017</date>
+		<description>
+			Add column referral_opd_name
+		</description>
+		<sql>
+			ALTER TABLE opd_test_order ADD COLUMN `referral_ward_name` VARCHAR(100) default NULL;
+		</sql>
+	</diff>
 </sqldiff>

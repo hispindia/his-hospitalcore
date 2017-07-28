@@ -21,6 +21,7 @@
 package org.openmrs.module.hospitalcore;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,8 @@ import org.openmrs.module.hospitalcore.model.Driver;
 import org.openmrs.module.hospitalcore.model.IndoorPatientServiceBill;
 import org.openmrs.module.hospitalcore.model.MiscellaneousService;
 import org.openmrs.module.hospitalcore.model.MiscellaneousServiceBill;
+import org.openmrs.module.hospitalcore.model.OpdTestOrder;
+import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.hospitalcore.model.PatientServiceBill;
 import org.openmrs.module.hospitalcore.model.PatientServiceBillItem;
 import org.openmrs.module.hospitalcore.model.Receipt;
@@ -340,6 +343,13 @@ public interface BillingService extends OpenmrsService {
 	public void saveBillEncounterAndOrderForIndoorPatient(IndoorPatientServiceBill bill) throws APIException;
 	
 	//New Requirement add Paid bill & Free bill Both 
-	public PatientServiceBillItem getPatientServiceBillItem(Integer billId,
-			String name)throws APIException;
+	public PatientServiceBillItem getPatientServiceBillItem(Integer billId,String name)throws APIException;
+	
+	public List<PatientSearch> searchListOfPatient(Date date, String searchKey,int page,int pgSize) throws APIException;
+	
+	public int countSearchListOfPatient(Date date, String searchKey,int page) throws APIException;
+	
+	public List<OpdTestOrder> listOfOrder(Integer patientId,Date date) throws APIException;
+	
+	public List<BillableService> listOfServiceOrder(Integer patientId, Integer encounterId) throws APIException;
 }
