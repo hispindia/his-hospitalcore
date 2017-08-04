@@ -67,9 +67,19 @@ public class PatientServiceBill implements Serializable {
 	
 	private Receipt receipt;
 	
-	private Boolean freeBill = false;
+	private String billType;
 	
 	private Set<PatientServiceBillItem> billItems;
+	
+	private float waiverPercentage;
+	
+    private float waiverAmount;
+    
+    private BigDecimal amountPayable;
+    
+    private Integer amountGiven;
+    
+    private Integer amountReturned;
 	
 	public Integer getPatientServiceBillId() {
 		return patientServiceBillId;
@@ -135,6 +145,14 @@ public class PatientServiceBill implements Serializable {
 		this.description = description;
 	}
 	
+	public User getVoidedby() {
+		return voidedby;
+	}
+
+	public void setVoidedby(User voidedby) {
+		this.voidedby = voidedby;
+	}
+
 	public void addBillItem(PatientServiceBillItem item) {
 		if (billItems == null)
 			billItems = new HashSet<PatientServiceBillItem>();
@@ -165,14 +183,14 @@ public class PatientServiceBill implements Serializable {
 		this.receipt = receipt;
 	}
 	
-	public Boolean getFreeBill() {
-		return freeBill;
+	public String getBillType() {
+		return billType;
 	}
-	
-	public void setFreeBill(Boolean freeBill) {
-		this.freeBill = freeBill;
+
+	public void setBillType(String billType) {
+		this.billType = billType;
 	}
-	
+
 	public BigDecimal getActualAmount() {
 		return actualAmount;
 	}
@@ -180,7 +198,7 @@ public class PatientServiceBill implements Serializable {
 	public void setActualAmount(BigDecimal actualAmount) {
 		this.actualAmount = actualAmount;
 	}
-	// New Requirement add 'voided_by' column in bills 
+	
 	public User getvoidedby() {
 		return voidedby;
 	}
@@ -188,7 +206,7 @@ public class PatientServiceBill implements Serializable {
 	public void setvoidedby(User voidedby) {
 		this.voidedby = voidedby;
 	}
-	// New Requirement add 'patient_category' column in bills 
+	
 	public String getPatientCategory() {
 		return patientCategory;
 	}
@@ -196,13 +214,53 @@ public class PatientServiceBill implements Serializable {
 	public void setPatientCategory(String patientCategory) {
 		this.patientCategory = patientCategory;
 	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	
-	// New Requirement add 'comment' column in bills
-		public String getComment() {
-			return comment;
-		}
-		
-		public void setComment(String comment) {
-			this.comment = comment;
-		}
+	public float getWaiverPercentage() {
+		return waiverPercentage;
+	}
+
+	public void setWaiverPercentage(float waiverPercentage) {
+		this.waiverPercentage = waiverPercentage;
+	}
+
+	public float getWaiverAmount() {
+		return waiverAmount;
+	}
+
+	public void setWaiverAmount(float waiverAmount) {
+		this.waiverAmount = waiverAmount;
+	}
+
+	public BigDecimal getAmountPayable() {
+		return amountPayable;
+	}
+
+	public void setAmountPayable(BigDecimal amountPayable) {
+		this.amountPayable = amountPayable;
+	}
+
+	public Integer getAmountGiven() {
+		return amountGiven;
+	}
+
+	public void setAmountGiven(Integer amountGiven) {
+		this.amountGiven = amountGiven;
+	}
+
+	public Integer getAmountReturned() {
+		return amountReturned;
+	}
+
+	public void setAmountReturned(Integer amountReturned) {
+		this.amountReturned = amountReturned;
+	}
+
 }

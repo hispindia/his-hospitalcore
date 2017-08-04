@@ -243,4 +243,8 @@ public interface BillingDAO {
      public List<OpdTestOrder> listOfOrder(Integer patientId,Date date) throws DAOException;
      
      public List<BillableService> listOfServiceOrder(Integer patientId, Integer encounterId) throws DAOException;
+     
+     public BillableService getServiceByConceptName(String conceptName) throws DAOException;
+     
+     public OpdTestOrder getOpdTestOrder(Integer encounterId,Integer conceptId) throws DAOException;
 }

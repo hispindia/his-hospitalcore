@@ -18,7 +18,7 @@
 		<property name="createdDate" column="created_date"  />
 		<property name="voided" column="voided"  />
 		<property name="voidedDate" column="voided_date"  />
-		<property name="freeBill" column="free_bill"  />
+		<property name="billType" column="bill_type"  />
 		<property name="actualAmount" column="actual_amount"  />
 		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_patientservicebill_voidedby"/>
 		<property name="patientCategory" column="patient_category" />
@@ -30,5 +30,10 @@
 			<one-to-many class="org.openmrs.module.hospitalcore.model.PatientServiceBillItem"  />
 		</set>
 		<many-to-one name="receipt" column="receipt_id" class="org.openmrs.module.hospitalcore.model.Receipt" lazy="false" foreign-key="fk_patientservicebill_receipt"/>
+		<property name="waiverPercentage" column="waiver_percetage" />
+		<property name="waiverAmount" column="waiver_amount" />
+		<property name="amountPayable" column="amount_payable" />
+		<property name="amountGiven" column="amount_given" />
+		<property name="amountReturned" column="amount_returned" />
 	</class>
 </hibernate-mapping>

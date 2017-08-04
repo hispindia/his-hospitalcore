@@ -898,6 +898,22 @@ public class HibernateBillingDAO implements BillingDAO {
     		List<BillableService> list = q.list();
     		return list;
     	}
-
-	
+        
+        public BillableService getServiceByConceptName(String conceptName)
+		throws DAOException {
+	    Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+			BillableService.class);
+	    //criteria.add(Restrictions.eq("name", conceptName));
+	    criteria.add(Restrictions.eq("conceptId", Context.getConceptService().getConcept(conceptName).getConceptId()));
+	    return (BillableService) criteria.uniqueResult();
+       }
+        
+        public OpdTestOrder getOpdTestOrder(Integer encounterId, Integer conceptId)
+		throws DAOException {
+	    Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+			OpdTestOrder.class);
+	    criteria.add(Restrictions.eq("encounter.encounterId", encounterId));
+	    criteria.add(Restrictions.eq("valueCoded.conceptId", conceptId));
+	    return (OpdTestOrder) criteria.uniqueResult();
+        }
 }
