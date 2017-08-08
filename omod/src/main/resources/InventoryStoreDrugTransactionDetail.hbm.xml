@@ -23,8 +23,9 @@
 		
 		<property name="unitPrice" column="unit_price" />
 		<property name="VAT" column="VAT" />
+		<property name="discount" column="discount" />
 		<property name="totalPrice" column="total_price" />
-		
+		<property name="totPriceAfterDiscount" column="tot_price_after_discount" />
 		<property name="batchNo" column="batch_no" />
 		<property name="companyName" column="company_name" />
 		<property name="dateManufacture" column="date_manufacture" />

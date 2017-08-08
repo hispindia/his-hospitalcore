@@ -51,7 +51,10 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private Integer currentQuantity ;
 	 private Integer issueQuantity;
 	 private BigDecimal unitPrice;
+
+	 private BigDecimal discount;
 	 private BigDecimal totalPrice;
+	 private BigDecimal totPriceAfterDiscount;
 	 private BigDecimal VAT;
 	 private BigDecimal costToPatient;
 	 
@@ -306,6 +309,23 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 
 	public void setExpireStatus(Integer expireStatus) {
 		this.expireStatus = expireStatus;
+	}
+
+
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	public BigDecimal getTotPriceAfterDiscount() {
+		return totPriceAfterDiscount;
+	}
+
+	public void setTotPriceAfterDiscount(BigDecimal totPriceAfterDiscount) {
+		this.totPriceAfterDiscount = totPriceAfterDiscount;
 	}
 
 	 
