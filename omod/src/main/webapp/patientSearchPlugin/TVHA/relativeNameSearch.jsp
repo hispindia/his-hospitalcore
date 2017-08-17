@@ -367,7 +367,7 @@
 	</div>
 	<table>
 		<tr>			
-			<td><input id="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" name="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" style='width: 152px;'/></td>
+			<td><input id="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" name="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" style='width: 152px;' onblur="setRelativeName();"/></td>
 			<td><input type="button" value="Advance search"
 			onclick="PATIENTSEARCH.toggleAdvanceSearch();" />
 		</tr>	

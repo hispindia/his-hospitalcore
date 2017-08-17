@@ -8,7 +8,7 @@
 	<name>@MODULE_NAME@</name>
 	<version>@MODULE_VERSION@</version>
 	<package>@MODULE_PACKAGE@</package>
-	<author>Viet Nguyen, Chuyen Nguyen</author>
+	<author>Ghanshyam</author>
 	<description>
 			Hospital core module, contains common api for hospital management system project in Shimla, India
 	</description>
