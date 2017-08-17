@@ -274,7 +274,7 @@ jQuery(document).ready(function() {
 		
 			// Get value from form			
 			nameOrIdentifier = jQuery.trim(jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", this.form).val());	
-			nameOrIdentifier = nameOrIdentifier.replace(/\s/g, "");			
+			//nameOrIdentifier = nameOrIdentifier.replace(/\s/g, "");			
 		
 			// Build essential query
 			//ghanshyam 16-march-2013 Support #1110[Registration]ddu server slow(commented old query below and written new query after this commented query)
@@ -296,7 +296,7 @@ jQuery(document).ready(function() {
 			this.fromClause   = " FROM patient_search ps";
 			this.fromClause  += " INNER JOIN person pe ON pe.person_id = ps.patient_id";
 			this.whereClause  = " WHERE";
-			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%' OR ps.given_name LIKE '" + nameOrIdentifier + "%'OR ps.middle_name LIKE '" + nameOrIdentifier + "%'OR ps.family_name LIKE '" + nameOrIdentifier + "%')";				
+			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%')";				
 			 //ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 			//this.whereClause += " AND pe.dead=0";
 			this.groupClause = " GROUP BY ps.patient_id";
@@ -367,7 +367,7 @@ jQuery(document).ready(function() {
 		
 			// Get value from form			
 			nameOrIdentifier = jQuery.trim(jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", this.form).val());			
-			nameOrIdentifier = nameOrIdentifier.replace(/\s/g, "");
+			//nameOrIdentifier = nameOrIdentifier.replace(/\s/g, "");
 		
 			// Build essential query
 			//ghanshyam 16-march-2013 Support #1110[Registration]ddu server slow(commented old query below and written new query after this commented query)
@@ -386,7 +386,7 @@ jQuery(document).ready(function() {
 			this.fromClause   = " FROM patient_search ps";
 			this.fromClause  += " INNER JOIN person pe ON pe.person_id = ps.patient_id";
 			this.whereClause  = " WHERE";
-			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%' OR ps.given_name LIKE '" + nameOrIdentifier + "%'OR ps.middle_name LIKE '" + nameOrIdentifier + "%'OR ps.family_name LIKE '" + nameOrIdentifier + "%')";	
+			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%')";	
 			//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 			//this.whereClause += " AND pe.dead=0";
 			
