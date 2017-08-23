@@ -361,6 +361,12 @@
 		}
 	}
 </script>
+<script type="text/javascript">
+	jQuery(document).ready(
+			function() {
+jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier").val(MODEL.relativeName);
+});
+</script>
 <form id="patientSearchForm">
 	<div id="errorSection">
 		

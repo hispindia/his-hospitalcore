@@ -399,13 +399,14 @@
 		/** BUILD QUERY FOR RELATIVE NAME */
 		buildRelativeNameQuery: function(){
 			value = jQuery.trim(jQuery("#relativeName", this.form).val());
-			personAttributeTypeName = "Father/Husband Name";
+			//personAttributeTypeName = "Father/Husband Name";
 			if(value!=undefined && value.length>0){
 			    //ghanshyam 16-march-2013 Support #1110[Registration]ddu server slow
-			    this.fromClause += " INNER JOIN person_attribute paRelativeName ON ps.patient_id= paRelativeName.person_id";
+			    //this.fromClause += " INNER JOIN person_attribute paRelativeName ON ps.patient_id= paRelativeName.person_id";
 				//this.fromClause += " INNER JOIN person_attribute paRelativeName ON ps.person_id= paRelativeName.person_id";
-				this.fromClause += " INNER JOIN person_attribute_type patRelativeName ON paRelativeName.person_attribute_type_id = patRelativeName.person_attribute_type_id ";
-				this.whereClause += " AND (patRelativeName.name LIKE '%" + personAttributeTypeName + "%' AND paRelativeName.value LIKE '%" + value + "%')";
+				//this.fromClause += " INNER JOIN person_attribute_type patRelativeName ON paRelativeName.person_attribute_type_id = patRelativeName.person_attribute_type_id ";
+				//this.whereClause += " AND (patRelativeName.name LIKE '%" + personAttributeTypeName + "%' AND paRelativeName.value LIKE '%" + value + "%')";
+				this.whereClause += " AND ps.relative_name LIKE '%" + value + "%' ";
 			}
 		},
 		
