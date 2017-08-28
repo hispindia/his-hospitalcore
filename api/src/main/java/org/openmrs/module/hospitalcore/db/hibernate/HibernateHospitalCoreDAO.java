@@ -232,7 +232,6 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	public List<Patient> searchPatient(String hql) {
 		List<Patient> patients = new Vector<Patient>();
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
-		System.out.println("yyyyyyy "+query);
 		List list = query.list();
 		if (CollectionUtils.isNotEmpty(list))
 			for (Object obj : list) {
