@@ -23,9 +23,7 @@
 		
 		<property name="unitPrice" column="unit_price" />
 		<property name="VAT" column="VAT" />
-		<property name="discount" column="discount" />
 		<property name="totalPrice" column="total_price" />
-		<property name="totPriceAfterDiscount" column="tot_price_after_discount" />
 		<property name="batchNo" column="batch_no" />
 		<property name="companyName" column="company_name" />
 		<property name="dateManufacture" column="date_manufacture" />
@@ -44,5 +42,10 @@
 	    </set>
 	    <property name="expireStatus" column="expire_status" />
 	    <property name="costToPatient" column="cost_to_patient" />
+	    <property name="waiverPercentage" column="waiver_percetage" />
+		<property name="waiverAmount" column="waiver_amount" />
+		<property name="amountPayable" column="amount_payable" />
+		<property name="amountGiven" column="amount_given" />
+		<property name="amountReturned" column="amount_returned" />
 	</class>
 </hibernate-mapping>

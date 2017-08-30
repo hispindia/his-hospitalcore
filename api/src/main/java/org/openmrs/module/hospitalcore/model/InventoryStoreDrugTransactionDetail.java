@@ -52,9 +52,7 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private Integer issueQuantity;
 	 private BigDecimal unitPrice;
 
-	 private BigDecimal discount;
 	 private BigDecimal totalPrice;
-	 private BigDecimal totPriceAfterDiscount;
 	 private BigDecimal VAT;
 	 private BigDecimal costToPatient;
 	 
@@ -74,6 +72,11 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private Concept frequency;
 	 private Integer noOfDays;
 	 private String comments;
+	 private float waiverPercentage;
+	 private float waiverAmount;
+	 private BigDecimal amountPayable;
+	 private Integer amountGiven;
+	 private Integer amountReturned;
 		
 	 public String getAttribute() {
 		return attribute;
@@ -311,24 +314,44 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 		this.expireStatus = expireStatus;
 	}
 
-
-	public BigDecimal getDiscount() {
-		return discount;
+	public float getWaiverPercentage() {
+		return waiverPercentage;
 	}
 
-	public void setDiscount(BigDecimal discount) {
-		this.discount = discount;
+	public void setWaiverPercentage(float waiverPercentage) {
+		this.waiverPercentage = waiverPercentage;
 	}
 
-	public BigDecimal getTotPriceAfterDiscount() {
-		return totPriceAfterDiscount;
+	public float getWaiverAmount() {
+		return waiverAmount;
 	}
 
-	public void setTotPriceAfterDiscount(BigDecimal totPriceAfterDiscount) {
-		this.totPriceAfterDiscount = totPriceAfterDiscount;
+	public void setWaiverAmount(float waiverAmount) {
+		this.waiverAmount = waiverAmount;
 	}
 
-	 
-	
+	public BigDecimal getAmountPayable() {
+		return amountPayable;
+	}
+
+	public void setAmountPayable(BigDecimal amountPayable) {
+		this.amountPayable = amountPayable;
+	}
+
+	public Integer getAmountGiven() {
+		return amountGiven;
+	}
+
+	public void setAmountGiven(Integer amountGiven) {
+		this.amountGiven = amountGiven;
+	}
+
+	public Integer getAmountReturned() {
+		return amountReturned;
+	}
+
+	public void setAmountReturned(Integer amountReturned) {
+		this.amountReturned = amountReturned;
+	}
 	 
 }
