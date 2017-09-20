@@ -64,6 +64,7 @@ public class DepartmentConceptFormController {
 			//Department department = dashboardService.getDepartmentById(id);
 			List<DepartmentConcept> listDiagnosisDepartment = dashboardService.listByDepartment(id, DepartmentConcept.TYPES[0]);
 			List<DepartmentConcept> listProcedureDepartment = dashboardService.listByDepartment(id, DepartmentConcept.TYPES[1]);
+			List<DepartmentConcept> listSymptomDepartment = dashboardService.listByDepartment(id, DepartmentConcept.TYPES[3]);
 			
 			List<Concept> diagnosisList = dashboardService.searchDiagnosis(null);
 			Collections.sort(diagnosisList, new ConceptComparator());
@@ -72,6 +73,14 @@ public class DepartmentConceptFormController {
 			//model.addAttribute("listDiagnosis", diagnosis);
 			List<Concept> procedures = dashboardService.searchProcedure(null);
 			Collections.sort(procedures, new ConceptComparator());
+			
+			
+			
+			//symptom list should be shown in left
+			List<Concept> symptom = dashboardService.searchSymptom(null);
+			Collections.sort(symptom, new ConceptComparator());
+			
+			
 			
 			List<Concept> listC = new ArrayList<Concept>();
 			if(CollectionUtils.isNotEmpty(listDiagnosisDepartment)){
@@ -89,15 +98,31 @@ public class DepartmentConceptFormController {
 			}
 			procedures.removeAll(listC);
 			
+			//symptom 
+			listC = new ArrayList<Concept>();
+			if(CollectionUtils.isNotEmpty(listSymptomDepartment)){
+				for(DepartmentConcept c : listSymptomDepartment){
+					listC.add(c.getConcept());
+				}
+			}
+			symptom.removeAll(listC);
+			
+			
+			
+			
+			
+			
 			//List all department
 			
 			
 			model.addAttribute("listProcedures", procedures);
 			model.addAttribute("diagnosisList", diagnosisList);
+			model.addAttribute("listSymptom", symptom);
 			
 			model.addAttribute("dId",id);
 			model.addAttribute("listDiagnosisDepartment",listDiagnosisDepartment);
 			model.addAttribute("listProcedureDepartment",listProcedureDepartment);
+			model.addAttribute("listSymptomDepartment",listSymptomDepartment);
 		}
 		
 		
@@ -108,6 +133,10 @@ public class DepartmentConceptFormController {
 		PatientDashboardService dashboardService = Context.getService(PatientDashboardService.class);
 		List<DepartmentConcept> listDiagnosisDepartment = dashboardService.listByDepartment(command.getDepartmentId(), DepartmentConcept.TYPES[0]);
 		List<DepartmentConcept> listProcedureDepartment = dashboardService.listByDepartment(command.getDepartmentId(), DepartmentConcept.TYPES[1]);
+		//symptom
+		List<DepartmentConcept> listSymptomDepartment = dashboardService.listByDepartment(command.getDepartmentId(), DepartmentConcept.TYPES[3]);
+
+		
 		Department department = dashboardService.getDepartmentById(command.getDepartmentId());
 		
 		String user = Context.getAuthenticatedUser().getGivenName();
@@ -194,6 +223,46 @@ public class DepartmentConceptFormController {
 			}
 		}
 		
+		//symptom
+		if(CollectionUtils.isEmpty(listSymptomDepartment)){
+			for(Integer iSymp : command.getSelectedSymptomList()){
+				DepartmentConcept departmentConcept = new DepartmentConcept();
+				departmentConcept.setDepartment(department);
+				departmentConcept.setConcept(Context.getConceptService().getConcept(iSymp));
+				departmentConcept.setCreatedBy(user);
+				departmentConcept.setCreatedOn(date);
+				departmentConcept.setTypeConcept(DepartmentConcept.TYPES[3]);
+				dashboardService.createDepartmentConcept(departmentConcept);
+			}
+		}else{
+			List<Integer> listIdSymptom = new ArrayList<Integer>();
+			
+			for(Integer i : command.getSelectedSymptomList()){
+				listIdSymptom.add(i);
+			}
+			
+			for(DepartmentConcept dC : listSymptomDepartment){
+				if(!listIdSymptom.contains(dC.getConcept().getId())){
+					dashboardService.removeDepartmentConcept(dC);
+				}else{
+					listIdSymptom.remove(dC.getConcept().getId());
+				}
+			}
+			
+			//create department symptom
+			
+			if(CollectionUtils.isNotEmpty(listIdSymptom)){
+				for(Integer proc : listIdSymptom){
+					DepartmentConcept departmentConcept = new DepartmentConcept();
+					departmentConcept.setDepartment(department);
+					departmentConcept.setConcept(Context.getConceptService().getConcept(proc));
+					departmentConcept.setCreatedBy(user);
+					departmentConcept.setCreatedOn(date);
+					departmentConcept.setTypeConcept(DepartmentConcept.TYPES[3]);
+					dashboardService.createDepartmentConcept(departmentConcept);
+				}
+			}
+		}
 		
 		return "redirect:/module/hospitalcore/departmentConcept.form?dId="+command.getDepartmentId();
 	}

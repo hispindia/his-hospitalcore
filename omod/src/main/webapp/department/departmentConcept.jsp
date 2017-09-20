@@ -129,6 +129,64 @@
         </td>
   </tr>
   
+  
+  <!-- Symptom -->
+  
+   <tr><td colspan="3">
+	<div class="ui-widget">
+		<strong>Symptom:</strong><em>*</em>
+		<input class="ui-autocomplete-input ui-widget-content ui-corner-all" id="symptom" style="width:280px" name="symptom"/>
+	</div>
+  
+ </td></tr>
+  <tr>
+        <td>
+        	
+          <!-- List of all available DataElements -->
+          <div id="divAvailableSymptomList">
+          <select size="15" style="width:550px" id="availableSymptomList" name="availableSymptomList" multiple="multiple" style="min-width:25em;height:5em" ondblclick="moveSelectedById( 'availableSymptomList', 'selectedSymptomList');">
+             <c:forEach items="${listSymptom}" var="symptom">
+              	 <option value="${symptom.conceptId}" >${symptom.name}</option>
+              </c:forEach>
+          </select>
+          </div>
+        </td>
+        <td>
+        	<input type="button" value="&gt;"  style="width:50px" onclick="moveSelectedById( 'availableSymptomList', 'selectedSymptomList');"/><br/>
+            <input type="button" value="&lt;"  style="width:50px" onclick="moveSelectedById( 'selectedSymptomList', 'availableSymptomList');"/><br/>
+			<input type="button" value="&gt;&gt;"  style="width:50px" onclick="moveAllById( 'availableSymptomList', 'selectedSymptomList' );"/><br/>
+			<input type="button" value="&lt;&lt;"  style="width:50px" onclick="moveAllById( 'selectedSymptomList', 'availableSymptomList' );"/>
+		</td>			
+        <td>
+          <!-- List of all selected DataElements -->
+          <select size="15" style="width:550px" id="selectedSymptomList" name="selectedSymptomList" multiple="multiple" style="min-width:25em;height:5em" ondblclick="moveSelectedById( 'selectedSymptomList', 'availableSymptomList' )">
+          	  <c:forEach items="${listSymptomDepartment}" var="ss">
+              	 <option value="${ss.concept.id}" >${ss.concept.name}</option>
+              </c:forEach>
+          </select>
+        </td>
+  </tr>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </table>      
 <br />
 <input type="submit" value="<spring:message code="general.save"/>" onclick="HOSPITALCORE.submit();">

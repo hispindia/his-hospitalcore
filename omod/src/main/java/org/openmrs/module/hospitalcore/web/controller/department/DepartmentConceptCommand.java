@@ -34,6 +34,9 @@ package org.openmrs.module.hospitalcore.web.controller.department;
 public class DepartmentConceptCommand {
 	private Integer[] selectedDiagnosisList;
 	private Integer[] selectedProcedureList;
+	//symptom list should be shown in left
+	private Integer[] selectedSymptomList;
+	
 	private Integer departmentId;
 	public Integer[] getSelectedDiagnosisList() {
 		return selectedDiagnosisList;
@@ -54,6 +57,12 @@ public class DepartmentConceptCommand {
 		this.departmentId = departmentId;
 	}
 	
+	public Integer[] getSelectedSymptomList() {
+		return selectedSymptomList;
+	}
+	public void setSelectedSymptomList(Integer[] selectedSymptomList) {
+		this.selectedSymptomList = selectedSymptomList;
+	}
 	
 	
 }
