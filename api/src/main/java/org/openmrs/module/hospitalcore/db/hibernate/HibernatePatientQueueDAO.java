@@ -359,4 +359,22 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 		 sessionFactory.getCurrentSession().merge(patientPersonalHistory);
 	}
 	
+	public OpdPatientQueue getOpdPatientQueueByPatientId(Patient patient) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdPatientQueue.class);
+		criteria.add(Restrictions.eq("patient", patient));
+		criteria.addOrder(Order.desc("createdOn"));
+		criteria.setMaxResults(1);
+		OpdPatientQueue opdPatientQueue = (OpdPatientQueue) criteria.uniqueResult();
+		return opdPatientQueue;
+	}
+	
+	public OpdPatientQueueLog getOpdPatientQueueLogByPatientId(Patient patient) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdPatientQueueLog.class);
+		criteria.add(Restrictions.eq("patient", patient));
+		criteria.addOrder(Order.desc("createdOn"));
+		criteria.setMaxResults(1);
+		OpdPatientQueueLog opdPatientQueueLog = (OpdPatientQueueLog) criteria.uniqueResult();
+		return opdPatientQueueLog;
+	}
+	
 }

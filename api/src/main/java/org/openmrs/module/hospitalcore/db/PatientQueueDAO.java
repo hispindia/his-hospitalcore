@@ -83,4 +83,6 @@ public interface PatientQueueDAO {
 	public void updatePatientFamilyHistoryByPatientId (PatientFamilyHistory patientFamilyHistory) throws DAOException;
 	public void updatePatientPersonalHistoryByPatientId (PatientPersonalHistory patientPersonalHistory) throws DAOException;
 	public OpdPatientQueueLog getOpdPatientQueueLog(String patientIdentifier,Integer opdConceptId) throws DAOException;
+	public OpdPatientQueue getOpdPatientQueueByPatientId(Patient patient) throws DAOException;
+	public OpdPatientQueueLog getOpdPatientQueueLogByPatientId(Patient patient) throws DAOException;
 }

@@ -25,6 +25,7 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,7 @@ import org.openmrs.Patient;
 import org.openmrs.PersonAttribute;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.hospitalcore.HospitalCoreService;
+import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,11 +66,18 @@ public class PatientSearchController {
 		Map<Integer, Map<Integer, String>> attributeMap = buildAttributeMap(patients);
 		Map<Integer, java.util.Date> lastVisitTime = getLastVisitTime(patients);
 		
+		Map<Integer,String> patientSearchMap = new LinkedHashMap<Integer,String>();
+		
+		for(Patient patient:patients){
+			patientSearchMap.put(patient.getPatientId(),Context.getService(HospitalCoreService.class).getPatientByPatientId(patient.getPatientId()).getRelativeName());
+		}
+		
 		patientAdmittedDetails(patients);
 		
 		model.addAttribute("lastVisitTime", lastVisitTime);
 		model.addAttribute("patients", patients);
 		model.addAttribute("attributeMap", attributeMap);
+		model.addAttribute("patientSearchMap", patientSearchMap);
 		return view;
 	}
 	

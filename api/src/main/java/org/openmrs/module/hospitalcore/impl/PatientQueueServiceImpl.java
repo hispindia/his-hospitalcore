@@ -223,4 +223,12 @@ public class PatientQueueServiceImpl  extends BaseOpenmrsService implements Pati
 		// TODO Auto-generated method stub
 		return dao.getOpdPatientQueueLog(patientIdentifier,opdConceptId);
 	}
+	public OpdPatientQueue getOpdPatientQueueByPatientId(Patient patient)throws APIException {
+       // TODO Auto-generated method stub
+       return dao.getOpdPatientQueueByPatientId(patient);
+    }
+	public OpdPatientQueueLog getOpdPatientQueueLogByPatientId(Patient patient)throws APIException {
+      // TODO Auto-generated method stub
+      return dao.getOpdPatientQueueLogByPatientId(patient);
+    }
 }

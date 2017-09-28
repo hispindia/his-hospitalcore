@@ -296,7 +296,7 @@ jQuery(document).ready(function() {
 			this.fromClause   = " FROM patient_search ps";
 			this.fromClause  += " INNER JOIN person pe ON pe.person_id = ps.patient_id";
 			this.whereClause  = " WHERE";
-			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%')";				
+			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '%" + nameOrIdentifier +  "%')";				
 			 //ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 			//this.whereClause += " AND pe.dead=0";
 			this.groupClause = " GROUP BY ps.patient_id";
@@ -386,7 +386,7 @@ jQuery(document).ready(function() {
 			this.fromClause   = " FROM patient_search ps";
 			this.fromClause  += " INNER JOIN person pe ON pe.person_id = ps.patient_id";
 			this.whereClause  = " WHERE";
-			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '" + nameOrIdentifier +  "%')";	
+			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '%" + nameOrIdentifier +  "%')";	
 			//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 			//this.whereClause += " AND pe.dead=0";
 			

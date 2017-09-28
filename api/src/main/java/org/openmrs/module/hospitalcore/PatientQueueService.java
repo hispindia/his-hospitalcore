@@ -84,4 +84,6 @@ public interface PatientQueueService extends OpenmrsService {
 	public void updatePatientFamilyHistoryByPatientId (PatientFamilyHistory patientFamilyHistory) throws APIException;
 	public void updatePatientPersonalHistoryByPatientId (PatientPersonalHistory patientPersonalHistory) throws APIException;
 	public OpdPatientQueueLog getOpdPatientQueueLog(String patientIdentifier,Integer opdConceptId) throws APIException;
+	public OpdPatientQueue getOpdPatientQueueByPatientId(Patient patient) throws APIException;
+	public OpdPatientQueueLog getOpdPatientQueueLogByPatientId(Patient patient) throws APIException;
 }
