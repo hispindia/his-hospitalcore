@@ -121,7 +121,13 @@ jQuery(document).ready(function() {
 				if (event.keyCode == 13) {
 					PATIENTSEARCH.search(true);
 					}
-			});							
+			});
+			
+			jQuery("#greenBookNo", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});									
 		},
 		
 		/** SEARCH */
@@ -313,6 +319,7 @@ jQuery(document).ready(function() {
 				this.buildPhoneNumberQuery();
 				//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 				this.buildAadharCardNumberQuery();
+				this.buildGreenBookNumberQuery();
 			}
 			
 			// Return the built query
@@ -400,6 +407,7 @@ jQuery(document).ready(function() {
 				this.buildPhoneNumberQuery();
 				//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 				this.buildAadharCardNumberQuery();
+				this.buildGreenBookNumberQuery();
 			}
 			
 			// Return the built query
@@ -589,6 +597,16 @@ jQuery(document).ready(function() {
 			}
 		},
 		
+		buildGreenBookNumberQuery: function(){
+		    value = jQuery.trim(jQuery("#greenBookNo", this.form).val());
+			greenBookNumberAttributeTypeName = "Green Book No";
+			if(value!=undefined && value.length>0){
+			    this.fromClause += " INNER JOIN person_attribute paGreenBookNumber ON ps.patient_id= paGreenBookNumber.person_id";
+				this.fromClause += " INNER JOIN person_attribute_type patGreenBookNumber ON paGreenBookNumber.person_attribute_type_id = patGreenBookNumber.person_attribute_type_id ";
+				this.whereClause += " AND (patGreenBookNumber.name LIKE '%" + greenBookNumberAttributeTypeName + "%' AND paGreenBookNumber.value LIKE '%" + value + "%')";
+			}
+		},
+		
 		/** GENERATE THE NAVIGATION BAR */
 		generateNavigation: function(){
 			navbar = this.totalRow + " patients found.";
@@ -751,6 +769,12 @@ jQuery(document).ready(function() {
 				<td>Aadhar Card No</td>
 				<td colspan="3">
 					<input id="acNo" style="width: 100px"/>
+				</td>	
+			</tr>
+			<tr>
+				<td>Green Book No</td>
+				<td colspan="3">
+					<input id="greenBookNo" style="width: 100px"/>
 				</td>	
 			</tr>
 		</table>
