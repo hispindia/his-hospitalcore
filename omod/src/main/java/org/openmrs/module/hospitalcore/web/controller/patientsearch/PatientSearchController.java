@@ -48,7 +48,6 @@ public class PatientSearchController {
 	public String showForm(@RequestParam("searchBoxView") String searchBoxView, HttpServletRequest request, Model model)
 	                                                                                                                    throws IOException {
 		model.addAttribute("searchBoxView", searchBoxView + ".jsp");
-		System.out.println("xxxxxxxxxxxx"+searchBoxView);
 		return "/module/hospitalcore/patientSearchPlugin/searchPatient";
 	}
 	
@@ -56,7 +55,6 @@ public class PatientSearchController {
 	@RequestMapping(value = "/module/hospitalcore/searchPatient.form", method = RequestMethod.POST)
 	public String searchPatient(@RequestParam("query") String query, @RequestParam("view") String view,
 	                            HttpServletRequest request, Model model) {
-		System.out.println("yyyyyy");
 		List<Patient> patients = Context.getService(HospitalCoreService.class).searchPatient(query);
 		
 		for (Enumeration e = request.getParameterNames(); e.hasMoreElements();) {
