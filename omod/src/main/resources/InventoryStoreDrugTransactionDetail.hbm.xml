@@ -42,7 +42,7 @@
 	    </set>
 	    <property name="expireStatus" column="expire_status" />
 	    <property name="costToPatient" column="cost_to_patient" />
-	     <property name="totalAmount" column="total_amount" />
+	    <property name="totalAmount" column="total_amount" />
 	    <property name="waiverPercentage" column="waiver_percetage" />
 		<property name="waiverAmount" column="waiver_amount" />
 		<property name="amountPayable" column="amount_payable" />

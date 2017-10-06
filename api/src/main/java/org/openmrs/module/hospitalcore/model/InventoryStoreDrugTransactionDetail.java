@@ -72,9 +72,9 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private Concept frequency;
 	 private Integer noOfDays;
 	 private String comments;
-	 private float totalAmount;
-	 private float waiverPercentage;
-	 private float waiverAmount;
+	 private Float totalAmount;
+	 private Float waiverPercentage;
+	 private Float waiverAmount;
 	 private BigDecimal amountPayable;
 	 private Integer amountGiven;
 	 private Integer amountReturned;
@@ -315,27 +315,27 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 		this.expireStatus = expireStatus;
 	}
 
-	public float getTotalAmount() {
+	public Float getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(float totalAmount) {
+	public void setTotalAmount(Float totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
-	public float getWaiverPercentage() {
+	public Float getWaiverPercentage() {
 		return waiverPercentage;
 	}
 
-	public void setWaiverPercentage(float waiverPercentage) {
+	public void setWaiverPercentage(Float waiverPercentage) {
 		this.waiverPercentage = waiverPercentage;
 	}
 
-	public float getWaiverAmount() {
+	public Float getWaiverAmount() {
 		return waiverAmount;
 	}
 
-	public void setWaiverAmount(float waiverAmount) {
+	public void setWaiverAmount(Float waiverAmount) {
 		this.waiverAmount = waiverAmount;
 	}
 
