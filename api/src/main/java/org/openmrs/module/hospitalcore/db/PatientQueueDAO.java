@@ -63,5 +63,6 @@ public interface PatientQueueDAO {
 			Encounter encounter) throws APIException;
 	public Obs getObservationByPersonConceptAndEncounter(Person person,
 			Concept concept, Encounter encounter) throws APIException;
+	public Obs getObservationByConceptAndEncounter(Concept concept, Encounter encounter) throws APIException;
 	public List<Obs> getAllDiagnosis(Integer personId) throws DAOException;
 }

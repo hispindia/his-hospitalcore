@@ -49,6 +49,7 @@ public class OpdPatientQueueLog implements  Serializable {
 	 private User user;
 	 private Date createdOn;
 	 private Encounter encounter;
+	 private Encounter registrationEncounter;
 	 
 	 
 	@Override
@@ -145,8 +146,11 @@ public class OpdPatientQueueLog implements  Serializable {
 	public void setEncounter(Encounter encounter) {
 		this.encounter = encounter;
 	}
-	 
-	 
-	 
+	public Encounter getRegistrationEncounter() {
+		return registrationEncounter;
+	}
+	public void setRegistrationEncounter(Encounter registrationEncounter) {
+		this.registrationEncounter = registrationEncounter;
+	}
 	  
 }

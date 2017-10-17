@@ -24,5 +24,6 @@
 		<property name="sex" column="sex" />
 		<property name="status" column="status" />
 		<property name="patientIdentifier" column="patient_identifier" />
+		<many-to-one name="registrationEncounter" column="registration_encounter"  class="org.openmrs.Encounter" />
 	</class>
 </hibernate-mapping>

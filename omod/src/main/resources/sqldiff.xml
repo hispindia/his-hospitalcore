@@ -416,4 +416,16 @@
 			ALTER TABLE patient_search ADD admitted smallint(6) DEFAULT 0;
 		</sql>
 	</diff>
+	<diff>
+		<version>2.8</version>
+		<author>Ghanshyam</author>
+		<date>13th oct 2017</date>
+		<description>
+			Add registration_encounter
+		</description>
+		<sql>			
+			ALTER TABLE opd_patient_queue ADD registration_encounter integer DEFAULT NULL;
+			ALTER TABLE opd_patient_queue_log ADD registration_encounter integer DEFAULT NULL;
+		</sql>
+	</diff>	
 </sqldiff>

@@ -213,6 +213,13 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 		return (Obs) criteria.uniqueResult();
 	}
 	
+	public Obs getObservationByConceptAndEncounter(Concept concept,Encounter encounter) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Obs.class);
+		criteria.add(Restrictions.eq("concept", concept));
+		criteria.add(Restrictions.eq("encounter", encounter));
+		return (Obs) criteria.uniqueResult();
+	}
+	
 	public OpdPatientQueueLog getOpdPatientQueueLog(String patientIdentifier,Integer opdConceptId) throws DAOException {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdPatientQueueLog.class, "queue")
 				.createAlias("queue.opdConcept", "opdConcept");

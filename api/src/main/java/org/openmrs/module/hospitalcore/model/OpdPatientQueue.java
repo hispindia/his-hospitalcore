@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.openmrs.Concept;
+import org.openmrs.Encounter;
 import org.openmrs.Patient;
 import org.openmrs.User;
 import org.openmrs.module.hospitalcore.util.PatientUtils;
@@ -49,6 +50,7 @@ public class OpdPatientQueue implements  Serializable {
 	 private User user;
 	 private Date createdOn;
 	 private String visitStatus;
+	 private Encounter registrationEncounter;
 	 
 	 
 	@Override
@@ -151,6 +153,11 @@ public class OpdPatientQueue implements  Serializable {
 	public void setVisitStatus(String visitStatus) {
 		this.visitStatus = visitStatus;
 	}
-	 
+	public Encounter getRegistrationEncounter() {
+		return registrationEncounter;
+	}
+	public void setRegistrationEncounter(Encounter registrationEncounter) {
+		this.registrationEncounter = registrationEncounter;
+	}
 	  
 }
