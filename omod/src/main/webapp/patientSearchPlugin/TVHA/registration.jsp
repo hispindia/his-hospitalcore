@@ -138,7 +138,46 @@
 				if (event.keyCode == 13) {
 					PATIENTSEARCH.search(true);
 					}
-			});				
+			});		
+			jQuery("#relativeName", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			
+			jQuery("#age", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			
+			jQuery("#phoneNumber", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});	
+			jQuery("#gender", this.form).change(function(){
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			jQuery("#lastVisit", this.form).change(function(){
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			
+			jQuery("#advanceSearchCalendar", this.form).change(function() {
+				if (event.keyCode == 13) {
+				PATIENTSEARCH.search(true);
+				}
+			});
+			jQuery("#lastDayOfVisit", this.form).change(function() {
+			
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
 		},
 		
 		// ghanshyam 2012-6-12 #261 added validation for special character in patient name
