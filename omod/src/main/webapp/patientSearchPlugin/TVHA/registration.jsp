@@ -500,7 +500,7 @@
 		//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 		buildAadharCardNumberQuery: function(){
 		    value = jQuery.trim(jQuery("#acNo", this.form).val());
-			aadharCardNumberAttributeTypeName = "Aadhar Card Number";
+			aadharCardNumberAttributeTypeName = "Aadhaar card number";
 			if(value!=undefined && value.length>0){
 			    this.fromClause += " INNER JOIN person_attribute paAadharCardNumber ON ps.patient_id= paAadharCardNumber.person_id";
 				this.fromClause += " INNER JOIN person_attribute_type patAadharCardNumber ON paAadharCardNumber.person_attribute_type_id = patAadharCardNumber.person_attribute_type_id ";

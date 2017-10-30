@@ -628,7 +628,7 @@ jQuery(document).ready(function() {
 		//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 		buildAadharCardNumberQuery: function(){
 		    value = jQuery.trim(jQuery("#acNo", this.form).val());
-			aadharCardNumberAttributeTypeName = "Aadhar Card Number";
+			aadharCardNumberAttributeTypeName = "Aadhaar card number";
 			if(value!=undefined && value.length>0){
 			    this.fromClause += " INNER JOIN person_attribute paAadharCardNumber ON ps.patient_id= paAadharCardNumber.person_id";
 				this.fromClause += " INNER JOIN person_attribute_type patAadharCardNumber ON paAadharCardNumber.person_attribute_type_id = patAadharCardNumber.person_attribute_type_id ";
@@ -732,11 +732,11 @@ jQuery(document).ready(function() {
 	<div id="errorSection">
 		
 	</div>
-	<table cellspacing="10">
+	<table cellspacing="1">
 		<tr>	
-			<td>Name/Identifier</td>
-			<td><input id="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" style="width:300px;"/></td>
-			<td><a href="javascript:PATIENTSEARCH.toggleAdvanceSearch();">Advance search</a></td>
+			<td valign="top">Name/Identifier</td>
+			<td valign="top"><input id="nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier" style="width:300px;"/></td>
+			<td valign="top"><a href="javascript:PATIENTSEARCH.toggleAdvanceSearch();">Advance search</a></td>
 			<td id="searchLoader"></td>
 		</tr>	
 	</table>

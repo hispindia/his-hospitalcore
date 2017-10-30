@@ -121,13 +121,52 @@ jQuery(document).ready(function() {
 				if (event.keyCode == 13) {
 					PATIENTSEARCH.search(true);
 					}
-			});	
+			});
 			
 			jQuery("#greenBookNo", this.form).keyup(function(event) {
 				if (event.keyCode == 13) {
 					PATIENTSEARCH.search(true);
 					}
-			});								
+			});		
+			jQuery("#relativeName", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			
+			jQuery("#age", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			
+			jQuery("#phoneNumber", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});	
+			jQuery("#gender", this.form).change(function(){
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			jQuery("#lastVisit", this.form).change(function(){
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			
+			jQuery("#advanceSearchCalendar", this.form).change(function() {
+				if (event.keyCode == 13) {
+				PATIENTSEARCH.search(true);
+				}
+			});
+			jQuery("#lastDayOfVisit", this.form).change(function() {
+			
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});							
 		},
 		
 		/** SEARCH */
@@ -589,7 +628,7 @@ jQuery(document).ready(function() {
 		//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 		buildAadharCardNumberQuery: function(){
 		    value = jQuery.trim(jQuery("#acNo", this.form).val());
-			aadharCardNumberAttributeTypeName = "Aadhar Card Number";
+			aadharCardNumberAttributeTypeName = "Aadhaar Card Number";
 			if(value!=undefined && value.length>0){
 			    this.fromClause += " INNER JOIN person_attribute paAadharCardNumber ON ps.patient_id= paAadharCardNumber.person_id";
 				this.fromClause += " INNER JOIN person_attribute_type patAadharCardNumber ON paAadharCardNumber.person_attribute_type_id = patAadharCardNumber.person_attribute_type_id ";
