@@ -170,6 +170,8 @@
 		WardBedStrength.hbm.xml
 		<!-- Record vitals -->
 		IpdPatientVitalStatistics.hbm.xml
+		TriagePatientQueue.hbm.xml
+		TriagePatientQueueLog.hbm.xml
     </mappingFiles>
 </module>
 

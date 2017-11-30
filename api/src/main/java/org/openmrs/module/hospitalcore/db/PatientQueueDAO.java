@@ -23,7 +23,7 @@
 package org.openmrs.module.hospitalcore.db;
 
 import java.util.List;
-//New Requirement "Editable Dashboard" ~Wasib//
+
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
 import org.openmrs.Obs;
@@ -33,6 +33,8 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.TriagePatientQueue;
+import org.openmrs.module.hospitalcore.model.TriagePatientQueueLog;
 
 /**
  * <p> Class: PatientQueueDAO </p>
@@ -65,4 +67,10 @@ public interface PatientQueueDAO {
 			Concept concept, Encounter encounter) throws APIException;
 	public Obs getObservationByConceptAndEncounter(Concept concept, Encounter encounter) throws APIException;
 	public List<Obs> getAllDiagnosis(Integer personId) throws DAOException;
+	public List<TriagePatientQueue> listTriagePatientQueue(String patientName,Integer referralConceptId,String status, int min, int max) throws DAOException;
+	public TriagePatientQueue getTriagePatientQueue(String patientIdentifier,Integer triageConceptId) throws DAOException;
+	public TriagePatientQueue getTriagePatientQueueById(Integer id) throws APIException;
+	public TriagePatientQueue saveTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws DAOException;
+	public TriagePatientQueueLog saveTriagePatientQueueLog(TriagePatientQueueLog triagePatientQueueLog) throws APIException ;
+	public void deleteTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws APIException;
 }

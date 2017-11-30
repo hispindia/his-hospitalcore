@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="TriagePatientQueue" table="triage_patient_queue" batch-size="500">
+
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<many-to-one name="user" column="user"  class="org.openmrs.User" foreign-key="fk_triagepatientqueueservice_user"/>
+		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient" lazy="false" foreign-key="fk_triagepatientqueueservice_patient"/>
+		<many-to-one name="referralConcept" column="referral_concept_id"  class="org.openmrs.Concept" foreign-key="fk_triagepatientqueueservice_concept"/>
+		<many-to-one name="triageConcept" column="triage_concept_id"  class="org.openmrs.Concept" foreign-key="fk_triagepatientqueueservice_opd_concept"/>
+		
+		<property name="birthDate" column="birth_date" />
+		<property name="createdOn" column="created_on" />
+		<property name="triageConceptName" column="triage_concept_name" />
+		<property name="patientName" column="patient_name" />
+		<property name="referralConceptName" column="referral_concept_name" />
+		<property name="sex" column="sex" />
+		<property name="status" column="status" />
+		<property name="patientIdentifier" column="patient_identifier" />
+		<property name="category" column="category" />
+	</class>
+</hibernate-mapping>

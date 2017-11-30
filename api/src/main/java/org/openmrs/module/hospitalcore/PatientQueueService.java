@@ -23,7 +23,7 @@
 package org.openmrs.module.hospitalcore;
 
 import java.util.List;
-//New Requirement "Editable Dashboard" //
+
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
 import org.openmrs.Obs;
@@ -33,6 +33,8 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.TriagePatientQueue;
+import org.openmrs.module.hospitalcore.model.TriagePatientQueueLog;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -66,4 +68,10 @@ public interface PatientQueueService extends OpenmrsService {
 			Concept concept, Encounter enc)throws APIException;
 	public Obs getObservationByConceptAndEncounter(Concept concept, Encounter enc)throws APIException;
 	public List<Obs> getAllDiagnosis(Integer personId) throws APIException;
+	public List<TriagePatientQueue> listTriagePatientQueue(String patientName ,Integer referralConceptId,String status, int min, int max) throws APIException;
+	public TriagePatientQueue getTriagePatientQueue(String patientIdentifier,Integer triageConceptId) throws APIException;
+	public TriagePatientQueue getTriagePatientQueueById(Integer id) throws APIException;
+	public TriagePatientQueue saveTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws APIException;
+	public TriagePatientQueueLog saveTriagePatientQueueLog(TriagePatientQueueLog triagePatientQueueLog) throws APIException ;
+	public void deleteTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws APIException;
 }

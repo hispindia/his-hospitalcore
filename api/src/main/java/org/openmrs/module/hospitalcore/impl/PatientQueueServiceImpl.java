@@ -23,7 +23,7 @@
 package org.openmrs.module.hospitalcore.impl;
 
 import java.util.List;
-//New Requirement "Editable Dashboard" //
+
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
 import org.openmrs.Obs;
@@ -35,6 +35,8 @@ import org.openmrs.module.hospitalcore.PatientQueueService;
 import org.openmrs.module.hospitalcore.db.PatientQueueDAO;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.TriagePatientQueue;
+import org.openmrs.module.hospitalcore.model.TriagePatientQueueLog;
 
 /**
  * <p> Class: PatientQueueServiceImpl </p>
@@ -158,5 +160,36 @@ public class PatientQueueServiceImpl  extends BaseOpenmrsService implements Pati
 			throws APIException{
 				return dao.getAllDiagnosis(personId);
 			}
-
+	
+	public List<TriagePatientQueue> listTriagePatientQueue(String patientName,
+			Integer referralConceptId, String status, int min, int max)
+			throws APIException {
+		// TODO Auto-generated method stub
+		return dao.listTriagePatientQueue(patientName, referralConceptId, status, min, max);
+	}
+	
+	public TriagePatientQueue getTriagePatientQueue(String patientIdentifier,Integer triageConceptId)throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getTriagePatientQueue(patientIdentifier,triageConceptId);
+	}
+	
+	public TriagePatientQueue getTriagePatientQueueById(Integer id)throws APIException {
+		// TODO Auto-generated method stub
+		return dao.getTriagePatientQueueById(id);
+	}
+	
+	public TriagePatientQueue saveTriagePatientQueue(TriagePatientQueue triagePatientQueue)throws APIException {
+       // TODO Auto-generated method stub
+       return dao.saveTriagePatientQueue(triagePatientQueue);
+    }
+	
+	public TriagePatientQueueLog saveTriagePatientQueueLog(TriagePatientQueueLog triagePatientQueueLog)throws APIException {
+	       // TODO Auto-generated method stub
+	       return dao.saveTriagePatientQueueLog(triagePatientQueueLog);
+	}
+	
+	public void deleteTriagePatientQueue(TriagePatientQueue triagePatientQueue)throws APIException {
+    // TODO Auto-generated method stub
+    dao.deleteTriagePatientQueue(triagePatientQueue);
+    }
 }

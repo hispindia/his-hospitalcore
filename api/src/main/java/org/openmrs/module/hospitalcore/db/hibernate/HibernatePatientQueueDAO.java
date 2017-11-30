@@ -24,7 +24,6 @@ package org.openmrs.module.hospitalcore.db.hibernate;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-//New Requirement "Editable Dashboard" //
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -39,12 +38,13 @@ import org.openmrs.Encounter;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.Person;
-import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.db.PatientQueueDAO;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.TriagePatientQueue;
+import org.openmrs.module.hospitalcore.model.TriagePatientQueueLog;
 
 public class HibernatePatientQueueDAO implements PatientQueueDAO {
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -280,7 +280,81 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 
 				return criteria.list();
 			}
+	
+	public TriagePatientQueue saveTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws DAOException {
+		return (TriagePatientQueue) sessionFactory.getCurrentSession().merge(triagePatientQueue);
+	}
+	
+	public TriagePatientQueue getTriagePatientQueue(String patientIdentifier,Integer triageConceptId) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(TriagePatientQueue.class, "queue")
+				.createAlias("queue.triageConcept", "triageConcept");
+		criteria.add(Restrictions.eq("queue.patientIdentifier", patientIdentifier));
+		criteria.add(Restrictions.eq("triageConcept.conceptId", triageConceptId));
+		String date = formatterExt.format(new Date());
+		String startFromDate = date + " 00:00:00";
+		String endFromDate = date + " 23:59:59";
+		try {
+			criteria.add(Restrictions.and(Restrictions.ge(
+					"queue.createdOn", formatter.parse(startFromDate)), Restrictions.le(
+					"queue.createdOn", formatter.parse(endFromDate))));
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error convert date: "+ e.toString());
+			e.printStackTrace();
+		}
+		criteria.addOrder(Order.desc("queue.createdOn"));
+		
+		List<TriagePatientQueue> list = criteria.list();
+		return CollectionUtils.isNotEmpty(list) ? list.get(0) : null;
+	}
+	
+	public TriagePatientQueue getTriagePatientQueueById(Integer id) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(TriagePatientQueue.class, "queue");
+		criteria.add(Restrictions.eq("queue.id", id));
+		return (TriagePatientQueue) criteria.uniqueResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TriagePatientQueue> listTriagePatientQueue(String searchText ,  Integer conceptId,String status, int min, int max) throws DAOException{
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(TriagePatientQueue.class,"triagePatientQueue");
+		if(!StringUtils.isBlank(searchText)){
+	    	criteria.add(Restrictions.or(Restrictions.like("triagePatientQueue.patientIdentifier",  "%"+searchText+"%"),Restrictions.like("triagePatientQueue.patientName",  "%"+searchText+"%")));
+		}
+		if(conceptId != null && conceptId > 0){
+			criteria.createAlias( "triagePatientQueue.triageConcept","triageConcept");
+			criteria.add(Restrictions.eq("triageConcept.conceptId", conceptId));
+		}
+		if(!StringUtils.isBlank(status)){
+			criteria.add(Restrictions.eq("triagePatientQueue.status", status));
+		}
+		//only get data if that's current date
+		//we need this because maybe cron-job not work normal
+		String date = formatterExt.format(new Date());
+		String startFromDate = date + " 00:00:00";
+		String endFromDate = date + " 23:59:59";
+		try {
+			criteria.add(Restrictions.and(Restrictions.ge(
+					"triagePatientQueue.createdOn", formatter.parse(startFromDate)), Restrictions.le(
+					"triagePatientQueue.createdOn", formatter.parse(endFromDate))));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		criteria.addOrder(Order.asc("triagePatientQueue.createdOn"));
+		if(max > 0){
+			criteria.setFirstResult(min).setMaxResults(max);
+		}
+		 List<TriagePatientQueue> list =  criteria.list();
 
+		return list;
+	}
+	
+	public TriagePatientQueueLog saveTriagePatientQueueLog(TriagePatientQueueLog triagePatientQueueLog) throws DAOException {
+		return (TriagePatientQueueLog) sessionFactory.getCurrentSession().merge(triagePatientQueueLog);
+	}
+	
+	public void deleteTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws DAOException {
+		sessionFactory.getCurrentSession().delete(triagePatientQueue);
+	}
 	
 	
 }
