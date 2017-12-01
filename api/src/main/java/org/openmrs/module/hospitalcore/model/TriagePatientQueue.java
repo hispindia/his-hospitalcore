@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.openmrs.Concept;
+import org.openmrs.Encounter;
 import org.openmrs.Patient;
 import org.openmrs.User;
 import org.openmrs.module.hospitalcore.util.PatientUtils;
@@ -49,6 +50,8 @@ public class TriagePatientQueue implements  Serializable {
 	 private User user;
 	 private Date createdOn;
 	 private String category;
+	 private Encounter registrationEncounter;
+	 private Encounter triageEncounter;
 	
 	@Override
 	public String toString() {
@@ -149,6 +152,18 @@ public class TriagePatientQueue implements  Serializable {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public Encounter getRegistrationEncounter() {
+		return registrationEncounter;
+	}
+	public void setRegistrationEncounter(Encounter registrationEncounter) {
+		this.registrationEncounter = registrationEncounter;
+	}
+	public Encounter getTriageEncounter() {
+		return triageEncounter;
+	}
+	public void setTriageEncounter(Encounter triageEncounter) {
+		this.triageEncounter = triageEncounter;
 	}
 	  
 }
