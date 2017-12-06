@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="TriagePatientData" table="triage_patient_data" batch-size="500">
+
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="weight" column="weight" />
+		<property name="height" column="height" />
+		<property name="bmi" column="bmi" />
+		<property name="systolic" column="systolic" />
+		<property name="daistolic" column="daistolic" />
+		<property name="pulsRate" column="puls_rate" />
+		<property name="temperature" column="temperature" />
+		<property name="lastMenstrualDate" column="last_menstrual" />
+		<property name="createdOn" column="created_on" />
+		<many-to-one name="triageLogId" column="triage_log_id"  class="org.openmrs.module.hospitalcore.model.TriagePatientQueueLog"/>
+		<many-to-one name="encounterOpd" column="encounter_opd"  class="org.openmrs.Encounter"/>
+	</class>
+</hibernate-mapping>

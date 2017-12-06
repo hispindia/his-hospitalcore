@@ -43,6 +43,7 @@ import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.db.PatientQueueDAO;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.TriagePatientData;
 import org.openmrs.module.hospitalcore.model.TriagePatientQueue;
 import org.openmrs.module.hospitalcore.model.TriagePatientQueueLog;
 
@@ -199,7 +200,7 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 	
 	public OpdPatientQueueLog getOpdPatientQueueLogByEncounter(Encounter encounter) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdPatientQueueLog.class);
-		criteria.add(Restrictions.eq("encounter", encounter));
+		criteria.add(Restrictions.eq("opdEncounter", encounter));
 		return (OpdPatientQueueLog) criteria.uniqueResult();
 	}
 	
@@ -354,6 +355,12 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 	
 	public void deleteTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws DAOException {
 		sessionFactory.getCurrentSession().delete(triagePatientQueue);
+	}
+	
+	public TriagePatientData saveTriagePatientData(TriagePatientData triagePatientData) throws DAOException {
+		sessionFactory.getCurrentSession().saveOrUpdate(triagePatientData);
+		return triagePatientData;
+		
 	}
 	
 	

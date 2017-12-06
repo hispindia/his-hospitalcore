@@ -33,6 +33,7 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.TriagePatientData;
 import org.openmrs.module.hospitalcore.model.TriagePatientQueue;
 import org.openmrs.module.hospitalcore.model.TriagePatientQueueLog;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,4 +75,5 @@ public interface PatientQueueService extends OpenmrsService {
 	public TriagePatientQueue saveTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws APIException;
 	public TriagePatientQueueLog saveTriagePatientQueueLog(TriagePatientQueueLog triagePatientQueueLog) throws APIException ;
 	public void deleteTriagePatientQueue(TriagePatientQueue triagePatientQueue) throws APIException;
+	public TriagePatientData saveTriagePatientData(TriagePatientData triagePatientData) throws APIException ;
 }

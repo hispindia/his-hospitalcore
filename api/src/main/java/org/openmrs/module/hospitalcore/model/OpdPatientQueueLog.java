@@ -48,9 +48,10 @@ public class OpdPatientQueueLog implements  Serializable {
 	 private String status;
 	 private User user;
 	 private Date createdOn;
-	 private Encounter encounter;
+	 private Encounter opdEncounter;
 	 private Encounter registrationEncounter;
-	 
+	 private Encounter triageEncounter;
+	 private TriagePatientData triageDataId;
 	 
 	@Override
 	public String toString() {
@@ -60,7 +61,9 @@ public class OpdPatientQueueLog implements  Serializable {
 				+ ", referralConcept=" + referralConcept + ", opdConcept="
 				+ opdConcept + ", opdConceptName=" + opdConceptName
 				+ ", status=" + status + ", user=" + user + ", createdOn="
-				+ createdOn + "]";
+				+ createdOn + " ,opdEncounter=" + opdEncounter
+				+ " ,registrationEncounter=" + registrationEncounter
+				+ " ,triageEncounter=" + triageEncounter + " ,triageDataId=" + triageDataId + "]";
 	}
 	public Integer getId() {
 		return id;
@@ -140,17 +143,29 @@ public class OpdPatientQueueLog implements  Serializable {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	public Encounter getEncounter() {
-		return encounter;
+	public Encounter getOpdEncounter() {
+		return opdEncounter;
 	}
-	public void setEncounter(Encounter encounter) {
-		this.encounter = encounter;
+	public void setOpdEncounter(Encounter opdEncounter) {
+		this.opdEncounter = opdEncounter;
 	}
 	public Encounter getRegistrationEncounter() {
 		return registrationEncounter;
 	}
 	public void setRegistrationEncounter(Encounter registrationEncounter) {
 		this.registrationEncounter = registrationEncounter;
+	}
+	public Encounter getTriageEncounter() {
+		return triageEncounter;
+	}
+	public void setTriageEncounter(Encounter triageEncounter) {
+		this.triageEncounter = triageEncounter;
+	}
+	public TriagePatientData getTriageDataId() {
+		return triageDataId;
+	}
+	public void setTriageDataId(TriagePatientData triageDataId) {
+		this.triageDataId = triageDataId;
 	}
 	  
 }

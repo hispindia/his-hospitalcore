@@ -424,8 +424,8 @@
 			Add registration_encounter
 		</description>
 		<sql>			
-			ALTER TABLE opd_patient_queue ADD registration_encounter integer DEFAULT NULL;
-			ALTER TABLE opd_patient_queue_log ADD registration_encounter integer DEFAULT NULL;
+			ALTER TABLE opd_patient_queue ADD registration_encounter int DEFAULT NULL , triage_encounter int DEFAULT NULL , triage_data_id int DEFAULT NULL;
+			ALTER TABLE opd_patient_queue_log ADD registration_encounter int DEFAULT NULL , triage_encounter int DEFAULT NULL , triage_data_id int DEFAULT NULL;
 		</sql>
 	</diff>	
 	<diff>
@@ -436,8 +436,31 @@
 			Add triage patient queue tables
 		</description>
 		<sql>
-			CREATE TABLE IF NOT EXISTS triage_patient_queue (id integer not null auto_increment, user integer, patient_id integer, referral_concept_id integer, triage_concept_id integer, created_on datetime, triage_concept_name varchar(255), patient_name varchar(255), referral_concept_name varchar(255), sex varchar(255), status varchar(255), patient_identifier  varchar(50)  default NULL, birth_date  datetime  default NULL, category varchar(21) default NULL,primary key (id));
-            CREATE TABLE IF NOT EXISTS triage_patient_queue_log (id integer not null auto_increment, user integer, patient_id integer, referral_concept_id integer, triage_concept_id integer, created_on datetime, triage_concept_name varchar(255), patient_name varchar(255), referral_concept_name varchar(255), sex varchar(255), status varchar(255), patient_identifier  varchar(50)  default NULL, birth_date  datetime  default NULL, encounter_id integer default 0, category varchar(21) default NULL, primary key (id));
+			CREATE TABLE IF NOT EXISTS triage_patient_queue (id integer not null auto_increment, user integer, patient_id integer, referral_concept_id integer, triage_concept_id integer, created_on datetime, triage_concept_name varchar(255), patient_name varchar(255), referral_concept_name varchar(255), sex varchar(255), status varchar(255), patient_identifier  varchar(50)  default NULL, birth_date  datetime  default NULL, category varchar(21) default NULL, registration_encounter int DEFAULT NULL, primary key (id));
+            CREATE TABLE IF NOT EXISTS triage_patient_queue_log (id integer not null auto_increment, user integer, patient_id integer, referral_concept_id integer, triage_concept_id integer, created_on datetime, triage_concept_name varchar(255), patient_name varchar(255), referral_concept_name varchar(255), sex varchar(255), status varchar(255), patient_identifier  varchar(50)  default NULL, birth_date  datetime  default NULL, category varchar(21) default NULL, registration_encounter int DEFAULT NULL, triage_encounter int DEFAULT NULL, primary key (id));
+		</sql>
+	</diff>	
+	<diff>
+		<version>3.0</version>
+		<author>Ghanshyam</author>
+		<date>4th dec 2017</date>
+		<description>
+			Create table triage_patient_data to add capture information in triage fields. 
+		</description>
+		<sql>
+			CREATE TABLE IF NOT EXISTS triage_patient_data (id INTEGER NOT NULL AUTO_INCREMENT, 
+			`weight` double(5,2),
+			`height` double(5,2),
+			`bmi` double(5,2),
+			`systolic` double(5,2),
+			`daistolic` double(5,2),
+			`puls_rate` double(5,2),
+			`temperature` double(5,2),
+			`last_menstrual` DATETIME,
+			`created_on` DATETIME,
+			`triage_log_id` integer,
+			`encounter_opd` integer,
+			 PRIMARY KEY (id));
 		</sql>
 	</diff>	
 </sqldiff>

@@ -51,7 +51,6 @@ public class TriagePatientQueue implements  Serializable {
 	 private Date createdOn;
 	 private String category;
 	 private Encounter registrationEncounter;
-	 private Encounter triageEncounter;
 	
 	@Override
 	public String toString() {
@@ -61,7 +60,7 @@ public class TriagePatientQueue implements  Serializable {
 				+ ", referralConcept=" + referralConcept + ", opdConcept="
 				+ triageConcept + ", triageConceptName=" + triageConceptName
 				+ ", status=" + status + ", user=" + user + ", createdOn="
-				+ createdOn + " ,category=" + category + "]";
+				+ createdOn + " ,category=" + category + " ,registrationEncounter=" + registrationEncounter + "]";
 	}
 	public Integer getId() {
 		return id;
@@ -158,12 +157,6 @@ public class TriagePatientQueue implements  Serializable {
 	}
 	public void setRegistrationEncounter(Encounter registrationEncounter) {
 		this.registrationEncounter = registrationEncounter;
-	}
-	public Encounter getTriageEncounter() {
-		return triageEncounter;
-	}
-	public void setTriageEncounter(Encounter triageEncounter) {
-		this.triageEncounter = triageEncounter;
 	}
 	  
 }

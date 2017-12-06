@@ -14,7 +14,7 @@
 		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient"  foreign-key="fk_opdpatientqueueservice_patient"/>
 		<many-to-one name="referralConcept" column="referral_concept_id"  class="org.openmrs.Concept" foreign-key="fk_opdpatientqueueservice_concept"/>
 		<many-to-one name="opdConcept" column="opd_concept_id"  class="org.openmrs.Concept" foreign-key="fk_opdpatientqueueservice_opd_concept"/>
-		<many-to-one name="encounter" column="encounter_id"  class="org.openmrs.Encounter" />
+		<many-to-one name="opdEncounter" column="encounter_id"  class="org.openmrs.Encounter" />
 		
 		<property name="birthDate" column="birth_date" />
 		<property name="createdOn" column="created_on" />
@@ -24,6 +24,9 @@
 		<property name="sex" column="sex" />
 		<property name="status" column="status" />
 		<property name="patientIdentifier" column="patient_identifier" />
+		
 		<many-to-one name="registrationEncounter" column="registration_encounter"  class="org.openmrs.Encounter" />
+		<many-to-one name="triageEncounter" column="triage_encounter"  class="org.openmrs.Encounter" />
+		<many-to-one name="triageDataId" column="triage_data_id"  class="org.openmrs.module.hospitalcore.model.TriagePatientData" />
 	</class>
 </hibernate-mapping>

@@ -35,6 +35,7 @@ import org.openmrs.module.hospitalcore.PatientQueueService;
 import org.openmrs.module.hospitalcore.db.PatientQueueDAO;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueue;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
+import org.openmrs.module.hospitalcore.model.TriagePatientData;
 import org.openmrs.module.hospitalcore.model.TriagePatientQueue;
 import org.openmrs.module.hospitalcore.model.TriagePatientQueueLog;
 
@@ -192,4 +193,9 @@ public class PatientQueueServiceImpl  extends BaseOpenmrsService implements Pati
     // TODO Auto-generated method stub
     dao.deleteTriagePatientQueue(triagePatientQueue);
     }
+	
+	public TriagePatientData saveTriagePatientData(TriagePatientData triagePatientData)throws APIException {
+	       // TODO Auto-generated method stub
+	       return dao.saveTriagePatientData(triagePatientData);
+	}
 }

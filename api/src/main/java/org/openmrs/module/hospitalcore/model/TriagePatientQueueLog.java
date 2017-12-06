@@ -48,8 +48,9 @@ public class TriagePatientQueueLog implements  Serializable {
 	 private String status;
 	 private User user;
 	 private Date createdOn;
-	 private Encounter encounter;
 	 private String category;
+	 private Encounter registrationEncounter;
+	 private Encounter triageEncounter;
 	 
 	@Override
 	public String toString() {
@@ -59,7 +60,8 @@ public class TriagePatientQueueLog implements  Serializable {
 				+ ", referralConcept=" + referralConcept + ", opdConcept="
 				+ triageConcept + ", triageConceptName=" + triageConceptName
 				+ ", status=" + status + ", user=" + user + ", createdOn="
-				+ createdOn + " ,category=" + "]";
+				+ createdOn + " ,category=" + " ,registrationEncounter=" + registrationEncounter
+				+ " ,triageEncounter=" + triageEncounter +"]";
 	}
 	public Integer getId() {
 		return id;
@@ -139,17 +141,23 @@ public class TriagePatientQueueLog implements  Serializable {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	public Encounter getEncounter() {
-		return encounter;
-	}
-	public void setEncounter(Encounter encounter) {
-		this.encounter = encounter;
-	}
 	public String getCategory() {
 		return category;
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public Encounter getRegistrationEncounter() {
+		return registrationEncounter;
+	}
+	public void setRegistrationEncounter(Encounter registrationEncounter) {
+		this.registrationEncounter = registrationEncounter;
+	}
+	public Encounter getTriageEncounter() {
+		return triageEncounter;
+	}
+	public void setTriageEncounter(Encounter triageEncounter) {
+		this.triageEncounter = triageEncounter;
 	}
 	  
 }
