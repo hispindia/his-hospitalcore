@@ -21,6 +21,7 @@
 package org.openmrs.module.hospitalcore.db.hibernate;
 
 import java.math.BigInteger;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,8 +59,6 @@ import org.openmrs.module.hospitalcore.model.CoreForm;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmitted;
 import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.hospitalcore.util.DateUtils;
-
-import java.text.ParseException;
 
 public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 
@@ -295,7 +294,7 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	@SuppressWarnings("rawtypes")
 	public List<PersonAttribute> getPersonAttributes(Integer patientId) {
 		List<PersonAttribute> attributes = new ArrayList<PersonAttribute>();
-		String hql = "SELECT pa.person_attribute_type_id, pa.`value` FROM person_attribute pa WHERE pa.person_id = "
+		String hql = "SELECT pa.person_attribute_type_id, pa.`value` ,pa.person_attribute_id FROM person_attribute pa WHERE pa.person_id = "
 				+ patientId + " AND pa.voided = 0;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List l = query.list();
@@ -308,6 +307,7 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 							(Integer) obss[0]);
 					attribute.setAttributeType(type);
 					attribute.setValue((String) obss[1]);
+					attribute.setPersonAttributeId((Integer) obss[2]);
 					attributes.add(attribute);
 				}
 			}
@@ -508,6 +508,28 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 			return "opdPatient"; 
 		}
 	}
+	
+	/*
+	public PersonAttribute getPersonAttribute(Person person,PersonAttributeType personAttributeType){
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonAttribute.class);
+		criteria.add(Restrictions.eq("attributeType", personAttributeType));
+		criteria.add(Restrictions.eq("voided", false));
+		Criteria personCriteria = criteria.createCriteria("person");
+		personCriteria.add(Restrictions.eq("person", person));	
+		personCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return (PersonAttribute) criteria.uniqueResult();
+	}*/
+	
+	public PersonAttribute getPersonAttribute(Person person,Integer personAttributeTypeId){
+	String hql = "SELECT pa FROM person_attribute pa WHERE pa.person_id = " + person.getPersonId() + " AND pa.person_attribute_type_id = "+ personAttributeTypeId +" AND pa.voided = 0;";
+	Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		return (PersonAttribute) query.uniqueResult();
+	}
+	
+	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute)
+	throws DAOException {
+    sessionFactory.getCurrentSession().saveOrUpdate(personAttribute);
+    }
 	
 
 }

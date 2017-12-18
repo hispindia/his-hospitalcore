@@ -36,7 +36,9 @@ import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
+import org.openmrs.Person;
 import org.openmrs.PersonAttribute;
+import org.openmrs.PersonAttributeType;
 import org.openmrs.User;
 import org.openmrs.api.APIException;
 import org.openmrs.api.ConceptService;
@@ -223,4 +225,6 @@ public interface HospitalCoreService extends OpenmrsService {
 	//order from opd
 	public PatientSearch getPatientByPatientId(int patientId);
 	public String getPatientType(Patient patientId) throws APIException;
+	public PersonAttribute getPersonAttribute(Person person,Integer personAttributeTypeId) throws APIException;
+	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute) throws APIException;
 }
