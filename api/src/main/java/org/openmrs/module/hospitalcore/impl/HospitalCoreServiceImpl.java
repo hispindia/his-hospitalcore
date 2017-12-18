@@ -775,4 +775,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute){
 		dao.saveOrUpdatePersonAttribute(personAttribute);
 	}
+	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy){
+		dao.saveOrUpdatePersonAttributee(personAttributeId,voidedBy);
+	}
 }

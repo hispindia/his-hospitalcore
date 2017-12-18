@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -59,6 +61,8 @@ import org.openmrs.module.hospitalcore.model.CoreForm;
 import org.openmrs.module.hospitalcore.model.IpdPatientAdmitted;
 import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.hospitalcore.util.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 
@@ -67,6 +71,9 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	SimpleDateFormat formatterExt = new SimpleDateFormat("dd/MM/yyyy");
 
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private DataSource dataSource;
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -529,6 +536,13 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute)
 	throws DAOException {
     sessionFactory.getCurrentSession().saveOrUpdate(personAttribute);
+    }
+	
+	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy)
+	throws DAOException {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query="UPDATE person_attribute SET voided=1,voided_by="+voidedBy+",date_voided=NOW() WHERE person_attribute_id="+personAttributeId+";";
+		jdbcTemplate.execute(query);
     }
 	
 

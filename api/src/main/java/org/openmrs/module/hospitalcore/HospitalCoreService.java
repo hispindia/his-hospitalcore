@@ -227,4 +227,5 @@ public interface HospitalCoreService extends OpenmrsService {
 	public String getPatientType(Patient patientId) throws APIException;
 	public PersonAttribute getPersonAttribute(Person person,Integer personAttributeTypeId) throws APIException;
 	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute) throws APIException;
+	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy) throws APIException;
 }
