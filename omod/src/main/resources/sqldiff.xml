@@ -424,8 +424,8 @@
 			Add registration_encounter
 		</description>
 		<sql>			
-			ALTER TABLE opd_patient_queue ADD registration_encounter int DEFAULT NULL , triage_encounter int DEFAULT NULL , triage_data_id int DEFAULT NULL;
-			ALTER TABLE opd_patient_queue_log ADD registration_encounter int DEFAULT NULL , triage_encounter int DEFAULT NULL , triage_data_id int DEFAULT NULL;
+			ALTER TABLE opd_patient_queue ADD COLUMN(registration_encounter INT DEFAULT NULL , triage_encounter INT DEFAULT NULL , triage_data_id INT DEFAULT NULL);
+            ALTER TABLE opd_patient_queue_log ADD COLUMN(registration_encounter INT DEFAULT NULL , triage_encounter INT DEFAULT NULL , triage_data_id INT DEFAULT NULL);
 		</sql>
 	</diff>	
 	<diff>
