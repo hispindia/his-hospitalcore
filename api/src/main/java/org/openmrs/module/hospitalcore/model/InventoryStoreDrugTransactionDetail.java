@@ -76,7 +76,8 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private Float waiverPercentage;
 	 private Float waiverAmount;
 	 private BigDecimal amountPayable;
-	 private Integer amountGiven;
+	 private BigDecimal amountCredit;
+	private Integer amountGiven;
 	 private Integer amountReturned;
 		
 	 public String getAttribute() {
@@ -345,6 +346,14 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 
 	public void setAmountPayable(BigDecimal amountPayable) {
 		this.amountPayable = amountPayable;
+	}
+	
+	 public BigDecimal getAmountCredit() {
+		return amountCredit;
+	}
+
+	public void setAmountCredit(BigDecimal amountCredit) {
+		this.amountCredit = amountCredit;
 	}
 
 	public Integer getAmountGiven() {

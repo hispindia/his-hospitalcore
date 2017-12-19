@@ -47,6 +47,7 @@
 	    <property name="waiverPercentage" column="waiver_percetage" />
 		<property name="waiverAmount" column="waiver_amount" />
 		<property name="amountPayable" column="amount_payable" />
+		<property name="amountCredit" column="amount_credit" />
 		<property name="amountGiven" column="amount_given" />
 		<property name="amountReturned" column="amount_returned" />
 	</class>
