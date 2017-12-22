@@ -55,6 +55,13 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private BigDecimal totalPrice;
 	 private BigDecimal VAT;
 	 private BigDecimal costToPatient;
+	 private BigDecimal rate;
+	 private BigDecimal cgst;
+	 private BigDecimal cgstAmount;
+	 private BigDecimal sgst;
+	 private BigDecimal sgstAmount;
+	 
+	 
 	 
 	 private String batchNo;
 	 private String companyName ;
@@ -370,6 +377,48 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 
 	public void setAmountReturned(Integer amountReturned) {
 		this.amountReturned = amountReturned;
+	}
+
+
+
+	public BigDecimal getCgst() {
+		return cgst;
+	}
+
+	public void setCgst(BigDecimal cgst) {
+		this.cgst = cgst;
+	}
+
+	public BigDecimal getCgstAmount() {
+		return cgstAmount;
+	}
+
+	public void setCgstAmount(BigDecimal cgstAmount) {
+		this.cgstAmount = cgstAmount;
+	}
+
+	public BigDecimal getSgst() {
+		return sgst;
+	}
+
+	public void setSgst(BigDecimal sgst) {
+		this.sgst = sgst;
+	}
+
+	public BigDecimal getSgstAmount() {
+		return sgstAmount;
+	}
+
+	public void setSgstAmount(BigDecimal sgstAmount) {
+		this.sgstAmount = sgstAmount;
+	}
+
+	public BigDecimal getRate() {
+		return rate;
+	}
+
+	public void setRate(BigDecimal rate) {
+		this.rate = rate;
 	}
 	 
 }

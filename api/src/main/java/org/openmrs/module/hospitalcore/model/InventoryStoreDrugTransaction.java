@@ -21,6 +21,7 @@
 package org.openmrs.module.hospitalcore.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
@@ -49,6 +50,8 @@ public class InventoryStoreDrugTransaction implements  Serializable {
 	 private Date createdOn;
 	 private String createdBy;
 	 private String paymentCategory;
+	 private String receiptNo;
+	 private BigDecimal billAmount;
 	public Integer getId() {
 		return id;
 	}
@@ -108,5 +111,17 @@ public class InventoryStoreDrugTransaction implements  Serializable {
 	public void setPaymentCategory(String paymentCategory)
 	{
 		 this.paymentCategory=paymentCategory;
+	}
+	public String getReceiptNo() {
+		return receiptNo;
+	}
+	public void setReceiptNo(String receiptNo) {
+		this.receiptNo = receiptNo;
+	}
+	public BigDecimal getBillAmount() {
+		return billAmount;
+	}
+	public void setBillAmount(BigDecimal billAmount) {
+		this.billAmount = billAmount;
 	}
 }

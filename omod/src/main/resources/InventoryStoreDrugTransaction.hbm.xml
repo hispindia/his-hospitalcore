@@ -20,6 +20,8 @@
 		<property name="typeTransaction" column="type_transaction"  />
 		<property name="status" column="status" />
 		<property name="description" column="description" length="500"/>
+		<property name="receiptNo" column="receipt_No" />
+		<property name="billAmount" column="bill_Amount" />
 		<property name="createdOn" column="created_on"  />
 		<property name="createdBy" column="created_by" length="255" />
 		<property name="paymentCategory" column="patient_category" length="255" />

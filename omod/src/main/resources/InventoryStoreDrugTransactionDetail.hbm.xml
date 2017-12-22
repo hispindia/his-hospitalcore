@@ -23,6 +23,13 @@
 		
 		<property name="unitPrice" column="unit_price" />
 		<property name="VAT" column="VAT" />
+		<property name="rate" column="Rate" />
+		<property name="cgst" column="cgst" />
+		<property name="cgstAmount" column="cgst_amount" />
+		<property name="sgst" column="sgst" />
+		<property name="sgstAmount" column="sgst_amount" />
+		
+		
 		<property name="totalPrice" column="total_price" />
 		<property name="batchNo" column="batch_no" />
 		<property name="companyName" column="company_name" />
