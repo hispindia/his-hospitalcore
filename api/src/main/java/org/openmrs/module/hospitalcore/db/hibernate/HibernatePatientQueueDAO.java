@@ -178,7 +178,7 @@ public class HibernatePatientQueueDAO implements PatientQueueDAO {
 	
 	//patient queue log
 	public OpdPatientQueueLog saveOpdPatientQueueLog(OpdPatientQueueLog opdPatientQueueLog) throws DAOException {
-		return (OpdPatientQueueLog) sessionFactory.getCurrentSession().merge(opdPatientQueueLog);
+		return (OpdPatientQueueLog) sessionFactory.getCurrentSession().saveOrUpdateCopy(opdPatientQueueLog);
 	}
 	
 	public OpdPatientQueueLog getOpdPatientQueueLogById(Integer id) throws DAOException {

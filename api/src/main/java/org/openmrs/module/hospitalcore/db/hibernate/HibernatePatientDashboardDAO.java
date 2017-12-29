@@ -358,7 +358,7 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	public OpdPatientQueueLog getOpdPatientQueueLog(Encounter encounter) throws DAOException {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
 				OpdPatientQueueLog.class);
-			criteria.add(Restrictions.like("encounter",encounter));
+		criteria.add(Restrictions.eq("opdEncounter", encounter));
 
 		return (OpdPatientQueueLog) criteria.uniqueResult();
 	}
