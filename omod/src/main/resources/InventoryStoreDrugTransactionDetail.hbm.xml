@@ -20,7 +20,7 @@
 	    <property name="quantity" column="quantity"  />
 		<property name="currentQuantity" column="current_quantity" />
 		<property name="issueQuantity" column="issue_quantity" />
-		
+		<property name="mrpPrice" column="mrp_price" />
 		<property name="unitPrice" column="unit_price" />
 		<property name="VAT" column="VAT" />
 		<property name="rate" column="Rate" />
@@ -28,7 +28,7 @@
 		<property name="cgstAmount" column="cgst_amount" />
 		<property name="sgst" column="sgst" />
 		<property name="sgstAmount" column="sgst_amount" />
-		
+		<property name="totalAmountAfterGst" column="total_amount_after_gst" />
 		
 		<property name="totalPrice" column="total_price" />
 		<property name="batchNo" column="batch_no" />

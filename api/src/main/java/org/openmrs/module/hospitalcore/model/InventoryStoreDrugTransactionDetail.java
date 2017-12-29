@@ -51,7 +51,8 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private Integer currentQuantity ;
 	 private Integer issueQuantity;
 	 private BigDecimal unitPrice;
-
+	 private BigDecimal mrpPrice;
+	 
 	 private BigDecimal totalPrice;
 	 private BigDecimal VAT;
 	 private BigDecimal costToPatient;
@@ -60,7 +61,7 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private BigDecimal cgstAmount;
 	 private BigDecimal sgst;
 	 private BigDecimal sgstAmount;
-	 
+	 private BigDecimal totalAmountAfterGst;
 	 
 	 
 	 private String batchNo;
@@ -419,6 +420,22 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 
 	public void setRate(BigDecimal rate) {
 		this.rate = rate;
+	}
+
+	public BigDecimal getMrpPrice() {
+		return mrpPrice;
+	}
+
+	public void setMrpPrice(BigDecimal mrpPrice) {
+		this.mrpPrice = mrpPrice;
+	}
+
+	public BigDecimal getTotalAmountAfterGst() {
+		return totalAmountAfterGst;
+	}
+
+	public void setTotalAmountAfterGst(BigDecimal totalAmountAfterGst) {
+		this.totalAmountAfterGst = totalAmountAfterGst;
 	}
 	 
 }
