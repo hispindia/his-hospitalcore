@@ -105,6 +105,9 @@
 			jQuery("#lastVisit", this.form).change(function(){
 				PATIENTSEARCH.search(true);
 			});
+			jQuery("#dohId", this.form).change(function(){
+				PATIENTSEARCH.search(true);
+			});
 			// Kesavulu 2012-12-28 #570 added keyup functionality for Advance search
 			jQuery("#relativeName", this.form).keyup(function(event) {
 				if (event.keyCode == 13) {
@@ -135,6 +138,11 @@
 			});
 			
 			jQuery("#greenBookNo", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});	
+			jQuery("#dohId", this.form).keyup(function(event) {
 				if (event.keyCode == 13) {
 					PATIENTSEARCH.search(true);
 					}
@@ -320,6 +328,7 @@
 				//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 				this.buildAadharCardNumberQuery();
 				this.buildGreenBookNumberQuery();
+				this.buildDohIdQuery();
 			}
 			
 			// Return the built query
@@ -368,6 +377,7 @@
 				//ghanshyam 12-sept-2013 New Requirement #2684 Introducing a field at the time of registration to put Aadhar Card Number
 				this.buildAadharCardNumberQuery();
 				this.buildGreenBookNumberQuery();
+				this.buildDohIdQuery();
 			}
 			
 			// Return the built query
@@ -515,6 +525,16 @@
 			    this.fromClause += " INNER JOIN person_attribute paGreenBookNumber ON ps.patient_id= paGreenBookNumber.person_id";
 				this.fromClause += " INNER JOIN person_attribute_type patGreenBookNumber ON paGreenBookNumber.person_attribute_type_id = patGreenBookNumber.person_attribute_type_id ";
 				this.whereClause += " AND (patGreenBookNumber.name LIKE '%" + greenBookNumberAttributeTypeName + "%' AND paGreenBookNumber.value LIKE '%" + value + "%')";
+			}
+		},
+		
+		buildDohIdQuery: function(){
+		    value = jQuery.trim(jQuery("#dohId", this.form).val());
+			dohIdAttributeTypeName = "DHOID";
+			if(value!=undefined && value.length>0){
+			    this.fromClause += " INNER JOIN person_attribute paDohId ON ps.patient_id= paDohId.person_id";
+				this.fromClause += " INNER JOIN person_attribute_type patDohId ON paDohId.person_attribute_type_id = patDohId.person_attribute_type_id ";
+				this.whereClause += " AND (patDohId.name LIKE '%" + dohIdAttributeTypeName + "%' AND paDohId.value LIKE '%" + value + "%')";
 			}
 		},
 		
@@ -688,6 +708,12 @@
 				<td>Green Book No</td>
 				<td colspan="3">
 					<input id="greenBookNo" style="width: 100px"/>
+				</td>	
+			</tr>
+					<tr>
+				<td>DOH ID</td>
+				<td colspan="3">
+					<input id="dohId" style="width: 100px"/>
 				</td>	
 			</tr>
 		</table>
