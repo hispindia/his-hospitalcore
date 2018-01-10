@@ -778,4 +778,10 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy){
 		dao.saveOrUpdatePersonAttributee(personAttributeId,voidedBy);
 	}
+	public Obs getObsByEncounterAndConcept(Encounter encounter,Concept concept){
+		return dao.getObsByEncounterAndConcept(encounter,concept);
+	}
+	public void saveOrUpdateObs(Obs obs){
+		dao.saveOrUpdateObs(obs);
+	}
 }

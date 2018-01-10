@@ -545,5 +545,18 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		jdbcTemplate.execute(query);
     }
 	
+	public Obs getObsByEncounterAndConcept(Encounter encounter,
+			Concept concept) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Obs.class);
+		criteria.add(Restrictions.eq("encounter", encounter));
+		criteria.add(Restrictions.eq("concept", concept));
+		return (Obs) criteria.uniqueResult();
+	}
+	
+	public void saveOrUpdateObs(Obs obs) throws DAOException {
+    sessionFactory.getCurrentSession().saveOrUpdate(obs);
+    }
+	
 
 }

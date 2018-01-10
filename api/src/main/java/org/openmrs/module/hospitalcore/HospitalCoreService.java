@@ -228,4 +228,7 @@ public interface HospitalCoreService extends OpenmrsService {
 	public PersonAttribute getPersonAttribute(Person person,Integer personAttributeTypeId) throws APIException;
 	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute) throws APIException;
 	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy) throws APIException;
+	public Obs getObsByEncounterAndConcept(Encounter encounter,Concept concept) throws APIException;
+	public void saveOrUpdateObs(Obs obs) throws APIException;
+
 }

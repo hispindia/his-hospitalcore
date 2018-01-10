@@ -137,4 +137,6 @@ public interface HospitalCoreDAO {
 	public PersonAttribute getPersonAttribute(Person person,Integer personAttributeTypeId) throws DAOException;
 	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute) throws DAOException;
 	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy) throws DAOException;
+	public Obs getObsByEncounterAndConcept(Encounter encounter,Concept concept) throws DAOException;
+	public void saveOrUpdateObs(Obs obs) throws DAOException;
 }
