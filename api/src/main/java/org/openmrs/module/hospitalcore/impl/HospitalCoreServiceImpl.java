@@ -59,7 +59,6 @@ import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.Person;
 import org.openmrs.PersonAttribute;
-import org.openmrs.PersonAttributeType;
 import org.openmrs.User;
 import org.openmrs.api.APIException;
 import org.openmrs.api.ConceptService;
@@ -778,8 +777,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy){
 		dao.saveOrUpdatePersonAttributee(personAttributeId,voidedBy);
 	}
-	public Obs getObsByEncounterAndConcept(Encounter encounter,Concept concept){
-		return dao.getObsByEncounterAndConcept(encounter,concept);
+	public Obs getObsByEncounterAndConcept(Encounter encounter,Set<Concept> concepts){
+		return dao.getObsByEncounterAndConcept(encounter,concepts);
 	}
 	public void saveOrUpdateObs(Obs obs){
 		dao.saveOrUpdateObs(obs);

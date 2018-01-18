@@ -546,11 +546,11 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
     }
 	
 	public Obs getObsByEncounterAndConcept(Encounter encounter,
-			Concept concept) {
+			Set<Concept> concepts) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
 				Obs.class);
 		criteria.add(Restrictions.eq("encounter", encounter));
-		criteria.add(Restrictions.eq("concept", concept));
+		criteria.add(Restrictions.in("concept", concepts));
 		return (Obs) criteria.uniqueResult();
 	}
 	

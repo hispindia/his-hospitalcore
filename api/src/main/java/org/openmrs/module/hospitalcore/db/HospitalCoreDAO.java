@@ -22,7 +22,6 @@
 package org.openmrs.module.hospitalcore.db;
 
 import java.math.BigInteger;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +32,6 @@ import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.Person;
 import org.openmrs.PersonAttribute;
-import org.openmrs.PersonAttributeType;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.concept.ConceptModel;
 import org.openmrs.module.hospitalcore.model.CoreForm;
@@ -137,6 +135,6 @@ public interface HospitalCoreDAO {
 	public PersonAttribute getPersonAttribute(Person person,Integer personAttributeTypeId) throws DAOException;
 	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute) throws DAOException;
 	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy) throws DAOException;
-	public Obs getObsByEncounterAndConcept(Encounter encounter,Concept concept) throws DAOException;
+	public Obs getObsByEncounterAndConcept(Encounter encounter,Set<Concept> concepts) throws DAOException;
 	public void saveOrUpdateObs(Obs obs) throws DAOException;
 }
