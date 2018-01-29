@@ -42,6 +42,9 @@ HOSPITALCORE={
 			jQuery('#selectedProcedureList option').each(function(i) {  
 				 jQuery(this).attr("selected", "selected");  
 			}); 
+			jQuery('#selectedSymptomList option').each(function(i) {  
+				 jQuery(this).attr("selected", "selected");  
+			});
 			jQuery("#formDepartmentConcept").submit();
 		}
 		
