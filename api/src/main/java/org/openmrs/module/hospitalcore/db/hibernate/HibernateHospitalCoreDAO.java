@@ -497,5 +497,12 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		criteria.add(Restrictions.eq("person",person));
 		return (PersonAddress) criteria.uniqueResult();
 	}
+	
+	public PatientIdentifier getPatientIdentifier(String identifier) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				PatientIdentifier.class);
+		criteria.add(Restrictions.eq("identifier",identifier));
+		return (PatientIdentifier) criteria.uniqueResult();
+	}
 
 }
