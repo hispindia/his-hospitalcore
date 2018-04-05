@@ -57,5 +57,6 @@
 		<property name="amountCredit" column="amount_credit" />
 		<property name="amountGiven" column="amount_given" />
 		<property name="amountReturned" column="amount_returned" />
+		<property name="duplicateStatus" column="duplicate_status" />
 	</class>
 </hibernate-mapping>

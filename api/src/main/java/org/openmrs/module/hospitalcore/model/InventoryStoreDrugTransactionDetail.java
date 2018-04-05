@@ -85,8 +85,9 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private Float waiverAmount;
 	 private BigDecimal amountPayable;
 	 private BigDecimal amountCredit;
-	private Integer amountGiven;
+	 private Integer amountGiven;
 	 private Integer amountReturned;
+	 private Integer duplicateStatus=0;;
 		
 	 public String getAttribute() {
 		return attribute;
@@ -437,5 +438,12 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	public void setTotalAmountAfterGst(BigDecimal totalAmountAfterGst) {
 		this.totalAmountAfterGst = totalAmountAfterGst;
 	}
-	 
+
+	public Integer getDuplicateStatus() {
+		return duplicateStatus;
+	}
+
+	public void setDuplicateStatus(Integer duplicateStatus) {
+		this.duplicateStatus = duplicateStatus;
+	} 
 }
