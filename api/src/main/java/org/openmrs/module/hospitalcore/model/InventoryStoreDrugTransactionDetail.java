@@ -87,7 +87,7 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private BigDecimal amountCredit;
 	 private Integer amountGiven;
 	 private Integer amountReturned;
-	 private Integer duplicateStatus=0;;
+	 private Integer duplicateStatus=0;
 		
 	 public String getAttribute() {
 		return attribute;

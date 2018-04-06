@@ -37,6 +37,7 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	 private String createdBy;
 	 private Patient patient;
 	 private String identifier;
+	 private Integer duplicateBill=0;
 	public Integer getId() {
 		return id;
 	}
@@ -88,6 +89,11 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}
-	 
+	public Integer getDuplicateBill() {
+		return duplicateBill;
+	}
+	public void setDuplicateBill(Integer duplicateBill) {
+		this.duplicateBill = duplicateBill;
+	}
 	 
 }

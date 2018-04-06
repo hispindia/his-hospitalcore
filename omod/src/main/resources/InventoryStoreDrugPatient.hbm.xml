@@ -18,5 +18,6 @@
 		<property name="identifier" column="identifier"  />
 		<property name="createdBy" column="created_by"  />
 		<property name="createdOn" column="created_on"  />	
+		<property name="duplicateBill" column="duplicate_bill" />
 	</class>
 </hibernate-mapping>
