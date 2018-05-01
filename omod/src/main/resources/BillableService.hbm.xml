@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="BillableService" table="billing_billable_service" batch-size="500">
+
+		<id name="serviceId" type="int" column="service_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="conceptId" column="concept_id" />
+		<property name="name" column="name" />
+		<property name="shortName" column="short_name" />
+		<property name="price" column="price"  />
+		<property name="disable" column="disable" />
+		<many-to-one name="category" column="category" class="org.openmrs.Concept"/>
+	</class>
+</hibernate-mapping>

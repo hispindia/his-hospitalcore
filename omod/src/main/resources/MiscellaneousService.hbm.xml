@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="MiscellaneousService" table="billing_miscellaneous_service" batch-size="500">
+
+		<id name="id" type="int" column="id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="name" column="name" />
+		<property name="description" column="description" />
+		<property name="price" column="price" />
+		<property name="retired" column="retired"  />
+		<property name="retiredDate" column="retired_date"  />
+		<property name="creator" column="creator" />
+		<property name="createdDate" column="created_date" />
+	</class>
+</hibernate-mapping>

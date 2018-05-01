@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="Answer" table="answer"
+		batch-size="500">
+
+		<id name="answerId" type="int" column="answer_id"
+			unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<many-to-one name="question" column="question_id" class="org.openmrs.module.hospitalcore.model.Question" foreign-key="fk_answer_question"/>
+		<many-to-one name="answerConcept" column="answer_concept" class="org.openmrs.Concept"
+			lazy="false" foreign-key="fk_answer_concept" />
+		<property name="freeText" column="free_text" />
+	</class>
+</hibernate-mapping>

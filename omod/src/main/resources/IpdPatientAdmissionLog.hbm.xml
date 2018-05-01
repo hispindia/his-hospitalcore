@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="IpdPatientAdmissionLog" table="ipd_patient_admission_log" batch-size="500">
+
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient" lazy="false" />
+		<many-to-one name="admissionWard" column="admission_ward_id"  class="org.openmrs.Concept" />
+		
+		<many-to-one name="opdLog" column="opd_log_id"  class="org.openmrs.module.hospitalcore.model.OpdPatientQueueLog" />
+		<many-to-one name="opdAmittedUser" column="opd_admitted_user_id"  class="org.openmrs.User" />
+			
+		<property name="admissionDate" column="admission_date" />
+		<property name="patientName" column="patient_name" />
+		<property name="birthDate" column="birth_date" />
+		<property name="patientIdentifier" column="patient_identifier" />
+		<property name="gender" column="gender" />
+		<property name="status" column="status" />
+		<many-to-one name="opdObsGroup" column="opd_obs_group_id"  class="org.openmrs.Obs" />
+		<many-to-one name="ipdEncounter" column="ipd_encounter_id"  class="org.openmrs.Encounter" />
+	</class>
+</hibernate-mapping>

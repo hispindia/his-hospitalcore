@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="RadiologyTest" table="radiology_test" batch-size="500">
+
+		<id name="id" type="int" column="test_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="status" column="status" />		
+		<property name="date" column="date" />
+		<many-to-one name="encounter" column="encounter_id" class="org.openmrs.Encounter"/>
+		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient"/>
+		<many-to-one name="order" column="order_id" class="org.openmrs.Order"/>		
+		<many-to-one name="concept" column="concept_id" class="org.openmrs.Concept"/>
+		<many-to-one name="creator" column="creator" class="org.openmrs.User"/>
+		<many-to-one name="form" column="form_id" class="org.openmrs.module.hospitalcore.form.RadiologyForm"/>
+	</class>
+</hibernate-mapping>

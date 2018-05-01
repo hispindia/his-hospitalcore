@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="IndoorPatientServiceBill" table="indoor_patient_service_bill"
+		batch-size="500">
+
+		<id name="indoorPatientServiceBillId" type="int" column="indoor_patient_service_bill_id"
+			unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<many-to-one name="creator" column="creator" class="org.openmrs.User"
+			foreign-key="fk_indoorpatientservicebill_user" />
+		<property name="amount" column="amount" />
+		<property name="createdDate" column="created_date" />
+		<property name="actualAmount" column="actual_amount" />
+		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient"
+			lazy="false" foreign-key="fk_indoorpatientservicebill_patient" />
+		<set name="billItems" table="indoor_patient_serivce_bill_item"
+			cascade="save-update,merge,evict,delete" lazy="false">
+			<key column="indoor_patient_service_bill_id" />
+			<one-to-many
+				class="org.openmrs.module.hospitalcore.model.IndoorPatientServiceBillItem" />
+		</set>
+		<many-to-one name="encounter" column="encounter_id" class="org.openmrs.Encounter"
+			foreign-key="fk_indoorpatientservicebill_encounter" />
+	</class>
+</hibernate-mapping>

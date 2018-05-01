@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="MiscellaneousServiceBill" table="billing_miscellaneous_service_bill" batch-size="500">
+
+		<id name="id" type="int" column="id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="liableName" column="liable_name" />
+		<property name="description" column="description" />
+		<property name="amount" column="amount" />
+		<property name="creator" column="creator" />
+		<property name="printed" column="printed" />
+		<property name="createdDate" column="created_date" />
+		<property name="voided" column="voided" />
+		<property name="quantity" column="quantity" />
+		<property name="voidedDate" column="voided_date" />
+		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_miscellaneousservicebill_voidedby"/>
+		<many-to-one name="service"  column="service_id" class="org.openmrs.module.hospitalcore.model.MiscellaneousService" foreign-key="fk_miscellaneous_service_bill_miscellaneous_service_service" lazy="false"/>
+		<many-to-one name="receipt" column="receipt_id" class="org.openmrs.module.hospitalcore.model.Receipt" lazy="false" foreign-key="fk_miscellaneousservicebill_receipt"/>
+	</class>
+</hibernate-mapping>

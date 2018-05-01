@@ -1,0 +1,46 @@
+/*
+ *  Copyright 2009 Society for Health Information Systems Programmes, India (HISP India)
+ *
+ *  This file is part of Hospitalcore module.
+ *
+ *  Hospitalcore module is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+
+ *  Hospitalcore module is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Hospitalcore module.  If not, see <http://www.gnu.org/licenses/>.
+ *
+*/
+
+.boxHover {
+	border: 1px inset #808080;
+	background-color: #FDDFFF;
+	cursor: pointer; cursor: hand;
+}
+
+.boxNormal {
+	border: 1px outset #808080 ;
+	background-color: #CFE7FF;
+}
+
+.udiv{
+	padding: 0.3em;
+	margin: 0.3em;
+	color: #003366;
+	width: 250px;
+	display: inline-table;
+	line-height: 18px;
+}
+
+
+div.selected{background-color: #91C05E; color: white}
+#billDiv{background: #91C05E; border: 1px black solid; padding: 0.3em; width: 30%; z-index: 999;}
+
+em { font-weight: bold; padding-right: 1em; vertical-align: top;color: red }
+tr.hover{cursor:pointer; background-color:#F0E68C}

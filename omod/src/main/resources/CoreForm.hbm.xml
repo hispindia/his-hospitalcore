@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="CoreForm" table="core_form" batch-size="500">
+
+		<id name="id" type="int" column="core_form_id"
+			unsaved-value="0">
+				<generator class="native"/>
+		</id>
+		<property name="name" column="name" />		
+		<property name="content" column="content" />
+		<property name="afterSubmit" column="after_submit" />		
+		<property name="description" column="description" />
+		<property name="createdOn" column="created_on" />
+		<many-to-one name="createdBy" column="created_by" class="org.openmrs.User" lazy="false"/>
+	</class>
+</hibernate-mapping>

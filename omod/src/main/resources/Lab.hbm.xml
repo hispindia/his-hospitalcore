@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="Lab" table="simplelabentry_lab" batch-size="500">
+
+		<id name="labId" type="int" column="lab_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="name" column="name" />
+		<property name="description" column="description" length="255" />
+		<many-to-one name="labOrderType" column="order_type_id" class="org.openmrs.OrderType" foreign-key="fk_lab_ordertype" />
+		<many-to-one name="labTestEncounterType" column="encounter_type_id" class="org.openmrs.EncounterType" foreign-key="fk_lab_ecountertype" />
+		<many-to-one name="patientIdentifierType" column="patient_identifier_type_id" class="org.openmrs.PatientIdentifierType" foreign-key="fk_lab_patientidentifier" />
+		<many-to-one name="role" column="role" class="org.openmrs.Role"	foreign-key="fk_lab_role" lazy="false"/>
+		<set name="investigationsToDisplay" table="simplelabentry_lab_investigations"  cascade="save-update,merge,evict" lazy="false">
+			<key column="lab_id" />
+			<many-to-many class="org.openmrs.Concept" column="concept_id"  unique="true"/>
+		</set>
+		<set name="confidentialTestsToDisplay" table="simplelabentry_lab_confidentialtests"  cascade="save-update,merge,evict" lazy="false">
+			<key column="lab_id" />
+			<many-to-many class="org.openmrs.Concept" column="concept_id"  unique="true"/>
+		</set>
+		<property name="retired" column="retired"  />
+		<property name="retiredDate" column="retired_date"  />
+	</class>
+</hibernate-mapping>

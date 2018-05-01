@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="DepartmentConcept" table="department_concept" batch-size="500">
+
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<many-to-one name="department" class="Department"   column="department_id" cascade="none" lazy="false" />
+	    <many-to-one name="concept" class="org.openmrs.Concept"   column="concept_id" cascade="none" />
+        <property name="typeConcept" column="type_concept" />
+		<property name="createdOn" column="created_on" />
+		<property name="createdBy" column="created_by" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="WardBedStrength" table="ward_bed_strength" batch-size="500">
+
+		<id name="wardBedStrengthId" type="int" column="ward_bed_strength_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<many-to-one name="ward" column="concept_id" class="org.openmrs.Concept"/>
+		<property name="bedStrength" column="bed_strength"  />
+		<property name="createdOn" column="created_on"  type="java.util.Date" />
+		<many-to-one name="createdBy" column="created_by"  class="org.openmrs.User"/>
+		
+	</class>
+</hibernate-mapping>

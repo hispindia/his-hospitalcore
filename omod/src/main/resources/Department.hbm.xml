@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="Department" table="department" batch-size="500">
+
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<set name="wards" table="department_ward" cascade="save-update,merge,evict" >
+            <key column="department_id" />
+            <many-to-many column="ward_id"  class="org.openmrs.Concept" />
+        </set>
+        <property name="name" column="name" />
+        <property name="retired" column="retired" />
+		<property name="createdOn" column="created_on" />
+		<property name="createdBy" column="created_by" />
+	</class>
+</hibernate-mapping>

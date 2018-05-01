@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="TenderBillItem" table="billing_tender_bill_item" batch-size="500">
+
+		<id name="tenderBillItemId" type="int" column="tender_bill_item_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="name" column="name" />
+		<property name="amount" column="amount" />
+		<property name="unitPrice" column="unit_price" />
+		<property name="quantity" column="quantity" />
+		<property name="createdDate" column="created_date"  />
+		<property name="voided" column="voided"  />
+		<property name="voidedDate" column="voided_date"  />
+		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_tenderbillitem_voidedby"/>
+		<many-to-one name="tender" lazy="false" column="tender_id" class="org.openmrs.module.hospitalcore.model.Tender"  foreign-key="fk_tenderbillitem_tender"/>
+		<many-to-one  name="tenderBill" column="tender_bill_id" class="org.openmrs.module.hospitalcore.model.TenderBill" foreign-key="fk_tenderbillitem_tenderbill"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+<class name="IpdPatientVitalStatistics" table="ipd_vital_statistics" batch-size="500">
+
+		<id name="id" type="int" column="id"
+			unsaved-value="0">
+				<generator class="native"/>
+		</id>
+		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient"/>
+		<many-to-one name="ipdPatientAdmissionLog" column="ipd_patientadmissionlog_id" class="org.openmrs.module.hospitalcore.model.IpdPatientAdmissionLog"/>
+		<property name="bloodPressure" column="blood_pressure" />
+		<property name="pulseRate" column="pulse_rate" />
+		<property name="temperature" column="temperature" />
+		<property name="dietAdvised" column="diet_advised" />
+		<property name="note" column="note" />
+		<property name="creator" column="created_by" />
+		<property name="createdOn" type="java.util.Date" column="created_on" not-null="true" length="19" />
+	</class>
+
+</hibernate-mapping>

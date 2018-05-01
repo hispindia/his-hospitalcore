@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="InventoryStoreDrugTransactionDetail" table="inventory_store_drug_transaction_detail" batch-size="500">
+
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+		
+		<many-to-one name="transaction" class="org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransaction"
+	        column="transaction_id" cascade="none" lazy="false" />
+	    <many-to-one name="drug" class="org.openmrs.module.hospitalcore.model.InventoryDrug"
+	        column="drug_id" cascade="none" lazy="false" />
+	    <many-to-one name="formulation" class="org.openmrs.module.hospitalcore.model.InventoryDrugFormulation"
+	        column="formulation_id" cascade="none" lazy="false" />    
+	    <property name="quantity" column="quantity"  />
+		<property name="currentQuantity" column="current_quantity" />
+		<property name="issueQuantity" column="issue_quantity" />
+		<property name="mrpPrice" column="mrp_price" />
+		<property name="unitPrice" column="unit_price" />
+		<property name="VAT" column="VAT" />
+		<property name="rate" column="Rate" />
+		<property name="cgst" column="cgst" />
+		<property name="cgstAmount" column="cgst_amount" />
+		<property name="sgst" column="sgst" />
+		<property name="sgstAmount" column="sgst_amount" />
+		<property name="totalAmountAfterGst" column="total_amount_after_gst" />
+		
+		<property name="totalPrice" column="total_price" />
+		<property name="batchNo" column="batch_no" />
+		<property name="companyName" column="company_name" />
+		<property name="dateManufacture" column="date_manufacture" />
+		<property name="dateExpiry" column="date_expiry" />
+		<property name="receiptDate" column="receipt_date" />
+		<property name="createdOn" column="created_on" />
+		
+		<property name="openingBalance" column="opening_balance"  />
+		<property name="closingBalance" column="closing_balance"  />
+		
+		<many-to-one name="parent" class="org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail"
+	        column="parent_id"  lazy="false" />	 
+	    <set name="subDetails"  table="inventory_store_drugs_transaction_detail" cascade="save-update,merge,evict" >
+	      <key column="parent_id"/>
+	      <one-to-many class="org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail"/>
+	    </set>
+	    <property name="expireStatus" column="expire_status" />
+	    <property name="costToPatient" column="cost_to_patient" />
+	    <property name="comments" column="comments" />
+	    <property name="totalAmount" column="total_amount" />
+	    <property name="waiverPercentage" column="waiver_percetage" />
+		<property name="waiverAmount" column="waiver_amount" />
+		<property name="amountPayable" column="amount_payable" />
+		<property name="amountCredit" column="amount_credit" />
+		<property name="amountGiven" column="amount_given" />
+		<property name="amountReturned" column="amount_returned" />
+		<property name="duplicateStatus" column="duplicate_status" />
+		<property name="voided" column="voided" />
+		<property name="quantityAfterReturn" column="quantity_after_return" />
+		<property name="totalAmountAferVoid" column="total_amount_after_void" />
+		<property name="waiverAmountAferVoid" column="waiver_amount_afer_void" />
+		<property name="cashReturned" column="cash_returned" />
+		<property name="amountCreditAfterVoid" column="amount_credit_after_void" />
+	</class>
+</hibernate-mapping>

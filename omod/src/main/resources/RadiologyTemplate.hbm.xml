@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.template">
+
+	<class name="RadiologyTemplate" table="radiology_template"
+		batch-size="500">
+
+		<id name="id" type="int" column="template_id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<property name="name" column="name" />
+		<property name="content" column="content" />
+		<property name="description" column="description" />
+		<set name="tests" table="radiology_template_test" cascade="save-update,merge,evict"
+			lazy="false">
+			<key column="template_id" />
+			<many-to-many class="org.openmrs.Concept" column="concept_id"
+				unique="true" />
+		</set>
+	</class>
+</hibernate-mapping>

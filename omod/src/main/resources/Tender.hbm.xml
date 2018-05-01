@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="Tender" table="billing_tender" batch-size="500">
+
+		<id name="tenderId" type="int" column="tender_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="number" column="number" />
+		<property name="name" column="name"  length="255"/>
+		<property name="description" column="description" type="java.lang.String" length="255"/>
+		<property name="price" column="price"  />
+		<property name="openingDate" column="opening_date" />
+		<property name="closingDate" column="closing_date" />
+		<property name="createdDate" column="created_date" />
+		<property name="retired" column="retired" />
+		<property name="retiredDate" column="retired_date" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="IpdPatientAdmitted" table="ipd_patient_admitted" batch-size="500">
+
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient" lazy="false" />
+		<many-to-one name="admittedWard" column="admitted_ward_id"  class="org.openmrs.Concept" />
+		
+		<many-to-one name="patientAdmissionLog" column="patient_admission_log_id"  class="org.openmrs.module.hospitalcore.model.IpdPatientAdmissionLog" />
+		<many-to-one name="patientAdmittedLogTransferFrom" column="patient_amitted_log_id_transfer_from"  class="org.openmrs.module.hospitalcore.model.IpdPatientAdmittedLog" />
+		
+		<many-to-one name="user" column="user_id"  class="org.openmrs.User" />
+		<many-to-one name="ipdAdmittedUser" column="ipd_admitted_user_id"  class="org.openmrs.User" />
+		
+		<property name="admissionDate" column="admission_date" />
+		<property name="patientName" column="patient_name" />
+		<property name="birthDate" column="birth_date" />
+		<property name="gender" column="gender" />
+		<property name="monthlyIncome" column="monthly_income" />
+		<property name="patientIdentifier" column="patient_identifier" />
+		<property name="basicPay" column="basic_pay" />
+		<property name="caste" column="caste" />
+		<property name="status" column="status" />
+		<property name="patientAddress" column="patient_address" />
+		<property name="bed" column="bed" />
+		<property name="fatherName" column="father_name" />
+		<property name="admissionOutCome" column="admission_outcome" />
+		
+	</class>
+</hibernate-mapping>

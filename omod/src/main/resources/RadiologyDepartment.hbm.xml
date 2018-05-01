@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="RadiologyDepartment" table="radiology_department" batch-size="500">
+
+		<id name="id" type="int" column="department_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="name" column="name" />
+		<property name="description" column="description" length="255" />
+		<many-to-one name="role" column="role" class="org.openmrs.Role" lazy="false"/>
+		<set name="investigations" table="radiology_department_investigations" cascade="save-update,merge,evict" lazy="false">
+			<key column="department_id" />
+			<many-to-many class="org.openmrs.Concept" column="concept_id" unique="true"/>
+		</set>
+	</class>
+</hibernate-mapping>

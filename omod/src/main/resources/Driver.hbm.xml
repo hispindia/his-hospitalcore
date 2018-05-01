@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="Driver" table="billing_driver" batch-size="500">
+
+		<id name="driverId" type="int" column="driver_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<property name="name" column="name" length="255"/>
+		<property name="address" column="address"  length="255"/>
+		<property name="description" column="description" length="255" />
+		<property name="phone" column="phone"  length="20"/>
+		<property name="createdDate" column="created_date"  />
+		<property name="retired" column="retired"  />
+		<property name="retiredDate" column="retired_date"  />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.2//EN" "http://resources.openmrs.org/doctype/config-1.2.dtd">
+
+<module configVersion="1.2">
+	
+	<!-- Base Module Properties -->
+	<id>@MODULE_ID@</id>
+	<name>@MODULE_NAME@</name>
+	<version>@MODULE_VERSION@</version>
+	<package>@MODULE_PACKAGE@</package>
+	<author>Ghanshyam</author>
+	<description>
+			Hospital core module, contains common api for hospital management system project in Shimla, India
+	</description>
+
+	<activator>@MODULE_PACKAGE@.HospitalCoreActivator</activator>
+	
+	<!-- <updateURL>https://dev.openmrs.org/modules/download/@MODULE_ID@/update.rdf</updateURL> -->
+	<!-- /Base Module Properties -->
+	
+	<require_version>1.6.1</require_version>
+	
+	
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
+	</extension>
+
+	
+	<!-- AOP
+	<advice>
+		<point>org.openmrs.api.FormService</point>
+		<class>@MODULE_PACKAGE@.advice.DuplicateFormAdvisor</class>
+	</advice>
+	 /AOP -->
+	
+	 
+	<!--Required Global Properties -->
+	
+	<!--
+	<dwr>
+		<allow>
+			<create creator="new" javascript="DWRFormEntryService">
+				<param name="class" value="org.openmrs.module.@MODULE_ID@.web.DWRFormEntryService"/>
+				<include method="enterForm"/>
+			</create>
+		</allow>
+
+		<signatures>
+			<![CDATA[
+			import @MODULE_PACKAGE@.web.DWRFormEntryService;
+			DWRFormEntryService.enterForm(Integer patientId, Integer formId, boolean useEncounter, List<String> fields);
+			]]>
+		</signatures>	
+	</dwr>
+	-->
+	
+	<!-- Servlets -->
+	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> 
+	<servlet>
+		<servlet-name>formDownload</servlet-name>
+		<servlet-class>@MODULE_PACKAGE@.web.FormDownloadServlet</servlet-class>
+	</servlet>
+	-->
+	<!-- /Servlets -->
+	
+	<globalProperty>
+        <property>@MODULE_ID@.obsGroup</property>
+        <defaultValue>Global Obs</defaultValue>
+        <description>Global obs group for a patient</description>
+    </globalProperty>
+	
+	
+	<globalProperty>
+        <property>@MODULE_ID@.ipdEncounter</property>
+        <defaultValue>IPDENCOUNTER</defaultValue>
+        <description>IPD ENCOUNTER</description>
+    </globalProperty>
+    
+    <globalProperty>
+        <property>@MODULE_ID@.hospitalName</property>
+        <defaultValue>DDU</defaultValue>
+        <description>This using when we show name of hospital</description>
+    </globalProperty>
+    
+    <globalProperty>
+        <property>@MODULE_ID@.identifier_prefix</property>
+        <defaultValue>SHDDU</defaultValue>
+        <description>Patient identifier prefixt</description>
+    </globalProperty>
+    
+    <globalProperty>
+        <property>@MODULE_ID@.ageCategory</property>
+        <defaultValue>0-12:CHILD;13-19:ADLOSCENT;20-59:ADULT;60-120:SENIOR CITIZEN</defaultValue>
+        <description>Age categories for patient and its ranges</description>
+    </globalProperty>
+    
+    <globalProperty>
+		<property>@MODULE_ID@.medicalExamination</property>
+		<defaultValue>9</defaultValue>
+		<description>
+			Concept class id to tell a concept is for a medical examination.
+		</description>
+	</globalProperty>
+	  <globalProperty>
+		<property>@MODULE_ID@.ninCode</property>
+		<defaultValue>10</defaultValue>
+		<description>
+			NIN code for hospitals
+		</description>
+	</globalProperty>
+	<!-- Internationalization -->
+	<!-- All message codes should start with @MODULE_ID@.* -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+	
+	<mappingFiles>
+        Tender.hbm.xml
+        Company.hbm.xml
+        Driver.hbm.xml
+        TenderBill.hbm.xml
+        TenderBillItem.hbm.xml
+        Ambulance.hbm.xml
+        AmbulanceBill.hbm.xml
+        AmbulanceBillItem.hbm.xml
+        BillableService.hbm.xml
+        PatientServiceBill.hbm.xml
+        PatientServiceBillItem.hbm.xml
+        MiscellaneousService.hbm.xml
+        MiscellaneousServiceBill.hbm.xml
+        BillingReceipt.hbm.xml
+        Lab.hbm.xml
+        LabTest.hbm.xml
+        OpdPatientQueue.hbm.xml
+        OpdPatientQueueLog.hbm.xml
+        IpdPatientAdmission.hbm.xml
+        IpdPatientAdmissionLog.hbm.xml
+        IpdPatientAdmitted.hbm.xml
+        IpdPatientAdmittedLog.hbm.xml
+        Department.hbm.xml
+        DepartmentConcept.hbm.xml
+        RadiologyDepartment.hbm.xml
+        CoreForm.hbm.xml
+        PatientSearch.hbm.xml
+        InventoryDrug.hbm.xml
+		InventoryDrugCategory.hbm.xml
+        InventoryDrugFormulation.hbm.xml
+        InventoryDrugUnit.hbm.xml
+        InventoryStore.hbm.xml
+        InventoryStoreDrugIndent.hbm.xml
+        InventoryStoreDrugPatient.hbm.xml
+        InventoryStoreDrugPatientDetail.hbm.xml
+        InventoryStoreDrugTransaction.hbm.xml
+        InventoryStoreDrugTransactionDetail.hbm.xml
+        OpdTestOrder.hbm.xml
+        OpdDrugOrder.hbm.xml
+        IndoorPatientServiceBill.hbm.xml
+		IndoorPatientServiceBillItem.hbm.xml
+		WardBedStrength.hbm.xml
+		<!-- Record vitals -->
+		IpdPatientVitalStatistics.hbm.xml
+		Symptom.hbm.xml
+		Question.hbm.xml
+		Answer.hbm.xml
+		<!-- Patient History -->
+		PatientDrugHistory.hbm.xml
+		PatientFamilyHistory.hbm.xml
+		PatientPersonalHistory.hbm.xml
+    </mappingFiles>
+</module>
+

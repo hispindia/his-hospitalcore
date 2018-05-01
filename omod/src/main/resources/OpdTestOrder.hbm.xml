@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="OpdTestOrder" table="opd_test_order" batch-size="500">
+
+		<id name="opdOrderId" type="int" column="opd_order_id"
+			unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient" />
+		<many-to-one name="encounter" column="encounter_id"
+			class="org.openmrs.Encounter" />
+		<many-to-one name="concept" column="concept_id" class="org.openmrs.Concept" />
+		<property name="typeConcept" column="type_concept" />
+		<many-to-one name="valueCoded" column="value_coded"
+			class="org.openmrs.Concept" />
+		<many-to-one name="creator" column="created_by" class="org.openmrs.User" />
+		<property name="createdOn" type="java.util.Date" column="created_on"
+			not-null="true" length="19" />
+		<property name="billingStatus" column="billing_status"
+			length="1" not-null="true" />
+		<property name="cancelStatus" column="cancel_status" length="1"
+			not-null="true" />
+		<many-to-one name="billableService" column="billable_service_id"
+			class="org.openmrs.module.hospitalcore.model.BillableService" />
+		<property name="scheduleDate" type="java.util.Date" column="schedule_date" length="19" />
+		<property name="indoorStatus" column="indoor_status" length="1" />
+		<property name="fromDept" column="referral_ward_name" length="100" />
+	</class>
+</hibernate-mapping>

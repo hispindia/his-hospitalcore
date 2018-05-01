@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="AmbulanceBillItem" table="billing_ambulance_bill_item" batch-size="500">
+
+		<id name="ambulanceBillItemId" type="int" column="ambulance__bill_item_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<many-to-one name="ambulance" column="ambulance_id" class="org.openmrs.module.hospitalcore.model.Ambulance" foreign-key="fk_ambulancebillitem_ambulance"/>
+		<many-to-one name="ambulanceBill" column="ambulance_bill_id" class="org.openmrs.module.hospitalcore.model.AmbulanceBill" foreign-key="fk_ambulancebillitem_ambulancebill"/>
+		<property name="numberOfTrip" column="number_of_trip"/>
+		<property name="amount" column="amount"/>
+		<property name="name" column="name"/>
+		<property name="createdDate" column="created_date"  />
+		<property name="voided" column="voided"  />
+		<property name="voidedDate" column="voided_date"  />
+		
+		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_ambulancebillitem_voidedby"/>
+		<!-- ghanshyam 07/07/2012 New Requirement #305: Additional details in Ambulance Bill-->
+		<property name="patientName" column="patient_name"  />
+		<property name="receiptNumber" column="receipt_number"  />
+		<property name="origin" column="origin"  />
+		<property name="destination" column="destination"  />
+	</class>
+</hibernate-mapping>

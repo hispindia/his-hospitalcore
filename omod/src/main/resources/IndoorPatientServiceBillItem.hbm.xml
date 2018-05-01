@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.hospitalcore.model">
+
+	<class name="IndoorPatientServiceBillItem" table="indoor_patient_service_bill_item" batch-size="500">
+
+		<id name="indoorPatientServiceBillItemId" type="int" column="indoor_patient_service_bill_item_id"
+			unsaved-value="0">
+				<generator class="native" />
+		</id>
+		<many-to-one name="service" column="service_id" class="org.openmrs.module.hospitalcore.model.BillableService" lazy="false" foreign-key="fk_indoorpatientservicebillitem_billableservice"/>
+		<many-to-one name="indoorPatientServiceBill" column="indoor_patient_service_bill_id" class="org.openmrs.module.hospitalcore.model.IndoorPatientServiceBill" foreign-key="fk_indoorpatientservicebillitem_patientservicebill"/>
+		<many-to-one name="order" column="order_id"  class="org.openmrs.Order" foreign-key="fk_indoorpatientservicebillitem_order"/>
+		<property name="unitPrice" column="unitPrice"/>
+		<property name="amount" column="amount"/>
+		<property name="quantity" column="quantity"/>
+		<property name="name" column="name"/>
+		<property name="createdDate" column="created_date"  />
+		<property name="actualAmount" column="actual_amount"  />			
+	</class>
+</hibernate-mapping>
