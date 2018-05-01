@@ -51,6 +51,18 @@ public class InventoryCommonServiceImpl extends BaseOpenmrsService implements In
 		this.dao = dao;
 	}
 	
+	public InventoryStoreDrugPatient getInventoryStoreDrugPatient(Integer billNo) throws APIException {
+		return dao.getInventoryStoreDrugPatient(billNo);
+	}
+	
+	public List<InventoryStoreDrugPatientDetail> getInventoryStoreDrugPatientDetail(InventoryStoreDrugPatient isdp) throws APIException {
+		return dao.getInventoryStoreDrugPatientDetail(isdp);
+	}
+	
+	public InventoryStoreDrugTransactionDetail getInventoryStoreDrugTransactionDetail(Integer id) throws APIException {
+		return dao.getInventoryStoreDrugTransactionDetail(id);
+	}
+	
 	public List<InventoryStoreDrugPatient> getAllIssueDateByPatientId(Patient patient) throws APIException {
 		return dao.getAllIssueDateByPatientId(patient);
 	}

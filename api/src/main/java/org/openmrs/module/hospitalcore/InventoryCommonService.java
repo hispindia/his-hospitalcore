@@ -42,6 +42,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface InventoryCommonService extends OpenmrsService{
 
+	public InventoryStoreDrugPatient getInventoryStoreDrugPatient(Integer billNo) throws APIException;
+	
+	public List<InventoryStoreDrugPatientDetail> getInventoryStoreDrugPatientDetail(InventoryStoreDrugPatient isdp) throws APIException;
+	
+	public InventoryStoreDrugTransactionDetail getInventoryStoreDrugTransactionDetail(Integer id) throws APIException;
+	
 	public List<InventoryStoreDrugPatient> getAllIssueDateByPatientId(Patient patient) throws APIException;
 	
 	public List<InventoryStoreDrugPatient> getDeatilOfInventoryStoreDrugPatient(Patient patient,String date) throws APIException;

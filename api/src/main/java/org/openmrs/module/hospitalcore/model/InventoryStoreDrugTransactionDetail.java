@@ -88,6 +88,12 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 	 private Integer amountGiven;
 	 private Integer amountReturned;
 	 private Integer duplicateStatus=0;
+	 private Integer voided=0;
+	 private Integer quantityAfterReturn=0;
+	 private Float totalAmountAferVoid;
+	 private Float waiverAmountAferVoid;
+	 private Integer cashReturned;
+	 private BigDecimal amountCreditAfterVoid;
 		
 	 public String getAttribute() {
 		return attribute;
@@ -445,5 +451,53 @@ public class InventoryStoreDrugTransactionDetail implements  Serializable , Comp
 
 	public void setDuplicateStatus(Integer duplicateStatus) {
 		this.duplicateStatus = duplicateStatus;
-	} 
+	}
+
+	public Integer getVoided() {
+		return voided;
+	}
+
+	public void setVoided(Integer voided) {
+		this.voided = voided;
+	}
+
+	public Integer getQuantityAfterReturn() {
+		return quantityAfterReturn;
+	}
+
+	public void setQuantityAfterReturn(Integer quantityAfterReturn) {
+		this.quantityAfterReturn = quantityAfterReturn;
+	}
+
+	public Float getTotalAmountAferVoid() {
+		return totalAmountAferVoid;
+	}
+
+	public void setTotalAmountAferVoid(Float totalAmountAferVoid) {
+		this.totalAmountAferVoid = totalAmountAferVoid;
+	}
+
+	public Float getWaiverAmountAferVoid() {
+		return waiverAmountAferVoid;
+	}
+
+	public void setWaiverAmountAferVoid(Float waiverAmountAferVoid) {
+		this.waiverAmountAferVoid = waiverAmountAferVoid;
+	}
+
+	public Integer getCashReturned() {
+		return cashReturned;
+	}
+
+	public void setCashReturned(Integer cashReturned) {
+		this.cashReturned = cashReturned;
+	}
+
+	public BigDecimal getAmountCreditAfterVoid() {
+		return amountCreditAfterVoid;
+	}
+
+	public void setAmountCreditAfterVoid(BigDecimal amountCreditAfterVoid) {
+		this.amountCreditAfterVoid = amountCreditAfterVoid;
+	}
 }

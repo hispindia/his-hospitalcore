@@ -38,7 +38,6 @@ import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.hospitalcore.db.InventoryCommonDAO;
-import org.openmrs.module.hospitalcore.model.CoreForm;
 import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.InventoryDrugFormulation;
 import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatient;
@@ -67,6 +66,30 @@ public class HibernateInventoryCommonDAO implements InventoryCommonDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@SuppressWarnings("unchecked")
+	public InventoryStoreDrugPatient getInventoryStoreDrugPatient(Integer billNo) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				InventoryStoreDrugPatient.class);
+		criteria.add(Restrictions.eq("id", billNo));
+		return (InventoryStoreDrugPatient) criteria.uniqueResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<InventoryStoreDrugPatientDetail> getInventoryStoreDrugPatientDetail(InventoryStoreDrugPatient isdp) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				InventoryStoreDrugPatientDetail.class);
+		criteria.add(Restrictions.eq("storeDrugPatient", isdp));
+		return criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public InventoryStoreDrugTransactionDetail getInventoryStoreDrugTransactionDetail(Integer id) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				InventoryStoreDrugTransactionDetail.class);
+		criteria.add(Restrictions.eq("id", id));
+		return (InventoryStoreDrugTransactionDetail) criteria.uniqueResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<InventoryStoreDrugPatient> getAllIssueDateByPatientId(
 			Patient patient) throws DAOException {

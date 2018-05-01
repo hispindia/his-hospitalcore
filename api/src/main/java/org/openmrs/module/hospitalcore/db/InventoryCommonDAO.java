@@ -39,6 +39,12 @@ import org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail
 */
 public interface InventoryCommonDAO {
 
+	public InventoryStoreDrugPatient getInventoryStoreDrugPatient(Integer billNo) throws DAOException;
+	
+	public List<InventoryStoreDrugPatientDetail> getInventoryStoreDrugPatientDetail(InventoryStoreDrugPatient isdp) throws DAOException;
+	
+	public InventoryStoreDrugTransactionDetail getInventoryStoreDrugTransactionDetail(Integer id) throws DAOException;
+	
 	public List<InventoryStoreDrugPatient> getAllIssueDateByPatientId(Patient patient) throws DAOException;
 	
 	public List<InventoryStoreDrugPatient> getDeatilOfInventoryStoreDrugPatient(Patient patient,String date) throws DAOException;

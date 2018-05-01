@@ -38,6 +38,10 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	 private Patient patient;
 	 private String identifier;
 	 private Integer duplicateBill=0;
+	 private Integer voided=0;
+	 private Date voidedDate;
+	 private String voidedBy;
+	 private String voidedReason;
 	public Integer getId() {
 		return id;
 	}
@@ -95,5 +99,28 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	public void setDuplicateBill(Integer duplicateBill) {
 		this.duplicateBill = duplicateBill;
 	}
-	 
+	public Integer getVoided() {
+		return voided;
+	}
+	public void setVoided(Integer voided) {
+		this.voided = voided;
+	}
+	public Date getVoidedDate() {
+		return voidedDate;
+	}
+	public void setVoidedDate(Date voidedDate) {
+		this.voidedDate = voidedDate;
+	}
+	public String getVoidedBy() {
+		return voidedBy;
+	}
+	public void setVoidedBy(String voidedBy) {
+		this.voidedBy = voidedBy;
+	}
+	public String getVoidedReason() {
+		return voidedReason;
+	}
+	public void setVoidedReason(String voidedReason) {
+		this.voidedReason = voidedReason;
+	}
 }

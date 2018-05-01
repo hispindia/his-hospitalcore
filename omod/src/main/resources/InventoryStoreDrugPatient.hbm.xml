@@ -19,5 +19,9 @@
 		<property name="createdBy" column="created_by"  />
 		<property name="createdOn" column="created_on"  />	
 		<property name="duplicateBill" column="duplicate_bill" />
+		<property name="voided" column="voided" />
+		<property name="voidedDate" column="voided_date" />
+		<property name="voidedBy" column="voided_by" />
+		<property name="voidedReason" column="voided_reason" />
 	</class>
 </hibernate-mapping>

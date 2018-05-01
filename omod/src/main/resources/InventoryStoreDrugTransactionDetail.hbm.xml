@@ -58,5 +58,11 @@
 		<property name="amountGiven" column="amount_given" />
 		<property name="amountReturned" column="amount_returned" />
 		<property name="duplicateStatus" column="duplicate_status" />
+		<property name="voided" column="voided" />
+		<property name="quantityAfterReturn" column="quantity_after_return" />
+		<property name="totalAmountAferVoid" column="total_amount_after_void" />
+		<property name="waiverAmountAferVoid" column="waiver_amount_afer_void" />
+		<property name="cashReturned" column="cash_returned" />
+		<property name="amountCreditAfterVoid" column="amount_credit_after_void" />
 	</class>
 </hibernate-mapping>
