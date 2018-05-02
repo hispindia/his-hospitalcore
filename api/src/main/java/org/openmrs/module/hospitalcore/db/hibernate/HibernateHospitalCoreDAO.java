@@ -379,11 +379,11 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	/**
 	 * @see org.openmrs.module.hospitalcore.db.HospitalCoreDAO#getLastVisitTime(int)
 	 */
-	public java.util.Date getLastVisitTime(int patientID) {
+	public java.util.Date getLastVisitTime(Patient patient) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
 				Encounter.class);
 		Encounter encounter = new Encounter();
-		criteria.add(Restrictions.eq("patientId", patientID));
+		criteria.add(Restrictions.eq("patient", patient));
 
 		// Don't trust in system hour so we use encounterId (auto increase)
 		criteria.addOrder(Order.desc("encounterId"));

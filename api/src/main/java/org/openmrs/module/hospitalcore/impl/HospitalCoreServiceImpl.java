@@ -738,8 +738,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * 
 	 * @see org.openmrs.module.hospitalcore.HospitalCoreService#getLastVisitTime(int)
 	 */
-	public java.util.Date getLastVisitTime(int patientID) {
-	    return dao.getLastVisitTime(patientID);
+	public java.util.Date getLastVisitTime(Patient patient) {
+	    return dao.getLastVisitTime(patient);
     }
 	
 	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient

@@ -115,7 +115,7 @@ public class PatientSearchController {
 		HospitalCoreService hcs = Context.getService(HospitalCoreService.class);
 		for (Patient p : patients) {
 			// TO DO
-			lastVisitTime.put(p.getPatientId(), hcs.getLastVisitTime(p.getPatientId()));
+			lastVisitTime.put(p.getPatientId(), hcs.getLastVisitTime(p));
 		}
 		return lastVisitTime;
 	}
