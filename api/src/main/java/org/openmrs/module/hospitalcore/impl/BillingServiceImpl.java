@@ -923,12 +923,14 @@ public class BillingServiceImpl extends BaseOpenmrsService implements BillingSer
 			}
 		}
 		
+		/*
 		if (labEncounter != null) {
 			Context.getEncounterService().saveEncounter(labEncounter);
 		}
 		if (radiologyEncounter != null) {
 			Context.getEncounterService().saveEncounter(radiologyEncounter);
 		}
+		*/
 		savePatientServiceBill(bill);
 	}
 	
@@ -972,6 +974,7 @@ public class BillingServiceImpl extends BaseOpenmrsService implements BillingSer
 			enc.setProvider(bill.getCreator());
 			enc.setEncounterType(encounterType);
 			enc.setPatient(bill.getPatient());
+			Context.getEncounterService().saveEncounter(enc);
 			return enc;
 		} else {
 			return encounter;
