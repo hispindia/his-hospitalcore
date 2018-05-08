@@ -63,6 +63,8 @@ public class PatientServiceBill implements Serializable {
 	
 	private String patientCategory;
 	
+	private String patientSubcategory;
+	
 	private String comment;
 	
 	private Receipt receipt;
@@ -213,6 +215,14 @@ public class PatientServiceBill implements Serializable {
 
 	public void setPatientCategory(String patientCategory) {
 		this.patientCategory = patientCategory;
+	}
+	
+	public String getPatientSubcategory() {
+		return patientSubcategory;
+	}
+
+	public void setPatientSubcategory(String patientSubcategory) {
+		this.patientSubcategory = patientSubcategory;
 	}
 
 	public String getComment() {
