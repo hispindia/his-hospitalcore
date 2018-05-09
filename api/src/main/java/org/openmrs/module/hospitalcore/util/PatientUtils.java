@@ -33,6 +33,7 @@ import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
+import org.openmrs.Person;
 import org.openmrs.PersonAttribute;
 import org.openmrs.PersonAttributeType;
 import org.openmrs.api.context.Context;
@@ -140,8 +141,11 @@ public class PatientUtils {
 	 */
 	public static String getPatientAttribute(Patient patient, String attributeNameType) {
 		String value = null;
+		HospitalCoreService hospitalCoreService = (HospitalCoreService) Context.getService(HospitalCoreService.class);
 		PersonAttributeType pat = Context.getPersonService().getPersonAttributeTypeByName(attributeNameType);
-		PersonAttribute pa = patient.getAttribute(pat);
+		//PersonAttribute pa = patient.getAttribute(pat);
+		Person person=Context.getPersonService().getPerson(patient);
+		PersonAttribute pa = hospitalCoreService.getPersonAttribute(person, pat);
 		if (pa != null) {
 			value = pa.getValue();
 		}

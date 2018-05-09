@@ -516,22 +516,20 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		}
 	}
 	
-	/*
 	public PersonAttribute getPersonAttribute(Person person,PersonAttributeType personAttributeType){
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PersonAttribute.class);
 		criteria.add(Restrictions.eq("attributeType", personAttributeType));
 		criteria.add(Restrictions.eq("voided", false));
-		Criteria personCriteria = criteria.createCriteria("person");
-		personCriteria.add(Restrictions.eq("person", person));	
-		personCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		criteria.add(Restrictions.eq("person", person));
 		return (PersonAttribute) criteria.uniqueResult();
-	}*/
+	}
 	
+	/*
 	public PersonAttribute getPersonAttribute(Person person,Integer personAttributeTypeId){
 	String hql = "SELECT pa FROM person_attribute pa WHERE pa.person_id = " + person.getPersonId() + " AND pa.person_attribute_type_id = "+ personAttributeTypeId +" AND pa.voided = 0;";
 	Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		return (PersonAttribute) query.uniqueResult();
-	}
+	}*/
 	
 	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute)
 	throws DAOException {

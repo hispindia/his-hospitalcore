@@ -59,6 +59,7 @@ import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.Person;
 import org.openmrs.PersonAttribute;
+import org.openmrs.PersonAttributeType;
 import org.openmrs.User;
 import org.openmrs.api.APIException;
 import org.openmrs.api.ConceptService;
@@ -768,8 +769,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public String getPatientType(Patient patientId){
 		return dao.getPatientType(patientId);
 	}
-	public PersonAttribute getPersonAttribute(Person person,Integer personAttributeTypeId){
-		return dao.getPersonAttribute(person,personAttributeTypeId);
+	public PersonAttribute getPersonAttribute(Person person,PersonAttributeType personAttributeType){
+		return dao.getPersonAttribute(person,personAttributeType);
 	}
 	public void saveOrUpdatePersonAttribute(PersonAttribute personAttribute){
 		dao.saveOrUpdatePersonAttribute(personAttribute);
