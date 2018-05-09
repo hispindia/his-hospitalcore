@@ -42,6 +42,8 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	 private Date voidedDate;
 	 private String voidedBy;
 	 private String voidedReason;
+	 private String patientCategry;
+	 private String patientSubcategory;
 	public Integer getId() {
 		return id;
 	}
@@ -71,9 +73,6 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	}
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
-	}
-	public String getPatientCategory(){
-		return PatientUtils.getPatientCategory(patient);
 	}
 	public String getCreatedBy() {
 		return createdBy;
@@ -122,5 +121,20 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	}
 	public void setVoidedReason(String voidedReason) {
 		this.voidedReason = voidedReason;
+	}
+	public String getPatientCategory(){
+		return PatientUtils.getPatientCategory(patient);
+	}
+	public String getPatientCategry() {
+		return patientCategry;
+	}
+	public void setPatientCategry(String patientCategry) {
+		this.patientCategry = patientCategry;
+	}
+	public String getPatientSubcategory() {
+		return patientSubcategory;
+	}
+	public void setPatientSubcategory(String patientSubcategory) {
+		this.patientSubcategory = patientSubcategory;
 	}
 }

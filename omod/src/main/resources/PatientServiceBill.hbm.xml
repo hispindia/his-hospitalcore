@@ -22,6 +22,7 @@
 		<property name="actualAmount" column="actual_amount"  />
 		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_patientservicebill_voidedby"/>
 		<property name="patientCategory" column="patient_category" />
+		<property name="patientSubcategory" column="patient_subcategory" />
 		<property name="comment" column="comment" />
 		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient" lazy="false" foreign-key="fk_patientservicebill_patient"/>
 		<!-- ghanshyam Support #339 [Billing]print of void bill [3.2.7 snapshot][DDU,Mohali,Solan,Tanda,] -->
