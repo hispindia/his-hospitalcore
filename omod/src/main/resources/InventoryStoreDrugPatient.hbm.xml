@@ -23,7 +23,7 @@
 		<property name="voidedDate" column="voided_date" />
 		<property name="voidedBy" column="voided_by" />
 		<property name="voidedReason" column="voided_reason" />
-		<property name="patientCategry" column="patient_category" />
-		<property name="patientSubcategory" column="patient_subcategory" />
+		<property name="patientCategoryf" column="patient_category" />
+		<property name="patientSubcategoryf" column="patient_subcategory" />
 	</class>
 </hibernate-mapping>
