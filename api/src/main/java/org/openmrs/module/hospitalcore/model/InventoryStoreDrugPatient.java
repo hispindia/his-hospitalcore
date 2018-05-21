@@ -42,8 +42,8 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	 private Date voidedDate;
 	 private String voidedBy;
 	 private String voidedReason;
-	 private String patientCategry;
-	 private String patientSubcategory;
+	 private String patientCategoryf;
+	 private String patientSubcategoryf;
 	public Integer getId() {
 		return id;
 	}
@@ -125,16 +125,16 @@ public class InventoryStoreDrugPatient implements  Serializable {
 	public String getPatientCategory(){
 		return PatientUtils.getPatientCategory(patient);
 	}
-	public String getPatientCategry() {
-		return patientCategry;
+	public String getPatientCategoryf() {
+		return patientCategoryf;
 	}
-	public void setPatientCategry(String patientCategry) {
-		this.patientCategry = patientCategry;
+	public void setPatientCategoryf(String patientCategoryf) {
+		this.patientCategoryf = patientCategoryf;
 	}
-	public String getPatientSubcategory() {
-		return patientSubcategory;
+	public String getPatientSubcategoryf() {
+		return patientSubcategoryf;
 	}
-	public void setPatientSubcategory(String patientSubcategory) {
-		this.patientSubcategory = patientSubcategory;
+	public void setPatientSubcategoryf(String patientSubcategoryf) {
+		this.patientSubcategoryf = patientSubcategoryf;
 	}
 }
