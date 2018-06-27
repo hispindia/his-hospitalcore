@@ -206,15 +206,20 @@ public class PatientDetailasCSVController {
 						.getPatientId());
 				String identifier = e.getPatient().getPatientIdentifier()
 						.getIdentifier();
+				
 				String name = e.getPatient().getGivenName().concat(" ")
 						.concat(e.getPatient().getMiddleName()).concat(" ")
 						.concat(e.getPatient().getFamilyName());
+				
 				record.setEncId(e.getEncounterId().toString());
+				
 				record.setPatientName(name);
 				record.setNinId(GlobalPropertyUtil.getString(
 						HospitalCoreConstants.PROPERTY_HOSPITAL_NIN_NUMBER,
 						null));
+				
 				record.setPatientidentifier(identifier);
+				
 			/*	String adharnumber = "";
 				for (PersonAttribute pa : pas) {
 					PersonAttributeType attributeType = pa.getAttributeType();
@@ -238,21 +243,28 @@ public class PatientDetailasCSVController {
 				}
 				if (phone.equals("")) {
 					record.setMobile("0");
+					
 				} else {
 					record.setMobile(phone);
+					
 				}
 				Set<Obs> obList = Context.getObsService().getObservations(e);
 		
 				IpdPatientAdmissionLog ipl = inService
 						.getIpdPatientAdmissionLogByEncounter(e);
+				if (ipl!=null)
+				{
 				if (ipl.getStatus().toString().equals("admitted")) {
 						visitId = e.getEncounterId().toString();
+						
 						typeofpatient = "1";
                           
 						visitDate = sdf.format(ipl.getIpdEncounter().getEncounterDatetime());
+						
 						record.setVisitDate(visitDate);
 						record.setPatientType("1");
 						departmentId = ipl.getAdmissionWard().toString();
+						
 						record.setDept(departmentId);
 						Integer h = ipl.getIpdEncounter().getEncounterDatetime().getHours();
 						Integer m = ipl.getIpdEncounter().getEncounterDatetime().getMinutes();
@@ -276,9 +288,10 @@ public class PatientDetailasCSVController {
 						}
 
 						visitTime = hours.concat(minute);
+						
 						seconds = seconds + ipl.getIpdEncounter().getEncounterDatetime().getSeconds();
 						record.setVisitTime(visitTime);
-					
+						
 						Calendar calci = Calendar.getInstance();
 						calci.setTime(e.getPatient().getBirthdate());
 						Calendar calci2 = Calendar.getInstance();
@@ -291,29 +304,33 @@ public class PatientDetailasCSVController {
 						}
 						calculateAge = yearDiff1 + "";
 						record.setAge(calculateAge);
-						if (ipl.getStatus().toString().equals("discharge")) {
-							IpdPatientAdmittedLog ipld = inService
-									.getIpdPatientAdmittedLogByAdmissionLog(ipl);
-							
-							departmentId = ipld.getAdmittedWard().toString();
-							record.setDept(departmentId);
-							Calendar cal = Calendar.getInstance();
-							cal.setTime(e.getPatient().getBirthdate());
-							Calendar cal2 = Calendar.getInstance();
-							cal2.setTime(ipl.getIpdEncounter().getEncounterDatetime());
-							int yearNew = cal.get(Calendar.YEAR);
-							int yearOld = cal2.get(Calendar.YEAR);
-							int yearDiff = yearOld - yearNew;
-							if (yearDiff < 1) {
-								yearDiff = 1;
-							}
-							calculateAge = yearDiff + "";
-							record.setAge(calculateAge);
-
-						}
+		
 						
 					}
-					
+				else
+				{
+					if (ipl.getStatus().toString().equals("discharge")) {
+						IpdPatientAdmittedLog ipld = inService
+								.getIpdPatientAdmittedLogByAdmissionLog(ipl);
+						
+						departmentId = ipld.getAdmittedWard().toString();
+						record.setDept(departmentId);
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(e.getPatient().getBirthdate());
+						Calendar cal2 = Calendar.getInstance();
+						cal2.setTime(ipl.getIpdEncounter().getEncounterDatetime());
+						int yearNew = cal.get(Calendar.YEAR);
+						int yearOld = cal2.get(Calendar.YEAR);
+						int yearDiff = yearOld - yearNew;
+						if (yearDiff < 1) {
+							yearDiff = 1;
+						}
+						calculateAge = yearDiff + "";
+						record.setAge(calculateAge);
+						
+					}	
+				}
+				}
 					
 				String gender = "";
 				if (e.getPatient().getGender().equals("M")) {
@@ -324,8 +341,9 @@ public class PatientDetailasCSVController {
 					gender = "3";
 				}
 				record.setGender(gender);
+				
 				records.add(record);
-               
+			
 			}
 
 			/*
@@ -374,7 +392,7 @@ public class PatientDetailasCSVController {
 
 		for (PatientCSV pcsv : records) {
 			String count = patientCount + "";
-			if (pcsv.getVisitDate() != null) {
+			if (pcsv.getVisitDate() != null) { 
 				rows.add(pcsv.getNinId().concat(",")
 						.concat(pcsv.getPatientidentifier()).concat(",")
 						.concat(pcsv.getEncId()).concat(",")
