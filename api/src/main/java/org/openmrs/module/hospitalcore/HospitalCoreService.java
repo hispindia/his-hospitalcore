@@ -223,5 +223,8 @@ public interface HospitalCoreService extends OpenmrsService {
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws APIException;
 	public PersonAddress getPersonAddress(Person person);
 	public PatientIdentifier getPatientIdentifier(String identifier);
+	public Obs getLastVisitOutCome(Integer personId, Integer conceptId);
+	public Obs getObsByEncounterAndConcept(Encounter encounter,Concept concept);
+	public List<Obs> getObssByEncounterAndConcept(Encounter encounter,Concept concept);
 	
 }

@@ -504,5 +504,34 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		criteria.add(Restrictions.eq("identifier",identifier));
 		return (PatientIdentifier) criteria.uniqueResult();
 	}
+	
+	public Obs getLastVisitOutCome(Integer personId, Integer conceptId) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession()
+				.createCriteria(Obs.class, "obs")
+				.add(Restrictions.eq("obs.person.personId", personId))
+				.add(Restrictions.eq("obs.concept.conceptId", conceptId))
+				.addOrder(Order.desc("obs.dateCreated"))
+				.setFirstResult(0)
+				.setMaxResults(1);
+		return (Obs) criteria.uniqueResult();
+	}
+	
+	public List<Obs> getObssByEncounterAndConcept(Encounter encounter,
+			Concept concept) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Obs.class);
+		criteria.add(Restrictions.eq("encounter", encounter));
+		criteria.add(Restrictions.eq("concept", concept));
+		return criteria.list();
+	}
+	
+	public Obs getObsByEncounterAndConcept(Encounter encounter,
+			Concept concept) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Obs.class);
+		criteria.add(Restrictions.eq("encounter", encounter));
+		criteria.add(Restrictions.eq("concept", concept));
+		return (Obs) criteria.uniqueResult();
+	}
 
 }

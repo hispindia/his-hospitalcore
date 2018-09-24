@@ -771,6 +771,18 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public PatientIdentifier getPatientIdentifier(String identifier){
 		return dao.getPatientIdentifier(identifier);
 	}
+	
+	public Obs getLastVisitOutCome(Integer personId, Integer conceptId){
+		return dao.getLastVisitOutCome(personId,conceptId);
+	}
+	
+	public Obs getObsByEncounterAndConcept(Encounter encounter,Concept concept){
+		return dao.getObsByEncounterAndConcept(encounter,concept);
+	}
+	
+	public List<Obs> getObssByEncounterAndConcept(Encounter encounter,Concept concept){
+		return dao.getObssByEncounterAndConcept(encounter,concept);
+	}
 
 
 }
