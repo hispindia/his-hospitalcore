@@ -783,6 +783,10 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public List<Obs> getObssByEncounterAndConcept(Encounter encounter,Concept concept){
 		return dao.getObssByEncounterAndConcept(encounter,concept);
 	}
+	
+	public List<Obs> getObsByPersonAndConcept(Person person,Concept concept){
+		return dao.getObsByPersonAndConcept(person,concept);
+	}
 
 
 }

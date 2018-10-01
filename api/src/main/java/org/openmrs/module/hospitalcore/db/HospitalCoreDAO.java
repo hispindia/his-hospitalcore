@@ -138,4 +138,5 @@ public interface HospitalCoreDAO {
 	public Obs getLastVisitOutCome(Integer personId, Integer conceptId);
 	public Obs getObsByEncounterAndConcept(Encounter encounter,Concept concept);
 	public List<Obs> getObssByEncounterAndConcept(Encounter encounter,Concept concept);
+	public List<Obs> getObsByPersonAndConcept(Person person,Concept concept);
 }

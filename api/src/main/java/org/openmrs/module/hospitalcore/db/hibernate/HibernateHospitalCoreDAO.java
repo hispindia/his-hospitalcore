@@ -533,5 +533,13 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		criteria.add(Restrictions.eq("concept", concept));
 		return (Obs) criteria.uniqueResult();
 	}
+	
+	public List<Obs> getObsByPersonAndConcept(Person person,Concept concept) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Obs.class);
+		criteria.add(Restrictions.eq("person", person));
+		criteria.add(Restrictions.eq("concept", concept));
+		return criteria.list();
+	}
 
 }
