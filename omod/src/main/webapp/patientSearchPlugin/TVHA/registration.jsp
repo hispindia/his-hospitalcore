@@ -108,6 +108,11 @@
 			jQuery("#dohId", this.form).change(function(){
 				PATIENTSEARCH.search(true);
 			});
+			
+			//new requirement add address in advance search
+			jQuery("#address", this.form).change(function(){
+				PATIENTSEARCH.search(true);
+			});
 			// Kesavulu 2012-12-28 #570 added keyup functionality for Advance search
 			jQuery("#relativeName", this.form).keyup(function(event) {
 				if (event.keyCode == 13) {
@@ -146,7 +151,13 @@
 				if (event.keyCode == 13) {
 					PATIENTSEARCH.search(true);
 					}
-			});		
+			});	
+			//new requirement add address in advance search
+			jQuery("#address", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
 			jQuery("#relativeName", this.form).keyup(function(event) {
 				if (event.keyCode == 13) {
 					PATIENTSEARCH.search(true);
@@ -329,6 +340,7 @@
 				this.buildAadharCardNumberQuery();
 				this.buildGreenBookNumberQuery();
 				this.buildDohIdQuery();
+				this.buildaddressQuery();
 			}
 			
 			// Return the built query
@@ -378,6 +390,7 @@
 				this.buildAadharCardNumberQuery();
 				this.buildGreenBookNumberQuery();
 				this.buildDohIdQuery();
+				this.buildaddressQuery();
 			}
 			
 			// Return the built query
@@ -535,6 +548,16 @@
 			    this.fromClause += " INNER JOIN person_attribute paDohId ON ps.patient_id= paDohId.person_id";
 				this.fromClause += " INNER JOIN person_attribute_type patDohId ON paDohId.person_attribute_type_id = patDohId.person_attribute_type_id ";
 				this.whereClause += " AND (patDohId.name LIKE '%" + dohIdAttributeTypeName + "%' AND paDohId.value LIKE '%" + value + "%')";
+			}
+		},
+	//new requirement add address in advance search
+		
+		buildaddressQuery: function(){
+		    value = jQuery.trim(jQuery("#address", this.form).val());
+			addressAttributeTypeName = "Postal Address";
+			if(value!=undefined && value.length>0){
+				this.fromClause += " INNER JOIN person_address pa ON pa.person_id= ps.patient_id";
+				this.whereClause += " AND ( pa.address1 LIKE '%" + value + "%')";
 			}
 		},
 		
@@ -714,6 +737,13 @@
 				<td>DOH ID</td>
 				<td colspan="3">
 					<input id="dohId" style="width: 100px"/>
+				</td>	
+			</tr>
+			
+					<tr>
+				<td>Address</td>
+				<td colspan="3">
+					<input id="address" style="width: 100px"/>
 				</td>	
 			</tr>
 		</table>

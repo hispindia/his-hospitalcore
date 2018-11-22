@@ -104,6 +104,10 @@ jQuery(document).ready(function() {
 			jQuery("#dohId", this.form).change(function(){
 				PATIENTSEARCH.search(true);
 			});
+			//new requirement add address in advance search
+			jQuery("#address", this.form).change(function(){
+				PATIENTSEARCH.search(true);
+			});
 			jQuery("#relativeName", this.form).blur(function(){
 				PATIENTSEARCH.search(true);
 			});
@@ -132,6 +136,12 @@ jQuery(document).ready(function() {
 					}
 			});	
 			jQuery("#dohId", this.form).keyup(function(event) {
+				if (event.keyCode == 13) {
+					PATIENTSEARCH.search(true);
+					}
+			});
+			//new requirement add address in advance search
+			jQuery("#address", this.form).keyup(function(event) {
 				if (event.keyCode == 13) {
 					PATIENTSEARCH.search(true);
 					}
@@ -368,6 +378,7 @@ jQuery(document).ready(function() {
 				this.buildAadharCardNumberQuery();
 				this.buildGreenBookNumberQuery();
 				this.buildDohIdQuery();
+				this.buildaddressQuery();
 			}
 			
 			// Return the built query
@@ -457,6 +468,7 @@ jQuery(document).ready(function() {
 				this.buildAadharCardNumberQuery();
 				this.buildGreenBookNumberQuery();
 				this.buildDohIdQuery();
+				this.buildaddressQuery();
 			}
 			
 			// Return the built query
@@ -666,6 +678,16 @@ jQuery(document).ready(function() {
 				this.whereClause += " AND (patDohId.name LIKE '%" + dohIdAttributeTypeName + "%' AND paDohId.value LIKE '%" + value + "%')";
 			}
 		},
+		//new requirement add address in advance search
+		
+		buildaddressQuery: function(){
+		    value = jQuery.trim(jQuery("#address", this.form).val());
+			addressAttributeTypeName = "Postal Address";
+			if(value!=undefined && value.length>0){
+				this.fromClause += " INNER JOIN person_address pa ON pa.person_id= ps.patient_id";
+				this.whereClause += " AND (pa.address1 LIKE '%" + value + "%')";
+			}
+		},
 		/** GENERATE THE NAVIGATION BAR */
 		generateNavigation: function(){
 			navbar = this.totalRow + " patients found.";
@@ -840,6 +862,12 @@ jQuery(document).ready(function() {
 				<td>DOH ID</td>
 				<td colspan="3">
 					<input id="dohId" style="width: 100px"/>
+				</td>	
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td colspan="3">
+					<input id="address" style="width: 100px"/>
 				</td>	
 			</tr>
 		</table>
