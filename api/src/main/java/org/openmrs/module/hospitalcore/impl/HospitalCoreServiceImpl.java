@@ -328,6 +328,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 			obs.setDateCreated(new Date());
 			obs.setObsDatetime(new Date());
 			obs.setLocation(new Location(1));
+			//System.out.println("patient.getPersonName().getGivenName()"+patient.getPersonName().getGivenName());
 			return Context.getObsService().saveObs(obs,
 					"Global obs for " + patient.getPersonName().getGivenName());
 		}
@@ -737,7 +738,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * 
 	 * @see org.openmrs.module.hospitalcore.HospitalCoreService#getLastVisitTime(int)
 	 */
-	public java.util.Date getLastVisitTime(int patientID) {
+	public java.util.Date getLastVisitTime(Patient patientID) {
 	    return dao.getLastVisitTime(patientID);
     }
 	

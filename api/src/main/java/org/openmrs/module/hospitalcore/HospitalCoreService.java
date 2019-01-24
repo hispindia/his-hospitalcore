@@ -207,7 +207,7 @@ public interface HospitalCoreService extends OpenmrsService {
 	 * @param patientID
 	 * @return
 	 */
-	public java.util.Date getLastVisitTime (int patientID);
+	public java.util.Date getLastVisitTime (Patient patient);
 	
 	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
 	public PatientSearch getPatient(int patientID);
