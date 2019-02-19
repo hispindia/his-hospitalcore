@@ -894,9 +894,11 @@ public class BillingServiceImpl extends BaseOpenmrsService implements BillingSer
 			if (concept.getConceptClass().equals(medicalExaminationClass)) {
 				Collection<ConceptSet> conceptSets = concept.getConceptSets();
 				if (conceptSets != null && conceptSets.size() > 0) {
-					for (ConceptSet con : conceptSets) {
+					for (ConceptSet con : conceptSets) { 
+						
 						if (labConceptIds.contains(con.getConcept().getConceptId())) {
 							labEncounter = getEncounter(bill, labEncounter, labEncounterType);
+							
 							Order order = addOrder(labEncounter, con.getConcept(), bill, labOrderType);
 							item.setOrder(order);
 							
@@ -907,10 +909,12 @@ public class BillingServiceImpl extends BaseOpenmrsService implements BillingSer
 						}
 					}
 				}
-			} else {
+			} else { 
 				if (labConceptIds.contains(concept.getConceptId())) {
 					labEncounter = getEncounter(bill, labEncounter, labEncounterType);
+					
 					Order order = addOrder(labEncounter, concept, bill, labOrderType);
+					
 					item.setOrder(order);
 					
 				} else if (radiologyConceptIds.contains(concept.getConceptId())) {
@@ -920,13 +924,14 @@ public class BillingServiceImpl extends BaseOpenmrsService implements BillingSer
 				}
 			}
 		}
-		
+	/*	
 		if (labEncounter != null) {
 			Context.getEncounterService().saveEncounter(labEncounter);
 		}
 		if (radiologyEncounter != null) {
 			Context.getEncounterService().saveEncounter(radiologyEncounter);
-		}
+		} */
+		
 		savePatientServiceBill(bill);
 	}
 	
@@ -970,6 +975,7 @@ public class BillingServiceImpl extends BaseOpenmrsService implements BillingSer
 			enc.setProvider(bill.getCreator());
 			enc.setEncounterType(encounterType);
 			enc.setPatient(bill.getPatient());
+			Context.getEncounterService().saveEncounter(enc);
 			return enc;
 		} else {
 			return encounter;
