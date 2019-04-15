@@ -70,7 +70,19 @@ public class PatientServiceBill implements Serializable {
 	private Boolean freeBill = false;
 	
 	private Set<PatientServiceBillItem> billItems;
-	
+	//New requirement discount and special ward
+    private float waiverPercentage;
+    private float spclwardPercentage;
+    private float waiverAmount;
+    private float spclwardAmount;
+    
+    private BigDecimal amountPayable;
+    
+    private Integer amountGiven;
+    
+    private Integer amountReturned;
+   
+
 	public Integer getPatientServiceBillId() {
 		return patientServiceBillId;
 	}
@@ -205,4 +217,59 @@ public class PatientServiceBill implements Serializable {
 		public void setComment(String comment) {
 			this.comment = comment;
 		}
+
+		public float getWaiverPercentage() {
+			return waiverPercentage;
+		}
+
+		public void setWaiverPercentage(float waiverPercentage) {
+			this.waiverPercentage = waiverPercentage;
+		}
+		 public float getSpclwardPercentage() {
+				return spclwardPercentage;
+			}
+
+			public void setSpclwardPercentage(float spclwardPercentage) {
+				this.spclwardPercentage = spclwardPercentage;
+			}
+
+			public float getWaiverAmount() {
+				return waiverAmount;
+			}
+
+			public void setWaiverAmount(float waiverAmount) {
+				this.waiverAmount = waiverAmount;
+			}
+
+			public float getSpclwardAmount() {
+				return spclwardAmount;
+			}
+
+			public void setSpclwardAmount(float spclwardAmount) {
+				this.spclwardAmount = spclwardAmount;
+			}
+
+			public BigDecimal getAmountPayable() {
+				return amountPayable;
+			}
+
+			public void setAmountPayable(BigDecimal amountPayable) {
+				this.amountPayable = amountPayable;
+			}
+
+			public Integer getAmountGiven() {
+				return amountGiven;
+			}
+
+			public void setAmountGiven(Integer amountGiven) {
+				this.amountGiven = amountGiven;
+			}
+
+			public Integer getAmountReturned() {
+				return amountReturned;
+			}
+
+			public void setAmountReturned(Integer amountReturned) {
+				this.amountReturned = amountReturned;
+			}
 }

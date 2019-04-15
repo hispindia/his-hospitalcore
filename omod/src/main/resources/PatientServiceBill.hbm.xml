@@ -23,6 +23,14 @@
 		<many-to-one name="voidedby" column="voided_by"  class="org.openmrs.User" foreign-key="fk_patientservicebill_voidedby"/>
 		<property name="patientCategory" column="patient_category" />
 		<property name="comment" column="comment" />
+		<!-- new requirement discount and spcl ward -->
+		<property name="waiverPercentage" column="waiver_percentage" />
+		<property name="waiverAmount" column="waiver_amount" />
+		<property name="spclwardPercentage" column="spcl_percentage" />
+		<property name="spclwardAmount" column="spcl_amount" />
+		<property name="amountPayable" column="amount_payable" />
+		<property name="amountGiven" column="amount_given" />
+		<property name="amountReturned" column="amount_returned" />
 		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient" lazy="false" foreign-key="fk_patientservicebill_patient"/>
 		<!-- ghanshyam Support #339 [Billing]print of void bill [3.2.7 snapshot][DDU,Mohali,Solan,Tanda,] -->
 		<set name="billItems" table="billing_patient_serivce_bill_item" cascade="save-update,merge,evict" lazy="false">
