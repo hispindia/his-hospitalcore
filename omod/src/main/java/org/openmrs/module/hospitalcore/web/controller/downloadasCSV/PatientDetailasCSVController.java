@@ -76,7 +76,7 @@ public class PatientDetailasCSVController {
 		String visitId = "";
 		String departmentId = "";
 		String visitDate = "";
-
+		String name="";
 		String hours = "";
 		String minute = "";
 		String seconds = "";
@@ -109,9 +109,18 @@ public class PatientDetailasCSVController {
 						.getPatientId());
 				String identifier = e.getPatient().getPatientIdentifier()
 						.getIdentifier();
-				String name = e.getPatient().getGivenName().concat(" ")
-						.concat(e.getPatient().getMiddleName()).concat(" ")
+				
+				if(e.getPatient().getMiddleName()==null)
+				{
+					 name = e.getPatient().getGivenName().concat(" ")
 						.concat(e.getPatient().getFamilyName());
+				}
+				else
+				{
+					name = e.getPatient().getGivenName().concat(" ")
+							.concat(e.getPatient().getMiddleName()).concat(" ")
+							.concat(e.getPatient().getFamilyName());
+				}
 				record.setEncId(e.getEncounterId().toString());
 				record.setPatientType("2");
 				record.setPatientName(name);
@@ -206,11 +215,17 @@ public class PatientDetailasCSVController {
 						.getPatientId());
 				String identifier = e.getPatient().getPatientIdentifier()
 						.getIdentifier();
-				
-				String name = e.getPatient().getGivenName().concat(" ")
-						.concat(e.getPatient().getMiddleName()).concat(" ")
+				if(e.getPatient().getMiddleName()==null)
+				{
+				 name = e.getPatient().getGivenName().concat(" ")
 						.concat(e.getPatient().getFamilyName());
-				
+				}
+				else
+				{
+					name = e.getPatient().getGivenName().concat(" ")
+							.concat(e.getPatient().getMiddleName()).concat(" ")
+							.concat(e.getPatient().getFamilyName());
+				}
 				record.setEncId(e.getEncounterId().toString());
 				
 				record.setPatientName(name);
