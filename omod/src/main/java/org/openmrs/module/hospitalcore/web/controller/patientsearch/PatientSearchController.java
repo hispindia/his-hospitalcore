@@ -67,17 +67,25 @@ public class PatientSearchController {
 		Map<Integer, java.util.Date> lastVisitTime = getLastVisitTime(patients);
 		
 		Map<Integer,String> patientSearchMap = new LinkedHashMap<Integer,String>();
+		//for address in search view
+		Map<Integer,String> patientaddress = new LinkedHashMap<Integer,String>();
 		
 		for(Patient patient:patients){
 			patientSearchMap.put(patient.getPatientId(),Context.getService(HospitalCoreService.class).getPatientByPatientId(patient.getPatientId()).getRelativeName());
 		}
 		
+		for(Patient patient:patients){
+			
+			patientaddress.put(patient.getPatientId(),patient.getPersonAddress().getAddress1().concat(",").concat(patient.getPersonAddress().getCityVillage()));
+			
+		}
 		patientAdmittedDetails(patients);
 		
 		model.addAttribute("lastVisitTime", lastVisitTime);
 		model.addAttribute("patients", patients);
 		model.addAttribute("attributeMap", attributeMap);
 		model.addAttribute("patientSearchMap", patientSearchMap);
+		model.addAttribute("patientaddress", patientaddress);
 		return view;
 	}
 	

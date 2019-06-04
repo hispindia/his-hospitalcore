@@ -48,6 +48,7 @@ import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.PatientIdentifier;
 import org.openmrs.Person;
+import org.openmrs.PersonAddress;
 import org.openmrs.PersonAttribute;
 import org.openmrs.PersonAttributeType;
 import org.openmrs.PersonName;
@@ -243,6 +244,10 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 			for (Object obj : list) {
 				Object[] obss = (Object[]) obj;
 				if (obss != null && obss.length > 0) {
+					//for address in display
+					PersonAddress personadd = new PersonAddress();
+					personadd.setAddress1((String)obss[11]);
+					personadd.setCityVillage((String)obss[12]);
 					Person person = new Person((Integer) obss[0]);
 					PersonName personName = new PersonName((Integer) obss[8]);
 					personName.setGivenName((String) obss[2]);
@@ -252,6 +257,9 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 					Set<PersonName> names = new HashSet<PersonName>();
 					names.add(personName);
 					person.setNames(names);
+					Set<PersonAddress> addres = new HashSet<PersonAddress>();
+					addres.add(personadd);
+					person.setAddresses(addres);
 					Patient patient = new Patient(person);
 					PatientIdentifier patientIdentifier = new PatientIdentifier();
 					patientIdentifier.setPatient(patient);
