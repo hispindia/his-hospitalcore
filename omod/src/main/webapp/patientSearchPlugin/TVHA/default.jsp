@@ -88,7 +88,9 @@ jQuery(document).ready(function() {
 			jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", this.form).keyup(function(event){				
 				if(event.keyCode == 13){	
 					nameInCapital = StringUtils.capitalize(jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", PATIENTSEARCH.form).val());
+					
 					jQuery("#nameOrgivennameOrmiddleNameOrfamilyNameOrIdentifier", PATIENTSEARCH.form).val(nameInCapital);
+					
 					PATIENTSEARCH.search(true);
 				}
 			});
@@ -334,7 +336,7 @@ jQuery(document).ready(function() {
 		
 		/** BUILD QUERY */
 		buildQuery: function(){
-		
+		 
 			// Get value from form			
 			nameOrIdentifier = jQuery.trim(jQuery("#nameOrgivenNameOrmiddleNameOrfamilyNameOrIdentifier", this.form).val());	
 			//nameOrIdentifier = nameOrIdentifier.replace(/\s/g, "");			
@@ -355,9 +357,10 @@ jQuery(document).ready(function() {
 			*/	
 			
 			//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
-			this.selectClause = "SELECT ps.patient_id, ps.identifier, ps.given_name, ps.middle_name, ps.family_name, ps.gender, ps.birthdate, ps.age, ps.person_name_id, ps.dead ";
+			this.selectClause = "SELECT ps.patient_id, ps.identifier, ps.given_name, ps.middle_name, ps.family_name, ps.gender, ps.birthdate, ps.age, ps.person_name_id,ps.dead,ps.admitted,padd.address1,padd.city_village ";
 			this.fromClause   = " FROM patient_search ps";
 			this.fromClause  += " INNER JOIN person pe ON pe.person_id = ps.patient_id";
+			this.fromClause  += " INNER JOIN person_address padd ON padd.person_id = pe.person_id";
 			this.whereClause  = " WHERE";
 			this.whereClause += " (ps.identifier LIKE '%" + nameOrIdentifier +"%' OR ps.fullname LIKE '%" + nameOrIdentifier +  "%')";				
 			 //ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
@@ -408,9 +411,10 @@ jQuery(document).ready(function() {
 			*/	
 			
 			//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
-			this.selectClause = "SELECT ps.patient_id, ps.identifier, ps.given_name, ps.middle_name, ps.family_name, ps.gender, ps.birthdate, ps.age, ps.person_name_id, ps.dead ";
+			this.selectClause = "SELECT ps.patient_id, ps.identifier, ps.given_name, ps.middle_name, ps.family_name, ps.gender, ps.birthdate, ps.age, ps.person_name_id, ps.dead,padd.address1,padd.city_village ";
 			this.fromClause   = " FROM patient_search ps";
 			this.fromClause  += " INNER JOIN person pe ON pe.person_id = ps.patient_id";
+			this.fromClause  += " INNER JOIN person_address padd ON padd.person_id = pe.person_id";
 			this.whereClause  = " WHERE";		
 			this.groupClause = " GROUP BY ps.patient_id";
 			this.orderClause = " ORDER BY ps.patient_id ASC";
