@@ -328,7 +328,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 			obs.setDateCreated(new Date());
 			obs.setObsDatetime(new Date());
 			obs.setLocation(new Location(1));
-			//System.out.println("patient.getPersonName().getGivenName()"+patient.getPersonName().getGivenName());
+	//System.out.println("patient.getPersonName().getGivenName()"+patient.getPersonName().getGivenName());
 			return Context.getObsService().saveObs(obs,
 					"Global obs for " + patient.getPersonName().getGivenName());
 		}
@@ -761,6 +761,1730 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept){
 		return dao.getObsInstanceForDiagnosis(encounter,concept);
 	}
+
+
+	public Integer getNoOfPatientWithDogBite(String gender,Integer d0,String d1)
+	{
+		return dao.getNoOfPatientWithDogBite(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherBite(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherBite(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSnakeBite(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSnakeBite(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRheumatic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRheumatic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBigemany(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBigemany(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCardiac(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCardiac(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVenous(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVenous(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHypertension(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHypertension(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithIschemic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithIschemic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRheumaticHeart(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRheumaticHeart(gender,d0,d1);
+	}
+	////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Integer getNoOfPatientWithVericoseVein(String gender,Integer d0,String d1)
+	{
+		return dao.getNoOfPatientWithVericoseVein(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherCardiovascular(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherCardiovascular(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLymphadenitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLymphadenitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCerebralPalsy(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCerebralPalsy(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEncephalitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEncephalitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEpilepsy(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEpilepsy(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHemiparesis(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHemiparesis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHydrocephalus(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHydrocephalus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithInsomnia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithInsomnia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMigraine(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMigraine(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherNervous(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherNervous(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithParaplegia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherNervous(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithParkinsonism(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithParkinsonism(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCerebro(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCerebro(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVertigo(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVertigo(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCongenitalDisorders(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCongenitalDisorders(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCongenitalHeart(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCongenitalHeart(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDental(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDental(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCaries(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCaries(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAcne(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAcne(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCutaneous(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCutaneous(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDermatitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDermatitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHerpes(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHerpes(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithImpetigo(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithImpetigo(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherSkin(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherSkin(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPruritus(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPruritus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithScabies(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithScabies(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTinea(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTinea(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVersicolor(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVersicolor(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUrticaria(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUrticaria(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVitiligo(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVitiligo(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithWart(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithWart(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDracunculiasis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDracunculiasis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDiarrhea(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDiarrhea(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAcutePancreatitis(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAcutePancreatitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAppendicitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAppendicitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBleeding(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBleeding(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCholecystitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCholecystitis(gender,d0,d1);
+	}
+
+
+	public Integer getNoOfPatientWithDiseasesOral(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDiseasesOral(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithFissure(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithFissure(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithIntestinalObstruction(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithIntestinalObstruction(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithNoninfectiveGastroenteritis(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithNoninfectiveGastroenteritis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChronicLiver(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChronicLiver(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPancreatitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPancreatitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPepticUlcer(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPepticUlcer(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPeritonitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPeritonitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHydatedCystLiver(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHydatedCystLiver(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCholelithiasis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCholelithiasis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGastritis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGastritis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHaemorrhoids(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHaemorrhoids(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHernia(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHernia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGITDisorder(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGITDisorder(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHeartburn(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHeartburn(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAmoebic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAmoebic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCandidiasis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCandidiasis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBacillary(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBacillary(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDysentery(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDysentery(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCretinism(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCretinism(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCystic(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCystic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithThyroidGland(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithThyroidGland(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDehydration(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDehydration(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMellitusType1(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMellitusType1(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMellitusType2(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMellitusType2(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEndemicGoiter(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEndemicGoiter(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHyperthyroidism(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHyperthyroidism(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHypothyroidism(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHypothyroidism(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMalnutrition(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMalnutrition(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDiabetesMellitus(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDiabetesMellitus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherEndocrine(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherEndocrine(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPellagra(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPellagra(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVitaminA(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return  dao.getNoOfPatientWithVitaminA(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVitaminB(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVitaminB(gender,d0,d1);
+	}
+
+
+	public Integer getNoOfPatientWithVitaminD(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVitaminD(gender,d0,d1);						
+	}
+
+
+
+	public Integer getNoOfPatientWithOverweight(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOverweight(gender,d0,d1);
+	}
+
+
+	public Integer getNoOfPatientWithScurvy(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithScurvy(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDNS(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDNS(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHearingLos(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHearingLos(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHoarseness(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHoarseness(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithExterna(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithExterna(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMedia(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMedia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtalgia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtalgia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTinnitus(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTinnitus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithWax(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithWax(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLaryngitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLaryngitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTonsillitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTonsillitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPharangitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPharangitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChronic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChronic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherENT(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherENT(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSinusitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSinusitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTonsilar(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTonsilar(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRhinitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRhinitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTractInfection(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTractInfection(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBlindness(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBlindness(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCataract(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCataract(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithConjuntivitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithConjuntivitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCorneal(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCorneal(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEyeRefraction(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEyeRefraction(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGlaucoma(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGlaucoma(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChoroid(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChoroid(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEyeDisorder(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEyeDisorder(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPterygium(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPterygium(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithStye(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithStye(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCornealUlcer(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCornealUlcer(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTrachoma(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTrachoma(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLocalizedswelling(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLocalizedswelling(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAbdominalPain(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAbdominalPain(gender,d0,d1);
+	}
+
+
+	public Integer getNoOfPatientWithAcuteAbdomen(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAcuteAbdomen(gender,d0,d1);
+	}
+
+
+
+	public Integer getNoOfPatientWithAnorexia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAnorexia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAscites(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAscites(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAtaxia(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAtaxia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithcommunicablediseases(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithcommunicablediseases(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCough(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCough(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithToxicity(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithToxicity(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAphagia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAphagia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDysuria(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDysuria(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEdema(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEdema(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEpistaxis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEpistaxis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithThrive(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithThrive(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHeadache(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHeadache(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHematuria(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHematuria(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithFalling(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithFalling(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithInfantile(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithInfantile(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithJaundice(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithJaundice(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMemoryDisorder(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMemoryDisorder(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherGeneral(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherGeneral(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSyncope(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSyncope(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUrinary(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUrinary(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithWeakness(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithWeakness(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUnknownOrigin(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUnknownOrigin(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAllergies(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAllergies(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithFebrile(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithFebrile(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRenal(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRenal(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithProstatic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithProstatic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBreast(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBreast(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChronicRenal(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChronicRenal(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGlomerular(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGlomerular(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHydrocele(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHydrocele(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDisorderBreast(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDisorderBreast(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSpondylopathies(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSpondylopathies(gender,d0,d1);
+	}
+
+
+
+	public Integer getNoOfPatientWithOsteomyelitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOsteomyelitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChronicOsteomyelitis(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChronicOsteomyelitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithFractures(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithFractures(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCancerBreast(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCancerBreast(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCancerBronchus(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCancerBronchus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCancerCervix(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCancerCervix(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCancerLiver(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCancerLiver(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOesophagus(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOesophagus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOralCavity(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOralCavity(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithStomach(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithStomach(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUterus(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUterus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithNeoplasm(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithNeoplasm(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherNeoplasm(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherNeoplasm(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChoriocarcinoma(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChoriocarcinoma(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMalignant(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMalignant(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAlcohol(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAlcohol(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMoodDisorder(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMoodDisorder(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPsychiatric(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPsychiatric(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSchzophrenia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSchzophrenia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDementia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDementia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSenile(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSenile(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRetardation(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRetardation(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMental(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMental(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAsthma(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAsthma(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBronchiectasis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBronchiectasis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLowerRespiratory(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLowerRespiratory(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBronchiolitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBronchiolitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBronchoneumonia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBronchoneumonia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRespiratory(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRespiratory(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPhysiotherapy(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPhysiotherapy(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHealthServices(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHealthServices(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGonococcus(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGonococcus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAnogenital(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAnogenital(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTransmitted(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTransmitted(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSyphilis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSyphilis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChlamydia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChlamydia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGenitalUlcer(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGenitalUlcer(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUrethral(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUrethral(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChikungunya(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChikungunya(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDengue(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDengue(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithFilariasis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithFilariasis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithJapaneseEncephalitis(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithJapaneseEncephalitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithKalaAzar(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithKalaAzar(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMalaria(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMalaria(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBirthWeight(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBirthWeight(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUmbilical(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUmbilical(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithNewborn(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithNewborn(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithNeonatorum(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithNeonatorum(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBirthTrauma(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBirthTrauma(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEctopic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEctopic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEdemaProtenuria(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEdemaProtenuria(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSpontaneous(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSpontaneous(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPostpartum(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPostpartum(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPuerperalSepsis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPuerperalSepsis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHemorrhage(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHemorrhage(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMaternal(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMaternal(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLabour(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLabour(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEclampsia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEclampsia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVomitting(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVomitting(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAbortive(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAbortive(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPreterm(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPreterm(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithParasitic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithParasitic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPuerperium(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPuerperium(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMalpresentation(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMalpresentation(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGestations(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGestations(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTwinPregnancy(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTwinPregnancy(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMaterna(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMaterna(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTeenage(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTeenage(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEarly(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEarly(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPregnacyTest(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPregnacyTest(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRhIncompatibility(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRhIncompatibility(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithFalseLabour(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithFalseLabour(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBreechDelivery(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBreechDelivery(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithNephrotic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithNephrotic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherBreas(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherBreas(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGenitourinary(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGenitourinary(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithParaphimosis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithParaphimosis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTract(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTract(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUrolithiasis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUrolithiasis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDysmenorrhoea(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDysmenorrhoea(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherGynaecologicalDisorder(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherGynaecologicalDisorder(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUterineFibroid(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUterineFibroid(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAmenorrhoe(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAmenorrhoe(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGenital(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGenital(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMenorrhagia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMenorrhagia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOvarian(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOvarian(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVaginal(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVaginal(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVaginitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVaginitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLeucorrhoea(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLeucorrhoea(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPelvic(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPelvic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAnaemia(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAnaemia(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithImmune(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithImmune(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithhemorrhagic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithhemorrhagic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAnthrax(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAnthrax(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDiphtheria(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDiphtheria(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHIV(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHIV(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMeasles(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMeasles(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithInfectious(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithInfectious(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPlague(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPlague(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSevereSepsis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSevereSepsis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTuberculosis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTuberculosis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithInfestation(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithInfestation(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLeptopirosis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLeptopirosis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithParalysis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithParalysis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMeningococcal(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMeningococcal(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithUnspecified(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithUnspecified(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRabies(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRabies(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTetanus(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTetanus(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMeningitis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMeningitis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithChicken(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithChicken(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLeprosy(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLeprosy(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHerpesSimplex(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHerpesSimplex(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMumps(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMumps(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCholera(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCholera(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithEnteric(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithEnteric(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHepatitisA(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHepatitisA(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHepatitisUnspecified(String gender,
+			Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHepatitisUnspecified(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHepatitisB(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHepatitisB(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHepatitisC(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHepatitisC(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHepatitisE(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHepatitisE(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLymphadenopathy(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLymphadenopathy(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithWhooping(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithWhooping(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithInfuenza(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithInfuenza(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithSwine(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithSwine(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithTraffic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithTraffic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDrowning(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDrowning(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAssault(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAssault(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithBurn(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithBurn(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHarm(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHarm(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithInfected(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithInfected(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAbuse(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAbuse(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPoisoning(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPoisoning(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithForeign(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithForeign(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAccidents(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAccidents(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOtherInjuries(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOtherInjuries(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithArthritisOther(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithArthritisOther(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDislocation(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDislocation(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGouty(String gender, Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGouty(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOsteoarthritis(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOsteoarthritis(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithwithoutFracture(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithwithoutFracture(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMusculoskeletal(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMusculoskeletal(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPyogenic(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPyogenic(gender,d0,d1);
+	}
+
+	public Integer getNoOfPatientWithRheumatoid(String gender, Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithRheumatoid(gender,d0,d1);
+	}
+
+
 
 
 }

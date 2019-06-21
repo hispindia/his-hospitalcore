@@ -19,6 +19,9 @@
 --%> 
 <script type="text/javascript">
 	$ = jQuery.noConflict();
+	 function getContextPath(){
+		 return "${pageContext.request.contextPath}";
+		 }
 </script>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/hospitalcore/styles/paging.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/moduleResources/hospitalcore/styles/common.css" />
@@ -40,4 +43,5 @@
 <script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/page-actions.js" ></script>
 <script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/page-utils.js" ></script>
 <script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/string-utils.js" ></script>
+<script type="text/javascript"  src="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/jquery/jquery.monthpicker.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/moduleResources/hospitalcore/scripts/jquery/jquery.tipTip.js"></script>
