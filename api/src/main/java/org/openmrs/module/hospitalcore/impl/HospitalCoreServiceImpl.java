@@ -2483,8 +2483,220 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		// TODO Auto-generated method stub
 		return dao.getNoOfPatientWithRheumatoid(gender,d0,d1);
 	}
+//drugs
+	public Integer getNoOfPatientWithAnalgesicsAntiPyreticdrugs(Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAnalgesicsAntiPyreticdrugs(d0,d1);
+	}
 
+	public Integer getNoOfPatientWithAntiAllergicdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiAllergicdrugs(d0,d1);
+	}
 
+	public Integer getNoOfPatientWithAntiAnaemicdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiAnaemicdrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiEpilepticdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiEpilepticdrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntFilarial(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntFilarial(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiFungaldrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiFungaldrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiLeishmaniasisdrugs(Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiLeishmaniasisdrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiParkinsonismdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiParkinsonismdrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiProtozoaldrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiProtozoaldrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiRabies(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiRabies(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiBacterials(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiBacterials(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiCancerdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiCancerdrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiHelminthics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiHelminthics(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiMalarials(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiMalarials(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiSeptics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiSeptics(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiVertigodrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiVertigodrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiVirals(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiVirals(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithCardiovasculardrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithCardiovasculardrugs(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithContrastagents(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithContrastagents(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDentalpreparation(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDentalpreparation(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDermatologicalointmentcreams(Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDermatologicalointmentcreams(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDiuretics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDiuretics(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDrugsactingRespiratory(Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDrugsactingRespiratory(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDrugscoagulation(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDrugscoagulation(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDrugsGouRheumatoid(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDrugsGouRheumatoid(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithDrugsMigraine(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithDrugsMigraine(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithGastrointestinal(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithGastrointestinal(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithHormoneEndocrine(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithHormoneEndocrine(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithImmunologicals(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithImmunologicals(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithLifeSaving(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithLifeSaving(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMetabolism(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMetabolism(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithMucolytic(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithMucolytic(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiCholinesterases(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiCholinesterases(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOphthalmological(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOphthalmological(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOpthalmic(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOpthalmic(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithOxytocics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithOxytocics(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithPsychotherapeutic(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithPsychotherapeutic(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithElectrolyte(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithElectrolyte(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithParenteral(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithParenteral(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithVitamins(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithVitamins(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAnaesthetics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAnaesthetics(d0,d1);
+	}
+
+	public Integer getNoOfPatientWithAntiDiabeticdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		return dao.getNoOfPatientWithAntiDiabeticdrugs(d0,d1);
+	}
 
 
 }

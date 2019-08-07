@@ -58,6 +58,8 @@ public class AdminList extends AdministrationSectionExt {
 		map.put("module/hospitalcore/listForm.form", "hospitalcore.form.list");
 		map.put("module/hospitalcore/downloadCsv.form", "hospitalcore.download.csv");
         map.put("module/hospitalcore/diagnosisHIS.form", "hospitalcore.download.excel");
+        map.put("module/hospitalcore/procedureHIS.form", "hospitalcore.downloadp.excel");
+        map.put("module/hospitalcore/drugHIS.form", "hospitalcore.downloadd.excel");
 		//map.put("/module/hospitalcore/conceptImport.form", "hospitalcore.concept.import");
 		return map;
 	}

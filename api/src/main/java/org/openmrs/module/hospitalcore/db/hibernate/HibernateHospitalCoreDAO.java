@@ -57,8 +57,11 @@ import org.openmrs.module.hospitalcore.db.HospitalCoreDAO;
 import org.openmrs.module.hospitalcore.model.CoreForm;
 import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.hospitalcore.util.DateUtils;
+
 import java.text.ParseException;
+
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -8087,6 +8090,724 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////
+	//drugs
+	public Integer getNoOfPatientWithAnalgesicsAntiPyreticdrugs(Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANALGESICS AND ANTIPYRETIC DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiAllergicdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI ALLERGIC AND DRUGS USED IN ANAPHYLAXIS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiAnaemicdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI ANAEMIC DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+	public Integer getNoOfPatientWithAntiDiabeticdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI DIABETIC DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+	public Integer getNoOfPatientWithAntiEpilepticdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI EPILEPTIC DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntFilarial(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI FILARIAL')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiFungaldrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI FUNGAL DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiLeishmaniasisdrugs(Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI LEISHMANIASIS DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiParkinsonismdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI PARKINSONISM DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiProtozoaldrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI PROTOZOAL DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiRabies(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI RABIES')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiBacterials(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTIBACTERIALS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiCancerdrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTICANCER DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiHelminthics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTIHELMINTHICS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiMalarials(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTIMALARIALS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiSeptics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTISEPTICS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiVertigodrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTI VERTIGO DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiVirals(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANTIVIRAL')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithCardiovasculardrugs(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('CARDIOVASCULAR DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithContrastagents(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('CONTRAST AGENTS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithDentalpreparation(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('DERMATOLOGICAL OINTMENT AND CREAMS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithDermatologicalointmentcreams(Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANALGESICS AND ANTIPYRETIC DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithDiuretics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('DIURETICS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithDrugsactingRespiratory(Integer d0,
+			String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('DRUGS ACTING ON RESPIRATORY SYSTEM')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithDrugscoagulation(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('DRUGS AFFECTING COAGULATION')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithDrugsGouRheumatoid(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('DRUGS FOR GOUT AND RHEUMATOID DISORDERS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithDrugsMigraine(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('DRUGS FOR MIGRAINE')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithGastrointestinal(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('GASTROINTESTINAL DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+	public Integer getNoOfPatientWithAnaesthetics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('ANAESTHETICS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithHormoneEndocrine(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('HORMONE AND OTHER ENDOCRINE DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithImmunologicals(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('IMMUNOLOGICALS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithLifeSaving(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('LIFE SAVING DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithMetabolism(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('METABOLISM (HYPOLIPIDAEMIC AGENTS)')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithMucolytic(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('MUCOLYTIC, PROTEOLYTIC AND OTHER ENZYMES')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithAntiCholinesterases(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('MUSCLE RELAXANT AND ANTICHOLINESTERASES')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithOphthalmological(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('OPHTHALMOLOGICAL AND ENT PREPARATION')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithOpthalmic(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('OPTHALMIC DIAGNOSTIC AGENTS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithOxytocics(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('OXYTOCICS AND ANTIOXYTOCICS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithPsychotherapeutic(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('PSYCHOTHERAPEUTIC DRUGS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithElectrolyte(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('SOLUTION CORRECTING WATER AND ELECTROLYTE')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithParenteral(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('SOLUTIONS FOR PARENTERAL NUTRITION')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+
+	public Integer getNoOfPatientWithVitamins(Integer d0, String d1) {
+		// TODO Auto-generated method stub
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String query = " SELECT COUNT(pers)from ( "
+				       + " SELECT isdp.patient_id AS pers FROM inventory_store_drug_patient isdp"
+                       + " INNER JOIN inventory_store_drug_patient_detail isdpd ON isdp.id=isdpd.store_drug_patient_id"
+                       + " INNER JOIN inventory_store_drug_transaction_detail isdt ON isdt.id=isdpd.transaction_detail_id "
+                       + " INNER JOIN inventory_drug id ON id.id=isdt.drug_id "
+                       + " INNER JOIN inventory_drug_category idc ON id.category_id=idc.id "
+                       + " WHERE idc.name IN ('VITAMINS AND MINERALS')"
+                       + " AND MONTH(isdt.created_on)="+ "'" + d0 + "'"
+                       + " AND YEAR(isdt.created_on)= " + "'" + d1 + "'" 
+                       + " GROUP BY isdp.patient_id "
+                       + " )ambika " ;
+		return jdbcTemplate.queryForInt(query);
+	}
+	
+	
+	
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	SimpleDateFormat formatterExt = new SimpleDateFormat("dd/MM/yyyy");
@@ -8496,6 +9217,8 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		criteria.add(Restrictions.eq("concept", concept));
 		return criteria.list();
 	}
+
+
 
 
 }

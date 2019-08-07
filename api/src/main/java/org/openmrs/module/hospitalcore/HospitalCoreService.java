@@ -516,4 +516,51 @@ public interface HospitalCoreService extends OpenmrsService {
 	public Integer getNoOfPatientWithHydrocele(String gender,Integer d0,String d1);
 	public Integer getNoOfPatientWithDisorderBreast(String gender,Integer d0,String d1);
 	
+	
+	////Drug
+	public Integer getNoOfPatientWithAnalgesicsAntiPyreticdrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiAllergicdrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiAnaemicdrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiDiabeticdrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiEpilepticdrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntFilarial(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiFungaldrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiLeishmaniasisdrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiParkinsonismdrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiProtozoaldrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiRabies(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiBacterials(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiCancerdrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiHelminthics(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiMalarials(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiSeptics(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiVertigodrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiVirals(Integer d0,String d1);
+	public Integer getNoOfPatientWithCardiovasculardrugs(Integer d0,String d1);
+	public Integer getNoOfPatientWithContrastagents(Integer d0,String d1);
+	public Integer getNoOfPatientWithDentalpreparation(Integer d0,String d1);
+	public Integer getNoOfPatientWithDermatologicalointmentcreams(Integer d0,String d1);
+	public Integer getNoOfPatientWithDiuretics(Integer d0,String d1);
+	public Integer getNoOfPatientWithDrugsactingRespiratory(Integer d0,String d1);
+	public Integer getNoOfPatientWithDrugscoagulation(Integer d0,String d1);
+	public Integer getNoOfPatientWithDrugsGouRheumatoid(Integer d0,String d1);
+	public Integer getNoOfPatientWithDrugsMigraine(Integer d0,String d1);
+	public Integer getNoOfPatientWithGastrointestinal(Integer d0,String d1);
+	public Integer getNoOfPatientWithAnaesthetics(Integer d0,String d1);
+	public Integer getNoOfPatientWithHormoneEndocrine(Integer d0,String d1);
+	public Integer getNoOfPatientWithImmunologicals(Integer d0,String d1);
+	public Integer getNoOfPatientWithLifeSaving(Integer d0,String d1);
+	public Integer getNoOfPatientWithMetabolism(Integer d0,String d1);
+	public Integer getNoOfPatientWithMucolytic(Integer d0,String d1);
+	public Integer getNoOfPatientWithAntiCholinesterases(Integer d0,String d1);
+	public Integer getNoOfPatientWithOphthalmological(Integer d0,String d1);
+	public Integer getNoOfPatientWithOpthalmic (Integer d0,String d1);
+	public Integer getNoOfPatientWithOxytocics(Integer d0,String d1);
+	public Integer getNoOfPatientWithPsychotherapeutic(Integer d0,String d1);
+	public Integer getNoOfPatientWithElectrolyte(Integer d0,String d1);
+	public Integer getNoOfPatientWithParenteral(Integer d0,String d1);
+	public Integer getNoOfPatientWithVitamins(Integer d0,String d1);
+	
+	
+	
 }
