@@ -71,10 +71,10 @@ public class PatientServiceBill implements Serializable {
 	
 	private Set<PatientServiceBillItem> billItems;
 	//New requirement discount and special ward
-    private float waiverPercentage;
-    private float spclwardPercentage;
-    private float waiverAmount;
-    private float spclwardAmount;
+    private Float waiverPercentage;
+    private Float spclwardPercentage;
+    private Float waiverAmount;
+    private Float spclwardAmount;
     
     private BigDecimal amountPayable;
     
@@ -218,34 +218,34 @@ public class PatientServiceBill implements Serializable {
 			this.comment = comment;
 		}
 
-		public float getWaiverPercentage() {
+		public Float getWaiverPercentage() {
 			return waiverPercentage;
 		}
 
-		public void setWaiverPercentage(float waiverPercentage) {
+		public void setWaiverPercentage(Float waiverPercentage) {
 			this.waiverPercentage = waiverPercentage;
 		}
-		 public float getSpclwardPercentage() {
+		 public Float getSpclwardPercentage() {
 				return spclwardPercentage;
 			}
 
-			public void setSpclwardPercentage(float spclwardPercentage) {
+			public void setSpclwardPercentage(Float spclwardPercentage) {
 				this.spclwardPercentage = spclwardPercentage;
 			}
 
-			public float getWaiverAmount() {
+			public Float getWaiverAmount() {
 				return waiverAmount;
 			}
 
-			public void setWaiverAmount(float waiverAmount) {
+			public void setWaiverAmount(Float waiverAmount) {
 				this.waiverAmount = waiverAmount;
 			}
 
-			public float getSpclwardAmount() {
+			public Float getSpclwardAmount() {
 				return spclwardAmount;
 			}
 
-			public void setSpclwardAmount(float spclwardAmount) {
+			public void setSpclwardAmount(Float spclwardAmount) {
 				this.spclwardAmount = spclwardAmount;
 			}
 
