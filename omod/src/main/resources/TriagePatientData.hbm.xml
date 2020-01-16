@@ -18,6 +18,9 @@
 		<property name="pulsRate" column="puls_rate" />
 		<property name="temperature" column="temperature" />
 		<property name="lastMenstrualDate" column="last_menstrual" />
+		<property name="fbs" column="fbs" />
+		<property name="rbs" column="rbs" />
+		<property name="ppbs" column="ppbs" />
 		<property name="createdOn" column="created_on" />
 		<many-to-one name="triageLogId" column="triage_log_id"  class="org.openmrs.module.hospitalcore.model.TriagePatientQueueLog"/>
 		<many-to-one name="encounterOpd" column="encounter_opd"  class="org.openmrs.Encounter"/>

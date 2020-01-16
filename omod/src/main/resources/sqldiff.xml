@@ -462,5 +462,16 @@
 			`encounter_opd` integer,
 			 PRIMARY KEY (id));
 		</sql>
+	</diff>
+	<diff>
+		<version>3.1</version>
+		<author>Shubham</author>
+		<date>15th Jan 2020</date>
+		<description>
+			Add columns fbs, rbs and ppbs to triage_patient_data table.
+		</description>
+		<sql>
+			ALTER TABLE triage_patient_data ADD COLUMN (fbs DOUBLE(5, 2), rbs DOUBLE(5, 2), ppbs DOUBLE(5, 2));
+		</sql>
 	</diff>	
 </sqldiff>

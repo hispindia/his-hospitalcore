@@ -37,6 +37,9 @@ public class TriagePatientData implements Serializable {
 	private Double pulsRate;
 	private Double temperature;
 	private Date lastMenstrualDate;
+	private Double fbs;
+	private Double rbs;
+	private Double ppbs;
 	private Date createdOn;
 	private TriagePatientQueueLog triageLogId;
 	private Encounter encounterOpd;
@@ -94,6 +97,31 @@ public class TriagePatientData implements Serializable {
 	public void setLastMenstrualDate(Date lastMenstrualDate) {
 		this.lastMenstrualDate = lastMenstrualDate;
 	}
+	
+	public Double getFbs() {
+		return fbs;
+	}
+
+	public void setFbs(Double fbs) {
+		this.fbs = fbs;
+	}
+
+	public Double getRbs() {
+		return rbs;
+	}
+
+	public void setRbs(Double rbs) {
+		this.rbs = rbs;
+	}
+
+	public Double getPpbs() {
+		return ppbs;
+	}
+
+	public void setPpbs(Double ppbs) {
+		this.ppbs = ppbs;
+	}
+	
 	public Date getCreatedOn() {
 		return createdOn;
 	}
