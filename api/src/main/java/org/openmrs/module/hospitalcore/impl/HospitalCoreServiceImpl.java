@@ -18,7 +18,6 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore.impl;
 
 import java.io.IOException;
@@ -30,6 +29,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -784,4 +784,10 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public void saveOrUpdateObs(Obs obs){
 		dao.saveOrUpdateObs(obs);
 	}
+
+	// Clinical Morbidity Report
+	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(String valueCodes, Integer month, Integer year, String ward) {
+		return dao.getNumberOfPatientsWithAgeGroups(valueCodes, month, year, ward);
+	}
 }
+

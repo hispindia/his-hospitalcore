@@ -18,11 +18,11 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore.db;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.openmrs.Concept;
@@ -138,4 +138,7 @@ public interface HospitalCoreDAO {
 	public void saveOrUpdatePersonAttributee(Integer personAttributeId,Integer voidedBy) throws DAOException;
 	public Obs getObsByEncounterAndConcept(Encounter encounter,Set<Concept> concepts) throws DAOException;
 	public void saveOrUpdateObs(Obs obs) throws DAOException;
+
+	// Clinical Morbidity Report
+	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(String valueCodes, Integer month, Integer year, String ward);
 }

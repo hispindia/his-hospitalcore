@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/module/hospitalcore/conceptImport.form")
 public class DiagnosisImporterController {
 
-// TODO: replace System.out and printStackTrace with log messages
+
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getUploadForm(

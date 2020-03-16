@@ -18,13 +18,13 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -230,4 +230,6 @@ public interface HospitalCoreService extends OpenmrsService {
 	public Obs getObsByEncounterAndConcept(Encounter encounter,Set<Concept> concepts) throws APIException;
 	public void saveOrUpdateObs(Obs obs) throws APIException;
 
+	// Clinical Morbidity Report
+	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(String valueCodes, Integer month, Integer year, String ward);
 }

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 
 
-import org.openmrs.api.context.Context;
-import org.openmrs.module.hospitalcore.HospitalCoreService;
+// import org.openmrs.api.context.Context;
+// import org.openmrs.module.hospitalcore.HospitalCoreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +30,7 @@ public class DownloadAsCSvController {
 		                         @RequestParam(value="currentPage",required=false)  Integer currentPage,
 		                        Model model, HttpServletRequest request){
 			
-			HospitalCoreService hcs=Context.getService(HospitalCoreService.class);
+			// HospitalCoreService hcs=Context.getService(HospitalCoreService.class);
 			 
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			String dateStr = sdf.format(new Date());
