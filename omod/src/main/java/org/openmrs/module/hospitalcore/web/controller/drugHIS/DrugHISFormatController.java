@@ -1,9 +1,6 @@
 package org.openmrs.module.hospitalcore.web.controller.drugHIS;
 
 import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.api.context.Context;

@@ -225,4 +225,8 @@ public interface HospitalCoreService extends OpenmrsService {
 	public Map<String, Object> getNumberOfPatientsWithDiagnosisList(String name, String code, Integer month, Integer year, String valueCodes);
 	public List<Map<String, Object>> getNumberOfPatientsWithDrugCategoriesList(Integer month, Integer year);
 	public List<Map<String, Object>> getNumberOfPatientsWithProceduresList(Integer month, Integer year);
+
+	public List<Map<String, Object>> getPatientDemographicDetailsAPI(String patientIdentifier, String date);
+	public List<Map<String, Object>> getHospitalProperties();
+	public List<Map<String, Object>> getPatientDiagnosiList(Integer patientId, String date);
 }

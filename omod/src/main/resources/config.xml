@@ -109,6 +109,13 @@
 			NIN code for hospitals
 		</description>
 	</globalProperty>
+	<globalProperty>
+		<property>@MODULE_ID@.slipMessage</property>
+		<defaultValue>Thank you</defaultValue>
+		<description>
+			Message for opd slip
+		</description>
+	</globalProperty>
 	<!-- Internationalization -->
 	<!-- All message codes should start with @MODULE_ID@.* -->
 	<messages>
@@ -172,4 +179,3 @@
 		IpdPatientVitalStatistics.hbm.xml
     </mappingFiles>
 </module>
-

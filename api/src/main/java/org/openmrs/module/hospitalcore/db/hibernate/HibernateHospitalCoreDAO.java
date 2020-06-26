@@ -520,4 +520,25 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		String query = "SELECT cn.name, IFNULL(temp.maleCount, 0) AS \"males\", IFNULL(temp.femaleCount, 0) AS \"females\" FROM concept_name cn INNER JOIN concept ON concept.concept_id = cn.concept_id  INNER JOIN concept_class cc ON cc.concept_class_id = concept.class_id AND cc.concept_class_id = 2 LEFT JOIN ( SELECT temp.value_coded, SUM(IF (temp.gender = 'M', 1, 0)) AS \"maleCount\", SUM(IF (temp.gender = 'F', 1, 0)) AS \"femaleCount\" FROM ( SELECT obs.obs_id, obs.person_id, obs.value_coded, cn.name, obs.obs_datetime, person.gender  FROM obs INNER JOIN person ON person.person_id = obs.person_id INNER JOIN concept_name cn ON cn.concept_id = obs.value_coded AND cn.concept_name_type = 'FULLY_SPECIFIED' INNER JOIN concept ON concept.concept_id = cn.concept_id  INNER JOIN concept_class cc ON cc.concept_class_id = concept.class_id AND cc.concept_class_id = 2 WHERE MONTH(obs.obs_datetime) = " + month + " AND YEAR(obs.obs_datetime) = " + year + " GROUP BY obs.person_id, cn.concept_id ) temp GROUP BY temp.value_coded) temp ON temp.value_coded = cn.concept_id WHERE cn.concept_name_type = 'FULLY_SPECIFIED' ORDER BY cn.name";
 		return jdbcTemplate.queryForList(query);
 	}
+
+	public List<Map<String, Object>> getPatientDemographicDetailsAPI(String patientIdentifier, String date) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select ps.patient_id, ps.identifier, concat_ws(' ', ps.given_name, ps.middle_name, ps.family_name) as patientName, ps.gender, concat('', encounter.encounter_datetime) as visit_date, cn.name as opd_visit, case when TIMESTAMPDIFF(year, ps.birthdate, encounter.encounter_datetime) < 1 then case when TIMESTAMPDIFF(month, ps.birthdate, encounter.encounter_datetime) < 1 then concat_ws(' ', TIMESTAMPDIFF(day, ps.birthdate, encounter.encounter_datetime), 'd') else concat_ws(' ', TIMESTAMPDIFF(month, ps.birthdate, encounter.encounter_datetime), 'm') end else concat_ws(' ', TIMESTAMPDIFF(year, ps.birthdate, encounter.encounter_datetime), 'y') end as age from patient_search ps inner join encounter on encounter.patient_id = ps.patient_id inner join obs on obs.encounter_id = encounter.encounter_id inner join concept_name cn on cn.concept_id = obs.value_coded and cn.concept_name_type = 'FULLY_SPECIFIED' where ps.identifier  = '" + patientIdentifier + "' AND date(encounter.encounter_datetime) = '" + date + "' AND obs.concept_id = 3";
+		
+		return jdbcTemplate.queryForList(sql);
+	}
+
+	public List<Map<String, Object>> getHospitalProperties() {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select case when gp.property = 'hospital.location_user' then 'hospitalName' else 'ninCode' end as property, gp.property_value from global_property gp where gp.property in ('hospital.location_user', 'hospitalcore.ninCode')";
+
+		return jdbcTemplate.queryForList(sql);
+	}
+
+	public List<Map<String, Object>> getPatientDiagnosiList(Integer patientId, String date) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select cn.name, crt.code, concat_ws(' ', pn.given_name, pn.middle_name, pn.family_name) as doctorName from obs inner join concept_name cn on cn.concept_id = obs.value_coded and cn.concept_name_type = 'FULLY_SPECIFIED' inner join concept_name cn1 on cn1.concept_id = obs.concept_id and cn1.concept_name_type = 'FULLY_SPECIFIED' inner join concept_reference_map crm on crm.concept_id = cn.concept_id inner join concept_reference_term crt on crt.concept_reference_term_id = crm.concept_reference_term_id and crt.concept_source_id = 3 inner join users on users.user_id = obs.creator inner join person on person.person_id = users.person_id inner join person_name pn on pn.person_id = person.person_id where obs.person_id = " + patientId + " and date(obs_datetime) = '" + date + "' AND cn1.name in ('FINAL DIAGNOSIS', 'PROVISIONAL DIAGNOSIS') group by obs.value_coded";
+
+		return jdbcTemplate.queryForList(sql);
+	}
 }

@@ -774,4 +774,16 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public List<Map<String, Object>> getNumberOfPatientsWithProceduresList(Integer month, Integer year) {
 		return dao.getNumberOfPatientsWithProceduresList(month, year);
 	}
+
+	public List<Map<String, Object>> getPatientDemographicDetailsAPI(String patientIdentifier, String date) {
+		return dao.getPatientDemographicDetailsAPI(patientIdentifier, date);
+	}
+
+	public List<Map<String, Object>> getHospitalProperties() {
+		return dao.getHospitalProperties();
+	}
+
+	public List<Map<String, Object>> getPatientDiagnosiList(Integer patientId, String date) {
+		return dao.getPatientDiagnosiList(patientId, date);
+	}
 }
