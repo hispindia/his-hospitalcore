@@ -18,7 +18,6 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore.impl;
 
 import java.io.IOException;
@@ -30,6 +29,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -760,6 +760,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept){
 		return dao.getObsInstanceForDiagnosis(encounter,concept);
 	}
-
+	public List getPatientDemographicDetailsAPI(String patientIdentifier, String date) {
+		return dao.getPatientDemographicDetailsAPI(patientIdentifier, date);
+	}
 
 }

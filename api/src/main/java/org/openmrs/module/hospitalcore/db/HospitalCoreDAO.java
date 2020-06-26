@@ -18,12 +18,12 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore.db;
 
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.openmrs.Concept;
@@ -130,4 +130,6 @@ public interface HospitalCoreDAO {
 	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes);
 	public Set<Encounter>getEncountersByPatientAndDateFromObs(String date);
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws DAOException;
+
+	public List getPatientDemographicDetailsAPI(String patientIdentifier, String date);
 }

@@ -492,4 +492,12 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 		return criteria.list();
 	}
 
+	public List getPatientDemographicDetailsAPI(String patientIdentifier, String date) {
+		
+		String hql = "SELECT ps.identifier, ps.gender, ps.age, concat(\"\", date(encounter.encounter_datetime)), cn.name FROM patient_search ps INNER JOIN encounter ON encounter.patient_id = ps.patient_id INNER JOIN obs ON obs.encounter_id = encounter.encounter_id INNER JOIN concept_name cn ON cn.concept_id = obs.value_coded AND cn.concept_name_type = 'FULLY_SPECIFIED' WHERE ps.identifier = '" + patientIdentifier + "' AND DATE(encounter.encounter_datetime) = '" + date + "' AND obs.concept_id = 3;";
+
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		return query.list();
+	}
+
 }

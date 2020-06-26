@@ -18,7 +18,6 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore;
 
 import java.io.IOException;
@@ -26,6 +25,7 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -219,5 +219,7 @@ public interface HospitalCoreService extends OpenmrsService {
 	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes);
 	public Set<Encounter>getEncountersByPatientAndDateFromObs(String date);
 	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws APIException;
+
+	public List getPatientDemographicDetailsAPI(String patientIdentifier, String date);
 	
 }
