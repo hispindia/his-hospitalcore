@@ -786,8 +786,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	}
 
 	// Clinical Morbidity Report
-	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(String valueCodes, Integer month, Integer year, String ward) {
-		return dao.getNumberOfPatientsWithAgeGroups(valueCodes, month, year, ward);
+	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(Integer month, Integer year, String ward) {
+		return dao.getNumberOfPatientsWithAgeGroups(month, year, ward);
 	}
 }
 

@@ -231,5 +231,5 @@ public interface HospitalCoreService extends OpenmrsService {
 	public void saveOrUpdateObs(Obs obs) throws APIException;
 
 	// Clinical Morbidity Report
-	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(String valueCodes, Integer month, Integer year, String ward);
+	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(Integer month, Integer year, String ward);
 }

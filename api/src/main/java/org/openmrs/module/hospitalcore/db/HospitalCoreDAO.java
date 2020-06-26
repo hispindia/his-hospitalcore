@@ -140,5 +140,5 @@ public interface HospitalCoreDAO {
 	public void saveOrUpdateObs(Obs obs) throws DAOException;
 
 	// Clinical Morbidity Report
-	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(String valueCodes, Integer month, Integer year, String ward);
+	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(Integer month, Integer year, String ward);
 }

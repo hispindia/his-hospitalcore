@@ -1,7 +1,5 @@
 package org.openmrs.module.hospitalcore.web.controller.clinicalMorbidity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +24,7 @@ public class ClinicalMorbidityReportController {
 						@RequestParam(value = "w", required = true) String ward,
 						Model model, HttpServletRequest request) {
 
-		String[] ageGroups = {"0-29 Days (Neonates)", "Infants", "Under 5", "5 - 11 Years", "11 - 18 Years", "18 - 58 Years", "58 And Above"};  
+		String[] ageGroupsArray = {"0-29 Days (Neonates)", "Infants", "Under 5", "5 - 11 Years", "11 - 18 Years", "18 - 58 Years", "58 And Above"};  
 		String[][] diagnosisMappings = {
 			{ "W54.0", "Bites & Stings", "Dogbite", "1067" }, 
 			{ "T63, W20-W64", "Bites & Stings", "Other bites, stings and inanimate/animate mechanical force", "1068, 1069, 1241, 1261, 2498" }, 
@@ -42,13 +40,13 @@ public class ClinicalMorbidityReportController {
 			{ "I00-I99", "Cardiovascular ", "Other Cardiovascular Disorder", "1122, 1182, 1385, 1756, 1771, 1779, 1811, 1815, 1816, 1835, 1837, 1838, 1867, 1279, 1950, 2515, 1841" }, 
 			{ "I88, L04", "Cardiovascular/Dermatology", "Lymphadnitis", "1164, 1439" }, 
 			{ "G80", "CNS", "Cerebral Palsy", "1157" }, 
-			{ "G04", "CNS", "Encephalitis", "1843, 2897,  1722, 2901" }, 
+			{ "G04", "CNS", "Encephalitis", "1843, 2897, 1722, 2901" }, 
 			{ "G40 - G47", "CNS", "Epilepsy/Seizure", "1064, 1088, 1928, 2177" }, 
 			{ "G81", "CNS", "Hemiperises/Hemiplegia", "1126" }, 
 			{ "G91", "CNS", "Hydrocephalus ", "1773" }, 
 			{ "G47", "CNS", "Insomnia", "1135" }, 
 			{ "G43, G44", "CNS", "Migraine/Cluster Headache", "1260, 1433" }, 
-			{ "G00 - G99", "CNS", "Other Nervous System Disorder", "1123, 1125, 1200, 1212, 1250, 1286, 1372, 1400, 1404, 1769, 1842, 1844, 1957, 2111, 2167, 2174,  2885, 2126, 2143, 2047" }, 
+			{ "G00 - G99", "CNS", "Other Nervous System Disorder", "1123, 1125, 1200, 1212, 1250, 1286, 1372, 1400, 1404, 1769, 1842, 1844, 1957, 2111, 2167, 2174, 2885, 2126, 2143, 2047" }, 
 			{ "G82", "CNS", "Paraplegia(Paraperesis)/Quadriplegia(Quadriperesis)", "1910" }, 
 			{ "G20, G21", "CNS", "Parkinsonism", "1434" }, 
 			{ "I63.9", "CNS/Cardiovascular", "Cerebro Vascular Accident (Stroke)", "1254, 1814, 1923" }, 
@@ -59,7 +57,7 @@ public class ClinicalMorbidityReportController {
 			{ "K02", "Dental", "Dental Caries", "1604, 1610, 1612, 1620, 1624, 1627, 1628, 1631, 1634, 1636, 1639, 1048" }, 
 			{ "L70", "Dermatology", "Acne", "1437" }, 
 			{ "L02", "Dermatology", "Cutaneous Abscess, Furuncle and Curbuncle", "1035, 1053, 1249" }, 
-			{ "L20 - L30", "Dermatology", "Dermatitis and Eczema", "1039, 1040, 1127, 1176, 1515,  1934" }, 
+			{ "L20 - L30", "Dermatology", "Dermatitis and Eczema", "1039, 1040, 1127, 1176, 1515, 1934" }, 
 			{ "B02", "Dermatology", "Herpes Zoster and Complications", "1359, 1130" }, 
 			{ "L01, L08.0", "Dermatology", "Impetigo/Pyoderma", "1492, 1513" }, 
 			{ "L00-L99", "Dermatology", "Other Skin Diseases", "1050, 1134, 1155, 1275, 1460, 1490, 1523, 1768, 1825, 1828, 1861, 1902, 1960, 2100, 2122, 2129, 2611, 1229" }, 
@@ -108,7 +106,7 @@ public class ClinicalMorbidityReportController {
 			{ "E03.9", "Endocrine,Metabolic, Nutritional etc", "Hypothyroidism Unspecified", "1431, 1432" }, 
 			{ "E40-E46", "Endocrine,Metabolic, Nutritional etc", "Malnutrition", "1762, 1765, 1766, 3011" }, 
 			{ "E8 - E13", "Endocrine,Metabolic, Nutritional etc", "Other Diabetes Mellitus (Include Complication)", "1338, 1484, 1846" }, 
-			{ "E00 - E89", "Endocrine,Metabolic, Nutritional etc", "Other Endocrine, Metabolic & Nutrional diseases", "1800 , 1100, 1462, 2093, 2107" }, 
+			{ "E00 - E89", "Endocrine,Metabolic, Nutritional etc", "Other Endocrine, Metabolic & Nutrional diseases", "1800, 1100, 1462, 2093, 2107" }, 
 			{ "E52", "Endocrine,Metabolic, Nutritional etc", "Pellagra", "1108" }, 
 			{ "E50", "Endocrine,Metabolic, Nutritional etc", "Vitamin A Deficiency", "1396" }, 
 			{ "E51-E53", "Endocrine,Metabolic, Nutritional etc", "Vitamin B Deficiency", "1514" }, 
@@ -141,16 +139,16 @@ public class ClinicalMorbidityReportController {
 			{ "H52", "Eye", "Eye Refraction Disorder include Myopia, Presbyiopia, Hypermetropia etc.", "1382, 1453, 1454, 1488" }, 
 			{ "H40 - H42", "Eye", "Glaucoma", "1304" }, 
 			{ "H30 - H36", "Eye", "Other Choroid and Retina Disorder", "1384, 1422, 1423, 1429, 1482, 2889" }, 
-			{ "H00-H59", "Eye", "Other Eye Disorder", "1165, 1289, 1301, 1394, 1417, 1418, 1419, 1420, 1421, 1424, 1425, 1427, 1428, 1430, 1451, 1455, 1461, 2079 , 2446 , 1819" }, 
+			{ "H00-H59", "Eye", "Other Eye Disorder", "1165, 1289, 1301, 1394, 1417, 1418, 1419, 1420, 1421, 1424, 1425, 1427, 1428, 1430, 1451, 1455, 1461, 2079, 2446, 1819" }, 
 			{ "H11.0", "Eye", "Pterygium", "1381" }, 
-			{ "H00", "Eye", "Stye/Chalazion", "1150 , 1348" }, 
-			{ "H16.0, H17", "Eye", "Corneal Ulcer/Opacities", "1408 , 1426" }, 
+			{ "H00", "Eye", "Stye/Chalazion", "1150, 1348" }, 
+			{ "H16.0, H17", "Eye", "Corneal Ulcer/Opacities", "1408, 1426" }, 
 			{ "A71", "Eye/Infection", "Trachoma", "1369" }, 
 			{ "R22", "General", "Localized swelling, mass and lump", "1922" }, 
-			{ "R10.9", "General", " Pain Unspecified", "1063 , 1110 , 1456 , 1664 , 1908 , 2476 , 2484" }, 
+			{ "R10.9", "General", " Pain Unspecified", "1063, 1110, 1456, 1664, 1908, 2476, 2484" }, 
 			{ "R63.5", "General", "Abnormal Weight Gain", "3792" }, 
 			{ "R63.4", "General", "Abnormal Weight Loss", "3793" }, 
-			{ "R10.0", "General", "Acute Abdomen", "1224 , 1225" }, 
+			{ "R10.0", "General", "Acute Abdomen", "1224, 1225" }, 
 			{ "T78", "General", "Anaphylactic Reaction", "3794" }, 
 			{ "R63.0", "General", "Anorexia", "1136" }, 
 			{ "R18, K70.31, K70.11, K71.51", "General", "Ascitis", "1120" }, 
@@ -158,8 +156,8 @@ public class ClinicalMorbidityReportController {
 			{ "Z20", "General", "Contact with or suspected exposure to communicable diseases (STI, TB etc)", "1788" }, 
 			{ "R05", "General", "Cough", "1901" }, 
 			{ "R40", "General", "Drowsiness & Coma", "3795" }, 
-			{ "T50", "General", "Drug Toxicity", "1026 , 1029 , 1106" }, 
-			{ "R13", "General", "Dysphagia/Aphagia", "1204 , 2158 , 1140" }, 
+			{ "T50", "General", "Drug Toxicity", "1026, 1029, 1106" }, 
+			{ "R13", "General", "Dysphagia/Aphagia", "1204, 2158, 1140" }, 
 			{ "R30.0", "General", "Dysurea", "1210" }, 
 			{ "R60", "General", "Edema", "1121" }, 
 			{ "R04", "General", "Epistaxis", "1072" }, 
@@ -170,7 +168,7 @@ public class ClinicalMorbidityReportController {
 			{ "R10.83", "General", "Infantile Colic", "1450" }, 
 			{ "R17", "General", "Jaundice NOS", "1093" }, 
 			{ "R41.3", "General", "Memory Disorder ", "2507" }, 
-			{ "R00 - R99", "General", "Other General", "1474 , 1761 , 2068 , 2146" }, 
+			{ "R00 - R99", "General", "Other General", "1474, 1761, 2068, 2146" }, 
 			{ "R52", "General", "Pain (Unspecified)", "3796" }, 
 			{ "R55", "General", "Syncope/Blackout/Fainting", "1386" }, 
 			{ "R32, R39.81", "General", "Urinary Incontinence", "1834" }, 
@@ -186,39 +184,39 @@ public class ClinicalMorbidityReportController {
 			{ "N43", "Genitourinary", "Hydrocele", "1352" }, 
 			{ "N61", "Genitourinary", "Inflammatory Disorder of Breast", "1326, 1036" }, 
 			{ "N04", "Genitourinary", "Nephrotic Syndrome", "1264" }, 
-			{ "N60 - N65", "Genitourinary", "Other Breast Disorder", "1328 , 1508 , 2434" }, 
-			{ "N00-N99", "Genitourinary", "Other Genitourinary Disorder", "1107, 1184 , 1226 , 1238 , 1298 , 1300 , 1318 , 1379 , 1447 , 1494 , 1783 , 1829 , 1836 , 1890 , 2101 , 2513 , 2076 " }, 
+			{ "N60 - N65", "Genitourinary", "Other Breast Disorder", "1328, 1508, 2434" }, 
+			{ "N00-N99", "Genitourinary", "Other Genitourinary Disorder", "1107, 1184, 1226, 1238, 1298, 1300, 1318, 1379, 1447, 1494, 1783, 1829, 1836, 1890, 2101, 2513, 2076 " }, 
 			{ "N47", "Genitourinary", "Phimosis/Paraphimosis", "1109" }, 
-			{ "N23", "Genitourinary", "Renal Colic", "1377 , 1383" }, 
+			{ "N23", "Genitourinary", "Renal Colic", "1377, 1383" }, 
 			{ "N39.0", "Genitourinary", "Urinary Tract Infection", "1017" }, 
-			{ "N20-N23", "Genitourinary", "Urolithiasis", "1263 , 1760" }, 
+			{ "N20-N23", "Genitourinary", "Urolithiasis", "1263, 1760" }, 
 			{ "N94.4 - N94.6", "Gynaecology", "Dysmenorrhoea", "1045" }, 
-			{ "N70-N99", "Gynaecology", "Other Gynaecological Disorder", "1009 , 1062 , 1343 , 1312 , 1442 , 1443 , 1444 , 1445 , 1446 , 1487 , 1504, 1507 , 1810 , 1851 , 1855 , 2430 , 1311 ,  1320 , 1321 , 1115 , 1208 , 1223 , 1232 , 1235 , 1378" }, 
+			{ "N70-N99", "Gynaecology", "Other Gynaecological Disorder", "1009, 1062, 1343, 1312, 1442, 1443, 1444, 1445, 1446, 1487, 1504, 1507, 1810, 1851, 1855, 2430, 1311, 1320, 1321, 1115, 1208, 1223, 1232, 1235, 1378" }, 
 			{ "D25", "Gyneclology/Neoplasm", "Uterine Fibroid", "1319" }, 
 			{ "N91", "Gynecology", "Amenorrhoea", "1500, 1501" }, 
 			{ "N81", "Gynecology", "Female Genital Prolapse", "1852" }, 
-			{ "N92", "Gynecology", "Menorrhagia", "2491 , 1259" }, 
+			{ "N92", "Gynecology", "Menorrhagia", "2491, 1259" }, 
 			{ "N83.20", "Gynecology", "Ovarian Cyst Unspecified", "1272" }, 
 			{ "N93.9", "Gynecology", "Uterine and Vaginal Bleeding, Unspecified", "1323" }, 
-			{ "N76, B37.3", "Gynecology", "Vaginitis/Vulvitis", "1054 , 1103 , 1387, 1317" }, 
+			{ "N76, B37.3", "Gynecology", "Vaginitis/Vulvitis", "1054, 1103, 1387, 1317" }, 
 			{ "N89.8", "Gynecology", "Leucorrhoea", "1448" }, 
 			{ "N70-N77", "Gynecology/STI", "Female Pelvic Inflamatory Diseases", "1153" }, 
-			{ "D50-D64", "Haematology", "Anemia", "996 , 997 , 998 , 1175" }, 
-			{ "D50 - D89", "Haematology", "Other Diseases of Blood & Blood Forming Organs & Certain Disorders Involving Immune Mechanism", "1972 , 2060 , 2063 , 2073 , 1503 , 1886 , 2040" }, 
-			{ "D69", "Haematology", "Purpura and other hemorrhagic conditions including Thrombocytopenia", "1132 , 1864" }, 
+			{ "D50-D64", "Haematology", "Anemia", "996, 997, 998, 1175" }, 
+			{ "D50 - D89", "Haematology", "Other Diseases of Blood & Blood Forming Organs & Certain Disorders Involving Immune Mechanism", "1972, 2060, 2063, 2073, 1503, 1886, 2040" }, 
+			{ "D69", "Haematology", "Purpura and other hemorrhagic conditions including Thrombocytopenia", "1132, 1864" }, 
 			{ "A22", "Infectious", "Anthrax", "1710" }, 
 			{ "A36", "Infectious", "Diphtheria", "1713" }, 
-			{ "B20", "Infectious", "HIV/AIDS", "1148 , 1197 , 1749 , 1775 , 1797 , 1863" }, 
+			{ "B20", "Infectious", "HIV/AIDS", "1148, 1197, 1749, 1775, 1797, 1863" }, 
 			{ "B05", "Infectious", "Measles", "1020" }, 
-			{ "A00 - B99", "Infectious", "Other Infectious & Parasitic Diseases", "1160, 1186, 1172, 1065, 1070 , 1087, 1104, 1174, 1185, 1297, 1435, 1706, 1744 , 1751, 1805, 1666, 1745, 1678" }, 
+			{ "A00 - B99", "Infectious", "Other Infectious & Parasitic Diseases", "1160, 1186, 1172, 1065, 1070, 1087, 1104, 1174, 1185, 1297, 1435, 1706, 1744, 1751, 1805, 1666, 1745, 1678" }, 
 			{ "A20", "Infectious", "Plague", "1709" }, 
 			{ "R65.2, A41.9", "Infectious", "Septicemia/Severe Sepsis", "1397" }, 
-			{ "A15-A19", "Infectious", "Tuberculosis", "1010 , 1163 , 1707 , 1708 , 1752, 1245, 1213, 1525, 1527, 1470" }, 
+			{ "A15-A19", "Infectious", "Tuberculosis", "1010, 1163, 1707, 1708, 1752, 1245, 1213, 1525, 1527, 1470" }, 
 			{ "B65 - B83", "Infectious", "Worm Infestation", "1083" }, 
 			{ "A27", "Infectious", "Leptopirosis", "1711" }, 
 			{ "A80", "Infectious/CNS", "Acute Flacid Paralysis (under 15 years of age)", "1195, 2899" }, 
 			{ "A39.0", "Infectious/CNS", "Meningitis Meningococcal", "1518" }, 
-			{ "G00 - G03 , B45", "Infectious/CNS", "Meningitis Unspecified", "1167, 1179, 1019, 1723" }, 
+			{ "G00 - G03, B45", "Infectious/CNS", "Meningitis Unspecified", "1167, 1179, 1019, 1723" }, 
 			{ "A82", "Infectious/CNS", "Rabies", "1517" }, 
 			{ "A35", "Infectious/CNS", "Tetanus (Exclude Neonatal Tetanus)", "1521" }, 
 			{ "A87", "Infectious/CNS", "Meningitis Viral", "1714" }, 
@@ -229,14 +227,15 @@ public class ClinicalMorbidityReportController {
 			{ "A00", "Infectious/Digestive", "Cholera (laboratory confirmed)", "1082" }, 
 			{ "A01", "Infectious/Digestive", "Enteric Fever (Typhoid)", "1056" }, 
 			{ "B15", "Infectious/Digestive", "Viral Hepatitis A", "1005, 1746, 2524" }, 
-			{ "B15 -B19 / K70-K77", "Infectious/Digestive ", "Hepatitis Unspecified", "1748, 1008 , 2527 , 1505" }, 
+			{ "B15 -B19 / K70-K77", "Infectious/Digestive ", "Hepatitis Unspecified", "1748, 1008, 2527, 1505" }, 
 			{ "B16, B18", "Infectious/Digestive ", "Viral Hepatitis B", "2525, 1006, 1747" }, 
-			{ "B17.1, B18", "Infectious/Digestive ", "Viral Hepatitis C", "1007 , 2526" }, 
-			{ "B17.2", "Infectious/Digestive ", "Viral Hepatitis E", " 2528 , 1506" }, 
+			{ "B17.1, B18", "Infectious/Digestive ", "Viral Hepatitis C", "1007, 2526" }, 
+			{ "B17.2", "Infectious/Digestive ", "Viral Hepatitis E", "2528, 1506" }, 
 			{ "R59", "Infectious/General", "Cervicle Lymphadenopathy", "1189" }, 
 			{ "A37", "Infectious/Respiratory", "Whooping Cough/Pertusis", "1145" }, 
 			{ "J09 - J11", "Infectious/Respiratory", "Infuenza", "1802" }, 
-			{ "J09.X2", "Infectious/Respiratory", "Swineflu (H1N1)", "2508" }, 
+			{ "J09.X2", "Infectious/Respiratory", "Swineflu (H1N1)", "2508" },
+			{"U07.1", "Infectious/Respiratory", "COVID-19", "3810"}, 
 			{ "V00-X58", "Injuries, Poisoning etc", "Accident Traffic", "1028" }, 
 			{ "X92.0-X92.9", "Injuries, Poisoning etc", "Accidental Drowning", "3010" }, 
 			{ "X97-Y04", "Injuries, Poisoning etc", "Assault (no weapon)", "3797" }, 
@@ -247,14 +246,14 @@ public class ClinicalMorbidityReportController {
 			{ "T74.2 & T76.2", "Injuries, Poisoning etc", "Sexual Assault/Abuse", "1066" }, 
 			{ "T36 - T50", "Injuries, Poisoning etc", "Poisoning", "1524, 1938" }, 
 			{ "T15-T19", "Injuries, Poisoning etc", "Entrance of Foreignbody through Natural Orifice", "1344, 1345, 1347" }, 
-			{ "V00-X58 ", "Injuries, Poisoning etc", "Other Accidents", "1027,  2888" }, 
-			{ "S00-T88", "Injuries, Poisoning etc", "Other Injuries", "1452 , 1770 , 1772 , 1906 , 1969 , 2038 , 1032 , 1401 , 1402 , 1043 , 1046 , 1061 , 1084 , 2339 , 2342 , 2342 , 2471 , 2147 , 1258, 1265,1266, 1267" }, 
+			{ "V00-X58 ", "Injuries, Poisoning etc", "Other Accidents", "1027, 2888" }, 
+			{ "S00-T88", "Injuries, Poisoning etc", "Other Injuries", "1452, 1770, 1772, 1906, 1969, 2038, 1032, 1401, 1402, 1043, 1046, 1061, 1084, 2339, 2342, 2342, 2471, 2147, 1258, 1265, 1266, 1267" }, 
 			{ "M02, M13, M19", "Musculoskeletal", "Arthritis Other", "1037, 1803" }, 
-			{ "S01-S99", "Musculoskeletal", "Dislocation and Sprain", "2340, 1112, 1486 , 1798 , 1801 , 1904 , 2542, 1076, 2036" }, 
+			{ "S01-S99", "Musculoskeletal", "Dislocation and Sprain", "2340, 1112, 1486, 1798, 1801, 1904, 2542, 1076, 2036" }, 
 			{ "M10", "Musculoskeletal", "Gouty Arthritis", "1324, 1491" }, 
 			{ "M15 - M19", "Musculoskeletal", "Osteoarthritis", "1268" }, 
 			{ "M80 - M81", "Musculoskeletal", "Osteoporosis with or witout Fracture", "1271" }, 
-			{ "M00-M99", "Musculoskeletal", "Other Musculoskeletal Disorder", "1776, 1777, 1055, 1246, 1262, 1306, 1316, 1336, 1340, 1351, 1368, 1395, 1403, 1782, 1909, 1911, 1913, 1917, 2344, 2345, 2348, 2349, 2428, 2429, 2467, 2517, 2114, 2156, 1663, 1824,1196" }, 
+			{ "M00-M99", "Musculoskeletal", "Other Musculoskeletal Disorder", "1776, 1777, 1055, 1246, 1262, 1306, 1316, 1336, 1340, 1351, 1368, 1395, 1403, 1782, 1909, 1911, 1913, 1917, 2344, 2345, 2348, 2349, 2428, 2429, 2467, 2517, 2114, 2156, 1663, 1824, 1196" }, 
 			{ "M00", "Musculoskeletal", "Pyogenic Arthritis", "1278, 2541, 2499" }, 
 			{ "M05, M06", "Musculoskeletal", "Rhematoid Arthritis", "1086" }, 
 			{ "M45-M49", "Musculoskeletal", "Spondylopathies", "1156, 1242, 1255, 1389, 1391, 2346, 2352" }, 
@@ -277,42 +276,42 @@ public class ClinicalMorbidityReportController {
 			{ "F30 - F39", "Psychiatric, Behavioral, Neurodevelopmental", "Mood Disorder (Mania, Bipolar, Major Depression)", "1915" }, 
 			{ "F01-F99", "Psychiatric, Behavioral, Neurodevelopmental", "Other Psychiatric, Behavioral, Neurodevelopmental Disorder", "1862, 1868, 1813, 2157, 1495" }, 
 			{ "F20 - F29", "Psychiatric, Behavioral, Neurodevelopmental", "Psychotic Disorder including Schzophrenia", "1096, 1111, 2887" }, 
-			{ "F01-F03, G30, G31", "Psychiatric, Behavioral, Neurodevelopmental/CNS", "Dementia", "1188 , 2043" }, 
+			{ "F01-F03, G30, G31", "Psychiatric, Behavioral, Neurodevelopmental/CNS", "Dementia", "1188, 2043" }, 
 			{ "F03, G31", "Psychiatric, Behavioral, Neurodevelopmental/CNS", "Senile Dementia", "1114" }, 
-			{ "F70-F79 ", "Psychiatric, Behavioral, Neurodevelopmental/CNS", "Mental Retardation/Intellectual Disability", "1845 , 2044" }, 
-			{ "F40 - F48", "Psychiatric, Behavioral, Neurodevepmental", "Anxiety, Dissociative, Stress related, Somatic & Other Non-Psychotic-Mental Disorders", "1399 , 1360 , 2886" }, 
-			{ "J45", "Respiratory", "Asthma", "999 , 1000 , 1281 , 1926" }, 
+			{ "F70-F79 ", "Psychiatric, Behavioral, Neurodevelopmental/CNS", "Mental Retardation/Intellectual Disability", "1845, 2044" }, 
+			{ "F40 - F48", "Psychiatric, Behavioral, Neurodevepmental", "Anxiety, Dissociative, Stress related, Somatic & Other Non-Psychotic-Mental Disorders", "1399, 1360, 2886" }, 
+			{ "J45", "Respiratory", "Asthma", "999, 1000, 1281, 1926" }, 
 			{ "J47", "Respiratory", "Bronchiectasis", "1799" }, 
-			{ "J40 - J47", "Respiratory", "Chronic Lower Respiratory Tract Infection including Chronic Bronchitis and Emphysema", "1180 , 1407 , 1498 , 1522" }, 
-			{ "J20 - J21", "Respiratory", "Acute Bronchitis/Bronchiolitis", "1001 , 1060 , 1222" }, 
-			{ "J12 - J18", "Respiratory", "Pneumonia & Bronchopneumonia", "1011 , 1080 ,1113 , 1141 , 1168 , 1285 , 1796 , 1866" }, 
-			{ "J00-J99", "Respiratory/ENT", "Other Respiratory Disorder", "1227 , 1315 , 2898" }, 
+			{ "J40 - J47", "Respiratory", "Chronic Lower Respiratory Tract Infection including Chronic Bronchitis and Emphysema", "1180, 1407, 1498, 1522" }, 
+			{ "J20 - J21", "Respiratory", "Acute Bronchitis/Bronchiolitis", "1001, 1060, 1222" }, 
+			{ "J12 - J18", "Respiratory", "Pneumonia & Bronchopneumonia", "1011, 1080, 1113, 1141, 1168, 1285, 1796, 1866" }, 
+			{ "J00-J99", "Respiratory/ENT", "Other Respiratory Disorder", "1227, 1315, 2898" }, 
 			{ "??", "Services", "Physiotherapy", "3798" }, 
 			{ "Z00-Z99", "Services", "Person Encountering Health Services for Dressing, Injection and Other Services", "3799" }, 
 			{ "Z00-Z13", "Services", "Person Encountering Health Services for Examination", "1502" }, 
 			{ "Z30-Z39", "Services", "Persons Encountering Health Services in Circumstances Related to Reproduction ", "3800" }, 
 			{ "A54", "STI", "Gonococcus Infection", "1147" }, 
-			{ "A60", "STI", "Herpes Simplex (Ano-genital)", "1355 , 1721" }, 
+			{ "A60", "STI", "Herpes Simplex (Ano-genital)", "1355, 1721" }, 
 			{ "A50-A64", "STI", "Other Sexually Transmitted Infection (STI)", "1073" }, 
-			{ "A50 - A53", "STI", "Syphilis", "1099 , 1751 , 1716 , 1717 , 1718" }, 
+			{ "A50 - A53", "STI", "Syphilis", "1099, 1751, 1716, 1717, 1718" }, 
 			{ "A56, A59", "STI", "Chlamydia/Trichomonas Valvovaginitis, Cystitis, Urethritis", "1371" }, 
-			{ "A55, A57, A58", "STI", "Genital Ulcer (Chancroid, Granuloma Inguinale/Donovanosis, Lymphogranuloma Venerum)", "1295 , 1719 , 1720" }, 
+			{ "A55, A57, A58", "STI", "Genital Ulcer (Chancroid, Granuloma Inguinale/Donovanosis, Lymphogranuloma Venerum)", "1295, 1719, 1720" }, 
 			{ "R36,  A50-A64", "STI/General", "Urethral Discharge", "1209" }, 
 			{ "A92.0", "Vector borne", "Chickungunya", "2895" }, 
-			{ "A90 - A91", "Vector borne", "Dengue/DHF/DSS/Yellow Fever", "1018 , 1724 , 1743 , 2896" }, 
+			{ "A90 - A91", "Vector borne", "Dengue/DHF/DSS/Yellow Fever", "1018, 1724, 1743, 2896" }, 
 			{ "B74", "Vector borne", "Filariasis", "1750" }, 
 			{ "A83.0", "Vector borne", "Japanese Encephalitis", "2879" }, 
-			{ "B55", "Vector borne", "Kala Azar/Leishmaniasis", "2891 , 2893" }, 
+			{ "B55", "Vector borne", "Kala Azar/Leishmaniasis", "2891, 2893" }, 
 			{ "B50 - B54", "Vector borne", "Malaria", "1041" }, 
 			{ "P07", "Newborn", "Low Birth Weight", "1865" }, 
 			{ "P36", "Newborn", "Umbilical Sepsis/Bacterial Sepsis of New Born", "1496" }, 
-			{ "P00 - P96", "Newborn", "Other Newborn conditions effected during perinatal period", "1965 , 1806 , 1857 , 1860" }, 
+			{ "P00 - P96", "Newborn", "Other Newborn conditions effected during perinatal period", "1965, 1806, 1857, 1860" }, 
 			{ "A33", "Newborn", "Tetanus Neonatorum", "1519, 1712" }, 
 			{ "P10 - P15", "Newborn", "Birth Trauma to Newborn", "1780" }, 
 			{ "P22", "Newborn", "Respiratory Distress of Newborn", "3801" }, 
-			{ "O00", "Obstetrics", "Ectopic Pregnancy (include ruptured ectopic pregnancy)", "1013 , 1410" }, 
+			{ "O00", "Obstetrics", "Ectopic Pregnancy (include ruptured ectopic pregnancy)", "1013, 1410" }, 
 			{ "O10 - O16", "Obstetrics", "Edema, Protenuria, and Hypertensive Disorder in Pregnancy, Childbirth & Puerperium", "1014" }, 
-			{ "O03", "Obstetrics", "Spontaneous Abortion", "1015 , 1398" }, 
+			{ "O03", "Obstetrics", "Spontaneous Abortion", "1015, 1398" }, 
 			{ "O72", "Obstetrics", "Postpartum Hemorrhage  (PPH)", "1016" }, 
 			{ "O85 - O86", "Obstetrics", "Puerperal Sepsis & Other Puerperal Infections", "1047, 2066" }, 
 			{ "O44, O45, O20", "Obstetrics", "Antepartum Hemorrhage (Placenta Previa/Abruptio Placenta and others)", "1102, 1214, 1284" }, 
@@ -346,34 +345,19 @@ public class ClinicalMorbidityReportController {
 		};
 		
 		HospitalCoreService hcs= Context.getService(HospitalCoreService.class);
+		List<Map<String, Object>> numberOfPatientsWithAgeGroupList = hcs.getNumberOfPatientsWithAgeGroups(month, year, ward);
 		
-		List<Map<String, Map<String, Object>>> diagnosisList = new ArrayList<Map<String,Map<String,Object>>>();
-	
-		for (int i = 0; i < diagnosisMappings.length; i++) {
-			List<Map<String, Object>> numberOfPatientsWithAgeGroupList = hcs.getNumberOfPatientsWithAgeGroups(diagnosisMappings[i][3], month, year, ward);
-			Map<String, Map<String, Object>> numberOfPatientsWithAgeGroupMap = new HashMap<String,Map<String,Object>>();
-			Map<String, Object> diagnosis = new HashMap<String,Object>();
-			diagnosis.put("code", diagnosisMappings[i][0]);
-			diagnosis.put("category", diagnosisMappings[i][1]);
-			diagnosis.put("classification", diagnosisMappings[i][2]);
-			numberOfPatientsWithAgeGroupMap.put("diagnosis", diagnosis);
-
-			for(Map<String, Object> numberOfPatientWithAgeGroup : numberOfPatientsWithAgeGroupList) {
-				String ageGroup = (String)numberOfPatientWithAgeGroup.get("ageGroup");
-				numberOfPatientWithAgeGroup.remove("ageGroup");
-				numberOfPatientsWithAgeGroupMap.put(ageGroup, numberOfPatientWithAgeGroup);
-			}
-			diagnosisList.add(numberOfPatientsWithAgeGroupMap);
-		}
 
 		// Converting Java list to json.
 		ObjectMapper mapper = new ObjectMapper();
 		String diagnosisListJson = "";
 		String ageGroupsJson = "";
+		String numberOfPatient = "";
 		
 		try {
-			diagnosisListJson = mapper.writeValueAsString(diagnosisList);
-			ageGroupsJson = mapper.writeValueAsString(ageGroups);
+			diagnosisListJson = mapper.writeValueAsString(diagnosisMappings);
+			ageGroupsJson = mapper.writeValueAsString(ageGroupsArray);
+			numberOfPatient = mapper.writeValueAsString(numberOfPatientsWithAgeGroupList);
 	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -381,6 +365,8 @@ public class ClinicalMorbidityReportController {
 	
 		model.addAttribute("diagnosisListJson", diagnosisListJson);
 		model.addAttribute("ageGroupsJson", ageGroupsJson);
+		model.addAttribute("numberOfPatient", numberOfPatient);
+		model.addAttribute("ward", ward);
     	
     	return "/module/hospitalcore/clinicalMorbidityHIS/clinicalMorbidityReport";
 	}

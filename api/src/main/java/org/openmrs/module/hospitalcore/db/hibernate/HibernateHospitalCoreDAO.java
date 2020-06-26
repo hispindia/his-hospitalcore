@@ -566,27 +566,13 @@ public class HibernateHospitalCoreDAO implements HospitalCoreDAO {
 	}
 	
 	// Clinical Morbidity Report
-	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(String valueCodes, Integer month, Integer year, String ward) {
+	public List<Map<String, Object>> getNumberOfPatientsWithAgeGroups(Integer month, Integer year, String ward) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		Integer wardEncounter = 9;
-		String equal = "!=";
+		Integer encounterType = 9;
 		if (ward.equals("IPD WARD")) {
-			wardEncounter = 10;
+			encounterType = 10;
 		}
-
-		if (ward.equals("OUTREACH OPD")) {
-			equal = "=";
-		}
-
-		// encounter_type = 5 = REGINITIAL
-		// encounter_type = 6 = REGREVISIT
-		// encounter_type = 9 = OPDENCOUNTER
-		// encounter_type = 10 = IPDENCOUNTER
-		// concept_id = 3 = OPD WARD
-		// concept_id = 3763 = OUTREACH IN FIELD OPD
-		
-		String query = "SELECT ageGroup, (SUM(IF(gender = 'M' AND encounter_type = 5, 1, 0))) AS \"NewMale\", (SUM(IF(gender = 'F' AND encounter_type = 5, 1, 0))) AS \"NewFemale\", (SUM(IF(gender = 'M' AND encounter_type = 6, 1, 0))) AS \"ReMale\", (SUM(IF(gender = 'F' AND encounter_type = 6, 1, 0))) AS \"ReFemale\" FROM (SELECT temp.encounter_id, CASE WHEN temp.ageInMonths <= 0 THEN '0-29 Days (Neonates)' WHEN temp.ageInMonths >= 1 AND temp.ageInMonths <= 11 THEN 'Infants' WHEN temp.ageInYears >= 1 AND temp.ageInYears < 5 THEN 'Under 5' WHEN temp.ageInYears >= 5 AND temp.ageInYears < 11 THEN '5 - 11 Years' WHEN temp.ageInYears >= 11 AND temp.ageInYears < 18 THEN '11 - 18 Years' WHEN temp.ageInYears >= 18 AND temp.ageInYears < 58 THEN '18 - 58 Years' WHEN temp.ageInYears >= 58 THEN '58 And Above' END AS \"ageGroup\", gender, encounter_type FROM (SELECT encounter.encounter_id, encounter.encounter_type, person.gender, TIMESTAMPDIFF(year, person.birthdate, encounter.encounter_datetime ) AS ageInYears, abs(TIMESTAMPDIFF(month, person.birthdate, encounter.encounter_datetime )) AS ageInMonths, ABS(TIMESTAMPDIFF(day, person.birthdate, encounter.encounter_datetime )) AS ageIndays FROM encounter INNER JOIN patient ON patient.patient_id = encounter.patient_id INNER JOIN person ON person.person_id = patient.patient_id INNER JOIN encounter encounter2 ON encounter2.patient_id = encounter.patient_id AND encounter2.encounter_type = " + wardEncounter + " INNER JOIN obs ON obs.encounter_id = encounter.encounter_id INNER JOIN concept_name cn ON cn.concept_id = obs.concept_id AND cn.concept_name_type = 'FULLY_SPECIFIED' AND cn.locale = 'en' AND cn.concept_id = 3 INNER JOIN concept_name cn2 ON cn2.concept_id = obs.value_coded AND cn2.concept_name_type = 'FULLY_SPECIFIED' AND cn2.locale = 'en' AND cn2.concept_id " + equal + " 3763 INNER JOIN obs obs2 ON obs2.encounter_id = encounter2.encounter_id INNER JOIN concept_name cn3 ON cn3.concept_id = obs2.concept_id AND cn3.concept_name_type = 'FULLY_SPECIFIED' AND cn3.locale = 'en' AND cn3.concept_id IN (2304, 2978) INNER JOIN concept_name cn4 ON cn4.concept_id = obs2.value_coded AND cn4.concept_name_type = 'FULLY_SPECIFIED' AND cn4.locale = 'en' AND cn4.concept_id IN ("+ valueCodes + ") WHERE encounter.encounter_type in (5, 6) AND MONTH(obs.obs_datetime) = " + month + " AND YEAR(obs.obs_datetime) = " + year + "  AND MONTH(obs2.obs_datetime) = " + month + " AND YEAR(obs2.obs_datetime) = " + year + " GROUP BY encounter.encounter_id ORDER BY encounter.encounter_datetime, encounter2.encounter_datetime, obs.obs_datetime, obs2.obs_datetime ) temp) temp2 GROUP BY ageGroup";
-   
+		String query = "SELECT encounterType, valueCode, diagnosisName, CASE WHEN ageInMonths <= 0 THEN '0-29 Days (Neonates)'  WHEN ageInMonths >= 1 AND ageInMonths <= 11 THEN 'Infants' WHEN ageInYears >= 1 AND ageInYears < 5 THEN 'Under 5' WHEN ageInYears >= 5 AND ageInYears < 11 THEN '5 - 11 Years' WHEN ageInYears >= 11 AND ageInYears < 18 THEN '11 - 18 Years' WHEN ageInYears >= 18 AND ageInYears < 58 THEN '18 - 58 Years' WHEN ageInYears >= 58 THEN '58 And Above' END AS 'ageGroup', CASE WHEN encounterType = 5 AND gender = 'M' THEN 'NewMale' WHEN encounterType = 5 AND gender = 'F' THEN 'NewFemale' WHEN encounterType = 6 AND gender = 'M' THEN 'ReMale' WHEN encounterType = 6 AND gender = 'F' THEN 'ReFemale' END AS visitGender FROM ( SELECT encounter.encounter_type AS encounterType,  person.gender, TIMESTAMPDIFF(YEAR, person.birthdate, encounter.encounter_datetime ) AS ageInYears, ABS(TIMESTAMPDIFF(MONTH, person.birthdate, encounter.encounter_datetime )) AS ageInMonths, obs.value_coded AS valueCode, cn1.name AS diagnosisName FROM encounter INNER JOIN obs ON obs.encounter_id = encounter.encounter_id INNER JOIN concept_name cn ON cn.concept_id = obs.concept_id AND cn.concept_name_type = 'FULLY_SPECIFIED' INNER JOIN concept_name cn1 ON cn1.concept_id = obs.value_coded AND cn1.concept_name_type = 'FULLY_SPECIFIED' AND cn1.locale = 'en' INNER JOIN person ON person.person_id = encounter.patient_id  WHERE MONTH(encounter.encounter_datetime) = " + month + " AND YEAR(encounter.encounter_datetime) = " + year + " AND encounter.encounter_type IN (5, 6, " + encounterType + ") AND obs.concept_id IN (3, 2304, 2978) GROUP BY encounter.patient_id, encounter.encounter_type, obs.value_coded ORDER BY encounter.patient_id, obs.obs_id) temp";
 		return jdbcTemplate.queryForList(query);
 	}
 }  
