@@ -26,6 +26,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import javax.sql.DataSource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -55,6 +58,8 @@ import org.openmrs.module.hospitalcore.model.InventoryDrug;
 import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
 import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
 import org.openmrs.module.hospitalcore.model.OpdTestOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -74,8 +79,19 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	public List<Order> getOrders(List<Concept> concepts, Patient patient,
-			Location location, Date orderStartDate) throws DAOException {
+	@Autowired
+	private DataSource dataSource;
+
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	public List<Order> getOrders(List<Concept> concepts, Patient patient, Location location, Date orderStartDate)
+			throws DAOException {
 
 		// ghanshyam 25/06/2012 tag DLS_DEAD_LOCAL_STORE code
 		// Map<Integer,Integer> monthEOMMap = new HashMap<Integer, Integer>();
@@ -109,12 +125,9 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 			// cal.roll( Calendar.DATE, +1 );
 			String startDate = sdf.format(orderStartDate) + " 00:00:00";
 			String endDate = sdf.format(orderStartDate) + " 23:59:59";
-			hql += " ((o.startDate is null and o.encounter.encounterDatetime BETWEEN '"
-					+ startDate
-					+ "' AND '"
-					+ endDate
-					+ "' ) OR (    o.startDate is not null and  o.startDate  BETWEEN '"
-					+ startDate + "' AND '" + endDate + "'  )  )";
+			hql += " ((o.startDate is null and o.encounter.encounterDatetime BETWEEN '" + startDate + "' AND '"
+					+ endDate + "' ) OR (    o.startDate is not null and  o.startDate  BETWEEN '" + startDate
+					+ "' AND '" + endDate + "'  )  )";
 
 		}
 
@@ -135,25 +148,21 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Concept> searchConceptsByNameAndClass(String text,
-			ConceptClass clazz) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				Concept.class);
+	public List<Concept> searchConceptsByNameAndClass(String text, ConceptClass clazz) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Concept.class);
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		criteria.add(Expression.eq("retired", false));
 		criteria.add(Restrictions.eq("conceptClass", clazz));
 		if (StringUtils.isNotBlank(text)) {
 			criteria.createAlias("names", "names");
-			criteria.add(Expression
-					.like("names.name", text, MatchMode.ANYWHERE));
+			criteria.add(Expression.like("names.name", text, MatchMode.ANYWHERE));
 		}
 		return criteria.list();
 	}
 
-	public List<Encounter> getEncounter(Patient patient, Location location,
-			EncounterType encType, String date) throws DAOException {
-		Criteria crit = sessionFactory.getCurrentSession().createCriteria(
-				Encounter.class);
+	public List<Encounter> getEncounter(Patient patient, Location location, EncounterType encType, String date)
+			throws DAOException {
+		Criteria crit = sessionFactory.getCurrentSession().createCriteria(Encounter.class);
 		crit.add(Expression.eq("patient", patient));
 		if (location != null && location.getLocationId() != null) {
 			crit.add(Expression.eq("location", location));
@@ -174,11 +183,8 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 				endDate = date + " 23:59:59";
 			}
 			try {
-				crit.add(Restrictions.and(
-						Restrictions.ge("encounterDatetime",
-								formatter.parseObject(startDate)),
-						Restrictions.le("encounterDatetime",
-								formatter.parseObject(endDate))));
+				crit.add(Restrictions.and(Restrictions.ge("encounterDatetime", formatter.parseObject(startDate)),
+						Restrictions.le("encounterDatetime", formatter.parseObject(endDate))));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -192,10 +198,8 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	}
 
 	// Department
-	public Department createDepartment(Department department)
-			throws DAOException {
-		return (Department) sessionFactory.getCurrentSession()
-				.merge(department);
+	public Department createDepartment(Department department) throws DAOException {
+		return (Department) sessionFactory.getCurrentSession().merge(department);
 	}
 
 	public void removeDepartment(Department department) throws DAOException {
@@ -203,16 +207,14 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	}
 
 	public Department getDepartmentById(Integer id) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				Department.class, "department");
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Department.class, "department");
 		criteria.add(Restrictions.eq("department.id", id));
 		Department r = (Department) criteria.uniqueResult();
 		return r;
 	}
 
 	public Department getDepartmentByName(String name) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				Department.class, "department");
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Department.class, "department");
 		criteria.add(Restrictions.eq("department.name", name));
 		criteria.setFirstResult(0).setMaxResults(1);
 		List<Department> list = criteria.list();
@@ -220,19 +222,16 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	}
 
 	public Department getDepartmentByWard(Integer wardId) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				Department.class, "department");
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Department.class, "department");
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-				.createCriteria("department.wards", Criteria.LEFT_JOIN)
-				.add(Restrictions.eq("id", wardId));
+				.createCriteria("department.wards", Criteria.LEFT_JOIN).add(Restrictions.eq("id", wardId));
 		criteria.setFirstResult(0).setMaxResults(1);
 		List<Department> list = criteria.list();
 		return CollectionUtils.isNotEmpty(list) ? list.get(0) : null;
 	}
 
 	public List<Department> listDepartment(Boolean retired) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				Department.class, "department");
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Department.class, "department");
 		if (retired != null) {
 			criteria.add(Restrictions.eq("department.retired", retired));
 		}
@@ -241,19 +240,14 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	}
 
 	// DepartmentConcept
-	public DepartmentConcept createDepartmentConcept(
-			DepartmentConcept departmentConcept) throws DAOException {
-		return (DepartmentConcept) sessionFactory.getCurrentSession().merge(
-				departmentConcept);
+	public DepartmentConcept createDepartmentConcept(DepartmentConcept departmentConcept) throws DAOException {
+		return (DepartmentConcept) sessionFactory.getCurrentSession().merge(departmentConcept);
 	}
 
-	public DepartmentConcept getByDepartmentAndConcept(Integer departmentId,
-			Integer conceptId) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				DepartmentConcept.class, "departmentConcept");
-		criteria.add(
-				Restrictions
-						.eq("departmentConcept.department.id", departmentId))
+	public DepartmentConcept getByDepartmentAndConcept(Integer departmentId, Integer conceptId) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DepartmentConcept.class,
+				"departmentConcept");
+		criteria.add(Restrictions.eq("departmentConcept.department.id", departmentId))
 				.add(Restrictions.eq("departmentConcept.concept.id", conceptId));
 		criteria.setFirstResult(0).setMaxResults(1);
 		List<DepartmentConcept> list = criteria.list();
@@ -261,44 +255,35 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	}
 
 	public DepartmentConcept getById(Integer id) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				DepartmentConcept.class, "departmentConcept");
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DepartmentConcept.class,
+				"departmentConcept");
 		criteria.add(Restrictions.eq("departmentConcept.id", id));
 		criteria.setFirstResult(0).setMaxResults(1);
 		DepartmentConcept r = (DepartmentConcept) criteria.uniqueResult();
 		return r;
 	}
 
-	public void removeDepartmentConcept(DepartmentConcept departmentConcept)
-			throws DAOException {
+	public void removeDepartmentConcept(DepartmentConcept departmentConcept) throws DAOException {
 		sessionFactory.getCurrentSession().delete(departmentConcept);
 	}
 
-	public List<DepartmentConcept> listByDepartment(Integer departmentId,
-			Integer typeConcept) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				DepartmentConcept.class, "departmentConcept");
-		criteria.add(
-				Restrictions
-						.eq("departmentConcept.department.id", departmentId))
-				.add(Restrictions.eq("departmentConcept.typeConcept",
-						typeConcept));
+	public List<DepartmentConcept> listByDepartment(Integer departmentId, Integer typeConcept) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DepartmentConcept.class,
+				"departmentConcept");
+		criteria.add(Restrictions.eq("departmentConcept.department.id", departmentId))
+				.add(Restrictions.eq("departmentConcept.typeConcept", typeConcept));
 		List<DepartmentConcept> list = criteria.list();
 		return list;
 	}
 
-	public List<Concept> listByDepartmentByWard(Integer wardId,
-			Integer typeConcept) throws DAOException {
-		Criteria criteria = sessionFactory
-				.getCurrentSession()
+	public List<Concept> listByDepartmentByWard(Integer wardId, Integer typeConcept) throws DAOException {
+		Criteria criteria = sessionFactory.getCurrentSession()
 				.createCriteria(DepartmentConcept.class, "departmentConcept")
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 				.createAlias("departmentConcept.department", "department")
-				.add(Restrictions.eq("departmentConcept.typeConcept",
-						typeConcept))
+				.add(Restrictions.eq("departmentConcept.typeConcept", typeConcept))
 				.add(Restrictions.eq("department.retired", false));
-		criteria.createCriteria("department.wards", Criteria.LEFT_JOIN).add(
-				Restrictions.eq("id", wardId));
+		criteria.createCriteria("department.wards", Criteria.LEFT_JOIN).add(Restrictions.eq("id", wardId));
 		List<DepartmentConcept> list = criteria.list();
 		if (CollectionUtils.isNotEmpty(list)) {
 			List<Concept> listConcept = new ArrayList<Concept>();
@@ -311,12 +296,9 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 	}
 
 	public List<Concept> searchInvestigation(String text) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				Concept.class);
-		ConceptClass cct = Context.getConceptService().getConceptClassByName(
-				"Test");
-		ConceptClass ccl = Context.getConceptService().getConceptClassByName(
-				"LabSet");
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Concept.class);
+		ConceptClass cct = Context.getConceptService().getConceptClassByName("Test");
+		ConceptClass ccl = Context.getConceptService().getConceptClassByName("LabSet");
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		criteria.add(Expression.eq("retired", false));
 		Criterion lhs = Restrictions.eq("conceptClass", cct);
@@ -325,16 +307,14 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 		criteria.add(orExp);
 		if (StringUtils.isNotBlank(text)) {
 			criteria.createAlias("names", "names");
-			criteria.add(Expression
-					.like("names.name", text, MatchMode.ANYWHERE));
+			criteria.add(Expression.like("names.name", text, MatchMode.ANYWHERE));
 		}
 		return criteria.list();
 
 	}
 
 	public List<InventoryDrug> findDrug(String name) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				InventoryDrug.class, "drug");
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(InventoryDrug.class, "drug");
 		if (!StringUtils.isBlank(name)) {
 			criteria.add(Restrictions.like("drug.name", "%" + name + "%"));
 		}
@@ -343,32 +323,48 @@ public class HibernatePatientDashboardDAO implements PatientDashboardDAO {
 		return l;
 	}
 
-	public OpdDrugOrder saveOrUpdateOpdDrugOrder(OpdDrugOrder opdDrugOrder)
-			throws DAOException {
+	public OpdDrugOrder saveOrUpdateOpdDrugOrder(OpdDrugOrder opdDrugOrder) throws DAOException {
 		sessionFactory.getCurrentSession().saveOrUpdate(opdDrugOrder);
 		return opdDrugOrder;
 	}
 
-	public OpdTestOrder saveOrUpdateOpdOrder(OpdTestOrder opdTestOrder)
-			throws DAOException {
+	public OpdTestOrder saveOrUpdateOpdOrder(OpdTestOrder opdTestOrder) throws DAOException {
 		sessionFactory.getCurrentSession().saveOrUpdate(opdTestOrder);
 		return opdTestOrder;
 	}
-	
+
 	public OpdPatientQueueLog getOpdPatientQueueLog(Encounter encounter) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				OpdPatientQueueLog.class);
-			criteria.add(Restrictions.like("encounter",encounter));
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdPatientQueueLog.class);
+		criteria.add(Restrictions.like("encounter", encounter));
 
 		return (OpdPatientQueueLog) criteria.uniqueResult();
 	}
-	
+
 	public List<OpdDrugOrder> getOpdDrugOrder(Encounter encounter) throws DAOException {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				OpdDrugOrder.class);
-			criteria.add(Restrictions.like("encounter",encounter));
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(OpdDrugOrder.class);
+		criteria.add(Restrictions.like("encounter", encounter));
 
 		return criteria.list();
+	}
+
+	public List<Map<String, Object>> getPatientDrugDetails(String identifier, String date) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "SELECT drug, issue_date, quantity FROM patient_drug_details WHERE patient_identifier = '"
+				+ identifier + "'";
+
+		if (!date.equalsIgnoreCase("all")) {
+			sql += " and issue_date = '" + date + "'";
+		}
+
+		return jdbcTemplate.queryForList(sql);
+	}
+
+	public List<String> getPatientDrugIssueDates(String identifier) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select distinct(issue_date) from patient_drug_details where patient_identifier = '" + identifier
+				+ "'";
+
+		return jdbcTemplate.queryForList(sql, String.class);
 	}
 
 }

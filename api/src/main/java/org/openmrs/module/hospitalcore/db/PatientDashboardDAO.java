@@ -18,11 +18,11 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore.db;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.openmrs.Concept;
 import org.openmrs.ConceptClass;
@@ -40,28 +40,53 @@ import org.openmrs.module.hospitalcore.model.OpdPatientQueueLog;
 import org.openmrs.module.hospitalcore.model.OpdTestOrder;
 
 public interface PatientDashboardDAO {
-	public List<Order> getOrders(List<Concept> concepts, Patient patient, Location location, Date orderStartDate) throws DAOException;
+	public List<Order> getOrders(List<Concept> concepts, Patient patient, Location location, Date orderStartDate)
+			throws DAOException;
+
 	public List<Concept> searchConceptsByNameAndClass(String text, ConceptClass clazz) throws DAOException;
-	public List<Encounter> getEncounter(Patient p , Location loc, EncounterType encType, String date) throws DAOException;
-	
-	//Department
+
+	public List<Encounter> getEncounter(Patient p, Location loc, EncounterType encType, String date)
+			throws DAOException;
+
+	// Department
 	public Department createDepartment(Department department) throws DAOException;
+
 	public void removeDepartment(Department department) throws DAOException;
+
 	public Department getDepartmentById(Integer id) throws DAOException;
+
 	public Department getDepartmentByWard(Integer wardId) throws DAOException;
+
 	public List<Department> listDepartment(Boolean retired) throws DAOException;
+
 	public Department getDepartmentByName(String name) throws DAOException;
-	//DepartmentConcept
+
+	// DepartmentConcept
 	public DepartmentConcept createDepartmentConcept(DepartmentConcept departmentConcept) throws DAOException;
+
 	public DepartmentConcept getByDepartmentAndConcept(Integer departmentId, Integer conceptId) throws DAOException;
+
 	public DepartmentConcept getById(Integer id) throws DAOException;
+
 	public void removeDepartmentConcept(DepartmentConcept departmentConcept) throws DAOException;
+
 	public List<DepartmentConcept> listByDepartment(Integer departmentId, Integer typeConcept) throws DAOException;
+
 	public List<Concept> listByDepartmentByWard(Integer wardId, Integer typeConcept) throws DAOException;
+
 	public List<Concept> searchInvestigation(String text) throws DAOException;
+
 	public List<InventoryDrug> findDrug(String name) throws DAOException;
+
 	public OpdDrugOrder saveOrUpdateOpdDrugOrder(OpdDrugOrder opdDrugOrder) throws DAOException;
+
 	public OpdTestOrder saveOrUpdateOpdOrder(OpdTestOrder opdTestOrder) throws DAOException;
+
 	public OpdPatientQueueLog getOpdPatientQueueLog(Encounter encounter) throws DAOException;
+
 	public List<OpdDrugOrder> getOpdDrugOrder(Encounter encounter) throws DAOException;
+
+	public List<Map<String, Object>> getPatientDrugDetails(String identifier, String date);
+
+	public List<String> getPatientDrugIssueDates(String identifier);
 }

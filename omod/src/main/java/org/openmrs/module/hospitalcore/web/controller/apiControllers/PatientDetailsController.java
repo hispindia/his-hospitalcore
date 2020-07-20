@@ -42,7 +42,8 @@ public class PatientDetailsController {
             patientDetail.setPatientIdentifier((String) patientDetails.get(0).get("identifier"));
             patientDetail.setHospitalName((String) hospitalProperties.get(0).get("property_value"));
             patientDetail.setNinCode((String) hospitalProperties.get(1).get("property_value"));
-            List<Map<String, Object>> diagnosis = hcs.getPatientDiagnosiList((Integer) patientDetails.get(0).get("patient_id"), date);
+            List<Map<String, Object>> diagnosis = hcs
+                    .getPatientDiagnosiList((Integer) patientDetails.get(0).get("patient_id"), date);
             String doctorName = "";
             for (Map<String, Object> map : diagnosis) {
                 doctorName = (String) map.get("doctorName");
@@ -160,6 +161,7 @@ class PatientDetail {
     public void setNinCode(String ninCode) {
         this.ninCode = ninCode;
     }
+
     public void setDoctorName(String doctorName) {
         this.doctorName = doctorName;
     }

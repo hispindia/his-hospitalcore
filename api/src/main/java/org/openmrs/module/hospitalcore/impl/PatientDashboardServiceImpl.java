@@ -18,13 +18,13 @@
  *
  **/
 
-
 package org.openmrs.module.hospitalcore.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.openmrs.Concept;
@@ -49,76 +49,84 @@ import org.openmrs.module.hospitalcore.util.PatientDashboardConstants;
 
 public class PatientDashboardServiceImpl implements PatientDashboardService {
 
-	public PatientDashboardServiceImpl(){
-    }
-    
-    protected PatientDashboardDAO dao;
-	
+	public PatientDashboardServiceImpl() {
+	}
+
+	protected PatientDashboardDAO dao;
+
 	public void setDao(PatientDashboardDAO dao) {
 		this.dao = dao;
 	}
+
 	public List<Concept> searchDiagnosis(String text) throws APIException {
-		ConceptClass cc =  Context.getConceptService().getConceptClassByName(PatientDashboardConstants.CONCEPT_CLASS_NAME_DIAGNOSIS);
-		return dao.searchConceptsByNameAndClass(text, cc);
-	}
-	
-	public List<Concept> getAnswers(Concept labSet)  throws APIException{
-        List<Concept> conceptList = new ArrayList<Concept>();
-        if (labSet.getDatatype().isCoded()) {
-            if (!labSet.getAnswers().isEmpty()) {
-                List<ConceptAnswer> conceptAnswers = new ArrayList<ConceptAnswer>(labSet.getAnswers());
-                for (int count = 0; count < conceptAnswers.size(); count++) {
-                    Concept conceptAnsName = conceptAnswers.get(count).getAnswerConcept();
-                    conceptList.add(conceptAnsName);
-                }
-            }
-        }
-        return conceptList;
-    }
-	public List<Order> getOrders(List<Concept> concepts,  Patient patient, Location location, Date orderStartDate) throws APIException{
-		return dao.getOrders(concepts, patient, location, orderStartDate);
-		
-	}
-	public List<Concept> searchProcedure(String text) throws APIException {
-		ConceptClass cc =  Context.getConceptService().getConceptClassByName(PatientDashboardConstants.CONCEPT_CLASS_NAME_PROCEDURE);
+		ConceptClass cc = Context.getConceptService()
+				.getConceptClassByName(PatientDashboardConstants.CONCEPT_CLASS_NAME_DIAGNOSIS);
 		return dao.searchConceptsByNameAndClass(text, cc);
 	}
 
-	public List<Encounter> getEncounter(Patient p, Location loc,
-			EncounterType encType, String date) {
+	public List<Concept> getAnswers(Concept labSet) throws APIException {
+		List<Concept> conceptList = new ArrayList<Concept>();
+		if (labSet.getDatatype().isCoded()) {
+			if (!labSet.getAnswers().isEmpty()) {
+				List<ConceptAnswer> conceptAnswers = new ArrayList<ConceptAnswer>(labSet.getAnswers());
+				for (int count = 0; count < conceptAnswers.size(); count++) {
+					Concept conceptAnsName = conceptAnswers.get(count).getAnswerConcept();
+					conceptList.add(conceptAnsName);
+				}
+			}
+		}
+		return conceptList;
+	}
+
+	public List<Order> getOrders(List<Concept> concepts, Patient patient, Location location, Date orderStartDate)
+			throws APIException {
+		return dao.getOrders(concepts, patient, location, orderStartDate);
+
+	}
+
+	public List<Concept> searchProcedure(String text) throws APIException {
+		ConceptClass cc = Context.getConceptService()
+				.getConceptClassByName(PatientDashboardConstants.CONCEPT_CLASS_NAME_PROCEDURE);
+		return dao.searchConceptsByNameAndClass(text, cc);
+	}
+
+	public List<Encounter> getEncounter(Patient p, Location loc, EncounterType encType, String date) {
 		return dao.getEncounter(p, loc, encType, date);
 	}
+
 	public Set<Concept> listDiagnosisByOpd(Integer opdConcept) throws APIException {
 		Set<Concept> listDiagnosis = new HashSet<Concept>();
 		Concept concept = Context.getConceptService().getConcept(opdConcept);
-		if(concept != null && concept.getAnswers() != null && !concept.getAnswers().isEmpty()){
+		if (concept != null && concept.getAnswers() != null && !concept.getAnswers().isEmpty()) {
 			Concept diagnosisC = null;
-			for(ConceptAnswer c : concept.getAnswers()){
-				if("diagnosis".equalsIgnoreCase(c.getAnswerConcept().getConceptClass().getName())){
+			for (ConceptAnswer c : concept.getAnswers()) {
+				if ("diagnosis".equalsIgnoreCase(c.getAnswerConcept().getConceptClass().getName())) {
 					diagnosisC = c.getAnswerConcept();
 					break;
 				}
 			}
-			
-			//OPD only one concept have class is diagnosis, get default one concept have diagnosis
-			if(diagnosisC == null){
+
+			// OPD only one concept have class is diagnosis, get default one concept have
+			// diagnosis
+			if (diagnosisC == null) {
 				return null;
 			}
 			// get answer of OPD
-			if(diagnosisC.getAnswers() != null && !diagnosisC.getAnswers().isEmpty()){
-				for(ConceptAnswer c : diagnosisC.getAnswers()){
+			if (diagnosisC.getAnswers() != null && !diagnosisC.getAnswers().isEmpty()) {
+				for (ConceptAnswer c : diagnosisC.getAnswers()) {
 					//
-					if(c.getAnswerConcept() != null && c.getAnswerConcept().getAnswers() != null && !c.getAnswerConcept().getAnswers().isEmpty()){
-						for(ConceptAnswer cInner : c.getAnswerConcept().getAnswers())
-						{
-							if(cInner.getAnswerConcept().getConceptClass() != null && "diagnosis".equalsIgnoreCase(cInner.getAnswerConcept().getConceptClass().getName())){
+					if (c.getAnswerConcept() != null && c.getAnswerConcept().getAnswers() != null
+							&& !c.getAnswerConcept().getAnswers().isEmpty()) {
+						for (ConceptAnswer cInner : c.getAnswerConcept().getAnswers()) {
+							if (cInner.getAnswerConcept().getConceptClass() != null && "diagnosis"
+									.equalsIgnoreCase(cInner.getAnswerConcept().getConceptClass().getName())) {
 								listDiagnosis.add(cInner.getAnswerConcept());
 							}
 						}
-					}else{
-						
-						if(c.getAnswerConcept().getConceptClass() != null && "diagnosis".equalsIgnoreCase(c.getAnswerConcept().getConceptClass().getName()))
-						{
+					} else {
+
+						if (c.getAnswerConcept().getConceptClass() != null
+								&& "diagnosis".equalsIgnoreCase(c.getAnswerConcept().getConceptClass().getName())) {
 							listDiagnosis.add(c.getAnswerConcept());
 						}
 					}
@@ -127,63 +135,87 @@ public class PatientDashboardServiceImpl implements PatientDashboardService {
 		}
 		return listDiagnosis;
 	}
-	
-	//Department
-	public Department createDepartment(Department department) throws APIException{
+
+	// Department
+	public Department createDepartment(Department department) throws APIException {
 		return dao.createDepartment(department);
 	}
-	public void removeDepartment(Department department) throws APIException{
+
+	public void removeDepartment(Department department) throws APIException {
 		dao.removeDepartment(department);
 	}
-	public Department getDepartmentById(Integer id) throws APIException{
+
+	public Department getDepartmentById(Integer id) throws APIException {
 		return dao.getDepartmentById(id);
 	}
-	public Department getDepartmentByWard(Integer wardId) throws APIException{
+
+	public Department getDepartmentByWard(Integer wardId) throws APIException {
 		return dao.getDepartmentByWard(wardId);
 	}
-	public List<Department> listDepartment(Boolean retired) throws APIException{
+
+	public List<Department> listDepartment(Boolean retired) throws APIException {
 		return dao.listDepartment(retired);
 	}
-	public Department getDepartmentByName(String name) throws APIException{
+
+	public Department getDepartmentByName(String name) throws APIException {
 		return dao.getDepartmentByName(name);
 	}
-	//DepartmentConcept
-	public DepartmentConcept createDepartmentConcept(DepartmentConcept departmentConcept) throws APIException{
+
+	// DepartmentConcept
+	public DepartmentConcept createDepartmentConcept(DepartmentConcept departmentConcept) throws APIException {
 		return dao.createDepartmentConcept(departmentConcept);
 	}
-	public DepartmentConcept getByDepartmentAndConcept(Integer departmentId, Integer conceptId) throws APIException{
+
+	public DepartmentConcept getByDepartmentAndConcept(Integer departmentId, Integer conceptId) throws APIException {
 		return dao.getByDepartmentAndConcept(departmentId, conceptId);
 	}
-	public DepartmentConcept getById(Integer id) throws APIException{
+
+	public DepartmentConcept getById(Integer id) throws APIException {
 		return dao.getById(id);
 	}
-	public void removeDepartmentConcept(DepartmentConcept departmentConcept) throws APIException{
+
+	public void removeDepartmentConcept(DepartmentConcept departmentConcept) throws APIException {
 		dao.removeDepartmentConcept(departmentConcept);
 	}
-	public List<DepartmentConcept> listByDepartment(Integer departmentId, Integer typeConcept) throws APIException{
-		return dao.listByDepartment(departmentId,typeConcept);
+
+	public List<DepartmentConcept> listByDepartment(Integer departmentId, Integer typeConcept) throws APIException {
+		return dao.listByDepartment(departmentId, typeConcept);
 	}
-	public List<Concept> listByDepartmentByWard(Integer wardId,
-			Integer typeConcept) throws APIException {
+
+	public List<Concept> listByDepartmentByWard(Integer wardId, Integer typeConcept) throws APIException {
 		return dao.listByDepartmentByWard(wardId, typeConcept);
 	}
+
 	public List<Concept> searchInvestigation(String text) throws APIException {
 		return dao.searchInvestigation(text);
 	}
+
 	public List<InventoryDrug> findDrug(String name) throws APIException {
 		return dao.findDrug(name);
 	}
+
 	public OpdDrugOrder saveOrUpdateOpdDrugOrder(OpdDrugOrder opdDrugOrder) throws APIException {
 		return dao.saveOrUpdateOpdDrugOrder(opdDrugOrder);
 	}
+
 	public OpdTestOrder saveOrUpdateOpdOrder(OpdTestOrder opdTestOrder) throws APIException {
 		return dao.saveOrUpdateOpdOrder(opdTestOrder);
 	}
+
 	public OpdPatientQueueLog getOpdPatientQueueLog(Encounter encounter) {
 		return dao.getOpdPatientQueueLog(encounter);
 	}
+
 	public List<OpdDrugOrder> getOpdDrugOrder(Encounter encounter) {
 		return dao.getOpdDrugOrder(encounter);
 	}
-	
+
+	public List<Map<String, Object>> getPatientDrugDetails(String identifier, String date) {
+		return dao.getPatientDrugDetails(identifier, date);
+	}
+
+	public List<String> getPatientDrugIssueDates(String identifier) {
+		return dao.getPatientDrugIssueDates(identifier);
+	}
+
 }
