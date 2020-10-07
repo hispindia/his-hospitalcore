@@ -40,41 +40,50 @@ import org.openmrs.module.hospitalcore.model.PatientSearch;
 public interface HospitalCoreDAO {
 
 	public List<Obs> listObsGroup(Integer personId, Integer conceptId, Integer min, Integer max) throws DAOException;
-	public Obs getObsGroupCurrentDate(Integer personId, Integer conceptId) throws DAOException;	
+
+	public Obs getObsGroupCurrentDate(Integer personId, Integer conceptId) throws DAOException;
+
 	public Integer buildConcepts(List<ConceptModel> conceptModels);
-	public List<Patient> searchPatient(String nameOrIdentifier,String gender, int age , int rangeAge, String date, int rangeDay,String relativeName) throws DAOException;
-	
+
+	public List<Patient> searchPatient(String nameOrIdentifier, String gender, int age, int rangeAge, String date,
+			int rangeDay, String relativeName) throws DAOException;
+
 	/**
 	 * Search patients
+	 * 
 	 * @param hql
 	 * @return
 	 */
 	public List<Patient> searchPatient(String hql);
-	
+
 	/**
 	 * Get patient search result count
+	 * 
 	 * @param hql
 	 * @return
 	 */
 	public BigInteger getPatientSearchResultCount(String hql);
-	
-	/** 
+
+	/**
 	 * Get all attributes of an patient
+	 * 
 	 * @param patientId
 	 * @return
 	 */
 	public List<PersonAttribute> getPersonAttributes(Integer patientId);
-	
+
 	/**
 	 * Get last visit encounter
+	 * 
 	 * @param patient
 	 * @param types
 	 * @return
 	 */
 	public Encounter getLastVisitEncounter(Patient patient, List<EncounterType> types);
-	
+
 	/**
 	 * Save core form
+	 * 
 	 * @param form
 	 * @return
 	 */
@@ -82,6 +91,7 @@ public interface HospitalCoreDAO {
 
 	/**
 	 * Get core form by id
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -89,6 +99,7 @@ public interface HospitalCoreDAO {
 
 	/**
 	 * Get core forms by name
+	 * 
 	 * @param conceptName
 	 * @return
 	 */
@@ -96,23 +107,26 @@ public interface HospitalCoreDAO {
 
 	/**
 	 * Get all core forms
+	 * 
 	 * @return
 	 */
 	public List<CoreForm> getCoreForms();
 
 	/**
 	 * Delete core form
+	 * 
 	 * @param form
 	 */
 	public void deleteCoreForm(CoreForm form);
-	
+
 	/**
 	 * Save patientSearch
+	 * 
 	 * @param patientSearch
 	 * @return
 	 */
 	public PatientSearch savePatientSearch(PatientSearch patientSearch);
-	
+
 	/**
 	 * 
 	 * Auto generated method comment
@@ -120,16 +134,18 @@ public interface HospitalCoreDAO {
 	 * @param patientID
 	 * @return
 	 */
-	public java.util.Date getLastVisitTime (int patientID);
-	
-	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
-	public PatientSearch getPatient(int patientID);
-	
-	//public List<Patient> getAllEncounterCurrentDate(String date,Set<EncounterType> encounterTypes);
-	
-	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes);
-	public Set<Encounter>getEncountersByPatientAndDateFromObs(String date);
-	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws DAOException;
+	public java.util.Date getLastVisitTime(int patientID);
 
-	public List getPatientDemographicDetailsAPI(String patientIdentifier, String date);
+	// ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
+	public PatientSearch getPatient(int patientID);
+
+	// public List<Patient> getAllEncounterCurrentDate(String
+	// date,Set<EncounterType> encounterTypes);
+
+	public Set<Encounter> getEncountersByPatientAndDate(String date, Set<EncounterType> encounterTypes);
+
+	public Set<Encounter> getEncountersByPatientAndDateFromObs(String date);
+
+	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter, Concept concept) throws DAOException;
+
 }

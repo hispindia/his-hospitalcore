@@ -77,8 +77,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
-		HospitalCoreService {
+public class HospitalCoreServiceImpl extends BaseOpenmrsService implements HospitalCoreService {
 
 	private Log log = LogFactory.getLog(this.getClass());
 
@@ -87,18 +86,15 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 
 	protected HospitalCoreDAO dao;
 
-	public List<Obs> listObsGroup(Integer personId, Integer conceptId,
-			Integer min, Integer max) throws APIException {
+	public List<Obs> listObsGroup(Integer personId, Integer conceptId, Integer min, Integer max) throws APIException {
 		return dao.listObsGroup(personId, conceptId, min, max);
 	}
 
-	private Concept insertConcept(ConceptService conceptService,
-			String dataTypeName, String conceptClassName, String concept) {
+	private Concept insertConcept(ConceptService conceptService, String dataTypeName, String conceptClassName,
+			String concept) {
 		try {
-			ConceptDatatype datatype = Context.getConceptService()
-					.getConceptDatatypeByName(dataTypeName);
-			ConceptClass conceptClass = conceptService
-					.getConceptClassByName(conceptClassName);
+			ConceptDatatype datatype = Context.getConceptService().getConceptDatatypeByName(dataTypeName);
+			ConceptClass conceptClass = conceptService.getConceptClassByName(conceptClassName);
 			Concept con = conceptService.getConcept(concept);
 			if (con == null) {
 				con = new Concept();
@@ -114,8 +110,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		return null;
 	}
 
-	public void creatConceptQuestionAndAnswer(ConceptService conceptService,
-			User user, String conceptParent, String... conceptChild) {
+	public void creatConceptQuestionAndAnswer(ConceptService conceptService, User user, String conceptParent,
+			String... conceptChild) {
 		Concept concept = conceptService.getConcept(conceptParent);
 		if (concept == null) {
 			insertConcept(conceptService, "Coded", "Question", conceptParent);
@@ -129,8 +125,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		}
 	}
 
-	private void addConceptAnswers(Concept concept, String[] answerNames,
-			User creator) {
+	private void addConceptAnswers(Concept concept, String[] answerNames, User creator) {
 		Set<Integer> currentAnswerIds = new HashSet<Integer>();
 		for (ConceptAnswer answer : concept.getAnswers()) {
 			currentAnswerIds.add(answer.getAnswerConcept().getConceptId());
@@ -150,19 +145,15 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		}
 	}
 
-	private Concept insertHospital(ConceptService conceptService,
-			String hospitalName) {
+	private Concept insertHospital(ConceptService conceptService, String hospitalName) {
 		try {
-			ConceptDatatype datatype = Context.getConceptService()
-					.getConceptDatatypeByName("N/A");
-			ConceptClass conceptClass = conceptService
-					.getConceptClassByName("Misc");
+			ConceptDatatype datatype = Context.getConceptService().getConceptDatatypeByName("N/A");
+			ConceptClass conceptClass = conceptService.getConceptClassByName("Misc");
 			Concept con = conceptService.getConceptByName(hospitalName);
 			// System.out.println(con);
 			if (con == null) {
 				con = new Concept();
-				ConceptName name = new ConceptName(hospitalName,
-						Context.getLocale());
+				ConceptName name = new ConceptName(hospitalName, Context.getLocale());
 				con.addName(name);
 				con.setDatatype(datatype);
 				con.setConceptClass(conceptClass);
@@ -175,18 +166,14 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		return null;
 	}
 
-	public EncounterType insertEncounterTypeByKey(String type)
-			throws APIException {
+	public EncounterType insertEncounterTypeByKey(String type) throws APIException {
 		EncounterType encounterType = null;
 		try {
-			GlobalProperty gp = Context.getAdministrationService()
-					.getGlobalPropertyObject(type);
-			encounterType = Context.getEncounterService().getEncounterType(
-					gp.getPropertyValue());
+			GlobalProperty gp = Context.getAdministrationService().getGlobalPropertyObject(type);
+			encounterType = Context.getEncounterService().getEncounterType(gp.getPropertyValue());
 			if (encounterType == null) {
 				encounterType = new EncounterType(gp.getPropertyValue(), "");
-				encounterType = Context.getEncounterService()
-						.saveEncounterType(encounterType);
+				encounterType = Context.getEncounterService().saveEncounterType(encounterType);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -201,8 +188,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 */
 	/*
 	 * public EncounterType insertEncounterTypeByKey(String type) throws
-	 * APIException { EncounterType encounterType = null; try { GlobalProperty
-	 * gp = Context.getAdministrationService().getGlobalPropertyObject(type);
+	 * APIException { EncounterType encounterType = null; try { GlobalProperty gp =
+	 * Context.getAdministrationService().getGlobalPropertyObject(type);
 	 * encounterType =
 	 * Context.getEncounterService().getEncounterType(gp.getPropertyValue()); if
 	 * (encounterType == null) { encounterType = new
@@ -211,10 +198,10 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * ().saveEncounterType(encounterType); } } catch (Exception e) {
 	 * e.printStackTrace(); } return encounterType; }
 	 * 
-	 * public void addConceptAnswers(ConceptService conceptService, Concept
-	 * concept, String[] answerNames, User creator) throws APIException {
-	 * Set<Integer> currentAnswerIds = new HashSet<Integer>(); for
-	 * (ConceptAnswer answer : concept.getAnswers()) {
+	 * public void addConceptAnswers(ConceptService conceptService, Concept concept,
+	 * String[] answerNames, User creator) throws APIException { Set<Integer>
+	 * currentAnswerIds = new HashSet<Integer>(); for (ConceptAnswer answer :
+	 * concept.getAnswers()) {
 	 * currentAnswerIds.add(answer.getAnswerConcept().getConceptId()); } boolean
 	 * changed = false;
 	 * 
@@ -228,21 +215,19 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * Context.getConceptService().getConcept(answerName); if
 	 * (!currentAnswerIds.contains(answer.getConceptId())) { changed = true;
 	 * System.out.println("co nhay vao day khong "+answer); ConceptAnswer
-	 * conceptAnswer = new ConceptAnswer(answer);
-	 * conceptAnswer.setCreator(creator); concept.addAnswer(conceptAnswer); } }
-	 * if (changed) { System.out.println("nhay vao tao cai concept: ");
+	 * conceptAnswer = new ConceptAnswer(answer); conceptAnswer.setCreator(creator);
+	 * concept.addAnswer(conceptAnswer); } } if (changed) {
+	 * System.out.println("nhay vao tao cai concept: ");
 	 * Context.getConceptService().saveConcept(concept); } }
 	 * 
 	 * private Concept insertAnswerConcept(ConceptService conceptService, String
-	 * hospitalName) { try { ConceptDatatype datatype =
-	 * Context.getConceptService() .getConceptDatatypeByName("N/A");
-	 * ConceptClass conceptClass = conceptService
+	 * hospitalName) { try { ConceptDatatype datatype = Context.getConceptService()
+	 * .getConceptDatatypeByName("N/A"); ConceptClass conceptClass = conceptService
 	 * .getConceptClassByName("Misc"); Concept con =
-	 * conceptService.getConceptByName(hospitalName); //
-	 * System.out.println(con); if (con == null) { con = new Concept();
-	 * ConceptName name = new ConceptName(hospitalName, Context.getLocale());
-	 * con.addName(name); con.setDatatype(datatype);
-	 * con.setConceptClass(conceptClass); return
+	 * conceptService.getConceptByName(hospitalName); // System.out.println(con); if
+	 * (con == null) { con = new Concept(); ConceptName name = new
+	 * ConceptName(hospitalName, Context.getLocale()); con.addName(name);
+	 * con.setDatatype(datatype); con.setConceptClass(conceptClass); return
 	 * conceptService.saveConcept(con); } return con; } catch (Exception e) {
 	 * e.printStackTrace(); } return null; }
 	 * 
@@ -250,56 +235,53 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * 
 	 * public void setDao(HospitalCoreDAO dao) { this.dao = dao; }
 	 *//**
-	 * Insert a concept unless it exists
-	 * 
-	 * @param dataTypeName
-	 * @param conceptClassName
-	 * @param conceptName
-	 * @return found concept or created
-	 */
+		 * Insert a concept unless it exists
+		 * 
+		 * @param dataTypeName
+		 * @param conceptClassName
+		 * @param conceptName
+		 * @return found concept or created
+		 */
+
 	/*
 	 * public Concept insertConceptUnlessExist(String dataTypeName, String
 	 * conceptClassName, String conceptName) { Concept con = null; try {
-	 * ConceptService conceptService = Context.getConceptService();
-	 * ConceptDatatype datatype =
+	 * ConceptService conceptService = Context.getConceptService(); ConceptDatatype
+	 * datatype =
 	 * Context.getConceptService().getConceptDatatypeByName(dataTypeName);
 	 * System.out.println("me datatype: "+datatype); ConceptClass conceptClass =
 	 * conceptService .getConceptClassByName(conceptClassName);
 	 * System.out.println("me conceptclass: "+conceptClass); con =
 	 * conceptService.getConceptByName(conceptName);
-	 * System.out.println("be4 con: "+con); if (con == null) { con = new
-	 * Concept(); ConceptName name = new
-	 * ConceptName(conceptName,Context.getLocale()); con.addName(name);
-	 * con.setDatatype(datatype); con.setConceptClass(conceptClass);
+	 * System.out.println("be4 con: "+con); if (con == null) { con = new Concept();
+	 * ConceptName name = new ConceptName(conceptName,Context.getLocale());
+	 * con.addName(name); con.setDatatype(datatype);
+	 * con.setConceptClass(conceptClass);
 	 * System.out.println("con after: datatype: "+con.getDatatype());
 	 * System.out.println("con after: conceptClass: "+conceptClass);
 	 * //con.setDateCreated(new Date()); Concept ccccc
 	 * =conceptService.saveConcept(con); System.out.println("cccccc; "+ccccc);
-	 * return ccccc; } } catch (Exception e) { e.printStackTrace(); } return
-	 * con; }
+	 * return ccccc; } } catch (Exception e) { e.printStackTrace(); } return con; }
 	 */
 	/**
 	 * Create the global obs for a patient
 	 * 
 	 * @param patient
 	 */
-	public Concept insertConceptUnlessExist(String dataTypeName,
-			String conceptClassName, String conceptName) throws APIException {
+	public Concept insertConceptUnlessExist(String dataTypeName, String conceptClassName, String conceptName)
+			throws APIException {
 		Concept con = null;
 		try {
 			ConceptService conceptService = Context.getConceptService();
-			ConceptDatatype datatype = Context.getConceptService()
-					.getConceptDatatypeByName(dataTypeName);
+			ConceptDatatype datatype = Context.getConceptService().getConceptDatatypeByName(dataTypeName);
 			// System.out.println("me datatype: "+datatype);
-			ConceptClass conceptClass = conceptService
-					.getConceptClassByName(conceptClassName);
+			ConceptClass conceptClass = conceptService.getConceptClassByName(conceptClassName);
 			// System.out.println("me conceptclass: "+conceptClass);
 			con = conceptService.getConceptByName(conceptName);
 			// System.out.println("be4 con: "+con);
 			if (con == null) {
 				con = new Concept();
-				ConceptName name = new ConceptName(conceptName,
-						Context.getLocale());
+				ConceptName name = new ConceptName(conceptName, Context.getLocale());
 				con.addName(name);
 				con.setDatatype(datatype);
 				con.setConceptClass(conceptClass);
@@ -317,19 +299,16 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	}
 
 	public Obs createObsGroup(Patient patient, String properyKey) {
-		String opdVisitConceptName = Context.getAdministrationService()
-				.getGlobalProperty(properyKey);
+		String opdVisitConceptName = Context.getAdministrationService().getGlobalProperty(properyKey);
 		if (!StringUtils.isBlank(opdVisitConceptName)) {
-			Concept concept = insertConceptUnlessExist("N/A", "Misc",
-					opdVisitConceptName);
+			Concept concept = insertConceptUnlessExist("N/A", "Misc", opdVisitConceptName);
 			Obs obs = new Obs();
 			obs.setPatient(patient);
 			obs.setConcept(concept);
 			obs.setDateCreated(new Date());
 			obs.setObsDatetime(new Date());
 			obs.setLocation(new Location(1));
-			return Context.getObsService().saveObs(obs,
-					"Global obs for " + patient.getPersonName().getGivenName());
+			return Context.getObsService().saveObs(obs, "Global obs for " + patient.getPersonName().getGivenName());
 		}
 		return null;
 	}
@@ -341,14 +320,11 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * @return
 	 */
 	public Obs getObsGroup(Patient patient) {
-		String name = Context.getAdministrationService().getGlobalProperty(
-				HospitalCoreConstants.PROPERTY_OBSGROUP);
+		String name = Context.getAdministrationService().getGlobalProperty(HospitalCoreConstants.PROPERTY_OBSGROUP);
 		Obs obs = null;
 		try {
-			Concept concept = Context.getConceptService()
-					.getConceptByName(name);
-			List<Obs> obses = listObsGroup(patient.getPersonId(),
-					concept.getConceptId(), 0, 1);
+			Concept concept = Context.getConceptService().getConceptByName(name);
+			List<Obs> obses = listObsGroup(patient.getPersonId(), concept.getConceptId(), 0, 1);
 			obs = CollectionUtils.isEmpty(obses) ? null : obses.get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -358,8 +334,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	}
 
 	public Obs getObsGroupCurrentDate(Integer personId) throws APIException {
-		String name = Context.getAdministrationService().getGlobalProperty(
-				HospitalCoreConstants.PROPERTY_OBSGROUP);
+		String name = Context.getAdministrationService().getGlobalProperty(HospitalCoreConstants.PROPERTY_OBSGROUP);
 		Concept concept = Context.getConceptService().getConceptByName(name);
 		// TODO Auto-generated method stub
 		return dao.getObsGroupCurrentDate(personId, concept.getConceptId());
@@ -382,8 +357,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	public void insertSynonym(Concept concept, String name) {
 		Locale loc = new Locale("en");
 		ConceptName conceptName = new ConceptName(name, loc);
-		ConceptNameTag tag = Context.getConceptService()
-				.getConceptNameTagByName("synonym");
+		ConceptNameTag tag = Context.getConceptService().getConceptNameTagByName("synonym");
 		conceptName.addTag(tag);
 		conceptName.setDateCreated(new Date());
 		conceptName.setCreator(Context.getAuthenticatedUser());
@@ -397,10 +371,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * @param concept
 	 * @param name
 	 */
-	public void insertMapping(Concept concept, String sourceName,
-			String sourceCode) {
-		ConceptSource conceptSource = Context.getConceptService()
-				.getConceptSourceByName(sourceName);
+	public void insertMapping(Concept concept, String sourceName, String sourceCode) {
+		ConceptSource conceptSource = Context.getConceptService().getConceptSourceByName(sourceName);
 		List<ConceptMap> conceptMaps = new ArrayList<ConceptMap>();
 		conceptMaps.addAll(concept.getConceptMappings());
 
@@ -425,9 +397,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		}
 	}
 
-	public Concept insertConcept(String dataTypeName, String conceptClassName,
-			String name, String shortname, String description)
-			throws APIException {
+	public Concept insertConcept(String dataTypeName, String conceptClassName, String name, String shortname,
+			String description) throws APIException {
 		Concept con = null;
 		try {
 			ConceptService conceptService = Context.getConceptService();
@@ -444,18 +415,15 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 				con = addName(con, shortname.toUpperCase(), loc);
 
 				// Add description
-				ConceptDescription conceptDescription = new ConceptDescription(
-						description, loc);
+				ConceptDescription conceptDescription = new ConceptDescription(description, loc);
 				con.addDescription(conceptDescription);
 
 				// Add datatype
-				ConceptDatatype conceptDatatype = Context.getConceptService()
-						.getConceptDatatypeByName(dataTypeName);
+				ConceptDatatype conceptDatatype = Context.getConceptService().getConceptDatatypeByName(dataTypeName);
 				con.setDatatype(conceptDatatype);
 
 				// add conceptClass
-				ConceptClass conceptClass = conceptService
-						.getConceptClassByName(conceptClassName);
+				ConceptClass conceptClass = conceptService.getConceptClassByName(conceptClassName);
 				con.setConceptClass(conceptClass);
 
 				return conceptService.saveConcept(con);
@@ -479,10 +447,8 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		return concept;
 	}
 
-	public Integer importConcepts(InputStream diagnosisStream,
-			InputStream mappingStream, InputStream synonymStream)
-			throws XPathExpressionException, ParserConfigurationException,
-			SAXException, IOException {
+	public Integer importConcepts(InputStream diagnosisStream, InputStream mappingStream, InputStream synonymStream)
+			throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		Integer diagnosisNo = 0;
 		Set<ConceptModel> concepts = new HashSet<ConceptModel>();
 		Set<Mapping> mapping = new HashSet<Mapping>();
@@ -505,11 +471,9 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	}
 
 	private Set<ConceptModel> parseDiagnosis(InputStream stream)
-			throws ParserConfigurationException, SAXException, IOException,
-			XPathExpressionException {
+			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		Set<ConceptModel> concepts = new TreeSet<ConceptModel>();
-		DocumentBuilderFactory domFactory = DocumentBuilderFactory
-				.newInstance();
+		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 		domFactory.setNamespaceAware(true);
 		DocumentBuilder builder = domFactory.newDocumentBuilder();
 		Document doc = builder.parse(stream);
@@ -524,8 +488,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 					Node field = fields.item(j);
 					NamedNodeMap attributes = field.getAttributes();
 					if (field.getNodeName().equalsIgnoreCase("field")) {
-						String type = attributes.getNamedItem("name")
-								.getTextContent();
+						String type = attributes.getNamedItem("name").getTextContent();
 						String value = field.getTextContent();
 
 						if ("name".equalsIgnoreCase(type)) {
@@ -544,11 +507,9 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	}
 
 	private Set<Mapping> parseMapping(InputStream stream)
-			throws ParserConfigurationException, SAXException, IOException,
-			XPathExpressionException {
+			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		Set<Mapping> mappings = new TreeSet<Mapping>();
-		DocumentBuilderFactory domFactory = DocumentBuilderFactory
-				.newInstance();
+		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 		domFactory.setNamespaceAware(true);
 		DocumentBuilder builder = domFactory.newDocumentBuilder();
 		Document doc = builder.parse(stream);
@@ -563,8 +524,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 					Node field = fields.item(j);
 					NamedNodeMap attributes = field.getAttributes();
 					if (field.getNodeName().equalsIgnoreCase("field")) {
-						String type = attributes.getNamedItem("name")
-								.getTextContent();
+						String type = attributes.getNamedItem("name").getTextContent();
 						String value = field.getTextContent();
 
 						if ("name".equalsIgnoreCase(type)) {
@@ -587,11 +547,9 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	}
 
 	private Set<Synonym> parseSynonym(InputStream stream)
-			throws ParserConfigurationException, SAXException, IOException,
-			XPathExpressionException {
+			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		Set<Synonym> synnonyms = new TreeSet<Synonym>();
-		DocumentBuilderFactory domFactory = DocumentBuilderFactory
-				.newInstance();
+		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 		domFactory.setNamespaceAware(true);
 		DocumentBuilder builder = domFactory.newDocumentBuilder();
 		Document doc = builder.parse(stream);
@@ -606,8 +564,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 					Node field = fields.item(j);
 					NamedNodeMap attributes = field.getAttributes();
 					if (field.getNodeName().equalsIgnoreCase("field")) {
-						String type = attributes.getNamedItem("name")
-								.getTextContent();
+						String type = attributes.getNamedItem("name").getTextContent();
 						String value = field.getTextContent();
 
 						if ("concept".equalsIgnoreCase(type)) {
@@ -625,8 +582,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		return synnonyms;
 	}
 
-	private List<ConceptModel> merge(Set<ConceptModel> conceptSet,
-			Set<Mapping> mappingSet, Set<Synonym> synonymSet) {
+	private List<ConceptModel> merge(Set<ConceptModel> conceptSet, Set<Mapping> mappingSet, Set<Synonym> synonymSet) {
 		List<ConceptModel> conceptList = new ArrayList<ConceptModel>();
 		conceptList.addAll(conceptSet);
 		for (Mapping mapping : mappingSet) {
@@ -654,11 +610,9 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		return Collections.binarySearch(conceptList, concept);
 	}
 
-	public List<Patient> searchPatient(String nameOrIdentifier, String gender,
-			int age, int rangeAge, String date, int rangeDay,
-			String relativeName) throws APIException {
-		return dao.searchPatient(nameOrIdentifier, gender, age, rangeAge, date,
-				rangeDay, relativeName);
+	public List<Patient> searchPatient(String nameOrIdentifier, String gender, int age, int rangeAge, String date,
+			int rangeDay, String relativeName) throws APIException {
+		return dao.searchPatient(nameOrIdentifier, gender, age, rangeAge, date, rangeDay, relativeName);
 	}
 
 	public List<Patient> searchPatient(String hql) {
@@ -673,11 +627,10 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 		return dao.getPersonAttributes(patientId);
 	}
 
-	public Encounter getLastVisitEncounter(Patient patient,
-			List<EncounterType> types) {
+	public Encounter getLastVisitEncounter(Patient patient, List<EncounterType> types) {
 		return dao.getLastVisitEncounter(patient, types);
 	}
-	
+
 	/**
 	 * Save core form
 	 * 
@@ -713,7 +666,7 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * 
 	 * @return
 	 */
-	public List<CoreForm> getCoreForms(){
+	public List<CoreForm> getCoreForms() {
 		return dao.getCoreForms();
 	}
 
@@ -722,14 +675,14 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * 
 	 * @param form
 	 */
-	public void deleteCoreForm(CoreForm form){
+	public void deleteCoreForm(CoreForm form) {
 		dao.deleteCoreForm(form);
 	}
-	
+
 	/**
 	 * Save patientSearch
 	 */
-	public PatientSearch savePatientSearch(PatientSearch patientSearch){
+	public PatientSearch savePatientSearch(PatientSearch patientSearch) {
 		return dao.savePatientSearch(patientSearch);
 	}
 
@@ -738,30 +691,30 @@ public class HospitalCoreServiceImpl extends BaseOpenmrsService implements
 	 * @see org.openmrs.module.hospitalcore.HospitalCoreService#getLastVisitTime(int)
 	 */
 	public java.util.Date getLastVisitTime(int patientID) {
-	    return dao.getLastVisitTime(patientID);
-    }
-	
-	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
-	public PatientSearch getPatient(int patientID){
+		return dao.getLastVisitTime(patientID);
+	}
+
+	// ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
+	public PatientSearch getPatient(int patientID) {
 		return dao.getPatient(patientID);
 	}
 
-	/*public List<Patient> getAllEncounterCurrentDate(String date,Set<EncounterType> encounterTypes) {
-		// TODO Auto-generated method stub
-		return dao.getAllEncounterCurrentDate(date,encounterTypes);
-	}*/
-	
-	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes){
-		return dao.getEncountersByPatientAndDate(date,encounterTypes);
+	/*
+	 * public List<Patient> getAllEncounterCurrentDate(String
+	 * date,Set<EncounterType> encounterTypes) { // TODO Auto-generated method stub
+	 * return dao.getAllEncounterCurrentDate(date,encounterTypes); }
+	 */
+
+	public Set<Encounter> getEncountersByPatientAndDate(String date, Set<EncounterType> encounterTypes) {
+		return dao.getEncountersByPatientAndDate(date, encounterTypes);
 	}
-	public Set<Encounter> getEncountersByPatientAndDateFromObs(String date){
+
+	public Set<Encounter> getEncountersByPatientAndDateFromObs(String date) {
 		return dao.getEncountersByPatientAndDateFromObs(date);
 	}
-	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept){
-		return dao.getObsInstanceForDiagnosis(encounter,concept);
-	}
-	public List getPatientDemographicDetailsAPI(String patientIdentifier, String date) {
-		return dao.getPatientDemographicDetailsAPI(patientIdentifier, date);
+
+	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter, Concept concept) {
+		return dao.getObsInstanceForDiagnosis(encounter, concept);
 	}
 
 }

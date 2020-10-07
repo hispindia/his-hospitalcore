@@ -49,20 +49,17 @@ import org.xml.sax.SAXException;
 @Transactional
 public interface HospitalCoreService extends OpenmrsService {
 
-	public List<Obs> listObsGroup(Integer personId, Integer conceptId,
-			Integer min, Integer max) throws APIException;
+	public List<Obs> listObsGroup(Integer personId, Integer conceptId, Integer min, Integer max) throws APIException;
 
-	public EncounterType insertEncounterTypeByKey(String type)
-			throws APIException;
+	public EncounterType insertEncounterTypeByKey(String type) throws APIException;
 
-	public void creatConceptQuestionAndAnswer(ConceptService conceptService,
-			User user, String conceptParent, String... conceptChild)
-			throws APIException;
+	public void creatConceptQuestionAndAnswer(ConceptService conceptService, User user, String conceptParent,
+			String... conceptChild) throws APIException;
 
 	public Obs createObsGroup(Patient patient, String properyKey);
 
-	public Concept insertConceptUnlessExist(String dataTypeName,
-			String conceptClassName, String conceptName) throws APIException;
+	public Concept insertConceptUnlessExist(String dataTypeName, String conceptClassName, String conceptName)
+			throws APIException;
 
 	public Obs getObsGroup(Patient patient);
 
@@ -70,28 +67,21 @@ public interface HospitalCoreService extends OpenmrsService {
 
 	public void insertSynonym(Concept concept, String name);
 
-	public void insertMapping(Concept concept, String sourceName,
-			String sourceCode);
+	public void insertMapping(Concept concept, String sourceName, String sourceCode);
 
 	/**
 	 * Insert the concept unless it exists
 	 * 
-	 * @param dataTypeName
-	 *            name of datatype
-	 * @param conceptClassName
-	 *            name of concept class
-	 * @param name
-	 *            name of the concept
-	 * @param shortname
-	 *            shortname of the concept
-	 * @param description
-	 *            description of the concept
+	 * @param dataTypeName     name of datatype
+	 * @param conceptClassName name of concept class
+	 * @param name             name of the concept
+	 * @param shortname        shortname of the concept
+	 * @param description      description of the concept
 	 * @return the created concept or the existing concept
 	 * @throws APIException
 	 */
-	public Concept insertConcept(String dataTypeName, String conceptClassName,
-			String name, String shortname, String description)
-			throws APIException;
+	public Concept insertConcept(String dataTypeName, String conceptClassName, String name, String shortname,
+			String description) throws APIException;
 
 	/**
 	 * Import concepts from XML files.
@@ -105,10 +95,8 @@ public interface HospitalCoreService extends OpenmrsService {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public Integer importConcepts(InputStream diagnosisStream,
-			InputStream mappingStream, InputStream synonymStream)
-			throws XPathExpressionException, ParserConfigurationException,
-			SAXException, IOException;
+	public Integer importConcepts(InputStream diagnosisStream, InputStream mappingStream, InputStream synonymStream)
+			throws XPathExpressionException, ParserConfigurationException, SAXException, IOException;
 
 	/**
 	 * Search patients
@@ -123,9 +111,8 @@ public interface HospitalCoreService extends OpenmrsService {
 	 * @return
 	 * @throws APIException
 	 */
-	public List<Patient> searchPatient(String nameOrIdentifier, String gender,
-			int age, int rangeAge, String date, int rangeDay,
-			String relativeName) throws APIException;
+	public List<Patient> searchPatient(String nameOrIdentifier, String gender, int age, int rangeAge, String date,
+			int rangeDay, String relativeName) throws APIException;
 
 	/**
 	 * Search patients
@@ -150,18 +137,19 @@ public interface HospitalCoreService extends OpenmrsService {
 	 * @return
 	 */
 	public List<PersonAttribute> getPersonAttributes(Integer patientId);
-	
+
 	/**
 	 * Get last visit encounter
+	 * 
 	 * @param patient
 	 * @param types
 	 * @return
 	 */
-	public Encounter getLastVisitEncounter(Patient patient,
-			List<EncounterType> types);
+	public Encounter getLastVisitEncounter(Patient patient, List<EncounterType> types);
 
 	/**
 	 * Save core form
+	 * 
 	 * @param form
 	 * @return
 	 */
@@ -169,6 +157,7 @@ public interface HospitalCoreService extends OpenmrsService {
 
 	/**
 	 * Get core form by id
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -176,6 +165,7 @@ public interface HospitalCoreService extends OpenmrsService {
 
 	/**
 	 * Get core forms by name
+	 * 
 	 * @param conceptName
 	 * @return
 	 */
@@ -183,23 +173,26 @@ public interface HospitalCoreService extends OpenmrsService {
 
 	/**
 	 * Get all core forms
+	 * 
 	 * @return
 	 */
 	public List<CoreForm> getCoreForms();
 
 	/**
 	 * Delete core form
+	 * 
 	 * @param form
 	 */
 	public void deleteCoreForm(CoreForm form);
-	
+
 	/**
 	 * Save patientSearch
+	 * 
 	 * @param patientSearch
 	 * @return
 	 */
 	public PatientSearch savePatientSearch(PatientSearch patientSearch);
-	
+
 	/**
 	 * 
 	 * get Last Visit time
@@ -207,19 +200,19 @@ public interface HospitalCoreService extends OpenmrsService {
 	 * @param patientID
 	 * @return
 	 */
-	public java.util.Date getLastVisitTime (int patientID);
-	
-	//ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
-	public PatientSearch getPatient(int patientID);
-	
-	
-	//New requirement to download patient
-	//public List<Patient> getAllEncounterCurrentDate(String date,Set<EncounterType> encounterTypes);
-	
-	public Set<Encounter> getEncountersByPatientAndDate(String date,Set<EncounterType> encounterTypes);
-	public Set<Encounter>getEncountersByPatientAndDateFromObs(String date);
-	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter,Concept concept) throws APIException;
+	public java.util.Date getLastVisitTime(int patientID);
 
-	public List getPatientDemographicDetailsAPI(String patientIdentifier, String date);
-	
+	// ghanshyam,22-oct-2013,New Requirement #2940 Dealing with dead patient
+	public PatientSearch getPatient(int patientID);
+
+	// New requirement to download patient
+	// public List<Patient> getAllEncounterCurrentDate(String
+	// date,Set<EncounterType> encounterTypes);
+
+	public Set<Encounter> getEncountersByPatientAndDate(String date, Set<EncounterType> encounterTypes);
+
+	public Set<Encounter> getEncountersByPatientAndDateFromObs(String date);
+
+	public List<Obs> getObsInstanceForDiagnosis(Encounter encounter, Concept concept) throws APIException;
+
 }
