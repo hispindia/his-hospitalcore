@@ -86,7 +86,6 @@
 	});
 	document.querySelector("#selectWard").innerHTML = selectWardOption;
 
-
 	// get context path in order to build controller url
 	function getContextPath(){		
 		pn = location.pathname;
@@ -127,11 +126,12 @@
 	    	if (!table.nodeType) table = document.getElementById(table)
 	    	var link = document.createElement("a");
 	    	var ctx = {worksheet: 'ClinicalMorbidityReport', table: table.innerHTML}
+			let ward = document.querySelector("#selectWard").value;
 	   
 			link.href = uri + base64(format(template, ctx));
 
 			link.style = 'visibility:hidden';
-			link.download ='ClinicalMorbidityReport.xls';
+			link.download = 'ClinicalMorbidityReport(' + ward + ').xls';
 
 			document.body.appendChild(link);
 			link.click();

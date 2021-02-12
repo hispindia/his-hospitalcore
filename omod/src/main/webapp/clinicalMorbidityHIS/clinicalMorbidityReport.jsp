@@ -1,4 +1,4 @@
-<table id="dataTable" class="tablesorter" style="border-collapse: collapse;">
+<table id="dataTable" class="tablesorter" style="border-collapse: collapse; empty-cells: show;">
     <thead>
         <tr id="headerRowOne">
             <th rowspan="3" style="border: 1px solid black;">Sr. No.</th>
@@ -132,10 +132,10 @@
         tableBody += "<td style='border: 1px solid black;'>" + element.Diagnosis + "</td>";
         for (const key in element.Values) {
             if (element.Values.hasOwnProperty(key)) {
-                tableBody += "<td style='border: 1px solid black;'>" + element.Values[key].NewMale + "</td>";
-                tableBody += "<td style='border: 1px solid black;'>" + element.Values[key].NewFemale + "</td>";
-                tableBody += "<td style='border: 1px solid black;'>" + element.Values[key].ReMale + "</td>";
-                tableBody += "<td style='border: 1px solid black;'>" + element.Values[key].ReFemale + "</td>";   
+                tableBody += "<td style='border: 1px solid black;'>" + ((element.Values[key].NewMale == '0') ? '' : element.Values[key].NewMale) + "</td>";
+                tableBody += "<td style='border: 1px solid black;'>" + ((element.Values[key].NewFemale == '0') ? '' : element.Values[key].NewFemale) + "</td>";
+                tableBody += "<td style='border: 1px solid black;'>" + ((element.Values[key].ReMale == '0') ? '' : element.Values[key].ReMale) + "</td>";
+                tableBody += "<td style='border: 1px solid black;'>" + ((element.Values[key].ReFemale == '0') ? '' : element.Values[key].ReFemale) + "</td>";   
             }
         }
         tableBody += "</tr>";
